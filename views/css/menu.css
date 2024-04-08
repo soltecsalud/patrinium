@@ -1,0 +1,41 @@
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: rgba(0,132,140,0.3);
+  color: #fff;
+}
+
+[class*="sidebar-dark-"] {
+  background-color: #020381;
+}
+
+[class*="sidebar-dark-"] .nav-treeview >.nav-treeview>.nav-item>.nav-link {
+  color: #ffffff;
+}
+
+[class*="sidebar-dark-"] .nav-treeview > .nav-item > .nav-link {
+    color: #ffffff;
+}
+/* Consultar si se dejan los estilos de los dropdown con color asi no esten activos */
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #020381;
+  color: #fff;
+}
+
+[class*="sidebar-dark-"] .nav-treeview > .nav-item > .nav-link.active,
+[class*="sidebar-dark-"] .nav-treeview > .nav-item > .nav-link.active:hover,
+[class*="sidebar-dark-"] .nav-treeview > .nav-item > .nav-link.active:focus {
+  color:#020381;
+}
+
+.navbar-dark {
+    background-color: #020381;
+    border-color: #020381;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+[class*="sidebar-dark"] .brand-link {
+  border-bottom: 1px solid #00848c;
+}

@@ -1,0 +1,13 @@
+.card-dark:not(.card-outline)>.card-header {
+    background-color: #020381;
+    /* rgba(74,170,165,255) rgb */
+}
+
+/* .card-dark .card-header {
+    background-color: #4aaaa5;
+} */
+
+.btn-success{
+    background-color: #020381;
+    box-shadow: 2px 2px 2px #8e8e8e;
+}
