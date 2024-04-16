@@ -56,18 +56,14 @@ include_once "../controller/solicitudController.php";
         
         foreach ($solicitudes as $solicitud) {
 
-           // $id_solicitud_buscar = $solicitud->id_solicitud;
-        //$solicitud_adjunto = $controlador->verificarAdjuntoSolicitud($id_solicitud_buscar);
-          //  echo "<prev>";
-            //print_r($solicitud_adjunto);
-            //echo "</prev>";
+       
         ?>
             <tr>
             
                 <td><?php echo  htmlspecialchars($solicitud->created_at);?></td>
                 <td><?php echo  htmlspecialchars($solicitud->nombre_cliente);?></td>
                 <td><?php echo  htmlspecialchars($solicitud->referido_por);?></td>
-                <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+                <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
              
             </tr>
            <?php }?> 

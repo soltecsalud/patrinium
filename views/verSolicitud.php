@@ -107,20 +107,28 @@ include_once "../controller/solicitudController.php";
                                    
                                    <h1>Documentos Descargar</h1>
 
-                                   <table>
+                                   <table id="documentosAdjuntos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>1</th>
-                                            <th>2</th>
-                                            <th>3</th>
+                                            <th>Fecha</th>
+                                            <th>Nombre Archivo</th>
+                                            <th>Accion</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                         $solicitudes = $controlador->getListadoAdjuntos($id_revisar_solicitud);
+                                         
+
+                                         foreach($solicitudes as $adjuntos){
+                                        ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>3</td>
+                                            <td><?php  echo $adjuntos->create_at?></td>
+                                            <td><?php  echo $adjuntos->nombre_archivo?></td>
+                                            <td><a class="btn btn-primary"href="../controller/resource/<?php echo $adjuntos->id_solicitud."/".$adjuntos->nombre_archivo;?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
                                         </tr>
+                                        <?php } ?>
+                                
                                     </tbody>
                                    </table>
                                    
@@ -214,5 +222,24 @@ include_once "../controller/solicitudController.php";
         });
     });
 });
-
+$(document).ready(function() {
+    $('#documentosAdjuntos').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                title: 'Datos de Personas',
+                className: 'btn btn-success'
+            },
+            {
+                extend: 'pdfHtml5',
+                title: 'Datos de Personas',
+                className: 'btn btn-danger'
+            }
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        }
+    });
+});
 </script>

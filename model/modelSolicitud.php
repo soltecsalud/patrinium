@@ -17,9 +17,22 @@ class ModelSolicitud
     public static function obtenerAllSolicitud() {
         try {
             $sqlListarSolicitud = "
-            SELECT * FROM solicitud as a
+            SELECT a.id_solicitud, a.nombre_cliente,a.referido_por, a.created_at FROM solicitud as a
             left join archivo_adjunto as ar ON(a.id_solicitud = ar.id_solicitud)
 			where ar.id_solicitud is null
+            ";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerAdjuntos($condicion) {
+        try {
+            $sqlListarSolicitud = "
+            SELECT * FROM archivo_adjunto where id_solicitud = $condicion ;
             ";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();

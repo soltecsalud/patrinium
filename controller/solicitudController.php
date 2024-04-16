@@ -30,6 +30,13 @@ class Solicitud_controller{
         return $solicitud;
     }
 
+    public function getListadoAdjuntos($id_solicitud_archivo) {
+        $id_solicitud_adjunto_mdl = $id_solicitud_archivo;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerAdjuntos($id_solicitud_adjunto_mdl);
+        return $solicitud;
+    }
+
     public function insertarSolicitud() {
         $datos = array(
         "nombre_cliente" => $_POST['nombreCliente'],

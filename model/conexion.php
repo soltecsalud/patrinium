@@ -7,7 +7,7 @@ class Conexion{
     $usuario = "postgres";
     $BD = "patrinium";
     $rutaServidor = "127.0.0.1";
-    $puerto = "5433";
+    $puerto = "5432";
 
     $base_de_datos = null;
 
