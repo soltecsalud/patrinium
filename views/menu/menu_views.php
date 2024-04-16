@@ -40,7 +40,12 @@ if (!isset($_SESSION['usuario'])) {
                   <p>Listado de Solicitudes</p>
                 </a>
               </li>
-             
+              <li class="nav-item">
+                <a href="./ver_solicitud_adjuntos.php" class="nav-link">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                  <p>Respuestas Solicitudes</p>
+                </a>
+              </li>
             </ul>
         </li>
         <li class="nav-item">
@@ -142,7 +147,7 @@ if (!isset($_SESSION['usuario'])) {
 
        
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="./agenda.php" class="nav-link active">
             <i class="fa fa-calendar" aria-hidden="true"></i>
               <p>Agenda
                 <i class="right fas fa-angle-left"></i>
@@ -155,7 +160,7 @@ if (!isset($_SESSION['usuario'])) {
      
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./agenda.php" class="nav-link">
                 <i class="nav-icon fas fa-clipboard"></i>
                   <p>Consultar Agenda</p>
                 </a>
@@ -189,7 +194,7 @@ if (!isset($_SESSION['usuario'])) {
         
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="indicadores.php" class="nav-link">
                   <i class="nav-icon fas fa-tasks"></i>
                   <p>Indicadores </p>
                 </a>

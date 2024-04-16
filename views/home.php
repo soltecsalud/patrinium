@@ -14,7 +14,7 @@ if(!isset($_SESSION['usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once "head/head_views.php"; ?>
     <link rel="stylesheet" href="css/menu.css">
-    <title>Ruta de Atenci&oacute;n C&aacute;ncer de Cuello Uterino</title>
+    <title>PatrimoniumAPP</title>
     <style>
         .tab-nav {
             background-color: #F8F9FA;
@@ -37,7 +37,7 @@ if(!isset($_SESSION['usuario'])) {
 <body class="hold-transition sidebar-mini">
 
     <?php include_once "head/nav.php"; ?>
-
+        
     <?php include_once "menu/menu_views.php";
     ?>
     <div class="content-wrapper iframe-mode" data-widget="iframe" data-loading-screen="750">

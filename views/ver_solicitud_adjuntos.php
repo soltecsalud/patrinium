@@ -51,16 +51,10 @@ include_once "../controller/solicitudController.php";
      <?php
 
         $controlador = new Solicitud_controller();
-        $solicitudes = $controlador->getListadoSolicitudes();
+        $solicitudes = $controlador->getListadoSolicitudesConAdjuntos();
                                     
         
         foreach ($solicitudes as $solicitud) {
-
-           // $id_solicitud_buscar = $solicitud->id_solicitud;
-        //$solicitud_adjunto = $controlador->verificarAdjuntoSolicitud($id_solicitud_buscar);
-          //  echo "<prev>";
-            //print_r($solicitud_adjunto);
-            //echo "</prev>";
         ?>
             <tr>
             

@@ -61,7 +61,7 @@ if (!isset($_SESSION['usuario'])) {
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="" method="post" id="formulario-solicitud">
                             <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
                                     <h3 class="card-title">Registro Solicitud </h3>
@@ -80,17 +80,17 @@ if (!isset($_SESSION['usuario'])) {
                                             <!-- Grupo de Referido de -->
                                             <div class="form-group">
                                                 <label for="referidoDe">Referido:</label>
-                                                <input type="text" name="referido"class="form-control" id="referidoDe" placeholder="¿Quién te refirió?">
+                                                <input type="text" name="referido_por"class="form-control" id="referidoDe" placeholder="¿Quién te refirió?">
                                             </div>
 
                                             <!-- Grupo de Necesidad -->
                                             <div class="form-group">
                                                 <label for="necesidad">Necesidad:</label>
-                                                <textarea class="form-control" id="necesidad" rows="3" placeholder="Describe la necesidad"></textarea>
+                                                <textarea class="form-control" name="necesidad" rows="3" placeholder="Describe la necesidad"></textarea>
                                             </div>
 
                                             <!-- Botón de envío -->
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="submit" id="btnCrearSolicitud" class="btn btn-primary">Guardar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -110,3 +110,28 @@ if (!isset($_SESSION['usuario'])) {
 </body>
 
 </html>
+<script>
+  $(document).ready(function(){
+      $('#btnCrearSolicitud').click(function(){        
+          var datos = $('#formulario-solicitud').serialize()+ "&accion=guardarSolicitud";
+          console.log(datos);  
+        $.ajax({
+            type:"POST",
+            url:"../controller/solicitudController.php",
+            data:datos,
+            success:function(r){
+                console.log(r);
+                if(r.resultado == 0){
+                alert("fallo :(");
+                }else{
+                    alert("Agregado con éxito");
+                     // Redirección a listar_empresa.php
+                     window.location.href = 'listado_solicitudes.php';
+                }
+            }
+          });
+          return false;
+        });
+        
+    });
+</script>
