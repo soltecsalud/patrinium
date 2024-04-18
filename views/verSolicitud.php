@@ -199,13 +199,15 @@ include_once "../controller/solicitudController.php";
                                                 </div>
                                             </div>
                                             <div class="form-group mt-3">
-                                                <button type="button" id="btnInsertarFactura" class="btn btn-primary" onclick="calculateTotal()">Calcular Total</button>
+                                                <button type="button" id="btnInsertarFactura" class="btn btn-primary" >Insertar Factura</button>
+                                                <a class="btn btn-danger" href="factura_report.php" target="_blank" rel="noopener noreferrer">Ver Factura</a>
                                             </div>
                                             <div id="totalDetails" class="mt-2">
                                                 <!-- Los inputs y labels generados se colocarán aquí -->
                                             </div>
                                         </form>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </form>
