@@ -112,6 +112,28 @@ class ModelSolicitud
         }
     }
 
+    public static function insertarFactura($datos) {
+        try {
+            $json_datos = json_encode($datos);
+            $sql = "INSERT INTO public.factura(
+                 datos, created_at)
+                VALUES ( :datos, NOW());
+            ";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':datos', $json_datos);
+            
+            
+           
+            if($stmt->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            } 
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     
 }
 ?>

@@ -109,6 +109,26 @@ class Solicitud_controller{
         }
     }
     
+    public function insertarFactura() {
+        $datos = array(
+            "minutes" => isset($_POST['minutes']) ? $_POST['minutes'] : 35, 
+            "meeting"=>isset($_POST['meeting'])?$_POST['meeting']:50,
+            "operating"=>isset($_POST['operating'])?$_POST['operating']:75,
+            "power"=>isset($_POST['power'])?$_POST['power']:80,
+            "register"=>isset($_POST['register'])?$_POST['register']:20,
+            "statement"=>isset($_POST['statement'])?$_POST['statement']:10,
+            "company"=>isset($_POST['company'])?$_POST['company']:24,
+            "certificate"=>isset($_POST['certificate'])?$_POST['certificate']:14        
+        );
+        
+        $respuesta = ModelSolicitud::insertarFactura($datos);
+        
+        if($respuesta == "ok") {
+            echo 0; // Éxito
+        } else {
+            echo 1; // Error
+        }
+    }
         
     
 
@@ -137,4 +157,14 @@ if(isset($_POST['accion']) && $_POST['accion'] === 'insertarRevision') {
     $controlador = new Solicitud_controller();
     $controlador->insertarRevision(); // Asegúrate de que este método existe y es el correcto
 }
+
+if (isset($_POST['accion']) && $_POST['accion'] === 'insertarFactura') {
+    // var_dump($_FILES); 
+    $controlador = new Solicitud_controller();
+    $controlador->insertarFactura();
+  
+}
+  
+
+
 ?>
