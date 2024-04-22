@@ -66,7 +66,7 @@ include_once "../controller/solicitudController.php";
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        
                             <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
                                     <h3 class="card-title">Revisar Solicitud</h3>
@@ -104,8 +104,10 @@ include_once "../controller/solicitudController.php";
                                 </div>
                                 <!--tabla documentos descargables-->
                                 <div class="card-body">
-                                   
-                                   <h1>Documentos Descargar</h1>
+                                    <div class="card-header">
+                                        <h3 class="card-title">Documentos Descargar</h3>
+                                    </div>
+                                  
 
                                    <table id="documentosAdjuntos" class="table table-bordered table-striped">
                                     <thead>
@@ -133,84 +135,92 @@ include_once "../controller/solicitudController.php";
                                    </table>
                                    
                                     </div>
-                                </div>
 
-                                <div class="card-body">
-                                   
-                                   <h1>Creacion de factura</h1>
-                                   <div class="container mt-4">
-                                        
-                                        <form id="billingForm">
-                                            <div class="form-group">
-                                                <label for="documentList">Selecciona los Items:</label>
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" name="minutes" value="35" data-description="Minutes of the First Meeting" id="document1">
-                                                    <label class="form-check-label" for="document1">
-                                                        Minutes of the First Meeting
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" name="meeting" value="50" data-description="Minutes Meeting of the Assembly of Member" id="document1">
-                                                    <label class="form-check-label" for="document1">
-                                                    Minutes Meeting of the Assembly of Member
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" name="operating" value="50" data-description="Operating Agreement Real State" id="document1">
-                                                    <label class="form-check-label" for="document1">
-                                                        Operating Agreement Real State 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" value="50" name="power" data-description="Power of Attorney" id="document2">
-                                                    <label class="form-check-label" for="document2">
-                                                        Power of Attorney
-                                                    </label>
-                                                </div>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" name="register" value="106" data-description="Register of Members" id="document3">
-                                                    <label class="form-check-label" for="document3">
-                                                        Register of Members
-                                                    </label>
-                                                </div>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" value="34" data-description="STATEMENT OF MANAGING MEMBER" name="statement" id="document4">
-                                                    <label class="form-check-label" for="document4">
-                                                        STATEMENT OF MANAGING MEMBER
-                                                    </label>
-                                                </div>
-
-                                              
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" name="company" value="36" data-description="Company Information Details" id="document6">
-                                                    <label class="form-check-label" for="document6">
-                                                        Company Information Details
-                                                    </label>
-                                                </div>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input document-item" type="checkbox" value="37" name="certificate" data-description="Certificate of Formation Washington USA LLC" id="document7">
-                                                    <label class="form-check-label" for="document7">
-                                                        Certificate of Formation Washington USA LLC
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group mt-3">
-                                                <button type="button" id="btnInsertarFactura" class="btn btn-primary" >Insertar Factura</button>
-                                                <a class="btn btn-danger" href="factura_report.php" target="_blank" rel="noopener noreferrer">Ver Factura</a>
-                                            </div>
-                                            <div id="totalDetails" class="mt-2">
-                                                <!-- Los inputs y labels generados se colocarán aquí -->
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Creacion de factura</h3>
+                                        </div>
                                     
+                                    <div class="container mt-4">
+                                           
+                                            
+                                            <form id="billingForm">
+                                                    <div class="row">
+                                                                 <label class="form-check-label" for="">
+                                                                    Empresa Emite Factura:
+                                                                </label>
+                                                        <div class="col">
+                                                            <!-- Primer botón de radio -->
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="logo" id="radio1" value="patrinium" >
+                                                                <label class="form-check-label" for="radio1">
+                                                                    Patrinium
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <!-- Segundo botón de radio -->
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="logo" id="radio2" value="JairoVargas">
+                                                                <label class="form-check-label" for="radio2">
+                                                                    Jairo Vargas
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <!-- Tercer botón de radio -->
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="logo" id="radio3" value="empresa_3">
+                                                                <label class="form-check-label" for="radio3">
+                                                                    Empresa 3
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <label  for="">
+                                                      Servicios Para Facturar:
+                                                    </label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="generalandspecific" value="101" id="document0">
+                                                        <label class="form-check-label" for="document0">
+                                                            General and Specific Delaware's Corporation Advice Consulting
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group" id="inputContainer0" style="display: none;">
+                                                        <input type="text" class="form-control" id="valor_generalandspecific0" name="valor_generalandspecific" placeholder="valor USD">
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="letter_delivery" value="101" id="document2">
+                                                        <label class="form-check-label" for="document2">
+                                                            Letter of Delivery
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group" id="inputContainer2" style="display: none;">
+                                                        <input type="text" class="form-control" id="valor_letter_delivery" name="letter_delivery" placeholder="valor USD">
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="total_factura" value="102" id="document1">
+                                                        <label class="form-check-label" for="document1">
+                                                        Total Factura
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group" id="inputContainer1" style="display: none;">
+                                                        <input type="text" class="form-control" id="valor_total_factura" name="total_factura" placeholder="valor USD">
+                                                    </div>
+                                                
+                                                <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud;?>">
+                                                <button type="button" id="btnInsertarFactura" class="btn btn-primary">Insertar Factura</button>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
+
+                                
                             </div>
-                        </form>
+                        
                         
                        
                     </div>
@@ -244,8 +254,11 @@ include_once "../controller/solicitudController.php";
       <div class="modal-body">
         <!-- Aquí va el formulario -->
         <form id='accion' method="POST" enctype="multipart/form-data">
+    <!-- seleccionar image -->      
+          >   
+    
     <!-- Otros campos del formulario -->
-    <div class="form-group">
+            <div class="form-group">
                 <label for="archivoInput">Seleccionar Archivo</label>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="archivoInput" name="archivo">
@@ -270,13 +283,28 @@ include_once "../controller/solicitudController.php";
 </div>
 
 <script>
-    $('#archivoInput').change(function() {
-    var fileName = $(this).val();
-    console.log('Archivo seleccionado:', fileName);
-});
-</script>
-<script>
-    $(document).ready(function() {
+   document.addEventListener('DOMContentLoaded', function() {
+            // Selecciona todos los checkboxes con la clase toggle-checkbox
+            var checkboxes = document.querySelectorAll('.toggle-checkbox');
+
+            checkboxes.forEach(function(checkbox) {
+                // Encuentra el contenedor correspondiente al checkbox
+                var inputContainerId = 'inputContainer' + checkbox.id.replace('document', '');
+                var inputContainer = document.getElementById(inputContainerId);
+
+                checkbox.addEventListener('change', function() {
+                    if (checkbox.checked) {
+                        inputContainer.style.display = 'block'; // Muestra el input
+                    } else {
+                        inputContainer.style.display = 'none'; // Oculta el input
+                    }
+                });
+            });
+        });
+
+
+
+  $(document).ready(function() {
     $('#btn-cargar').click(function() {
         var formData = new FormData($('#accion')[0]);
         formData.append('accion', 'insertarRevision');
@@ -300,18 +328,7 @@ include_once "../controller/solicitudController.php";
 $(document).ready(function() {
     $('#documentosAdjuntos').DataTable({
         dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'excelHtml5',
-                title: 'Datos de Personas',
-                className: 'btn btn-success'
-            },
-            {
-                extend: 'pdfHtml5',
-                title: 'Datos de Personas',
-                className: 'btn btn-danger'
-            }
-        ],
+       
         language: {
             url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         }

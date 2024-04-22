@@ -112,15 +112,17 @@ class ModelSolicitud
         }
     }
 
-    public static function insertarFactura($datos) {
+    public static function insertarFactura($datos,$id) {
         try {
+            $id_solicitud = $id;
             $json_datos = json_encode($datos);
             $sql = "INSERT INTO public.factura(
-                 datos, created_at)
-                VALUES ( :datos, NOW());
+                 datos, created_at,id_solicitud)
+                VALUES ( :datos, NOW(),:id_solicitud);
             ";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':datos', $json_datos);
+            $stmt->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
             
             
            

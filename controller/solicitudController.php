@@ -60,12 +60,12 @@ class Solicitud_controller{
         $folderName = $id_solicitud ; // La nueva subcarpeta para las revisiones
     
         // Ruta completa al directorio de revisiones
-        $revisionPath = $uploadsDir . $folderName . '/';
+        $revisionPath = $uploadsDir . '/' . $folderName . '/';
     
         // Verificar si la carpeta de revisiones existe
         if (!file_exists($revisionPath)) {
             // Intenta crear la carpeta con permisos adecuados
-            if (!mkdir($revisionPath, 7777, true)) {
+            if (!mkdir($revisionPath, 0777, true)) {
                 die("Error al crear la carpeta de revisiones.");
             }
         }
@@ -110,25 +110,26 @@ class Solicitud_controller{
     }
     
     public function insertarFactura() {
+
+        $id_solicitud_factura=$_POST['id_solicitud'];
         $datos = array(
-            "minutes" => isset($_POST['minutes']) ? $_POST['minutes'] : 35, 
-            "meeting"=>isset($_POST['meeting'])?$_POST['meeting']:50,
-            "operating"=>isset($_POST['operating'])?$_POST['operating']:75,
-            "power"=>isset($_POST['power'])?$_POST['power']:80,
-            "register"=>isset($_POST['register'])?$_POST['register']:20,
-            "statement"=>isset($_POST['statement'])?$_POST['statement']:10,
-            "company"=>isset($_POST['company'])?$_POST['company']:24,
-            "certificate"=>isset($_POST['certificate'])?$_POST['certificate']:14        
-        );
-        
-        $respuesta = ModelSolicitud::insertarFactura($datos);
-        
-        if($respuesta == "ok") {
-            echo 0; // Éxito
-        } else {
-            echo 1; // Error
+            "logo"=>$_POST['logo'],
+            "General and Specific Delaware's Corporation Advice Consulting" =>$_POST['valor_generalandspecific'],
+            "Letter of Delivery"=>$_POST['letter_delivery'],
+            "Total"=>$_POST['total_factura']
+            
+            );
+
+     
+            $respuesta = ModelSolicitud::insertarFactura($datos,$id_solicitud_factura);
+            
+            if ($respuesta == "ok") {
+                echo json_encode(["status" => 0]); // Éxito
+            } else {
+                echo json_encode(["status" => 1]); // Error
+            }
         }
-    }
+    
         
     
 
