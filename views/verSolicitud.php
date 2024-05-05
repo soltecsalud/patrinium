@@ -146,73 +146,171 @@ include_once "../controller/solicitudController.php";
                                             
                                             <form id="billingForm">
                                                     <div class="row">
-                                                                 <label class="form-check-label" for="">
-                                                                    Empresa Emite Factura:
-                                                                </label>
-                                                        <div class="col">
-                                                            <!-- Primer botón de radio -->
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="logo" id="radio1" value="patrinium" >
-                                                                <label class="form-check-label" for="radio1">
-                                                                    Patrinium
-                                                                </label>
+                                                            <label class="text-center h3" style="margin-bottom: 2%;" for="">
+                                                                Empresa Emite Factura
+                                                            </label>
+                                                            <div class="col">
+                                                                <!-- Primer botón de radio -->
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="logo" id="radio1" value="patrinium" >
+                                                                    <label class="form-check-label" for="radio1">
+                                                                        Patrinium
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <!-- Segundo botón de radio -->
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="logo" id="radio2" value="JairoVargas">
-                                                                <label class="form-check-label" for="radio2">
-                                                                    Jairo Vargas
-                                                                </label>
+                                                            <div class="col">
+                                                                <!-- Segundo botón de radio -->
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="logo" id="radio2" value="JairoVargas">
+                                                                    <label class="form-check-label" for="radio2">
+                                                                        Jairo Vargas
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <!-- Tercer botón de radio -->
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio" name="logo" id="radio3" value="empresa_3">
-                                                                <label class="form-check-label" for="radio3">
-                                                                    Empresa 3
-                                                                </label>
+                                                            <div class="col">
+                                                                <!-- Tercer botón de radio -->
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="logo" id="radio3" value="empresa_3">
+                                                                    <label class="form-check-label" for="radio3" style="font-size: 20px;">
+                                                                        Empresasss
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                     </div>
-                                                    <label  for="">
-                                                      Servicios Para Facturar:
-                                                    </label>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="generalandspecific" value="101" id="document0">
-                                                        <label class="form-check-label" for="document0">
-                                                            General and Specific Delaware's Corporation Advice Consulting
-                                                        </label>
+                                                    <div class="row">
+                                                            <label class="text-center h3"  style="margin-bottom: 2%; margin-top:2%;"  for="nombreSociedad">
+                                                                Servicios Para Facturar
+                                                            </label> 
                                                     </div>
-                                                    <div class="form-group" id="inputContainer0" style="display: none;">
-                                                        <input type="text" class="form-control" id="valor_generalandspecific0" name="valor_generalandspecific" placeholder="valor USD">
-                                                    </div>
+                                                                            
 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="letter_delivery" value="101" id="document2">
-                                                        <label class="form-check-label" for="document2">
-                                                            Letter of Delivery
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-group" id="inputContainer2" style="display: none;">
-                                                        <input type="text" class="form-control" id="valor_letter_delivery" name="letter_delivery" placeholder="valor USD">
-                                                    </div>
+                                                    <?php
+                                                        $servicios = $controlador->getServicios($id_revisar_solicitud);
+                                                        //print_r($servicios);
+                                                    
 
-                                                    <div class="form-check">
-                                                        <input class="form-check-input document-item toggle-checkbox" type="checkbox" name="total_factura" value="102" id="document1">
-                                                        <label class="form-check-label" for="document1">
-                                                        Total Factura
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-group" id="inputContainer1" style="display: none;">
-                                                        <input type="text" class="form-control" id="valor_total_factura" name="total_factura" placeholder="valor USD">
-                                                    </div>
-                                                
+                                                   //Servicios desde JSONb 
+
+                                                          
+                                                            foreach ($servicios as $servicio): ?>
+                                                                    <?php if (!empty($servicio['servicios'])): ?>
+                                                                        <?php
+                                                                        // Decodificar el JSONB
+                                                                        $datos = json_decode($servicio['servicios'], true);
+
+                                                                        // Verificar si la decodificación fue exitosa
+                                                                        if ($datos) {
+                                                                            // Iterar sobre cada par clave-valor del JSONB
+                                                                            foreach ($datos as $clave => $valor) {
+                                                                                ?>
+                                                                              
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <label for="nombreSociedad"><?php echo $valor; ?></label>
+                                                                                        </div>
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <input type="text" placeholder="Valor en US" name="<?php echo $clave;?>" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                                
+                                                                                <?php
+                                                                            }
+                                                                        } else {
+                                                                            // Si no se pudo decodificar el JSONB, imprimir un mensaje de error
+                                                                            ?>
+                                                                            
+                                                                                <h4>Error al decodificar el JSONB</h4>
+                                                                          
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                                <?php foreach ($servicios as $servicio_adicionales): ?>
+                                                                    <?php if (!empty($servicio['servicios_adicionales'])): ?>
+                                                                        <?php
+                                                                        // Decodificar el JSONB
+                                                                        $datos_adicionales = json_decode($servicio['servicios_adicionales'], true);
+
+                                                                        // Verificar si la decodificación fue exitosa
+                                                                        if ($datos_adicionales) {
+                                                                            // Iterar sobre cada par clave-valor del JSONB
+                                                                            foreach ($datos_adicionales as $clave => $valor) {
+                                                                                ?>
+                                                                              
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <label for="nombreSociedad"><?php echo $valor; ?></label>
+                                                                                        </div>
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <input type="text" placeholder="Valor en US" name="<?php echo $clave;?>" class="form-control" >
+                                                                                            </div>
+                                                                                    </div>
+                                                                                
+                                                                                <?php
+                                                                            }
+                                                                        } else {
+                                                                            // Si no se pudo decodificar el JSONB, imprimir un mensaje de error
+                                                                            ?>
+                                                                            
+                                                                                <h4>Error al decodificar el JSONB</h4>
+                                                                          
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                                    
+                                                                    <div class="row"> 
+                                                                             <label class="text-center h3" style="margin-bottom: 2%;" for="">
+                                                                                En caso de generar factura solo con un Total
+                                                                            </label>
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <label for="nombreSociedad">Total Factura</label>
+                                                                                        </div>
+                                                                                        <div class="col-md-6 mb-3">
+                                                                                            <input type="text" placeholder="Valor en US" name="total_factura" class="form-control" >
+                                                                                        </div>
+                                                                                    </div>
+                                                                    </div>
+                                                             
+                                                                <div class="row">
+                                                                            <label class="text-center h3" style="margin-bottom: 2%;" for="">
+                                                                            Cuenta bancaria para Consignacion
+                                                                            </label>
+                                                                            <div class="col">
+                                                                            <!-- Primer botón de radio -->
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria1" value="000001" >
+                                                                                <label class="form-check-label" for="radio1">
+                                                                                    Cuenta bancaria 3
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <!-- Segundo botón de radio -->
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria2" value="000002">
+                                                                                <label class="form-check-label" for="radio2">
+                                                                                    Cuenta bancaria 2
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <!-- Tercer botón de radio -->
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria3" value="000003">
+                                                                                <label class="form-check-label" for="radio3" style="font-size: 20px;">
+                                                                                    Cuenta bancaria 3
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                </div>                            
                                                 <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud;?>">
                                                 <button type="button" id="btnInsertarFactura" class="btn btn-primary">Insertar Factura</button>
+                                                <a href="factura_report.php" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Factura</a>
                                             </form>
+                                            
                                         </div>
                                         
                                     </div>

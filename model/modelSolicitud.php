@@ -29,6 +29,23 @@ class ModelSolicitud
         }
     }
 
+    public static function obtenerServicios($id_solicitud) {
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "
+            SELECT servicios, servicios_adicionales FROM solicitud where id_solicitud = :id_solicitud 
+            ";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+          
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public static function obtenerAdjuntos($condicion) {
         try {
             $sqlListarSolicitud = "
@@ -70,14 +87,20 @@ class ModelSolicitud
         }
     }
     //modelo para insertar en BD el nombre del archivo, fecha, descripcion
-    public static function insertarSolicitud($datos) {
+    public static function insertarSolicitud($datos,$checkbox,$camposDinamicos) {
         try {
-            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at) 
-            VALUES (:nombre_cliente, :referido_por, :necesidad, NOW())";
+            $camposDinamicosJSON =json_encode($camposDinamicos);
+            $checkboxJSON = json_encode($checkbox);
+
+            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at,servicios,servicios_adicionales) 
+            VALUES (:nombre_cliente, :referido_por, :necesidad, NOW(),:servicios,:servicios_adicionales)";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':nombre_cliente', $datos['nombre_cliente'], PDO::PARAM_STR);
             $stmt->bindParam(':referido_por', $datos['referido_por'], PDO::PARAM_STR);
             $stmt->bindParam(':necesidad', $datos['necesidad'], PDO::PARAM_STR);
+            $stmt->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
+            $stmt->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
+            
             
            
             if($stmt->execute()) {

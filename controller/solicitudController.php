@@ -16,6 +16,13 @@ class Solicitud_controller{
         return $solicitud;
     }
 
+    public function getServicios($id_enviado_desde_vista){
+        $id_solicitud = $id_enviado_desde_vista;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerServicios($id_solicitud);
+        return $solicitud;
+    }
+
     public function verificarAdjuntoSolicitud($id_solicitud_adjunto) {
         $id_solicitud_adjunto_model = $id_solicitud_adjunto;
         $modelo = new ModelSolicitud();
@@ -42,9 +49,46 @@ class Solicitud_controller{
         "nombre_cliente" => $_POST['nombreCliente'],
         "referido_por" => $_POST['referido_por'],
         "necesidad" => $_POST['necesidad']
+         
+       
         );
-        
-        $respuesta = ModelSolicitud::insertarSolicitud($datos);
+       
+                        $checkbox = array();
+
+                // Define un array con los nombres de las casillas de verificación
+                $checkbox_names = array(
+                    'tipoTrust', 'registroCorporacion', 'registroFIP', 'goodStanding',
+                    'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
+                    'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
+                    'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
+                    'acuerdoDeSocios', 'proteccionDivorcios', 'proteccionPatrimonio', 'actas',
+                    'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
+                    'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
+                    'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
+                    'reporteB13', 'reporteFincen', 'reporteBOI', 'serviciosDomicilio', 'servicioTesoreria',
+                    'servicioNomina', 'controlInventarios', 'serviciosFacturacion', 'serviciosAdministracionNegocios',
+                    'serviciosLegalesNotario', 'serviciosLegalesApostille', 'serviciosReportesEspeciales'
+                );
+
+                // Recorre el array de nombres de casillas de verificación
+                foreach ($checkbox_names as $name) {
+                    // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
+                    if (isset($_POST[$name]) && $_POST[$name] !== '') {
+                        $checkbox[$name] = $_POST[$name];
+                    }
+                }
+
+                $camposDinamicos = array();
+                foreach ($_POST['campoDinamico'] as $indice => $valor) {
+                    // Verificar si el valor del campo dinámico está presente y no está vacío
+                    if (isset($valor) && $valor !== '') {
+                        // Agregar el valor del campo dinámico al array en el formato deseado
+                        $camposDinamicos["campoDinamico[$indice]"] = $valor;
+                    }
+                }
+      
+        var_dump($datos);
+        $respuesta = ModelSolicitud::insertarSolicitud($datos, $checkbox, $camposDinamicos);
         
         if($respuesta == "ok") {
             echo 0; // Éxito
@@ -111,15 +155,25 @@ class Solicitud_controller{
     
     public function insertarFactura() {
 
-        $id_solicitud_factura=$_POST['id_solicitud'];
-        $datos = array(
-            "logo"=>$_POST['logo'],
-            "General and Specific Delaware's Corporation Advice Consulting" =>$_POST['valor_generalandspecific'],
-            "Letter of Delivery"=>$_POST['letter_delivery'],
-            "Total"=>$_POST['total_factura']
-            
-            );
+        $id_solicitud_factura = $_POST['id_solicitud'];
+        $logo = $_POST['logo'];
+        $total_factura = $_POST['total_factura'];
+        $cuenta_bancaria = $_POST['cuenta_bancaria'];
+        // Crear un array para almacenar todos los datos
+                $datos = array(
+                    "logo" => $logo,
+                    "Total" => $total_factura,
+                    "cuenta_bancaria" => $cuenta_bancaria
+                );
 
+                // Iterar sobre los datos recibidos y agregarlos al array de datos
+                foreach ($_POST as $clave => $valor) {
+                    // Verificar si la clave corresponde a los datos estáticos ya agregados
+                    if (!in_array($clave, ['id_solicitud', 'logo', 'total_factura', 'cuenta'])) {
+                        // Agregar el campo al array de datos
+                        $datos[$clave] = $valor;
+                    }
+                }
      
             $respuesta = ModelSolicitud::insertarFactura($datos,$id_solicitud_factura);
             
