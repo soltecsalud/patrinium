@@ -204,14 +204,17 @@ include_once "../controller/solicitudController.php";
                                                                             foreach ($datos as $clave => $valor) {
                                                                                 ?>
                                                                               
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-6 mb-3">
-                                                                                            <label for="nombreSociedad"><?php echo $valor; ?></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 mb-3">
-                                                                                            <input type="text" placeholder="Valor en US" name="<?php echo $clave;?>" class="form-control" >
-                                                                                        </div>
+                                                                              <div class="row">
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label><?php echo $valor; ?></label>
                                                                                     </div>
+                                                                                    <div class="col-md-3 mb-3">
+                                                                                        <input type="text" placeholder="Cantidad" name="cantidad<?php echo $clave; ?>" class="form-control">
+                                                                                    </div>
+                                                                                    <div class="col-md-3 mb-3">
+                                                                                        <input type="text" placeholder="Valor" name="valor<?php echo $clave; ?>" class="form-control">
+                                                                                    </div>
+                                                                                </div>
                                                                                 
                                                                                 <?php
                                                                             }
@@ -239,24 +242,20 @@ include_once "../controller/solicitudController.php";
                                                                                 ?>
                                                                               
                                                                                     <div class="row">
-                                                                                        <div class="col-md-6 mb-3">
-                                                                                            <label for="nombreSociedad"><?php echo $valor; ?></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-6 mb-3">
-                                                                                            <input type="text" placeholder="Valor en US" name="<?php echo $clave;?>" class="form-control" >
+                                                                                            <div class="col-md-6 mb-3">
+                                                                                                <label for="nombreSociedad"><?php echo $valor; ?></label>
+                                                                                            </div>
+                                                                                        
+                                                                                           
+                                                                                         
+                                                                                            <div class="col-md-3 mb-3">
+                                                                                                <input type="text" placeholder="Cantidades" name="<?php echo $clave . '_cantidad'; ?>" class="form-control" >
                                                                                             </div>
                                                                                     </div>
                                                                                 
                                                                                 <?php
                                                                             }
-                                                                        } else {
-                                                                            // Si no se pudo decodificar el JSONB, imprimir un mensaje de error
-                                                                            ?>
-                                                                            
-                                                                                <h4>Error al decodificar el JSONB</h4>
-                                                                          
-                                                                            <?php
-                                                                        }
+                                                                        } 
                                                                         ?>
                                                                     <?php endif; ?>
                                                                 <?php endforeach; ?>
@@ -265,9 +264,11 @@ include_once "../controller/solicitudController.php";
                                                                              <label class="text-center h3" style="margin-bottom: 2%;" for="">
                                                                                 En caso de generar factura solo con un Total
                                                                             </label>
+                                                                            
                                                                                         <div class="col-md-6 mb-3">
                                                                                             <label for="nombreSociedad">Total Factura</label>
                                                                                         </div>
+                                                                                       
                                                                                         <div class="col-md-6 mb-3">
                                                                                             <input type="text" placeholder="Valor en US" name="total_factura" class="form-control" >
                                                                                         </div>
@@ -305,10 +306,27 @@ include_once "../controller/solicitudController.php";
                                                                                 </label>
                                                                             </div>
                                                                         </div>
-                                                                </div>                            
-                                                <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud;?>">
-                                                <button type="button" id="btnInsertarFactura" class="btn btn-primary">Insertar Factura</button>
-                                                <a href="factura_report.php" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Factura</a>
+                                                                </div>    
+                                                                <div class="row" style="margin-bottom: 3%;">
+                                                                            <label class="text-center h3" style="margin-bottom: 3%;" for="">
+                                                                                Observaciones
+                                                                            </label>
+                                                                        <div class="col-12">
+                                                                            <textarea class="form-control" rows="5" name="observaciones" id="exampleTextarea" placeholder="Escribe algo aquí..."></textarea>
+                                                                        </div>
+                                                                </div>   
+                                                                <div class="row">
+                                                                 
+                                                                        <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud;?>">
+                                                                        <button type="button" id="btnInsertarFactura" style="margin-bottom: 1%;" class="btn btn-primary">Insertar Factura</button>
+                                                                    
+                                                               
+                                                                        <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Factura</a>
+                                                                   
+                                                                        
+                                                                        
+                                                                </div>                     
+                                                
                                             </form>
                                             
                                         </div>

@@ -10,11 +10,12 @@ class ReportModel {
         ];
     }
 
-    static public function  getJsonFactura(){
+    static public function  getJsonFactura($id_solicitud){
         try {
-            $sqlListarJson = " Select * from factura  ";
+            $id_solicitud_busqueda = $id_solicitud;
+            $sqlListarJson = " Select * from factura where id_solicitud = :id_solicitud";
             $listaJsonFactura = Conexion::conectar()->prepare($sqlListarJson);
-            //$listaJsonFactura->bindParam(':usr', $usr, PDO::PARAM_STR, 25);
+            $listaJsonFactura->bindParam(":id_solicitud", $id_solicitud_busqueda, PDO::PARAM_INT);
             $listaJsonFactura->execute();
             return $listaJsonFactura->fetchAll(PDO::FETCH_OBJ);
             echo "error";

@@ -13,8 +13,8 @@ class MyPDF extends FPDF {
         // Dibujar una línea (posición X inicial, posición Y inicial, posición X final, posición Y final)
         $this->Line(5, 1, 204, 1);
        
-        
-        $getLogo=  ReportModel::getJsonFactura();
+        $id_solicitud=$_GET['numero_solicitud'];
+        $getLogo=  ReportModel::getJsonFactura($id_solicitud);
         foreach($getLogo as $datosLogo){
 
             $datosJson = json_decode($datosLogo->datos, true); // Decodifica como array asociativo
@@ -43,7 +43,7 @@ class MyPDF extends FPDF {
         // Posiciona el cursor al lado derecho de la imagen
         $this->SetX(70); // Ajusta esta posición según el tamaño de tu imagen
         // Fecha actual
-        $dateOfIssue = date('F j, Y'); // Formato: April 16, 2024
+        $dateOfIssue = date('m/d/Y'); // Formato: 05/09/2024
         // Imprime la fecha de emisión
         $this->Cell(0, 10, 'Date of issue: ' . $dateOfIssue, 0, 1, 'C');
         $this->Cell(250, 10, 'Invoice', 0, 1, 'C');
@@ -103,93 +103,84 @@ class MyPDF extends FPDF {
     }
 }
 
+
+
+
 class InvoiceController {
-    public function generatePDF() {
-
-        $getDatosFactura=  ReportModel::getJsonFactura();
-        foreach($getDatosFactura as $datosFactura){
-
-            $datosFactura = json_decode($datosFactura->datos, true); // Decodifica como array asociativo
-            // $datosJson = json_decode($datosFactura->datos); // Decodifica como objeto
-        
-            // Acceder a los datos como array asociativo
-           
-            $total = $datosFactura['Total'];
-            $letterOfDelivery = 1;
-            $generalAdvice = 2;
-            $cuentaBancaria = $datosFactura['cuenta_bancaria'];
-            $array = array();
-            $comprobacion=0;
-            if (empty($letterOfDelivery)) {
-
-                $comprobacion=1;
-
-            }else{
-                array_push($array,array('Letter of Delivery', '1', $letterOfDelivery, $letterOfDelivery));
+        public function generatePDF() {
+            $id_solicitud = $_GET['numero_solicitud'];  // Asumiendo que numero_solicitud es un parámetro GET
+            $getDatosFactura = ReportModel::getJsonFactura($id_solicitud);
+            $total = 0;
+            $array = [];
+            $useProvidedTotal = false;
+            $observaciones = '';  // Variable para almacenar las observaciones
+    
+            foreach ($getDatosFactura as $item) {
+                $datosFactura = json_decode($item->datos, true);
+    
+                // Guarda las observaciones si están presentes
+                if (isset($datosFactura['observaciones'])) {
+                    $observaciones = $datosFactura['observaciones'];
+                }
+    
+                if (!empty($datosFactura['Total'])) {
+                    $total = (float) $datosFactura['Total'];
+                    $useProvidedTotal = true;
+                } else {
+                    if (isset($datosFactura['servicios'])) {
+                        foreach ($datosFactura['servicios'] as $key => $servicio) {
+                            if (!isset($servicio['valor']) || !isset($servicio['cantidad'])) {
+                                continue;
+                            }
+                            $valor = (float) $servicio['valor'];
+                            $cantidad = (int) $servicio['cantidad'];
+                            $array[] = array($key, $cantidad, $valor, $valor * $cantidad);
+                            $total += $valor * $cantidad;
+                        }
+                    }
+                }
             }
-            if (empty($generalAdvice)) {
-
-                $comprobacion=15;
-
-            }else{
-                array_push($array,array('General Corporation Advice Consulting', '1', $generalAdvice, $generalAdvice));
-            }
-
+    
+            $cuentaBancaria = isset($datosFactura['cuenta_bancaria']) ? $datosFactura['cuenta_bancaria'] : 'No especificada';
+    
+            $pdf = new MyPDF();
+            $pdf->AliasNbPages();
+            $pdf->AddPage();
+    
+            $header = array('Description', 'Qty', 'Unit Price', 'Amount');
+            $pdf->SetFont('Arial', '', 12);
+            $pdf->SetY(105);
+            $pdf->ImprovedTable($header, $array, $useProvidedTotal);
+    
+            $y = $pdf->GetY() + 10;
+            $pdf->SetXY(-215, $y);
+            $pdf->Cell(130, 10, '', 0, 0, 'R');
+            $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
+            $pdf->Cell(30, 10, '$' . number_format($total, 2), 0, 1, 'R');
+    
+            $pdf->Ln(5); 
+             // Añadir observaciones si existen
+             // Añadir observaciones si existen
+        if (!empty($observaciones)) {
+            $pdf->SetX(-210);
+            $pdf->SetFont('Arial', 'B', 10);  // Cambia la fuente a negrita para el título de observaciones
+            $pdf->Cell(40, 10, 'Observaciones:', 0, 0, 'L');
+            $pdf->SetFont('Arial', '', 10);   // Cambia la fuente a normal para el contenido de observaciones
+            $pdf->MultiCell(160, 10, $observaciones, 0, 'J');  // Ajusta el texto a justificado
         }
-        $total_impr=0;
-        if(isset($total)){
-            $total_impr = $total;
-        }else{
-            $total_impr = 17000;
+
+            // Información de la cuenta bancaria
+            $pdf->Ln(10); 
+            $pdf->SetX(-215);
+            $pdf->Cell(130, 10, '', 0, 0, 'R');
+             // Salto de línea (ajusta según sea necesario
+            $pdf->SetFont('Arial', 'B', 15); 
+            $pdf->Cell(60, 10, 'Transferir a Cuenta bancaria No. ' . $cuentaBancaria . ' Banco xxx', 0, 1, 'R');
+    
+            // Añadir observaciones si existen
+         
+    
+            $pdf->Output();
         }
-
-        $pdf = new MyPDF();
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-     
-       
-        
-     
-       
-        
-   
-        // Títulos de las columnas
-        $pdf->SetFont('Arial', 'B', 12);
-        $header = array('Description', 'Qty', 'Unit Price', 'Amount');
-        // Datos de la factura
-        $pdf->SetFont('Arial', '', 12);
-        $data =  $array;
-
-        // Posición en la página
-        $pdf->SetY(105);
-        $pdf->ImprovedTable($header, $data);
-
-        // Ajustamos la posición para los totales
-        $y = $pdf->GetY() + 5;
-        $pdf->SetXY(-215, $y);
-        $pdf->Cell(130, 10, '', 0, 0, 'R');
-        $pdf->Cell(30, 10, 'Subtotal', 0, 0, 'R');
-        $pdf->Cell(30, 10,'$'.$total_impr.'.00', 0, 1, 'R');
-
-        $pdf->SetX(-215);
-        $pdf->Cell(130, 10, '', 0, 0, 'R');
-        $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
-        $pdf->Cell(30, 10,'$'.$total_impr.'.00', 0, 1, 'R');
-
-        $pdf->SetX(-215);
-        $pdf->Cell(130, 10, '', 0, 0, 'R');
-        $pdf->Cell(30, 10, 'Amount due', 0, 0, 'R');
-        $pdf->Cell(30, 10,'$'.$total_impr.'.00', 0, 1, 'R');
-
-        $pdf->Cell(90, 10,'Transferir a Cuenta bancaria No  '.$cuentaBancaria.'  Banco xxx', 0, 1, 'R');
-       
-        
-        
-
-        $pdf->Output();
     }
-
-
-
-}
 ?>

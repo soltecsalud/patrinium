@@ -154,29 +154,32 @@ class Solicitud_controller{
     }
     
     public function insertarFactura() {
-
         $id_solicitud_factura = $_POST['id_solicitud'];
-        $logo = $_POST['logo'];
-        $total_factura = $_POST['total_factura'];
-        $cuenta_bancaria = $_POST['cuenta_bancaria'];
-        // Crear un array para almacenar todos los datos
-                $datos = array(
-                    "logo" => $logo,
-                    "Total" => $total_factura,
-                    "cuenta_bancaria" => $cuenta_bancaria
-                );
+    $logo = $_POST['logo'];
+    $total_factura = $_POST['total_factura'];
+    $cuenta_bancaria = $_POST['cuenta_bancaria'];
+    $observaciones = $_POST['observaciones'];
 
-                // Iterar sobre los datos recibidos y agregarlos al array de datos
-                foreach ($_POST as $clave => $valor) {
-                    // Verificar si la clave corresponde a los datos estáticos ya agregados
-                    if (!in_array($clave, ['id_solicitud', 'logo', 'total_factura', 'cuenta'])) {
-                        // Agregar el campo al array de datos
-                        $datos[$clave] = $valor;
-                    }
-                }
-     
-            $respuesta = ModelSolicitud::insertarFactura($datos,$id_solicitud_factura);
-            
+    $datos = [
+        "logo" => $logo,
+        "Total" => $total_factura,
+        "cuenta_bancaria" => $cuenta_bancaria,
+        "observaciones" => $observaciones,
+        "servicios" => []
+    ];
+
+    // Procesar cada servicio detectando los nombres de campos que comienzan con 'cantidad' y 'valor'
+    foreach ($_POST as $clave => $valor) {
+        if (strpos($clave, 'cantidad') === 0) {
+            $key = substr($clave, 8); // Extraer la parte después de 'cantidad'
+            $datos['servicios'][$key]['cantidad'] = $valor;
+        } elseif (strpos($clave, 'valor') === 0) {
+            $key = substr($clave, 5); // Extraer la parte después de 'valor'
+            $datos['servicios'][$key]['valor'] = $valor;
+        }
+    }
+
+    $respuesta = ModelSolicitud::insertarFactura($datos, $id_solicitud_factura);
             if ($respuesta == "ok") {
                 echo json_encode(["status" => 0]); // Éxito
             } else {
