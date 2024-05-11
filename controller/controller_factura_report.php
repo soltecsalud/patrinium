@@ -114,10 +114,12 @@ class InvoiceController {
             $array = [];
             $useProvidedTotal = false;
             $observaciones = '';  // Variable para almacenar las observaciones
-    
+            $cuenta_bancaria = 0;  // Variable para almacenar la cuenta bancaria
             foreach ($getDatosFactura as $item) {
                 $datosFactura = json_decode($item->datos, true);
-    
+
+                $cuenta_bancaria = $datosFactura['cuenta_bancaria'];
+                
                 // Guarda las observaciones si están presentes
                 if (isset($datosFactura['observaciones'])) {
                     $observaciones = $datosFactura['observaciones'];
@@ -141,8 +143,8 @@ class InvoiceController {
                 }
             }
     
-            $cuentaBancaria = isset($datosFactura['cuenta_bancaria']) ? $datosFactura['cuenta_bancaria'] : 'No especificada';
-    
+           
+            
             $pdf = new MyPDF();
             $pdf->AliasNbPages();
             $pdf->AddPage();
@@ -164,7 +166,7 @@ class InvoiceController {
         if (!empty($observaciones)) {
             $pdf->SetX(-210);
             $pdf->SetFont('Arial', 'B', 10);  // Cambia la fuente a negrita para el título de observaciones
-            $pdf->Cell(40, 10, 'Observaciones:', 0, 0, 'L');
+            $pdf->Cell(40, 10, 'Observaciones:'.$cuenta_bancaria, 0, 0, 'L');
             $pdf->SetFont('Arial', '', 10);   // Cambia la fuente a normal para el contenido de observaciones
             $pdf->MultiCell(160, 10, $observaciones, 0, 'J');  // Ajusta el texto a justificado
         }
@@ -172,11 +174,29 @@ class InvoiceController {
             // Información de la cuenta bancaria
             $pdf->Ln(10); 
             $pdf->SetX(-215);
-            $pdf->Cell(130, 10, '', 0, 0, 'R');
+            $pdf->Cell(15, 10, '', 0, 0, 'R');
              // Salto de línea (ajusta según sea necesario
-            $pdf->SetFont('Arial', 'B', 15); 
-            $pdf->Cell(60, 10, 'Transferir a Cuenta bancaria No. ' . $cuentaBancaria . ' Banco xxx', 0, 1, 'R');
-    
+            $pdf->SetFont('Arial', 'B', 10); 
+
+            $datosBanco = ReportModel::getBanco($cuenta_bancaria);
+            foreach ($datosBanco as $item) {
+                // Añadir celda para nombre del banco
+                $pdf->Cell(0, 10, 'Nombre del Banco: ' . $item['nombre_banco'], 0, 1);
+                // Añadir celda para nombre de la cuenta
+                $pdf->Cell(0, 10, 'Nombre de la Cuenta: ' . $item['nombre_cuenta'], 0, 1);
+                // Añadir celda para número de cuenta
+                $pdf->Cell(0, 10, 'Número de Cuenta: ' . $item['numero_cuenta'], 0, 1);
+                // Añadir celda para ABA
+                $pdf->Cell(0, 10, 'ABA (Routing): ' . $item['aba'], 0, 1);
+                // Añadir celda para SWIFT
+                $pdf->Cell(0, 10, 'SWIFT: ' . $item['swift'], 0, 1);
+                // Añadir celda para dirección
+                $pdf->Cell(0, 10, 'Dirección: ' . $item['sucursal'], 0, 1);
+                // Añadir celda para teléfono
+                
+            }
+
+            $pdf->Ln(10);    
             // Añadir observaciones si existen
          
     

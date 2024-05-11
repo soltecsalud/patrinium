@@ -145,42 +145,56 @@ include_once "../controller/solicitudController.php";
                                            
                                             
                                             <form id="billingForm">
-                                                    <div class="row">
-                                                            <label class="text-center h3" style="margin-bottom: 2%;" for="">
-                                                                Empresa Emite Factura
-                                                            </label>
-                                                            <div class="col">
-                                                                <!-- Primer botón de radio -->
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="logo" id="radio1" value="patrinium" >
-                                                                    <label class="form-check-label" for="radio1">
-                                                                        Patrinium
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <!-- Segundo botón de radio -->
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="logo" id="radio2" value="JairoVargas">
-                                                                    <label class="form-check-label" for="radio2">
-                                                                        Jairo Vargas
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col">
-                                                                <!-- Tercer botón de radio -->
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" type="radio" name="logo" id="radio3" value="empresa_3">
-                                                                    <label class="form-check-label" for="radio3" style="font-size: 20px;">
-                                                                        Empresasss
-                                                                    </label>
-                                                                </div>
-                                                            </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                       
+                                                        <label class="text-center mb-2" style="font-size: smaller;" for="companySelect">
+                                                            Company Issuing Invoice:
+                                                        </label>
+                                                        <select class="form-select" id="companySelect" name="logo">
+                                                            <option value="0">Select Company</option>
+                                                            <option value="patrinium">Patrinium</option>
+                                                            <option value="JairoVargas">Jairo Vargas</option>
+                                                            <option value="empresa_3">Empresasss</option>
+                                                        </select>
                                                     </div>
+                                                    <div class="col-md-4">
+                                                        
+                                                        <label class="text-center mb-2" style="font-size: smaller;" for="bankAccountSelect">
+                                                            Bank Account for Deposit:
+                                                        </label>
+                                                        <select class="form-select" id="bankAccountSelect" name="cuenta_bancaria">
+                                                            <option value="0">Select Bank</option>
+                                                            
+                                                        <?php
+                                                            $banco_consigaciones = $controlador->getBancosConsignacion();   
+                                                                foreach ($banco_consigaciones as $banco_consigacion): ?>
+                                                                    <option value="<?php echo $banco_consigacion->id_banco; ?>"><?php echo $banco_consigacion->nombre_banco; ?></option>
+
+                                                        ?>
+                                                       <?php endforeach; ?>
+                                                            
+                                                            
+                                                        
+                                                        
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                       
+                                                        <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                                            Invoice Number:
+                                                        </label>
+                                                        <input type="text" class="form-control" id="invoiceNumberInput" name="invoice_number" placeholder="Enter invoice number">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <hr class="my-4 primary" > 
+
                                                     <div class="row">
-                                                            <label class="text-center h3"  style="margin-bottom: 2%; margin-top:2%;"  for="nombreSociedad">
-                                                                Servicios Para Facturar
-                                                            </label> 
+                                                        <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
+                                                            Billing Services:
+                                                        </label>
+                                                       
                                                     </div>
                                                                             
 
@@ -209,10 +223,10 @@ include_once "../controller/solicitudController.php";
                                                                                         <label><?php echo $valor; ?></label>
                                                                                     </div>
                                                                                     <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Cantidad" name="cantidad<?php echo $clave; ?>" class="form-control">
+                                                                                        <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control">
                                                                                     </div>
                                                                                     <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Valor" name="valor<?php echo $clave; ?>" class="form-control">
+                                                                                        <input type="text" placeholder="Unit Price" name="valor<?php echo $clave; ?>" class="form-control">
                                                                                     </div>
                                                                                 </div>
                                                                                 
@@ -259,69 +273,38 @@ include_once "../controller/solicitudController.php";
                                                                         ?>
                                                                     <?php endif; ?>
                                                                 <?php endforeach; ?>
-                                                                    
+                                                                <hr class="my-4 primary" > 
                                                                     <div class="row"> 
-                                                                             <label class="text-center h3" style="margin-bottom: 2%;" for="">
-                                                                                En caso de generar factura solo con un Total
+                                                                            <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
+                                                                                In case of issuing an invoice with only a Total:
                                                                             </label>
                                                                             
                                                                                         <div class="col-md-6 mb-3">
-                                                                                            <label for="nombreSociedad">Total Factura</label>
+                                                                                            <label for="nombreSociedad">Total Invoice</label>
                                                                                         </div>
                                                                                        
                                                                                         <div class="col-md-6 mb-3">
-                                                                                            <input type="text" placeholder="Valor en US" name="total_factura" class="form-control" >
+                                                                                            <input type="text" placeholder="Price" name="total_factura" class="form-control" >
                                                                                         </div>
+                                                                                        <hr class="my-4 primary" > 
                                                                                     </div>
                                                                     </div>
-                                                             
-                                                                <div class="row">
-                                                                            <label class="text-center h3" style="margin-bottom: 2%;" for="">
-                                                                            Cuenta bancaria para Consignacion
-                                                                            </label>
-                                                                            <div class="col">
-                                                                            <!-- Primer botón de radio -->
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria1" value="000001" >
-                                                                                <label class="form-check-label" for="radio1">
-                                                                                    Cuenta bancaria 3
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <!-- Segundo botón de radio -->
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria2" value="000002">
-                                                                                <label class="form-check-label" for="radio2">
-                                                                                    Cuenta bancaria 2
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col">
-                                                                            <!-- Tercer botón de radio -->
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="radio" name="cuenta_bancaria" id="cuentaBancaria3" value="000003">
-                                                                                <label class="form-check-label" for="radio3" style="font-size: 20px;">
-                                                                                    Cuenta bancaria 3
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                </div>    
-                                                                <div class="row" style="margin-bottom: 3%;">
-                                                                            <label class="text-center h3" style="margin-bottom: 3%;" for="">
-                                                                                Observaciones
+                                                                    <div class="row" style="margin-bottom: 3%;">
+                                                                            <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
+                                                                                Observations:
                                                                             </label>
                                                                         <div class="col-12">
-                                                                            <textarea class="form-control" rows="5" name="observaciones" id="exampleTextarea" placeholder="Escribe algo aquí..."></textarea>
+                                                                            <textarea class="form-control" rows="5" name="observaciones" id="exampleTextarea" placeholder="write something here"></textarea>
                                                                         </div>
-                                                                </div>   
+                                                                    </div>
+                                                                  
                                                                 <div class="row">
                                                                  
                                                                         <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud;?>">
-                                                                        <button type="button" id="btnInsertarFactura" style="margin-bottom: 1%;" class="btn btn-primary">Insertar Factura</button>
+                                                                        <button type="button" id="btnInsertarFactura" style="margin-bottom: 1%;" class="btn btn-primary">Insert Invoice</button>
                                                                     
                                                                
-                                                                        <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Factura</a>
+                                                                        <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Invoice</a>
                                                                    
                                                                         
                                                                         

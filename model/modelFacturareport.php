@@ -23,6 +23,20 @@ class ReportModel {
             die($e->getMessage());
         }
     }
+
+    static public function getBanco($id_banco){
+        try {
+            $id_banco_busqueda = $id_banco;
+            $sqlListarBanco = " Select * from bancos_consignaciones where id_banco = :id_banco";
+            $listaBanco = Conexion::conectar()->prepare($sqlListarBanco);
+            $listaBanco->bindParam(":id_banco", $id_banco_busqueda, PDO::PARAM_INT);
+            $listaBanco->execute();
+            return $listaBanco->fetchAll(PDO::FETCH_ASSOC);
+            echo "error";
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
 
 

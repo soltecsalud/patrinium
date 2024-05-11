@@ -59,6 +59,19 @@ class ModelSolicitud
         }
     }
 
+    public static function getBancosConsignacion() {
+        try {
+            $sqlListarSolicitud = "
+            SELECT * FROM bancos_consignaciones;
+            ";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public static function obtenerSolicitudesConAdjuntos() {
         try {
             $sqlListarSolicitud ="

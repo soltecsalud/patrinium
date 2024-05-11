@@ -44,6 +44,12 @@ class Solicitud_controller{
         return $solicitud;
     }
 
+    public function getBancosConsignacion() {
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->getBancosConsignacion();
+        return $solicitud;
+    }
+
     public function insertarSolicitud() {
         $datos = array(
         "nombre_cliente" => $_POST['nombreCliente'],
@@ -155,16 +161,18 @@ class Solicitud_controller{
     
     public function insertarFactura() {
         $id_solicitud_factura = $_POST['id_solicitud'];
-    $logo = $_POST['logo'];
-    $total_factura = $_POST['total_factura'];
-    $cuenta_bancaria = $_POST['cuenta_bancaria'];
-    $observaciones = $_POST['observaciones'];
+        $logo = $_POST['logo'];
+        $total_factura = $_POST['total_factura'];
+        $cuenta_bancaria = $_POST['cuenta_bancaria'];
+        $observaciones = $_POST['observaciones'];
+        $invoice_number = $_POST['invoice_number']; 
 
     $datos = [
         "logo" => $logo,
         "Total" => $total_factura,
         "cuenta_bancaria" => $cuenta_bancaria,
         "observaciones" => $observaciones,
+        "invoice_number" => $invoice_number,
         "servicios" => []
     ];
 
