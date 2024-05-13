@@ -118,8 +118,14 @@ class InvoiceController {
             foreach ($getDatosFactura as $item) {
                 $datosFactura = json_decode($item->datos, true);
 
-                $cuenta_bancaria = $datosFactura['cuenta_bancaria'];
-                
+                echo "<pre>"; print_r($datosFactura); echo "</pre>";
+                if (isset($datosFactura['cuenta_bancaria'])) {
+                    $cuenta_bancaria = $datosFactura['cuenta_bancaria'];
+                    echo "Cuenta Bancaria: $cuenta_bancaria"; // Verifica que se está asignando correctamente
+                } else {
+                    echo "La clave 'cuenta_bancaria' no existe en el JSON.";
+                }
+
                 // Guarda las observaciones si están presentes
                 if (isset($datosFactura['observaciones'])) {
                     $observaciones = $datosFactura['observaciones'];
