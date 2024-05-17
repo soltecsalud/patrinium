@@ -145,6 +145,10 @@ if (!isset($_SESSION['usuario'])) {
                                                             <input type="checkbox" class="custom-control-input" id="servicioAgenteRegistrador" name="servicioAgenteRegistrador" value="Servicio Agente Registrador">
                                                             <label class="custom-control-label" for="servicioAgenteRegistrador">Servicio de Agente Registrador</label>
                                                         </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="servicioProfesionales" name="servicioProfesionales" value="servicioProfesionales">
+                                                            <label class="custom-control-label" for="servicioProfesionales">Servicios Profesionales</label>
+                                                        </div>
                  
                                                     </div>
                                                     <div class="col-md-4">

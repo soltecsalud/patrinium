@@ -146,7 +146,7 @@ include_once "../controller/solicitudController.php";
                                             
                                             <form id="billingForm">
                                                 <div class="row">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                        
                                                         <label class="text-center mb-2" style="font-size: smaller;" for="companySelect">
                                                             Company Issuing Invoice:
@@ -158,7 +158,7 @@ include_once "../controller/solicitudController.php";
                                                             <option value="empresa_3">Empresasss</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         
                                                         <label class="text-center mb-2" style="font-size: smaller;" for="bankAccountSelect">
                                                             Bank Account for Deposit:
@@ -179,12 +179,39 @@ include_once "../controller/solicitudController.php";
                                                         
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                        
                                                         <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
                                                             Invoice Number:
                                                         </label>
                                                         <input type="text" class="form-control" id="invoiceNumberInput" name="invoice_number" placeholder="Enter invoice number">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                       
+                                                        <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                                            TAX:
+                                                        </label>
+                                                        <input type="text" class="form-control" id="tax" name="tax" placeholder="Enter TAX">
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-4">                                                            
+                                                            <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                                                Email:
+                                                            </label>
+                                                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email">
+                                                        </div>
+                                                        <div class="col-md-4">                                                            
+                                                            <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                                                Adress:
+                                                            </label>
+                                                            <input type="text" class="form-control" id="adress" name="adress" placeholder="Enter adress">
+                                                        </div>
+                                                        <div class="col-md-4">                                                            
+                                                            <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                                                Number TAX:
+                                                            </label>
+                                                            <input type="text" class="form-control" id="numberTax" name="numberTax" placeholder="Enter tax number">
+                                                        </div>
                                                     </div>
                                                     
                                                 </div>
@@ -255,17 +282,17 @@ include_once "../controller/solicitudController.php";
                                                                             foreach ($datos_adicionales as $clave => $valor) {
                                                                                 ?>
                                                                               
-                                                                                    <div class="row">
-                                                                                            <div class="col-md-6 mb-3">
-                                                                                                <label for="nombreSociedad"><?php echo $valor; ?></label>
-                                                                                            </div>
-                                                                                        
-                                                                                           
-                                                                                         
-                                                                                            <div class="col-md-3 mb-3">
-                                                                                                <input type="text" placeholder="Cantidades" name="<?php echo $clave . '_cantidad'; ?>" class="form-control" >
-                                                                                            </div>
+                                                                              <div class="row">
+                                                                                    <div class="col-md-6 mb-3">
+                                                                                        <label><?php echo $valor; ?></label>
                                                                                     </div>
+                                                                                    <div class="col-md-3 mb-3">
+                                                                                        <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control">
+                                                                                    </div>
+                                                                                    <div class="col-md-3 mb-3">
+                                                                                        <input type="text" placeholder="Unit Price" name="valor<?php echo $clave; ?>" class="form-control">
+                                                                                    </div>
+                                                                                </div>
                                                                                 
                                                                                 <?php
                                                                             }

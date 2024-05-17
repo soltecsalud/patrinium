@@ -166,6 +166,10 @@ class Solicitud_controller{
         $cuenta_bancaria = $_POST['cuenta_bancaria'];
         $observaciones = $_POST['observaciones'];
         $invoice_number = $_POST['invoice_number']; 
+        $email=$_POST['email'];
+        $adress=$_POST['adress'];
+        $tax=$_POST['tax'];
+        $number_tax=$_POST['numberTax'];
 
     $datos = [
         "logo" => $logo,
@@ -173,6 +177,10 @@ class Solicitud_controller{
         "cuenta_bancaria" => $cuenta_bancaria,
         "observaciones" => $observaciones,
         "invoice_number" => $invoice_number,
+        "email" => $email,
+        "adress" => $adress,
+        "tax" => $tax,
+        "number_tax" => $number_tax,
         "servicios" => []
     ];
 
