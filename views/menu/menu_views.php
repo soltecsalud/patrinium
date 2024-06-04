@@ -34,12 +34,7 @@ if (!isset($_SESSION['usuario'])) {
                   <p>Registrar Solicitud</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./registrarSolicitud_2.php" class="nav-link">
-                  <i class="nav-icon fas fa-clipboard"></i>
-                  <p>Registrar Solicitud2</p>
-                </a>
-              </li>
+             
               <li class="nav-item">
                 <a href="./listado_solicitudes.php" class="nav-link">
                 <i class="fa fa-list" aria-hidden="true"></i>

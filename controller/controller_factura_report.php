@@ -69,7 +69,7 @@ class MyPDF extends FPDF {
         // Mover a la derecha para el texto del lado derecho del encabezado
         $this->SetY(50);
         $this->SetX(-100); // Esto coloca la posición x justo antes del margen derecho del documento
-        $this->MultiCell(90, 5, "Bill to\n\n ".$name."\n Email: ". $email."\n Number Tax: ".$numberTax."\n Adress: ".$adress , 0, 'L');
+        $this->MultiCell(90, 5, "Bill to\n\n".$name."\n Email: ". $email."\n Number Tax: ".$numberTax."\n Adress: ".$adress , 0, 'L');
 
         // Dibuja una línea para separar el encabezado del resto de la página
         
@@ -182,6 +182,10 @@ class InvoiceController {
             $pdf->Cell(30, 10, 'SUB TOTAL', 0, 0, 'R');
             $pdf->Cell(30, 10, '$' . number_format($subtotal, 2), 0, 1, 'R');
 
+            if($tax==0){
+               
+          
+
             $y = $pdf->GetY() + 1;
             $pdf->SetXY(-215, $y);
             $pdf->Cell(130, 10, '', 0, 0, 'R');
@@ -202,7 +206,13 @@ class InvoiceController {
             $tax_operacion = 1+$mult_tax;
             
             $pdf->Cell(30, 10, '$' . number_format($subtotal*$tax_operacion,2), 0, 1, 'R');
-    
+        }else{
+            $y = $pdf->GetY() + 1;
+            $pdf->SetXY(-215, $y);
+            $pdf->Cell(130, 10, '', 0, 0, 'R');
+            $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
+            $pdf->Cell(30, 10, '$' . number_format($subtotal, 2), 0, 1, 'R');
+        }
             $pdf->Ln(5); 
              // Añadir observaciones si existen
              // Añadir observaciones si existen

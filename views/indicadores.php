@@ -7,6 +7,8 @@ if (!isset($_SESSION['usuario'])) {
     echo 'Acesso no autorizado.';
     exit();
 }
+
+require_once 'controller/indicadores_controller.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
-  <title>PatrimoniumAPP || Index </title>
+  <title>PatrimoniumAPP || Indicadores </title>
 </head>
 <body >
     <!-- Main content -->
@@ -29,14 +31,23 @@ if (!isset($_SESSION['usuario'])) {
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h4>
+                    New Requests
+                  
+                  </h4>
 
-                  <p>New Orders</p>
+                  <h3>
+                    <?php
+                    $indicadores = new Indicadores_Controller();
+                    $cantidadSolicitud = $indicadores->getSolicides();
+                    echo $cantidadSolicitud[0]->solicitudes;
+                    ?>
+                  </h3>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="listado_solicitudes.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->

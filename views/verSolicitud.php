@@ -135,12 +135,31 @@ include_once "../controller/solicitudController.php";
                                    </table>
                                    
                                     </div>
-
+                                            <?php 
+                                            
+                                            $verificar_documento = $controlador->validarDocumento($id_revisar_solicitud);
+                                           
+                                            if($verificar_documento == 1){
+                                                
+                                            ?>
+                                              
+                                               
+                                           
+                                         
                                     <div class="card-body">
                                         <div class="card-header">
                                             <h3 class="card-title">Creacion de factura</h3>
                                         </div>
-                                    
+                                            <?php 
+                                              $verificar_factura = $controlador->validarFactura($id_revisar_solicitud);
+                                                
+                                                if($verificar_factura == 1){?>
+                                                  
+                                                    <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Invoice</a>
+                                               <?php }
+                                              
+                                              else{
+                                            ?>
                                     <div class="container mt-4">
                                            
                                             
@@ -278,19 +297,21 @@ include_once "../controller/solicitudController.php";
 
                                                                         // Verificar si la decodificación fue exitosa
                                                                         if ($datos_adicionales) {
+                                                                           
                                                                             // Iterar sobre cada par clave-valor del JSONB
                                                                             foreach ($datos_adicionales as $clave => $valor) {
+                                                                               
                                                                                 ?>
-                                                                              
+                                                                             
                                                                               <div class="row">
                                                                                     <div class="col-md-6 mb-3">
                                                                                         <label><?php echo $valor; ?></label>
                                                                                     </div>
                                                                                     <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control">
+                                                                                        <input type="text" placeholder="Qty" name="cantidad<?php echo $valor; ?>" class="form-control">
                                                                                     </div>
                                                                                     <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Unit Price" name="valor<?php echo $clave; ?>" class="form-control">
+                                                                                        <input type="text" placeholder="Unit Price" name="valor<?php echo $valor; ?>" class="form-control">
                                                                                     </div>
                                                                                 </div>
                                                                                 
@@ -331,14 +352,16 @@ include_once "../controller/solicitudController.php";
                                                                         <button type="button" id="btnInsertarFactura" style="margin-bottom: 1%;" class="btn btn-primary">Insert Invoice</button>
                                                                     
                                                                
-                                                                        <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" class="btn btn-danger" target="_blank" rel="noopener noreferrer">Invoice</a>
+                                                                       
                                                                    
                                                                         
                                                                         
                                                                 </div>                     
                                                 
                                             </form>
-                                            
+                                            <?php } } else{
+                                                echo "<div class='alert alert-danger' role='alert'>NO Existe Documento Para Esta Solicutd</div>";
+                                            }  ?>
                                         </div>
                                         
                                     </div>
@@ -461,49 +484,7 @@ $(document).ready(function() {
     });
 });
 
-/*function calculateTotal() {
-    const container = document.getElementById('totalDetails');
-    container.innerHTML = ''; // Limpiar contenido anterior
-    let total = 0;
-    document.querySelectorAll('.document-item:checked').forEach((item, index) => {
-        total += parseInt(item.value);
-        const wrapper = document.createElement('div');
-        wrapper.className = 'form-group';
 
-        const label = document.createElement('label');
-        label.textContent = item.dataset.description + ':';
-        label.htmlFor = 'docValue' + index;
-
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.className = 'form-control';
-        input.id = 'docValue' + index;
-        input.name = 'documentValues[]';
-        input.readOnly = true;
-        input.value = item.dataset.description + ': ' + item.value + '  USD';
-
-        wrapper.appendChild(label);
-        wrapper.appendChild(input);
-        container.appendChild(wrapper);
-    });
-
-    // Agregar total al final
-    const totalWrapper = document.createElement('div');
-    totalWrapper.className = 'form-group';
-    
-    const totalLabel = document.createElement('label');
-    totalLabel.textContent = 'Total:';
-    
-    const totalInput = document.createElement('input');
-    totalInput.type = 'text';
-    totalInput.className = 'form-control';
-    totalInput.readOnly = true;
-    totalInput.value = total + ' USD';
-
-    totalWrapper.appendChild(totalLabel);
-    totalWrapper.appendChild(totalInput);
-    container.appendChild(totalWrapper);
-}*/
 $(document).ready(function(){
     $('#btnInsertarFactura').click(function(){
         var datos = $('#billingForm').serialize();

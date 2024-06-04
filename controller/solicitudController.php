@@ -210,7 +210,18 @@ class Solicitud_controller{
             }
         }
     
-        
+    public function validarFactura($id_revisar_solicitud) {
+        $id_revisar=$id_revisar_solicitud;
+        $facturaValida = ModelSolicitud::validarFactura($id_revisar);
+       return $facturaValida;
+       
+    }   
+    public function validarDocumento($id_revisar_solicitud) {
+        $id_revisar=$id_revisar_solicitud;
+        $documentoValidado = ModelSolicitud::validarDocumento($id_revisar);
+        return $documentoValidado;
+       
+    } 
     
 
     

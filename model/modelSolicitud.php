@@ -62,7 +62,8 @@ class ModelSolicitud
             $sqlListarSolicitud = "
             SELECT * FROM archivo_adjunto where id_solicitud = $condicion ;
             ";
-            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);   
+                    
             $listaSolicutd->execute();
             return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -78,6 +79,33 @@ class ModelSolicitud
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();
             return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function validarFactura($id_solicitud){
+        try {
+            $sqlListarSolicitud = "
+            select count(id) from factura where id_solicitud = :id_solicitud;
+            ";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);  
+            $listaSolicutd->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);         
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchColumn();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    public static function validarDocumento($id_solicitud){
+        try {
+            $sqlListarSolicitud = "
+            select  count(id_archivo_adjunto) from archivo_adjunto where id_solicitud = :id_solicitud;
+            ";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);  
+            $listaSolicutd->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);         
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchColumn();
         } catch (Exception $e) {
             die($e->getMessage());
         }
