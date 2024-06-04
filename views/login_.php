@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <title>Login </title>
-    <link rel="stylesheet" href="css/login.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="path/to/AdminLTE-3.2.0/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="path/to/AdminLTE-3.2.0/plugins/bootstrap/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="path/to/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="path/to/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Otros scripts y estilos -->
 </head>
-
-<body class="hold-transition sidebar-collapse ">
+<body class="hold-transition sidebar-collapse">
+    <!-- Contenido de la página -->
     <section class="vh-75">
         <div class="container-fluid">
             <div class="row">
@@ -44,5 +48,4 @@
         </div>
     </section>
 </body>
-
 </html>

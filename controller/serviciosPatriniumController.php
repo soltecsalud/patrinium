@@ -1,0 +1,49 @@
+<?php
+
+
+require_once('../model/modelServiciosPatrinium.php');
+
+
+
+class ServiciosPatriniumController {
+    public function guardar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                "nombre_servicio" => $_POST['nombre_servicio']
+            ];
+            
+            $modelo = new ModelServiciosPatrinium;
+            $resultado = $modelo->insertServiciosPatrinium($data);
+            
+            if ($resultado == "ok") {
+                echo json_encode(['resultado' => 1]); // Éxito
+            } else {
+                echo json_encode(['resultado' => 0]); // Error
+            }
+        }
+    }
+
+    public function listarServicios() {
+        try {
+            $modelo = new ModelServiciosPatrinium;
+            $resultado = $modelo->getServicios();
+            header('Content-Type: application/json'); // Asegúrate de que la respuesta sea JSON
+            echo json_encode($resultado);
+        } catch (Exception $e) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+    }
+}
+
+// En tu archivo de rutas o donde configures tus rutas
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarServicios') {
+    $controller = new ServiciosPatriniumController;
+    $controller->listarServicios();
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'guardarServicio') {
+    $controller = new ServiciosPatriniumController();
+    $controller->guardar();
+}
+?>
+

@@ -97,13 +97,13 @@ if (!isset($_SESSION['usuario'])) {
 <?php include_once "footer/footer_views.php"; ?>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/additional-methods.min.js"></script>
-    <script src="./js/ubicaciones.js"></script>
-    <script src="./js/SelectEPS.js"></script>
-    <script src="./js/SelectUsuario.js"></script>
-    <script src="./js/calcularEdad.js"></script>
-    <script src="js/select2.js"></script>
-    <script src="./js/registrarCaso.js"></script>
-    <script src="./js/validacionFormularios.js"></script>
-    <script src="js/selectMultiples.js"></script>
+    <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/localization/messages_es.min.js"></script>  
+    <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.all.js"></script>
+    <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.js"></script>
+    <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
+    
+   
 
 </html>

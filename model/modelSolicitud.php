@@ -45,7 +45,18 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
-
+    public static function getServiciosOfrecidos(){
+        try {
+            $sqlListarSolicitud = "
+                select * from servicios
+            ";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
     public static function obtenerAdjuntos($condicion) {
         try {
             $sqlListarSolicitud = "

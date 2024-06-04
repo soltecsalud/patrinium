@@ -35,6 +35,12 @@ if (!isset($_SESSION['usuario'])) {
                 </a>
               </li>
               <li class="nav-item">
+                <a href="./registrarSolicitud_2.php" class="nav-link">
+                  <i class="nav-icon fas fa-clipboard"></i>
+                  <p>Registrar Solicitud2</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="./listado_solicitudes.php" class="nav-link">
                 <i class="fa fa-list" aria-hidden="true"></i>
                   <p>Listado de Solicitudes</p>
@@ -83,15 +89,15 @@ if (!isset($_SESSION['usuario'])) {
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./registrarPersona.php" class="nav-link">
+                <a href="./bancos_consignaciones.php" class="nav-link">
                   <i class="nav-icon fas fa-clipboard"></i>
-                  <p>Registrar Persona</p>
+                  <p>Bancos Consiganciones</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./listadoPersonas.php" class="nav-link">
+                <a href="./servicios_patrinium.php" class="nav-link">
                 <i class="fa fa-list" aria-hidden="true"></i>
-                  <p>Listado de Personas</p>
+                  <p>Servicios</p>
                 </a>
               </li>
              

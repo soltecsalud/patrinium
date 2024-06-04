@@ -9,6 +9,13 @@ class Solicitud_controller{
         $solicitud = $modelo->obtenerSolicitud($id_solicitud_model);
         return $solicitud;
     }
+
+    public function getServiciosOfrecidos(){        
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->getServiciosOfrecidos();
+        $solicitud = json_encode($solicitud);
+        echo $solicitud;
+    }
     public function getListadoSolicitudes() {
       
         $modelo = new ModelSolicitud();
@@ -67,7 +74,7 @@ class Solicitud_controller{
                     'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
                     'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
                     'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
-                    'acuerdoDeSocios', 'proteccionDivorcios', 'proteccionPatrimonio', 'actas',
+                    'acuerdoDeSocios', 'proteccionDivorcios', 'ProteccióndePatrimonio', 'Actas','ServiciosProfesionales',
                     'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
                     'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
                     'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
@@ -239,6 +246,9 @@ if (isset($_POST['accion']) && $_POST['accion'] === 'insertarFactura') {
   
 }
   
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarServicios') {
+    $controller = new Solicitud_controller();
+    $controller->getServiciosOfrecidos();
+}
 
 ?>
