@@ -49,34 +49,28 @@ if (!isset($_SESSION['usuario'])) {
               </li>
             </ul>
         </li>
-        <li class="nav-item">
+          <li class="nav-item">
             <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-users"></i>
               <p>
-                Crear Personas
+                Facturacion
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./registrarPersona.php" class="nav-link">
+                <a href="./factura.php" class="nav-link">
                   <i class="nav-icon fas fa-clipboard"></i>
-                  <p>Registrar Reunion</p>
+                  <p>Facturas</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="./listadoPersonas.php" class="nav-link">
-                <i class="fa fa-list" aria-hidden="true"></i>
-                  <p>Listado de Reuniones</p>
-                </a>
-              </li>
-             
+              </li>       
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>
                 Crear Generales
                 <i class="right fas fa-angle-left"></i>
               </p>
@@ -93,6 +87,11 @@ if (!isset($_SESSION['usuario'])) {
                 <a href="./servicios_patrinium.php" class="nav-link">
                 <i class="fa fa-list" aria-hidden="true"></i>
                   <p>Servicios</p>
+                </a>
+              </li> <li class="nav-item">
+                <a href="./tipo_pagos.php" class="nav-link">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                  <p>Tipo Pagos</p>
                 </a>
               </li>
              

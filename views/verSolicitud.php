@@ -21,6 +21,7 @@ include_once "../controller/solicitudController.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Registrar ESE</title>
     <style>
         .card-registroSolicitudCliente {
@@ -360,7 +361,7 @@ include_once "../controller/solicitudController.php";
                                                 
                                             </form>
                                             <?php } } else{
-                                                echo "<div class='alert alert-danger' role='alert'>NO Existe Documento Para Esta Solicutd</div>";
+                                                echo "<div class='alert alert-danger' role='alert'>NO Existe Documento Para Insertar Factura</div>";
                                             }  ?>
                                         </div>
                                         
@@ -453,27 +454,37 @@ include_once "../controller/solicitudController.php";
 
 
 
-  $(document).ready(function() {
-    $('#btn-cargar').click(function() {
-        var formData = new FormData($('#accion')[0]);
-        formData.append('accion', 'insertarRevision');
+        $(document).ready(function() {
+            $('#btn-cargar').click(function() {
+                var formData = new FormData($('#accion')[0]);
+                formData.append('accion', 'insertarRevision');
 
-        $.ajax({
-            url: '../controller/solicitudController.php',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                console.log(response);
-                alert("¡AJAX ejecutado con éxito!");
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
+                $.ajax({
+                    url: '../controller/solicitudController.php',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log(response);
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: '¡File Saved Successfully!',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'ver_solicitud_adjuntos.php'; // Redireccionar a la página de solicitud adjuntos
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
         });
-    });
-});
+
 $(document).ready(function() {
     $('#documentosAdjuntos').DataTable({
         dom: 'Bfrtip',
