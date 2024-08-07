@@ -30,7 +30,7 @@ if (!isset($_SESSION['usuario'])) {
                 <div class="col-md-10 offset-md-1">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Billing</h3>
+                            <h3 class="card-title">Bills Paid</h3>
 
                             <div class="card-tools">
                                 <!-- This will cause the card to maximize when clicked -->
@@ -47,7 +47,7 @@ if (!isset($_SESSION['usuario'])) {
                             <table id="facturaTable"class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Action</th>
+                                        <th>Descargar Comprobante</th>
                                         <th>Solicitud</th> 
                                         <th>Invoice Number</th>                                                                                                                    
                                         <th>Company</th>
@@ -80,36 +80,13 @@ if (!isset($_SESSION['usuario'])) {
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
     
-    <script>
-  $(document).ready(function(){
-   $('#btn_insertar__tipo_pago').click(function(){        
-       var datos = $('#tipoPagoForm').serialize() + "&action=guardarTipoPago"; // Cambio aquí: añadir el # antes de consignacionForm
-       console.log(datos);  
-       $.ajax({
-           type: "POST",
-           url: "../controller/tipoPagoController.php",
-           data: datos,
-           success: function(r) {
-               console.log(r);
-               if (r.resultado == 0) {
-                   alert("fallo :(");
-               } else {
-                   alert("Agregado con éxito");
-                   // Redirección a listar_empresa.php
-                   window.location.href = 'tipo_pagos.php';
-               }
-           }
-       });
-       return false;
-   });
-});
-</script>
+
 <script>
     $(document).ready(function() {
         $.ajax({
             url: '../controller/facturaController.php', // Cambia esto por la ruta correcta a tu controlador
             type: 'POST',
-            data: { action: 'listarFacturas' },
+            data: { action: 'listarFacturasPagadas' },
             dataType: 'json',
             success: function(response) {
                 console.log(response); // Añade esto para ver la respuesta en la consola
@@ -129,7 +106,7 @@ if (!isset($_SESSION['usuario'])) {
                         total += Number(detalleServicio.valor) * Number(detalleServicio.cantidad);
                     });
                     let row = `<tr>
-                        <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-id-solicitud="${factura.id_solicitud}"/></td>
+                        <td><a class='btn btn-success' href='../controller/resource/${factura.id_solicitud}/${factura.ruta_pago}' target='_BLANK'><i class=' fas fa-download'></i></a></td>
                         <td>${factura.id_solicitud}</td>
                         <td>${datos.invoice_number}</td>
                         <td>${datos.logo}</td>
@@ -146,90 +123,12 @@ if (!isset($_SESSION['usuario'])) {
             }
         });
 
-        $(document).on('click', '.payment-btn', function() {
-            // Obtén el id_solicitud del botón que fue clickeado
-            var idSolicitud = $(this).data('id-solicitud');
-            // Actualiza el valor del campo oculto en el formulario
-            $('#invoiceNumber').val(idSolicitud);
-            // Muestra el modal
-            $('#tuModal').modal('show');
-        });
     });
 
-    $(document).ready(function() {
-    $('#btn-payment').click(function(event) {
-        event.preventDefault(); // Evita el comportamiento por defecto del botón de envío
+   
 
-        var formData = new FormData($('#paymentForm')[0]);
-        formData.append('accion', 'insertarPagoInvoice'); // Cambia 'action' por 'accion'
-
-        $.ajax({
-            url: '../controller/facturaController.php', // Asegúrate de que la ruta es correcta
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                console.log(response);
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: '¡Archivo guardado exitosamente!',
-                    icon: 'success',
-                    confirmButtonText: 'Aceptar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = 'factura.php'; // Redireccionar a la página de factura
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
-            }
-        });
-    });
-});
 </script>
 
-<!-- Modal -->
-<div class="modal fade" id="tuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Formulario de Pago</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario -->
-        <form id="paymentForm">
-          <!-- Campo oculto para invoice_number -->
-          <input type="hidden" id="invoiceNumber" name="id_solicitud">
-          <!-- Input de archivo -->
-          <div class="form-group">
-            <label for="paymentImage">Imagen de Pago</label>
-            <input type="file" class="form-control-file" id="paymentImage" name="payment_image">
-          </div>
-          <!-- Área de texto -->
-          <div class="form-group">
-            <label for="paymentNotes">Notas</label>
-            <textarea class="form-control" id="paymentNotes" name="payment_notes" rows="3"></textarea>
-          </div>
-          <!-- Select -->
-          <div class="form-group">
-            <label for="paymentOption">Opción de Pago</label>
-            <select class="form-control" id="paymentOption" name="payment_option">
-                <option value="Transferencia">Transferencia</option>
-                <option value="Cheque">Cheque</option>
-                <option value="Efectivo">Efectivo</option>
-            </select>
-          </div>
-          <!-- Botón de envío -->
-          <button type="submit" id="btn-payment" class="btn btn-primary">Enviar</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 </html>
 
