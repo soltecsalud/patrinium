@@ -63,6 +63,15 @@ if (!isset($_SESSION['usuario'])) {
                     <div class="card-body">
                         
                     <form action="" method="post" id="formulario-solicitud">
+
+                        <!-- Grupo de Select -->
+                        <div class="form-group">
+                            <label for="selectOptions">Selecciona Una Persona Registrada:</label>
+                            <select name="selectPersona" class="form-control" id="selectPersona">
+                                <option value="">Cargando opciones...</option>
+                            </select>
+                        </div>
+
                          <!-- Grupo de Nombre del Cliente -->
                          <div class="form-group">
                             <label for="nombreCliente">Nombre del Cliente:</label>
@@ -168,6 +177,7 @@ $(document).ready(function() {
 
                 // Contador para los elementos
                 var counter = 0;
+                var counter_list =1 ;
 
                 $.each(response, function(index, servicio) {
                     // Si el contador es múltiplo de 15, cerrar la columna actual y abrir una nueva
@@ -182,10 +192,12 @@ $(document).ready(function() {
                     // Agregar el elemento
                     servicioHtml += '<div class="custom-control custom-checkbox">';
                     servicioHtml += '<input type="checkbox" class="custom-control-input" id="' + servicio.servicio_name + '" name="' + servicio.servicio_name + '" value="' + servicio.nombre_servicio + '">';
-                    servicioHtml += '<label class="custom-control-label" for="' + servicio.servicio_name + '">' + servicio.nombre_servicio + '</label>';
+                    servicioHtml += '<label class="custom-control-label" for="' + servicio.servicio_name + '">' + counter_list + '. ' + servicio.nombre_servicio + '</label>';
                     servicioHtml += '</div>';
 
                     counter++;
+                    counter_list++;
+                    
                 });
 
                 // Cerrar la última columna y el contenedor principal
@@ -198,6 +210,30 @@ $(document).ready(function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error al obtener los servicios:', textStatus, errorThrown);
             }
+        });
+    });
+    $(document).ready(function() {
+        $.ajax({
+            url: '../controller/sociedadController.php',
+            type: 'GET',
+            data: { accion: 'getSociedades' },
+            dataType: 'json',
+            success: function(data) {
+                console.log('Respuesta del servidor:', data); // Depuración
+                var select = $('#selectPersona');
+                select.empty();
+                select.append('<option value="">Selecciona una Persona</option>');
+                $.each(data, function(index, item) {
+                    select.append('<option value="' + item.id_sociedad + '">' + item.nombre +" " + item.apellido + 
+                   
+                     '</option>');
+                });
+            },
+            error: function(xhr, status, error) {
+            console.error('Error en la solicitud AJAX:', status, error);
+            console.log('Respuesta del servidor:', xhr.responseText);
+            alert('Error al cargar las opciones');
+        }
         });
     });
     </script>

@@ -103,6 +103,18 @@ include_once "../controller/solicitudController.php";
                                    
                                     </div>
                                 </div>
+                        </div>
+                        <div class="card-body">
+                        
+                        <div class="card card-info card-outline shadow-none p-0">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos Persona</h3>
+                            </div>
+                                <div class="card-body">
+                                    hola
+                                </div>
+                            </div>
+                        </div>  <!--Fin Tabal Persona-->
                                 <!--tabla documentos descargables-->
                                 <div class="card-body">
                                     <div class="card-header">
@@ -383,7 +395,6 @@ include_once "../controller/solicitudController.php";
             
         </section>
     </div>
-
 
     <?php include_once "footer/footer_views.php"; ?>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>

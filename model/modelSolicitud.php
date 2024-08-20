@@ -45,10 +45,35 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
+
+    public static function obtenerSociedad($id_solicitud){
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "
+            SELECT id_sociedad, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
+             pais_residencia_fiscal, pais_domicilio, numero_pasaporte, pais_pasaporte, 
+             tipo_visa, direccion_local, telefonos, emails, industria,
+              nombre_negocio_local, ubicacion_negocio_principal, 
+              tamano_negocio, contacto_ejecutivo_local, numero_empleados, 
+              numero_hijos, razon_consultoria, requiere_registro_corporacion,  observaciones
+              , fk_solicitud, createdat
+	        FROM public.sociedad
+            where fk_solicitud = :id_solicitud;
+            ";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+          
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
     public static function getServiciosOfrecidos(){
         try {
             $sqlListarSolicitud = "
-                select * from servicios
+                select * from servicios order by nombre_servicio
             ";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();
@@ -144,14 +169,16 @@ class ModelSolicitud
             $camposDinamicosJSON =json_encode($camposDinamicos);
             $checkboxJSON = json_encode($checkbox);
 
-            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at,servicios,servicios_adicionales) 
-            VALUES (:nombre_cliente, :referido_por, :necesidad, NOW(),:servicios,:servicios_adicionales)";
+            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at,servicios,
+            servicios_adicionales,fk_persona) 
+            VALUES (:nombre_cliente, :referido_por, :necesidad, NOW(),:servicios,:servicios_adicionales,:fk_persona)";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':nombre_cliente', $datos['nombre_cliente'], PDO::PARAM_STR);
             $stmt->bindParam(':referido_por', $datos['referido_por'], PDO::PARAM_STR);
             $stmt->bindParam(':necesidad', $datos['necesidad'], PDO::PARAM_STR);
             $stmt->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
             $stmt->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
+            $stmt->bindParam(':fk_persona', $datos['fk_Persona'], PDO::PARAM_INT);
             
             
            

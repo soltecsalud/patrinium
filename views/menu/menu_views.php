@@ -29,6 +29,12 @@ if (!isset($_SESSION['usuario'])) {
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="./crearPersona.php" class="nav-link">
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>Crear Persona</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="./registrarSolicitud.php" class="nav-link">
                   <i class="nav-icon fas fa-clipboard"></i>
                   <p>Registrar Solicitud</p>
@@ -78,6 +84,33 @@ if (!isset($_SESSION['usuario'])) {
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link active">
+           <i class="fas fa-share-square"></i>
+
+              <p>
+                Crear Sociedades
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="./listarEmpresa.php" class="nav-link">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>Listar Empresa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./verSociedad.php" class="nav-link">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                  <p>Ver Sociedad</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-clipboard"></i>
               <p>
                 Crear Generales
@@ -105,56 +138,7 @@ if (!isset($_SESSION['usuario'])) {
               </li>
              
             </ul>
-          </li>
-       
-
-
-        
-          <li class="nav-item">
-            <a href="#" class="nav-link active">
-           <i class="fas fa-share-square"></i>
-
-              <p>
-                Crear Sociedades
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./crearEmpresa.php" class="nav-link">
-                  <i class="nav-icon fas fa-tasks"></i>
-                  <p>Crear Empresa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./listarEmpresa.php" class="nav-link">
-                <i class="fa fa-clipboard" aria-hidden="true"></i>
-                  <p>Listar Empresa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./verSociedad.php" class="nav-link">
-                <i class="fa fa-clipboard" aria-hidden="true"></i>
-                  <p>Ver Sociedad</p>
-                </a>
-              </li>
-            
-            </ul>
-          </li>
-      
-
-
-
-
-      
-
-
-       
-
-
-
-       
+          </li>       
           <li class="nav-item">
             <a href="./agenda.php" class="nav-link active">
             <i class="fa fa-calendar" aria-hidden="true"></i>

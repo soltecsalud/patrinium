@@ -1,6 +1,8 @@
 <?php
-include_once "../controller/getBancosController.php";
 
+require_once "../controller/solicitudController.php";
+
+$id_revisar_solicitud = $_GET['id_solicitud'];
 ?>
 
 <!DOCTYPE html>
@@ -35,52 +37,229 @@ include_once "../controller/getBancosController.php";
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+                     <?php
+                        $sociedad_controller = new Solicitud_controller();
+
+                        $fila = $sociedad_controller->getSociedad($id_revisar_solicitud);
+
+                      
+                    ?>
             <table class="table table-striped">
                 
+                
                 <tbody>
-                    
-                    <th scope="col"  style="text-align: center;">Numero sociedad</th>
-                        <td>123456789</td>
-                        <th scope="col"  style="text-align: center;">Fecha Creacion</th>
-                        <td>01/03/2024</td>
-                        <th>Estado de la Sociedad</th> 
-                        <td>Activo</td> 
-                    <tr>
-                        <th >Nombre de la Sociedad</th>
-                        <td>green sas</td>
-                        <th >Referencia de la Sociedad</th>                      
-                        <td>12345678</td>
-                        <th>Número de Registro</th>                      
-                        <td>12345678</td>
-                        
-                        
-                    </tr>
-                    <tr>
-                        <th>País de la Sociedad</th>
-                        <td>Estados Unidos</td>
-                        <th>Estado (solo USA)</th>                      
-                        <td>Florida</td>
-                              
-                        <th>Cantidad de Socios</th>    
-                        <th>3</th>                   
-                        
-                    </tr>
+                   
+                <tr>
+                            <th scope="col" style="text-align: center;">ID Solicitud</th>
+                            <td><?php echo $fila[0]['id_sociedad']; ?></td>
+                            <th scope="col" style="text-align: center;">Nombre</th>
+                            <td><?php echo $fila[0]['nombre']; ?></td>
+                            <th scope="col" style="text-align: center;">Apellido</th>
+                            <td><?php echo $fila[0]['apellido']; ?></td>
+                            <th scope="col" style="text-align: center;">Fecha de Nacimiento</th>
+                            <td><?php echo $fila[0]['fecha_nacimiento']; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Estado Civil</th>
+                            <td><?php echo $fila[0]['estado_civil']; ?></td>
+                            <th scope="col" style="text-align: center;">País de Origen</th>
+                            <td><?php echo $fila[0]['pais_origen']; ?></td>
+                            <th scope="col" style="text-align: center;">País de Residencia Fiscal</th>
+                            <td><?php echo $fila[0]['pais_residencia_fiscal']; ?></td>
+                            <th scope="col" style="text-align: center;">País de Domicilio</th>
+                            <td><?php echo $fila[0]['pais_domicilio']; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Número de Pasaporte</th>
+                            <td><?php echo $fila[0]['numero_pasaporte']; ?></td>
+                            <th scope="col" style="text-align: center;">País de Pasaporte</th>
+                            <td><?php echo $fila[0]['pais_pasaporte']; ?></td>
+                            <th scope="col" style="text-align: center;">Tipo de Visa</th>
+                            <td><?php echo $fila[0]['tipo_visa']; ?></td>
+                            <th scope="col" style="text-align: center;">Dirección Local</th>
+                            <td><?php echo $fila[0]['direccion_local']; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Teléfonos</th>
+                            <td><?php echo $fila[0]['telefonos']; ?></td>
+                            <th scope="col" style="text-align: center;">Emails</th>
+                            <td><?php echo $fila[0]['emails']; ?></td>
+                            <th scope="col" style="text-align: center;">Industria</th>
+                            <td><?php echo $fila[0]['industria']; ?></td>
+                            <th scope="col" style="text-align: center;">Nombre del Negocio Local</th>
+                            <td><?php echo $fila[0]['nombre_negocio_local']; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Ubicación del Negocio Principal</th>
+                            <td><?php echo $fila[0]['ubicacion_negocio_principal']; ?></td>
+                            <th scope="col" style="text-align: center;">Tamaño del Negocio</th>
+                            <td><?php echo $fila[0]['tamano_negocio']; ?></td>
+                            <th scope="col" style="text-align: center;">Contacto Ejecutivo Local</th>
+                            <td><?php echo $fila[0]['contacto_ejecutivo_local']; ?></td>
+                            <th scope="col" style="text-align: center;">Número de Empleados</th>
+                            <td><?php echo $fila[0]['numero_empleados']; ?></td>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Número de Hijos</th>
+                            <td><?php echo $fila[0]['numero_hijos']; ?></td>
+                            <th scope="col" style="text-align: center;">Razón de Consultoría</th>
+                            <td><?php echo $fila[0]['razon_consultoria']; ?></td>
+                            <th colpan="2" scope="col" style="text-align: center;">Requiere Registro de Corporación</th>
+                            <td colpan="2"><?php echo $fila[0]['requiere_registro_corporacion']; ?></td>
+                         
+                        </tr>
+                        <tr>
+                            <th scope="col" style="text-align: center;">Observaciones</th>
+                            <td><?php echo $fila[0]['observaciones']; ?></td>
+                          
+                        </tr>
                 </tbody>
             </table>
+
+            <?php
+                                                      
+                                                        $servicios = $controlador->getServicios($id_revisar_solicitud);
+                                                        //print_r($servicios);
+                                                    
+
+                                                   //Servicios desde JSONb 
+
+                                                          
+                                                            foreach ($servicios as $servicio): ?>
+                                                                    <?php if (!empty($servicio['servicios'])): ?>
+                                                                        <?php
+                                                                        // Decodificar el JSONB
+                                                                        $datos = json_decode($servicio['servicios'], true);
+
+                                                                        // Verificar si la decodificación fue exitosa
+                                                                        if ($datos) {
+                                                                            // Iterar sobre cada par clave-valor del JSONB
+                                                                            foreach ($datos as $clave => $valor) {
+                                                                                ?>
+                                                                              
+                                                                             
+                                                                                    <li class="col-md-6 mb-3">
+                                                                                        <label><?php echo $valor; ?></label>
+                                                                                    </li>
+                                                                           
+                                                                                    
+                                                                                <?php
+                                                                            }
+                                                                        } else {
+                                                                            // Si no se pudo decodificar el JSONB, imprimir un mensaje de error
+                                                                            ?>
+                                                                            
+                                                                                <h4>Error al decodificar el JSONB</h4>
+                                                                          
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                                                <?php foreach ($servicios as $servicio_adicionales): ?>
+                                                                    <?php if (!empty($servicio['servicios_adicionales'])): ?>
+                                                                        <?php
+                                                                        // Decodificar el JSONB
+                                                                        $datos_adicionales = json_decode($servicio['servicios_adicionales'], true);
+
+                                                                        // Verificar si la decodificación fue exitosa
+                                                                        if ($datos_adicionales) {
+                                                                           
+                                                                            // Iterar sobre cada par clave-valor del JSONB
+                                                                            foreach ($datos_adicionales as $clave => $valor) {
+                                                                               
+                                                                                ?>
+                                                                             
+                                                                              
+                                                                                    <li class="col-md-6 mb-3">
+                                                                                        <label><?php echo $valor; ?></label>
+                                                                                    </li>
+                                                                                   
+                                                                              
+                                                                                
+                                                                                <?php
+                                                                            }
+                                                                        } 
+                                                                        ?>
+                                                                    <?php endif; ?>
+                                                                <?php endforeach; ?>
+                                   
         </div>
         <!-- /.card-body -->
     </div>
-    <!--socios-->
-    <div class="card card-primary collapsed-card">
+    
+     <!--ESTRUCTURA CORPORATIVA-->
+     <div class="card card-primary collapsed-card">
         <div class="card-header">
-            <h3 class="card-title">Datos Socios</h3>
+            <h3 class="card-title">Estructura Corporativa</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#miModal">
-                    Crear Socio
+                
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+        <form>
+                    <div class="form-group">
+                        <label for="tipoTrust">Tipo de Trust</label>
+                        <select id="tipoTrust" class="form-control">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="Revocable">Revocable</option>
+                            <option value="Irrevocable">Irrevocable</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="corporacionHolding">Corporación Holding LLC</label>
+                        <select id="corporacionHolding" class="form-control">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                            <option value="PROBABLE">PROBABLE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="corporacionLLC1">Corporación LLC</label>
+                        <select id="corporacionLLC1" class="form-control">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="Tenedora">Tenedora</option>
+                            <option value="Operativa">Operativa</option>
+                            <option value="Socia">Socia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="corporacionLLC2">Corporación LLC</label>
+                        <select id="corporacionLLC2" class="form-control">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                            <option value="PROBABLE">PROBABLE</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="corporacionTerceros">Corporación en Terceros Países</label>
+                        <select id="corporacionTerceros" class="form-control">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                            <option value="PROBABLE">PROBABLE</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!--Corporacion sociedad-->
+    <div class="card card-primary collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title">Corporacion sociedad</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
                 </button>
+               
             </div>
         </div>
         <!-- /.card-header -->
@@ -89,52 +268,6 @@ include_once "../controller/getBancosController.php";
                 
               
             </table>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!--Bancos-->
-    <div class="card card-primary collapsed-card">
-        <div class="card-header">
-            <h3 class="card-title">Datos Bancarios</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#bancos">
-                    Asignar banco
-                </button>
-            </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-          
-          <table id="tablaBancos" class="table table-bordered table-striped">
-                  <thead>
-                      <tr>
-                          <th>Nombre Banco</th>
-                          <th>Cuenta Banco</th>
-                          <th>Titular Cuenta</th>
-                          <th>Tipo Banco</th>                                           
-                      </tr>
-                  </thead>
-                  <tbody>                  
-                        <?php 
-                        $controlador = new getBancos();
-                        $bancosSociedades = $controlador->getBancosSociedad();
-                        //print_r($bancosSociedades);
-                         
-                        foreach($bancosSociedades as $bancosSociedad){
-                        ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($bancosSociedad['nombre_banco']); ?></td>
-                                <td><?php echo htmlspecialchars($bancosSociedad['cuenta_banco']); ?></td>
-                                <td><?php echo htmlspecialchars($bancosSociedad['titular_cuenta']); ?></td>
-                                <td><?php echo htmlspecialchars($bancosSociedad['tipo_cuenta']); ?></td>
-                                
-                            </tr>
-                        <?php }?>
-                   </tbody>
-          </table>
         </div>
         <!-- /.card-body -->
     </div>

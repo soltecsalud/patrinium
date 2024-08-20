@@ -16,6 +16,8 @@ class Solicitud_controller{
         $solicitud = json_encode($solicitud);
         echo $solicitud;
     }
+
+
     public function getListadoSolicitudes() {
       
         $modelo = new ModelSolicitud();
@@ -27,6 +29,13 @@ class Solicitud_controller{
         $id_solicitud = $id_enviado_desde_vista;
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->obtenerServicios($id_solicitud);
+        return $solicitud;
+    }
+
+    public function getSociedad($id_enviado_desde_vista){
+        $id_solicitud = $id_enviado_desde_vista;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerSociedad($id_solicitud);
         return $solicitud;
     }
 
@@ -59,6 +68,7 @@ class Solicitud_controller{
 
     public function insertarSolicitud() {
         $datos = array(
+        "fk_Persona" => $_POST['selectPersona'],
         "nombre_cliente" => $_POST['nombreCliente'],
         "referido_por" => $_POST['referido_por'],
         "necesidad" => $_POST['necesidad']

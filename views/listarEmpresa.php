@@ -35,11 +35,11 @@ include_once "../controller/sociedadController.php";
         foreach($sociedades as $sociedad): 
         ?>
             <tr>
-            <td><a href="verSociedad.php" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
-                <td><?php echo htmlspecialchars($sociedad['nombre_sociedad']); ?></td>
-                <td><?php echo htmlspecialchars($sociedad['referencia_sociedad']); ?></td>
-                <td><?php echo htmlspecialchars($sociedad['fecha_registro']); ?></td>
-                <td><?php echo htmlspecialchars($sociedad['estado']); ?></td>
+                <td><a href="verSociedad.php?id_solicitud=<?php echo $sociedad['fk_solicitud']?> " class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+                <td><?php echo htmlspecialchars($sociedad['nombre']); ?></td>
+                <td><?php echo htmlspecialchars($sociedad['id_sociedad']); ?></td>
+                <td><?php echo htmlspecialchars($sociedad['fecha_nacimiento']); ?></td>
+                <td><?php echo htmlspecialchars($sociedad['pais_origen']); ?></td>
              
             </tr>
             <?php endforeach; ?>

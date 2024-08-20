@@ -6,7 +6,7 @@ class getBancos{
     public function getBancosSociedad() {
         $modelo = new BancosModel();
         $solicitud = $modelo->mdlGetBancosSociedad();
-        return $bancos;
+        //return $bancos;
     }
 }
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
