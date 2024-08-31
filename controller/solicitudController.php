@@ -178,6 +178,7 @@ class Solicitud_controller{
     
     public function insertarFactura() {
         $id_solicitud_factura = $_POST['id_solicitud'];
+        $estado = $_POST['estado'];
         $logo = $_POST['logo'];
         $total_factura = $_POST['total_factura'];
         $cuenta_bancaria = $_POST['cuenta_bancaria'];
@@ -189,6 +190,7 @@ class Solicitud_controller{
         $number_tax=$_POST['numberTax'];
 
     $datos = [
+        
         "logo" => $logo,
         "Total" => $total_factura,
         "cuenta_bancaria" => $cuenta_bancaria,
@@ -212,7 +214,7 @@ class Solicitud_controller{
         }
     }
 
-    $respuesta = ModelSolicitud::insertarFactura($datos, $id_solicitud_factura);
+    $respuesta = ModelSolicitud::insertarFactura($datos, $id_solicitud_factura, $estado);
             if ($respuesta == "ok") {
                 echo json_encode(["status" => 0]); // Éxito
             } else {

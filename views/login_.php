@@ -7,6 +7,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="path/to/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="path/to/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+
     <!-- Otros scripts y estilos -->
 </head>
 <body class="hold-transition sidebar-collapse">
@@ -14,9 +16,11 @@
     <section class="vh-75">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-6 px-0 d-none d-sm-block">
-                    <img src="views/imgs/logo1.png" alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: right;">
-                </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block" style="background-color: #0a0a23; display: flex; align-items: center; justify-content: center;">
+    <h1 style="font-family: 'Cinzel', serif; color: #ffffff; font-size: 4rem; text-align: center;">
+        PATRIMONIUM
+    </h1>
+</div>
                 <div class="col-sm-6 text-black" style="background:#f6f7fc;">
                     <div class="px-5 ms-xl-4">
                         <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #ffffff;"></i>

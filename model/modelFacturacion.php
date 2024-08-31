@@ -6,7 +6,7 @@ class ModelFacturacion {
     public function listarFacturas() {
 
         try {
-            $sql = "SELECT * FROM factura where estado != 1";
+            $sql = "SELECT * FROM factura where estado = 0 or estado = null";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
@@ -23,6 +23,21 @@ class ModelFacturacion {
             $sql = "SELECT * FROM factura where estado = :estado";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->bindParam(':estado',$estado , PDO::PARAM_STR);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function listarServicios() {
+
+        try {
+            $estado = 2;
+            $sql = "SELECT * FROM factura where estado = :estado";
+            $consulta = Conexion::conectar()->prepare($sql);
+            $consulta->bindParam(':estado',$estado , PDO::PARAM_INT);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
@@ -49,6 +64,27 @@ class ModelFacturacion {
             return "ok";
            
         } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function actualizarEstadoFactura($datos) {
+        try {
+            // Preparar la consulta SQL para actualizar el estado de la factura
+            $sql = "UPDATE factura SET estado = 0 WHERE id_solicitud = :id_solicitud AND id = :id";
+            $consulta = Conexion::conectar()->prepare($sql);
+    
+            // Vincular los parámetros
+            $consulta->bindParam(':id_solicitud', $datos['id_solicitud'], PDO::PARAM_INT);
+            $consulta->bindParam(':id', $datos['id'], PDO::PARAM_INT);
+    
+            // Ejecutar la consulta
+            $consulta->execute();
+    
+            return "ok";
+           
+        } catch (Exception $e) {
+            // Manejar la excepción y devolver un mensaje de error
             die($e->getMessage());
         }
     }

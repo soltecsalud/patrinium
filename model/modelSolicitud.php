@@ -19,7 +19,7 @@ class ModelSolicitud
             $sqlListarSolicitud = "
             SELECT a.id_solicitud, a.nombre_cliente,a.referido_por, a.created_at FROM solicitud as a
             left join archivo_adjunto as ar ON(a.id_solicitud = ar.id_solicitud)
-			where ar.id_solicitud is null
+			where ar.id_solicitud is null 
             ";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();
@@ -58,10 +58,10 @@ class ModelSolicitud
               numero_hijos, razon_consultoria, requiere_registro_corporacion,  observaciones
               , fk_solicitud, createdat
 	        FROM public.sociedad
-            where fk_solicitud = :id_solicitud;
+            where id_sociedad = :id_sociedad;
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
-            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->bindParam(':id_sociedad', $solicitud_id, PDO::PARAM_INT);        
             $listaSolicitud->execute();
             $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
           
@@ -139,8 +139,14 @@ class ModelSolicitud
     public static function obtenerSolicitudesConAdjuntos() {
         try {
             $sqlListarSolicitud ="
-            SELECT * FROM solicitud as a
-            inner join archivo_adjunto as ar ON(a.id_solicitud = ar.id_solicitud)
+                SELECT a.id_solicitud, ar.id_solicitud, a.nombre_cliente, a.referido_por, a.created_at
+                FROM solicitud as a
+                RIGHT JOIN (
+                    SELECT DISTINCT ON (id_solicitud) *
+                    FROM archivo_adjunto
+                    ORDER BY id_solicitud, id_archivo_adjunto
+                ) as ar ON a.id_solicitud = ar.id_solicitud;
+
            ";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();
@@ -214,18 +220,19 @@ class ModelSolicitud
         }
     }
 
-    public static function insertarFactura($datos,$id) {
+    public static function insertarFactura($datos,$id,$estado_factura) {
         try {
             $id_solicitud = $id;
+            $estado = $estado_factura;
             $json_datos = json_encode($datos);
             $sql = "INSERT INTO public.factura(
-                 datos, created_at,id_solicitud)
-                VALUES ( :datos, NOW(),:id_solicitud);
+                 datos, created_at,id_solicitud,estado)
+                VALUES ( :datos, NOW(),:id_solicitud,:estado);
             ";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':datos', $json_datos);
             $stmt->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
-            
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_INT);
             
            
             if($stmt->execute()) {

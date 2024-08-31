@@ -55,7 +55,27 @@ if (!isset($_SESSION['usuario'])) {
               </li>
             </ul>
         </li>
-          <li class="nav-item">
+        <li class="nav-item">
+            <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-users"></i>
+              <p>
+              Orden Servicios
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./orden_servicio.php" class="nav-link">
+                  <i class="nav-icon fas fa-clipboard"></i>
+                  <p>Orden Servicios</p>
+                </a>
+              </li>       
+            </ul>
+
+           
+        </li>
+        <li class="nav-item">
             <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-users"></i>
               <p>
@@ -81,7 +101,7 @@ if (!isset($_SESSION['usuario'])) {
                 </a>
               </li>       
             </ul>
-          </li>
+        </li>
           <li class="nav-item">
             <a href="#" class="nav-link active">
            <i class="fas fa-share-square"></i>

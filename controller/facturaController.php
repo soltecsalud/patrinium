@@ -27,6 +27,18 @@ class FacturaController {
         }
     }
 
+    public function listarServicios() {
+        try {
+            $modelo = new ModelFacturacion();
+            $resultado = $modelo->listarServicios();
+            header('Content-Type: application/json'); // Asegúrate de que la respuesta sea JSON
+            echo json_encode($resultado);
+        } catch (Exception $e) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+    }
+
     
         public function insertarRevision() {
             $id_solicitud = $_POST['id_solicitud'];
@@ -86,6 +98,32 @@ class FacturaController {
                 echo "No se ha seleccionado ningún archivo o ocurrió un error al cargarlo.";
             }
         }
+
+        public function actualizarFactura() {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['id_solicitud']) && isset($_POST['id'])) {
+                    // Preparar los datos para pasarlos al modelo
+                    $datos = [
+                        'id_solicitud' => $_POST['id_solicitud'],
+                        'id' => $_POST['id']
+                    ];
+                    
+                    // Llamar al modelo para actualizar la factura
+                    $resultado = ModelFacturacion::actualizarEstadoFactura($datos);
+        
+                    // Verificar el resultado y enviar la respuesta
+                    if ($resultado == "ok") {
+                        echo json_encode(['success' => true]);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'Error al actualizar la factura']);
+                    }
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+            }
+        }
 }
     
 
@@ -102,5 +140,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'listarFacturas
     
     $controlador = new FacturaController();
     $controlador->listarFacturasPagadas(); // Asegúrate de que este método existe y es el correcto
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'listarServicios') {
+    
+    $controlador = new FacturaController();
+    $controlador->listarServicios(); // Asegúrate de que este método existe y es el correcto
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'actualizarFactura') {
+    
+
+        $controlador = new FacturaController();
+        $controlador->actualizarFactura();
+   
+    // Puedes seguir añadiendo otros elseif para diferentes acciones aquí.
 }
 ?>

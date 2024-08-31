@@ -219,11 +219,12 @@ $(document).ready(function(){
                 if (r.resultado == 0) {
                     alert("fallo :(");
                 } else {
-                    alert("éxito :)");
+                    alert("Persona Agregada con Exito :)");
+                     window.location.href = "registrarSolicitud.php";
                 }
             },
             error: function(xhr, status, error) {
-                console.error("Error en la solicitud AJAXsssss:", status, error);
+                console.error("Error en la solicitud:", status, error);
                 alert("Error en la solicitud AJAX");
             }
         });

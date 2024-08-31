@@ -20,7 +20,9 @@ los orginales tambien toca ponerlos
 docuemtno copia digitales
 
 adicionar servicios o hacer una orden de servicios
+orden de trabajo numero solicitu + 0000x
+es la misma factura pero con nombre orden de trabajo con valores
+se hace orden de trabajo en un tabla colocar un boton para pasar a factura
 
 
-
-
+   

@@ -13068,7 +13068,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar-dark-olive .nav-sidebar.nav-legacy > .nav-item > .nav-link.active,
 .sidebar-light-olive .nav-sidebar.nav-legacy > .nav-item > .nav-link.active {
-  border-color: #4aaaa5;
+  border-color: #0073b7;
 }
 
 .sidebar-dark-lime .nav-sidebar > .nav-item > .nav-link.active,
@@ -21798,7 +21798,7 @@ body.text-sm .input-group-text {
 
 .custom-switch.custom-switch-off-olive .custom-control-input ~ .custom-control-label::before {
   background-color: #4aaaa5;
-  border-color: #20503b;
+  border-color: #0073b7;
 }
 
 .custom-switch.custom-switch-off-olive .custom-control-input:focus ~ .custom-control-label::before {

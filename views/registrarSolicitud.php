@@ -74,8 +74,8 @@ if (!isset($_SESSION['usuario'])) {
 
                          <!-- Grupo de Nombre del Cliente -->
                          <div class="form-group">
-                            <label for="nombreCliente">Nombre del Cliente:</label>
-                            <input type="text" name="nombreCliente" class="form-control" id="nombreCliente" placeholder="Ingresa el nombre del cliente">
+                            
+                            <input type="hidden" name="nombreCliente" class="form-control" id="nombreCliente" placeholder="Ingresa el nombre del cliente" value="no va ">
                         </div>
 
                         <!-- Grupo de Referido de -->
