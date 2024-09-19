@@ -33,6 +33,25 @@ class ModelSolicitud
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "
+                    SELECT a.servicios, a.servicios_adicionales, b.estado
+                    FROM solicitud a
+                    inner join factura as b ON(a.id_solicitud=b.id_solicitud)
+                    where a.id_solicitud = :id_solicitud
+            ";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            return $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+          
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerServiciosFactura($id_solicitud) {
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "
             SELECT servicios, servicios_adicionales FROM solicitud where id_solicitud = :id_solicitud 
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
@@ -43,6 +62,29 @@ class ModelSolicitud
             return $resultados;
         } catch (Exception $e) {
             die($e->getMessage());
+        }
+    }
+
+    public static function obtenerServiciosFacturados($id_solicitud) {
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "
+            select estado,datos from factura where id_solicitud=:id_solicitud 
+            ";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+          
+            foreach ($resultados as &$resultado) {
+                if (isset($resultado['datos'])) {
+                    // Decodificar el JSON en 'datos'
+                    $resultado['datos'] = json_decode($resultado['datos'], true);
+                }
+            }
+            return json_encode($resultados); // Retornar el resultado completo
+        } catch (Exception $e) {
+            return json_encode(["error" => $e->getMessage()]); // Retornar el error en formato JSON
         }
     }
 

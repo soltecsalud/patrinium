@@ -114,6 +114,43 @@ include_once "../controller/solicitudController.php";
     max-width: 90%;
     width: auto;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+td {
+    font-size: 14px;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table-title {
+    font-weight: bold;
+    color: #333;
+}
     </style>
 </head>
 
@@ -168,10 +205,7 @@ include_once "../controller/solicitudController.php";
         if (is_array($solicitudes) && count($solicitudes) > 0) {
             foreach ($solicitudes as $solicitud) {
                 if (is_object($solicitud)) {
-                    echo "<div class='info-row'>";
-                    echo "<span class='info-title'>Nombre Cliente:</span>";
-                    echo "<span class='info-value'>" . htmlspecialchars($solicitud->nombre_cliente) . "</span>";
-                    echo "</div>";
+                   
 
                     echo "<div class='info-row'>";
                     echo "<span class='info-title'>Referido Por:</span>";
@@ -214,7 +248,7 @@ include_once "../controller/solicitudController.php";
                                 </div>
                                     <div class="card-body">
 
-                                        <table class="table table-striped">
+                                        <table class="table">
                     
                                                 <?php
                                                         $sociedad_controller = new Solicitud_controller();
@@ -224,71 +258,71 @@ include_once "../controller/solicitudController.php";
                                                     
                                                     ?>
                                             <tbody>
-                                            
-                                            <tr>
-                                                        <th scope="col" class="table-title" >ID Solicitud</th>
+                                                    <tr>
+                                                        <th scope="col" class="table-title">ID Persona</th>
                                                         <td><?php echo $fila[0]['id_sociedad']; ?></td>
-                                                        <th scope="col" class="table-title" >Nombre</th>
+                                                        <th scope="col" class="table-title">Nombre</th>
                                                         <td><?php echo $fila[0]['nombre']; ?></td>
-                                                        <th scope="col" class="table-title" >Apellido</th>
+                                                        <th scope="col" class="table-title">Apellido</th>
                                                         <td><?php echo $fila[0]['apellido']; ?></td>
-                                                        <th scope="col" class="table-title" >Fecha de Nacimiento</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="table-title">Fecha de Nacimiento</th>
                                                         <td><?php echo $fila[0]['fecha_nacimiento']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col" class="table-title" >Estado Civil</th>
+                                                        <th scope="col" class="table-title">Estado Civil</th>
                                                         <td><?php echo $fila[0]['estado_civil']; ?></td>
-                                                        <th scope="col" class="table-title" >País de Origen</th>
+                                                        <th scope="col" class="table-title">País de Origen</th>
                                                         <td><?php echo $fila[0]['pais_origen']; ?></td>
-                                                        <th scope="col" class="table-title" >País de Residencia Fiscal</th>
-                                                        <td><?php echo $fila[0]['pais_residencia_fiscal']; ?></td>
-                                                        <th scope="col" class="table-title" >País de Domicilio</th>
-                                                        <td><?php echo $fila[0]['pais_domicilio']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col" class="table-title" >Número de Pasaporte</th>
+                                                        <th scope="col" class="table-title">País de Residencia Fiscal</th>
+                                                        <td><?php echo $fila[0]['pais_residencia_fiscal']; ?></td>
+                                                        <th scope="col" class="table-title">País de Domicilio</th>
+                                                        <td><?php echo $fila[0]['pais_domicilio']; ?></td>
+                                                        <th scope="col" class="table-title">Número de Pasaporte</th>
                                                         <td><?php echo $fila[0]['numero_pasaporte']; ?></td>
-                                                        <th scope="col" class="table-title" >País de Pasaporte</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="table-title">País de Pasaporte</th>
                                                         <td><?php echo $fila[0]['pais_pasaporte']; ?></td>
-                                                        <th scope="col" class="table-title" >Tipo de Visa</th>
+                                                        <th scope="col" class="table-title">Tipo de Visa</th>
                                                         <td><?php echo $fila[0]['tipo_visa']; ?></td>
-                                                        <th scope="col" class="table-title" >Dirección Local</th>
+                                                        <th scope="col" class="table-title">Dirección Local</th>
                                                         <td><?php echo $fila[0]['direccion_local']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="col" class="table-title" >Teléfonos</th>
+                                                        <th scope="col" class="table-title">Teléfonos</th>
                                                         <td><?php echo $fila[0]['telefonos']; ?></td>
-                                                        <th scope="col" class="table-title" >Emails</th>
+                                                        <th scope="col" class="table-title">Emails</th>
                                                         <td><?php echo $fila[0]['emails']; ?></td>
-                                                        <th scope="col" class="table-title" >Industria</th>
+                                                        <th scope="col" class="table-title">Industria</th>
                                                         <td><?php echo $fila[0]['industria']; ?></td>
-                                                        <th scope="col" class="table-title" >Nombre del Negocio Local</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="table-title">Nombre del Negocio Local</th>
                                                         <td><?php echo $fila[0]['nombre_negocio_local']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col" class="table-title" >Ubicación del Negocio Principal</th>
+                                                        <th scope="col" class="table-title">Ubicación del Negocio Principal</th>
                                                         <td><?php echo $fila[0]['ubicacion_negocio_principal']; ?></td>
-                                                        <th scope="col" class="table-title" >Tamaño del Negocio</th>
+                                                        <th scope="col" class="table-title">Tamaño del Negocio</th>
                                                         <td><?php echo $fila[0]['tamano_negocio']; ?></td>
-                                                        <th scope="col" class="table-title" >Contacto Ejecutivo Local</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="col" class="table-title">Contacto Ejecutivo Local</th>
                                                         <td><?php echo $fila[0]['contacto_ejecutivo_local']; ?></td>
-                                                        <th scope="col" class="table-title" >Número de Empleados</th>
+                                                        <th scope="col" class="table-title">Número de Empleados</th>
                                                         <td><?php echo $fila[0]['numero_empleados']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="col"  class="table-title" >Número de Hijos</th>
+                                                        <th scope="col" class="table-title">Número de Hijos</th>
                                                         <td><?php echo $fila[0]['numero_hijos']; ?></td>
-                                                        <th scope="col"  class="table-title" >Razón de Consultoría</th>
-                                                        <td><?php echo $fila[0]['razon_consultoria']; ?></td>
-                                                        <th colpan="2" scope="col"  class="table-title" >Requiere Registro de Corporación</th>
-                                                        <td colpan="2"><?php echo $fila[0]['requiere_registro_corporacion']; ?></td>
-                                                    
                                                     </tr>
                                                     <tr>
+                                                        <th scope="col" class="table-title">Razón de Consultoría</th>
+                                                        <td><?php echo $fila[0]['razon_consultoria']; ?></td>
+                                                        <th scope="col" class="table-title">Requiere Registro de Corporación</th>
+                                                        <td><?php echo $fila[0]['requiere_registro_corporacion']; ?></td>
                                                         <th scope="col" class="table-title">Observaciones</th>
-                                                        <td><?php echo $fila[0]['observaciones']; ?></td>
-                                                    
+                                                        <td colspan="3"><?php echo $fila[0]['observaciones']; ?></td>
                                                     </tr>
+                                            
                                             </tbody>
                                         </table>
                                     </div>
@@ -307,26 +341,48 @@ include_once "../controller/solicitudController.php";
                                         
                                     </div>
                                         <div class="card-body">
-                                                    <?php 
-                                                    $solicitud_servicios = $controlador->getServicios($id_revisar_solicitud);
-                                                    
-                                                    $servicios = json_decode($solicitud_servicios[0]['servicios'], true);
-                                                  
+                                                    <table>
+                                                        <tr>
+                                                            <td>Servicio</td>
+                                                            <td>Proceso</td>
+                                                            <td>Estado</td>
+                                                        </tr>
 
-                                                    // Imprimir la lista ordenada
-                                                    echo "<ol>";
+                                                    <?php
+                                                                $solicitud_servicios_json = $controlador->getServicios($id_revisar_solicitud);
 
-                                                    if (!empty($servicios)) {
-                                                        foreach ($servicios as $clave => $valor) {
-                                                            echo "<li>" . htmlspecialchars($valor) . " " .  "</li>";
-                                                        }
-                                                    }
+                                                                // Decodificar el JSON a un array asociativo
+                                                                $solicitud_servicios = json_decode($solicitud_servicios_json, true);
 
-                                                   
+                                                                // Recorrer el array de servicios
+                                                                foreach ($solicitud_servicios as $servicio) {
+                                                                    $nombre_servicio = json_decode($servicio['servicios'], true); // Decodificar el campo 'servicios'
+                                                                    $estado = $servicio['estado'];
 
-                                                    echo "</ol>";
-                                                    ?>
-                                                    
+                                                                    // Asignar estado
+                                                                    if ($estado == 2) {
+                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                                                                    } else if  ($estado == 1) {
+                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                                                                    }else if ($estado == 0){
+                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                    }
+                                                                    
+
+                                                                    // Generar filas de la tabla
+                                                                    foreach ($nombre_servicio as $clave => $valor) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?php echo $valor; ?></td>
+                                                                            <td><?php echo $estado; ?></td>
+                                                                            <td><?php echo $estado_texto;?></td>
+                                                                        </tr>
+                                                        <?php
+                                                                    }
+                                                                }
+                                                        ?>
+                                                    </table>
+
                                                 </div>
                                         </div>
                             </div>
@@ -339,23 +395,7 @@ include_once "../controller/solicitudController.php";
                                                     <?php 
                                                     
                                                     
-                                                  
-                                                    $servicios_adicionales = json_decode($solicitud_servicios[0]['servicios_adicionales'], true);
-
-                                                    // Imprimir la lista ordenada
-                                                    echo "<ol>";
-
-                                                  
-
-                                                    if (!empty($servicios_adicionales)) {
-                                                        foreach ($servicios_adicionales as $clave => $valor) {
-                                                            echo "<li>" . htmlspecialchars($valor) ."</li>";
-                                                        }
-                                                    }else{
-                                                        echo "No hay servicios adicionales :(";
-                                                    }
-
-                                                    echo "</ol>";
+                   
                                                     ?>
                                                     
                                                 </div>
@@ -537,7 +577,7 @@ include_once "../controller/solicitudController.php";
                     </div>
 
                     <?php
-                        $servicios = $controlador->getServicios($id_revisar_solicitud);
+                        $servicios = $controlador->getServiciosFactura($id_revisar_solicitud);
                         foreach ($servicios as $servicio):
                             if (!empty($servicio['servicios'])):
                                 $datos = json_decode($servicio['servicios'], true);
@@ -712,11 +752,11 @@ include_once "../controller/solicitudController.php";
   <div class="modal-dialog" id="modal_nuevo_servicos">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalSolicitudLabel">Crear Solicitud</h5>
+        <h5 class="modal-title" id="modalSolicitudLabel">Adicionar Servicios</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="formulario-solicitud">
+        <form id="formulario-insertar-servicios">
             <div class="nuevos_servicios"></div>    
           <div class="row">
             <div class="form-group" style="display: flex; justify-content: flex-end;">
@@ -728,7 +768,7 @@ include_once "../controller/solicitudController.php";
             <div id="contenedorCampos"></div>
           </div>
           <div class="row">
-            <button type="submit" id="btnCrearSolicitud" class="btn btn-primary" style="margin-top:1.5%;">Guardar</button>
+            <button type="submit" id="btnServiciosAdicionales" class="btn btn-primary" style="margin-top:1.5%;">Guardar</button>
           </div>
         </form>
       </div>
@@ -877,40 +917,39 @@ $(document).ready(function() {
             }
         });
     });
-$(document).ready(function(){
-    $('#btnCrearSolicitud').click(function(event){
-        event.preventDefault(); // Evitar que se envíe el formulario de forma predeterminada
-        
-        var datos = $('#formulario-solicitud').serialize() + "&accion=guardarSolicitud";
-        console.log(datos);
-        
+
+    $(document).ready(function() {
+    // Agregar nuevos campos de servicio al formulario
+    $("#agregarCampo").click(function() {
+        var campoHTML = '<div class="form-group"><input type="text" name="servicios[]" class="form-control" placeholder="Ingrese servicio"></div>';
+        $('#contenedorCampos').append(campoHTML);
+    });
+
+    // Evento al hacer clic en el botón de Guardar (#btnServiciosAdicionales)
+    $("#btnServiciosAdicionales").click(function(e) {
+        e.preventDefault();  // Evitar el comportamiento por defecto
+
+        var servicios = [];
+        $("input[name='servicios[]']").each(function() {
+            servicios.push($(this).val());  // Captura todos los valores de los inputs agregados dinámicamente
+        });
+
         $.ajax({
-            type: "POST",
-            url: "../controller/solicitudController.php",
-            data: datos,
-            dataType: "json", // Suponiendo que el servidor devuelve un JSON
-            success: function(r) {
-                console.log(r);
-                if (r.resultado == 0) {
-                    alert("Fallo :(");
-                } else {
-                    alert("Agregado con éxito");
-                    // Redirección a listar_empresa.php
-                    window.location.href = 'listado_solicitudes.php';
-                }
+            url: '../controller/solicitudController.php',  // Aquí va la URL de tu controlador PHP
+            type: 'POST',
+            data: {
+                servicios: JSON.stringify(servicios),  // Convertimos los servicios a formato JSON
+                fk_solicitud: 1,  // Este valor debe ser dinámico según tu lógica
+                usuario_creacion: 'nombre_usuario'  // Puedes obtener este valor de una sesión
             },
-            error: function(xhr, status, error) {
-                console.error("Ocurrió un error: " + error);
-                console.log(xhr.responseText);
+            success: function(response) {
+                alert('Servicios guardados con éxito');
+                $('#modalSolicitud').modal('hide');  // Cerrar el modal tras el éxito
+            },
+            error: function() {
+                alert('Error al guardar los servicios');
             }
         });
-        
-        return false;
-    });
-    
-    $('#agregarCampo').click(function(){
-        var campoHTML = '<div class="form-group"><input type="text" name="campo[]" class="form-control" placeholder="Ingrese valor"></div>';
-        $('#contenedorCampos').append(campoHTML);
     });
 });
 </script>

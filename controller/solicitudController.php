@@ -29,7 +29,23 @@ class Solicitud_controller{
         $id_solicitud = $id_enviado_desde_vista;
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->obtenerServicios($id_solicitud);
+        return json_encode($solicitud); 
+    }
+
+    public function getServiciosFactura($id_enviado_desde_vista){
+        $id_solicitud = $id_enviado_desde_vista;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerServiciosFactura($id_solicitud);
         return $solicitud;
+    }
+
+    
+
+    public function getServiciosFacturados($id_enviado_desde_vista){
+        $id_solicitud = $id_enviado_desde_vista;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerServiciosFacturados($id_solicitud);
+        echo $solicitud; // Imprimir el JSON decodificado correctamente
     }
 
     public function getSociedad($id_enviado_desde_vista){
@@ -236,7 +252,22 @@ class Solicitud_controller{
     } 
     
 
-    
+    public function insertarServiciosAdicionales() {
+        // Capturar los servicios y datos adicionales desde el POST
+        $servicios = json_decode($_POST['servicios'], true);  // Convertir JSON a array
+        $fk_solicitud = $_POST['fk_solicitud'];
+        $usuario_creacion = $_POST['usuario_creacion'];
+
+        // Enviar los datos al modelo
+        $resultado = ModelSolicitud::insertarServiciosAdicionales($servicios, $fk_solicitud, $usuario_creacion);
+
+        // Retornar el resultado
+        if ($resultado == "ok") {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error']);
+        }
+    }
 }
 if ($_SERVER['REQUEST_METHOD'] == 'GET' AND isset($_GET['numero_solicitud'])) {
     $id_solicitud = $_GET['numero_solicitud'];
