@@ -127,7 +127,8 @@ class Solicitud_controller{
                 }
       
         var_dump($datos);
-        $respuesta = ModelSolicitud::insertarSolicitud($datos, $checkbox, $camposDinamicos);
+        $usuario="serazo";
+        $respuesta = ModelSolicitud::insertarSolicitud($datos, $checkbox, $camposDinamicos,$usuario);
         
         if($respuesta == "ok") {
             echo 0; // Éxito
@@ -253,56 +254,80 @@ class Solicitud_controller{
     
 
     public function insertarServiciosAdicionales() {
-        // Capturar los servicios y datos adicionales desde el POST
-        $servicios = json_decode($_POST['servicios'], true);  // Convertir JSON a array
-        $fk_solicitud = $_POST['fk_solicitud'];
-        $usuario_creacion = $_POST['usuario_creacion'];
-
-        // Enviar los datos al modelo
-        $resultado = ModelSolicitud::insertarServiciosAdicionales($servicios, $fk_solicitud, $usuario_creacion);
-
-        // Retornar el resultado
-        if ($resultado == "ok") {
-            echo json_encode(['status' => 'success']);
-        } else {
-            echo json_encode(['status' => 'error']);
-        }
+                            
+                            $fk_solicitud=$_POST['fk_solicitud'];
+     
+           
+                            $checkbox = array();
+    
+                    // Define un array con los nombres de las casillas de verificación
+                    $checkbox_names = array(
+                        'tipoTrust', 'registroCorporacion', 'registroFIP', 'goodStanding',
+                        'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
+                        'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
+                        'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
+                        'acuerdoDeSocios', 'proteccionDivorcios', 'ProteccióndePatrimonio', 'Actas','ServiciosProfesionales',
+                        'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
+                        'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
+                        'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
+                        'reporteB13', 'reporteFincen', 'reporteBOI', 'serviciosDomicilio', 'servicioTesoreria',
+                        'servicioNomina', 'controlInventarios', 'serviciosFacturacion', 'serviciosAdministracionNegocios',
+                        'serviciosLegalesNotario', 'serviciosLegalesApostille', 'serviciosReportesEspeciales'
+                    );
+    
+                    // Recorre el array de nombres de casillas de verificación
+                    foreach ($checkbox_names as $name) {
+                        // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
+                        if (isset($_POST[$name]) && $_POST[$name] !== '') {
+                            $checkbox[$name] = $_POST[$name];
+                        }
+                    }
+    
+                    $camposDinamicos = array();
+                    foreach ($_POST['campoDinamico'] as $indice => $valor) {
+                        // Verificar si el valor del campo dinámico está presente y no está vacío
+                        if (isset($valor) && $valor !== '') {
+                            // Agregar el valor del campo dinámico al array en el formato deseado
+                            $camposDinamicos["campoDinamico[$indice]"] = $valor;
+                        }
+                    }
+          
+            //var_dump($datos);
+            $respuesta = ModelSolicitud::insertarServiciosAdicionales( $checkbox, $camposDinamicos, $fk_solicitud);
+            
+            if($respuesta == "ok") {
+                echo 0; // Éxito
+            } else {
+                echo 1; // Error
+            }
     }
 }
-if ($_SERVER['REQUEST_METHOD'] == 'GET' AND isset($_GET['numero_solicitud'])) {
-    $id_solicitud = $_GET['numero_solicitud'];
-    $controlador = new Solicitud_controller();
-    $controlador->getSolicitud($id_solicitud);
-}
-if ($_SERVER['REQUEST_METHOD'] == 'GET' ) {
-   
-    $controlador = new Solicitud_controller();
-    $controlador->getListadoSolicitudes();
-}
-// Manejar la acción enviada por Ajax
-if(isset($_POST['accion'])) {
-    
-    $controlador = new Solicitud_controller();
-    $controlador->insertarSolicitud();
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-if(isset($_POST['accion']) && $_POST['accion'] === 'insertarRevision') {
-    // Suponiendo que el var_dump era para depuración, puede ser removido en producción
-    // var_dump($_FILES); 
     $controlador = new Solicitud_controller();
-    $controlador->insertarRevision(); // Asegúrate de que este método existe y es el correcto
-}
 
-if (isset($_POST['accion']) && $_POST['accion'] === 'insertarFactura') {
-    // var_dump($_FILES); 
-    $controlador = new Solicitud_controller();
-    $controlador->insertarFactura();
-  
-}
-  
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarServicios') {
-    $controller = new Solicitud_controller();
-    $controller->getServiciosOfrecidos();
+    // Verificamos si se recibe 'accion'
+    if (isset($_POST['accion'])) {
+        if ($_POST['accion'] === 'guardarSolicitud') {
+            $controlador->insertarSolicitud();
+        } elseif ($_POST['accion'] === 'insertarRevision') {
+            $controlador->insertarRevision();
+        } elseif ($_POST['accion'] === 'insertarFactura') {
+            $controlador->insertarFactura();
+        } elseif ($_POST['accion'] === 'insertarServiciosAdicionales') {
+            $controlador->insertarServiciosAdicionales();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
+        }
+
+    // Verificamos si se recibe 'action'
+    } elseif (isset($_POST['action'])) {
+        if ($_POST['action'] === 'listarServicios') {
+            $controlador->getServiciosOfrecidos();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
+        }
+    }
 }
 
 ?>

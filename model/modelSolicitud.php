@@ -34,9 +34,9 @@ class ModelSolicitud
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "
                     SELECT a.servicios, a.servicios_adicionales, b.estado
-                    FROM solicitud a
-                    inner join factura as b ON(a.id_solicitud=b.id_solicitud)
-                    where a.id_solicitud = :id_solicitud
+                    FROM servicios_adicionales a
+                    inner join factura as b ON(a.fk_solicitud=b.id_solicitud)
+                    where a.fk_solicitud =:id_solicitud
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
             $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
@@ -212,31 +212,53 @@ class ModelSolicitud
         }
     }
     //modelo para insertar en BD el nombre del archivo, fecha, descripcion
-    public static function insertarSolicitud($datos,$checkbox,$camposDinamicos) {
+    public static function insertarSolicitud($datos, $checkbox, $camposDinamicos, $usuario_creacion) {
         try {
-            $camposDinamicosJSON =json_encode($camposDinamicos);
+            $camposDinamicosJSON = json_encode($camposDinamicos);
             $checkboxJSON = json_encode($checkbox);
-
-            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at,servicios,
-            servicios_adicionales,fk_persona) 
-            VALUES (:nombre_cliente, :referido_por, :necesidad, NOW(),:servicios,:servicios_adicionales,:fk_persona)";
-            $stmt = Conexion::conectar()->prepare($sql);
-            $stmt->bindParam(':nombre_cliente', $datos['nombre_cliente'], PDO::PARAM_STR);
-            $stmt->bindParam(':referido_por', $datos['referido_por'], PDO::PARAM_STR);
-            $stmt->bindParam(':necesidad', $datos['necesidad'], PDO::PARAM_STR);
-            $stmt->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
-            $stmt->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
-            $stmt->bindParam(':fk_persona', $datos['fk_Persona'], PDO::PARAM_INT);
-            
-            
-           
-            if($stmt->execute()) {
-                return "ok";
+    
+            // Primera inserción: Insertar en la tabla 'solicitud' y retornar el ID
+            $sql = "INSERT INTO solicitud (nombre_cliente, referido_por, necesidad, created_at, servicios, 
+                    servicios_adicionales, fk_persona) 
+                    VALUES (:nombre_cliente, :referido_por, :necesidad, NOW(), :servicios, :servicios_adicionales, :fk_persona) 
+                    RETURNING id_solicitud"; // Asegúrate de retornar el id_solicitud generado
+            $stmt1 = Conexion::conectar()->prepare($sql);
+            $stmt1->bindParam(':nombre_cliente', $datos['nombre_cliente'], PDO::PARAM_STR);
+            $stmt1->bindParam(':referido_por', $datos['referido_por'], PDO::PARAM_STR);
+            $stmt1->bindParam(':necesidad', $datos['necesidad'], PDO::PARAM_STR);
+            $stmt1->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
+            $stmt1->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
+            $stmt1->bindParam(':fk_persona', $datos['fk_Persona'], PDO::PARAM_INT);
+    
+            // Ejecutar la primera inserción
+            if ($stmt1->execute()) {
+                // Obtener el id de la solicitud insertada
+                $idSolicitud = $stmt1->fetch(PDO::FETCH_OBJ)->id_solicitud;
+    
+                // Segunda inserción: Insertar en la otra tabla relacionada
+                $sqlInsertarServicios = "
+                    INSERT INTO public.servicios_adicionales(
+                        servicios, servicios_adicionales, fecha_creacion, usuario_creacion, fk_solicitud)
+                    VALUES(:servicios, :servicios_adicionales, NOW(), :usuario_creacion, :fk_solicitud);
+                ";
+    
+                $stmt2 = Conexion::conectar()->prepare($sqlInsertarServicios);
+                $stmt2->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
+                $stmt2->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
+                $stmt2->bindParam(':usuario_creacion', $usuario_creacion, PDO::PARAM_STR);
+                $stmt2->bindParam(':fk_solicitud', $idSolicitud, PDO::PARAM_INT);
+    
+                // Ejecutar la segunda inserción
+                if ($stmt2->execute()) {
+                    return "ok";  // Si ambos inserts son exitosos
+                } else {
+                    return "error en la segunda inserción";  // Error en el segundo insert
+                }
             } else {
-                return "error";
-            } 
+                return "error en la primera inserción";  // Error en el primer insert
+            }
         } catch (Exception $e) {
-            return $e->getMessage();
+            return $e->getMessage();  // Captura y devuelve cualquier error
         }
     }
 
@@ -287,6 +309,32 @@ class ModelSolicitud
         }
     }
 
+    public static function insertarServiciosAdicionales($checkbox,$camposDinamicos,$fk_solicitud) {
+        try {
+
+            $fk_solicitud_insertar= $fk_solicitud;
+            $usuario_creacion = '1';
+            $camposDinamicosJSON =json_encode($camposDinamicos);
+            $checkboxJSON = json_encode($checkbox);
+
+            $sqlInsertarServicios = "
+                INSERT INTO public.servicios_adicionales(
+                servicios, servicios_adicionales, fecha_creacion, usuario_creacion, fk_solicitud)
+                VALUES(:servicios, :servicios_adicionales, NOW(), 
+                :usuario_creacion, :fk_solicitud);
+            ";
+    
+            $stmt = Conexion::conectar()->prepare($sqlInsertarServicios);
+            $stmt->bindParam(':servicios', $checkboxJSON, PDO::PARAM_STR);
+            $stmt->bindParam(':servicios_adicionales', $camposDinamicosJSON, PDO::PARAM_STR);
+            $stmt->bindParam(':usuario_creacion', $usuario_creacion, PDO::PARAM_STR);
+            $stmt->bindParam(':fk_solicitud', $fk_solicitud_insertar, PDO::PARAM_INT);
+    
+            return $stmt->execute();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
     
 }
 ?>

@@ -23,6 +23,7 @@ include_once "../controller/solicitudController.php";
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/barraFiltros.css">
     <title>Registrar ESE</title>
     <style>
         .card-registroSolicitudCliente {
@@ -39,42 +40,33 @@ include_once "../controller/solicitudController.php";
             border: 1px solid #0056b2;
             box-shadow: rgb(0, 80, 165) 2px 2px 2px 0px;
         }
-        .table-title  {
-            text-align: left;
-            color: #0066cc; /* Reemplaza con el color exacto del outline */
-            font-weight: bold; /* Si quieres que los títulos estén en negrita */
-        }
-
-        /* También asegúrate de que los elementos de datos estén alineados a la izquierda */
-        .table-data {
-            text-align: left;
-        }
+        
 
         .card-serazo {
-    width: 200px;
-    height: 260px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
+            width: 200px;
+            height: 180px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
 
-.card-number-serazo {
-    font-size: 80px;
-    color: #0066cc; /* Color morado */
-    font-weight: bold;
-}
+        .card-number-serazo {
+            font-size: 80px;
+            color: #0066cc; /* Color morado */
+            font-weight: bold;
+        }
 
-.card-text-serazo {
-    font-size: 30px;
-    color: #000000; /* Color negro */
-    margin-top: 5px;
-}
+        .card-text-serazo {
+            font-size: 20px;
+            color:#0221fe; /* Color negro */
+            margin-top: 5px;
+        }
 
 .info-card {
     width: 100%;
@@ -156,6 +148,22 @@ tr:hover {
 
 <body>
     <div class="content-wrapper">
+            <div  id="filtros-bar">
+                    <button type="button" id="fa-filter" class="btn  btn-xs barra filtros-bar " data-toggle="modal" data-target="#modalSolicitud" >
+                        <i class="fas fa-briefcase"></i>
+                    </button>
+                    <button type="button" id="fa-bars" class="btn  btn-xs barra first-child " data-toggle="modal" data-target="#billingModal" >
+                        <i class="fas fa-file-invoice"></i>
+                    </button>
+                    
+                    <button type="button" id="fa-minus-circle" class="btn  btn-xs barra first-child " data-toggle="modal" data-target="#upload_archivos" >
+                        <i class="fas fa-upload"></i>
+                    </button>
+                            
+                          
+                        
+                        
+        </div>
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -334,18 +342,16 @@ tr:hover {
                                     <div class="card-header">
                                         <h3 class="card-title">Servicios Solicitados</h3>
                                             <div class="card-tools">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalServicios">
-                                                    Actualizar Estados
-                                                </button>
+                                                
                                             </div>
                                         
                                     </div>
                                         <div class="card-body">
                                                     <table>
                                                         <tr>
-                                                            <td>Servicio</td>
-                                                            <td>Proceso</td>
-                                                            <td>Estado</td>
+                                                            <th>Servicio</th>
+                                                           
+                                                            <th>Estado</th>
                                                         </tr>
 
                                                     <?php
@@ -353,7 +359,7 @@ tr:hover {
 
                                                                 // Decodificar el JSON a un array asociativo
                                                                 $solicitud_servicios = json_decode($solicitud_servicios_json, true);
-
+                                                               
                                                                 // Recorrer el array de servicios
                                                                 foreach ($solicitud_servicios as $servicio) {
                                                                     $nombre_servicio = json_decode($servicio['servicios'], true); // Decodificar el campo 'servicios'
@@ -374,7 +380,7 @@ tr:hover {
                                                                         ?>
                                                                         <tr>
                                                                             <td><?php echo $valor; ?></td>
-                                                                            <td><?php echo $estado; ?></td>
+                                                                        
                                                                             <td><?php echo $estado_texto;?></td>
                                                                         </tr>
                                                         <?php
@@ -391,13 +397,49 @@ tr:hover {
                                     <div class="card-header">
                                         <h3 class="card-title">Servicios Adicionales</h3>
                                     </div>
-                                        <div class="card-body">
-                                                    <?php 
-                                                    
-                                                    
-                   
-                                                    ?>
-                                                    
+                                    <div class="card-body">
+                                                    <table>
+                                                        <tr>
+                                                            <th>Servicio</th>
+                                                           
+                                                            <th>Estado</th>
+                                                        </tr>
+
+                                                    <?php
+                                                                $solicitud_servicios_json = $controlador->getServicios($id_revisar_solicitud);
+
+                                                                // Decodificar el JSON a un array asociativo
+                                                                $solicitud_servicios = json_decode($solicitud_servicios_json, true);
+                                                               
+                                                                // Recorrer el array de servicios
+                                                                foreach ($solicitud_servicios as $servicio) {
+                                                                    $nombre_servicio = json_decode($servicio['servicios_adicionales'], true); // Decodificar el campo 'servicios'
+                                                                    $estado = $servicio['estado'];
+
+                                                                    // Asignar estado
+                                                                    if ($estado == 2) {
+                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                                                                    } else if  ($estado == 1) {
+                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                                                                    }else if ($estado == 0){
+                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                    }
+                                                                    
+
+                                                                    // Generar filas de la tabla
+                                                                    foreach ($nombre_servicio as $clave => $valor) {
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td><?php echo $valor; ?></td>
+                                                                        
+                                                                            <td><?php echo $estado_texto;?></td>
+                                                                        </tr>
+                                                        <?php
+                                                                    }
+                                                                }
+                                                        ?>
+                                                    </table>
+
                                                 </div>
                                         </div>
                             </div>
@@ -482,7 +524,11 @@ tr:hover {
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del Archivo</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Ingrese una descripción">
+                    <select class="form-control" id="descripcion" name="descripcion">
+                        <option value="PASAPORTE">PASAPORTE</option>
+                        <option value="VISA AMERICANA">VISA AMERICANA</option>
+                        <option value="DOCUMENTO DE IDENTIFICACION LOCAL">DOCUMENTO DE IDENTIFICACION LOCAL</option>
+                    </select>
                 <input type="hidden" class="form-control" value='<?php echo $id_revisar_solicitud?>'id="id_descripcion" name="id_solicitud" >
             </div>
             <button type="button" id="btn-cargar" class="btn btn-primary">Cargar Archivo</button>
@@ -667,86 +713,7 @@ tr:hover {
         </div>
     </div>
 </div>
-<!-- Modal actualizar servicios-->
-<div class="modal fade" id="modalServicios" tabindex="-1" role="dialog" aria-labelledby="modalServiciosLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalServiciosLabel">Revisar y Actualizar Servicios</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="formServicios" action="tu_accion_de_actualizacion.php" method="POST">
-        <div class="modal-body">
-            <ol>
-                <?php  
-                // Decodificar las cadenas JSON
-                $servicios = json_decode($solicitud_servicios[0]['servicios'], true);
-                $servicios_adicionales = json_decode($solicitud_servicios[0]['servicios_adicionales'], true);
 
-                // Verificar si las decodificaciones fueron exitosas
-                if (json_last_error() !== JSON_ERROR_NONE) {
-                    echo "Error al decodificar JSON: " . json_last_error_msg();
-                }
-
-                // Imprimir los servicios con sus checkboxes
-                if (!empty($servicios)) {
-                    foreach ($servicios as $clave => $valor) {
-                        echo "<li>" . htmlspecialchars($valor);
-                        echo "<div class='form-group'>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='pendiente-$clave' name='estado[$clave]' value='pendiente'>";
-                        echo "<label class='custom-control-label' for='pendiente-$clave'>Pendiente</label>";
-                        echo "</div>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='en_proceso-$clave' name='estado[$clave]' value='en_proceso'>";
-                        echo "<label class='custom-control-label' for='en_proceso-$clave'>En Proceso</label>";
-                        echo "</div>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='completado-$clave' name='estado[$clave]' value='completado'>";
-                        echo "<label class='custom-control-label' for='completado-$clave'>Completado</label>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</li>";
-                    }
-                } else {
-                    echo "No hay servicios disponibles.";
-                }
-
-                if (!empty($servicios_adicionales)) {
-                    foreach ($servicios_adicionales as $clave => $valor) {
-                        echo "<li>" . htmlspecialchars($valor);
-                        echo "<div class='form-group'>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='pendiente-adicional-$clave' name='estado_adicional[$clave]' value='pendiente'>";
-                        echo "<label class='custom-control-label' for='pendiente-adicional-$clave'>Pendiente</label>";
-                        echo "</div>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='en_proceso-adicional-$clave' name='estado_adicional[$clave]' value='en_proceso'>";
-                        echo "<label class='custom-control-label' for='en_proceso-adicional-$clave'>En Proceso</label>";
-                        echo "</div>";
-                        echo "<div class='custom-control custom-checkbox custom-control-inline'>";
-                        echo "<input type='checkbox' class='custom-control-input' id='completado-adicional-$clave' name='estado_adicional[$clave]' value='completado'>";
-                        echo "<label class='custom-control-label' for='completado-adicional-$clave'>Completado</label>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</li>";
-                    }
-                } else {
-                    echo "No hay servicios adicionales disponibles.";
-                }
-                ?>
-            </ol>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 <!--modal servicios--->
 <div class="modal fade" id="modalSolicitud" tabindex="-1" aria-labelledby="modalSolicitudLabel" aria-hidden="true">
   <div class="modal-dialog" id="modal_nuevo_servicos">
@@ -768,6 +735,7 @@ tr:hover {
             <div id="contenedorCampos"></div>
           </div>
           <div class="row">
+            <input type="hidden" name="fk_solicitud" value="<?php echo $id_revisar_solicitud;?>">
             <button type="submit" id="btnServiciosAdicionales" class="btn btn-primary" style="margin-top:1.5%;">Guardar</button>
           </div>
         </form>
@@ -866,6 +834,7 @@ $(document).ready(function(){
         return false;
     });
 });
+
 $(document).ready(function() {
         $.ajax({
             url: '../controller/solicitudController.php', // Ajusta el path según sea necesario
@@ -918,38 +887,43 @@ $(document).ready(function() {
         });
     });
 
-    $(document).ready(function() {
-    // Agregar nuevos campos de servicio al formulario
-    $("#agregarCampo").click(function() {
-        var campoHTML = '<div class="form-group"><input type="text" name="servicios[]" class="form-control" placeholder="Ingrese servicio"></div>';
-        $('#contenedorCampos').append(campoHTML);
-    });
+document.getElementById('agregarCampo').addEventListener('click', function() {
+    // Contador para asignar un índice único a cada campo
+    var contador = document.querySelectorAll('[name^="campoDinamico["]').length;
 
-    // Evento al hacer clic en el botón de Guardar (#btnServiciosAdicionales)
-    $("#btnServiciosAdicionales").click(function(e) {
-        e.preventDefault();  // Evitar el comportamiento por defecto
+    // Crear un nuevo elemento input de tipo texto
+    var nuevoInput = document.createElement('input');
+    nuevoInput.setAttribute('type', 'text');
+    nuevoInput.setAttribute('placeholder', 'Introduce un nuevo servicio');
+    // Modificar el name para incluir el índice actual del contador
+    nuevoInput.setAttribute('name', 'campoDinamico[' + contador + ']'); 
+    nuevoInput.setAttribute('class', 'form-control mt-2'); // Agregar margen y clases de Bootstrap
 
-        var servicios = [];
-        $("input[name='servicios[]']").each(function() {
-            servicios.push($(this).val());  // Captura todos los valores de los inputs agregados dinámicamente
-        });
-
-        $.ajax({
-            url: '../controller/solicitudController.php',  // Aquí va la URL de tu controlador PHP
-            type: 'POST',
-            data: {
-                servicios: JSON.stringify(servicios),  // Convertimos los servicios a formato JSON
-                fk_solicitud: 1,  // Este valor debe ser dinámico según tu lógica
-                usuario_creacion: 'nombre_usuario'  // Puedes obtener este valor de una sesión
-            },
-            success: function(response) {
-                alert('Servicios guardados con éxito');
-                $('#modalSolicitud').modal('hide');  // Cerrar el modal tras el éxito
-            },
-            error: function() {
-                alert('Error al guardar los servicios');
-            }
-        });
-    });
+    // Añadir el nuevo input al contenedor
+    document.getElementById('contenedorCampos').appendChild(nuevoInput);
 });
+    // Evento al hacer clic en el botón de Guardar (#btnServiciosAdicionales)
+ $(document).ready(function(){
+      $('#btnServiciosAdicionales').click(function(){        
+          var datos = $('#formulario-insertar-servicios').serialize()+ "&accion=insertarServiciosAdicionales";
+          console.log(datos);  
+        $.ajax({
+            type:"POST",
+            url:"../controller/solicitudController.php",
+            data:datos,
+            success:function(r){
+                console.log(r);
+                if(r.resultado == 0){
+                alert("fallo :(");
+                }else{
+                    alert("Agregado con éxito");
+                    window.location.href = 'verSolicitud.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>';
+                    
+                }
+            }
+          });
+          return false;
+        });
+        
+    });
 </script>
