@@ -191,6 +191,9 @@ tr:hover {
                             <button type="button" class="btn btn-tool" data-bs-toggle="modal" data-bs-target="#modalSolicitud">
                                 <i class="fas fa-briefcase"></i>
                             </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDatosAdicionales">
+                                Agregar Datos Adcionales
+                            </button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -446,7 +449,33 @@ tr:hover {
                         </div>
                            
                             
-                            <div class="card card-info card-outline shadow-none p-0">
+                        <div class="card card-info card-outline shadow-none p-0">
+                                <div class="card-header">
+                                    <h3 class="card-title">Documentos Download</h3>
+                                </div>
+                                    <div class="card-body">
+                                        <table id="documentosAdjuntos" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Nombre Archivo</th>
+                                                    <th>Accion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="pdf_2.php" target="_blank" rel="noopener noreferrer">asddsa</a></td>
+                                                </tr>
+                                        
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                        </div>
+                       
+                       
+                    
+                        <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
                                     <h3 class="card-title">Documentos Download</h3>
                                 </div>
@@ -481,7 +510,6 @@ tr:hover {
                         </div>  <!--Fin Tabal Persona-->
                        
                         </div>
-                    
                     
                     
                 </div>
@@ -743,6 +771,94 @@ tr:hover {
     </div>
   </div>
 </div>
+<!-- Modal PDF 2 -->
+<div class="modal fade" id="modalDatosAdicionales" tabindex="-1" aria-labelledby="modalDatosAdiacionales" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDatosAdicionales">Agregar Datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de cliente en dos columnas -->
+        <form id="formDatosAdicionales">
+          <div class="row">
+            <!-- Primera columna -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nombre_cliente">Nombre del Cliente</label>
+                <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" placeholder="Ingresa el nombre del cliente">
+              </div>
+              <div class="form-group">
+                <label for="sr_numero">Sr. Numero</label>
+                <input type="text" class="form-control" id="sr_numero" name="sr_numero" placeholder="Ingresa el Sr. Numero">
+              </div>
+              <div class="form-group">
+                <label for="date_organization">Date of Organization and Registration</label>
+                <input type="date" class="form-control" id="date_organization" name="date_organization">
+              </div>
+              <div class="form-group">
+                <label for="state_organization">State of Organization</label>
+                <input type="text" class="form-control" id="state_organization" name="state_organization" placeholder="Ingresa el estado de organización">
+              </div>
+              <div class="form-group">
+                <label for="principal_business">Principal Place of Business</label>
+                <input type="text" class="form-control" id="principal_business" name="principal_business" placeholder="Ingresa el lugar de negocio">
+              </div>
+              <div class="form-group">
+                <label for="managing_members">Managing Members</label>
+                <input type="text" class="form-control" id="managing_members" name="managing_members" placeholder="Ingresa los miembros directivos">
+              </div>
+            </div>
+
+            <!-- Segunda columna -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="bank_account">Bank Account</label>
+                <input type="text" class="form-control" id="bank_account" name="bank_account" placeholder="Ingresa la cuenta bancaria">
+              </div>
+              <div class="form-group">
+                <label for="fiscal_year">Fiscal Year</label>
+                <input type="text" class="form-control" id="fiscal_year" name="fiscal_year" placeholder="Ingresa el año fiscal">
+              </div>
+              <div class="form-group">
+                <label for="ein">EIN</label>
+                <input type="text" class="form-control" id="ein" name="ein" placeholder="Ingresa el EIN">
+              </div>
+              <div class="form-group">
+                <label for="date_annual_meeting">Date of Annual Meeting</label>
+                <input type="date" class="form-control" id="date_annual_meeting" name="date_annual_meeting">
+              </div>
+              <div class="form-group">
+                <label for="secretary">Secretary</label>
+                <input type="text" class="form-control" id="secretary" name="secretary" placeholder="Ingresa el secretario">
+              </div>
+              <div class="form-group">
+                <label for="treasurer">Treasurer</label>
+                <input type="text" class="form-control" id="treasurer" name="treasurer" placeholder="Ingresa el tesorero">
+              </div>
+              <div class="form-group">
+                <label for="members">Members</label>
+                <input type="text" class="form-control" id="members" name="members" placeholder="Ingresa los miembros">
+              </div>
+              <div class="form-group">
+                <label for="initial_manager">Initial Temporal Manager</label>
+                <input type="text" class="form-control" id="initial_manager" name="initial_manager" placeholder="Ingresa el manager temporal inicial">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="fk_solicitud" value="<?php echo $id_revisar_solicitud;?>">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="guardarDatosAdicionales">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
    document.addEventListener('DOMContentLoaded', function() {
             // Selecciona todos los checkboxes con la clase toggle-checkbox
@@ -926,4 +1042,29 @@ document.getElementById('agregarCampo').addEventListener('click', function() {
         });
         
     });
+
+    $(document).ready(function() {
+    $('#guardarDatosAdicionales').click(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '../controller/solicitudController.php', // Cambia por la ruta real de tu controlador
+            type: 'POST',
+            data: $('#formDatosAdicionales').serialize() + '&accion=guardarCliente',
+            success: function(response) {
+                var resultado = JSON.parse(response);
+                if (resultado.status === 0) {
+                    alert('Datos guardados correctamente');
+                    $('#modalCliente').modal('hide'); // Cerrar el modal al guardar
+                    window.location.href = 'verSolicitud.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>';
+                } else {
+                    alert('Hubo un error al guardar el cliente');
+                }
+            },
+            error: function() {
+                alert('Error al procesar la solicitud');
+            }
+        });
+    });
+});
 </script>

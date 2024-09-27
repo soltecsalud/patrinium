@@ -173,14 +173,14 @@ if (!isset($_SESSION['usuario'])) {
      
 
               <li class="nav-item">
-                <a href="./agenda.php" class="nav-link">
+                <a href="./prueba_pdf_editable.php class="nav-link">
                 <i class="nav-icon fas fa-clipboard"></i>
                   <p>Consultar Agenda</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="prueba_pdf_editable.php" class="nav-link">
                 <i class="nav-icon fas fa-file-alt"></i>
                   <p>Informe Agenda</p>
                 </a>

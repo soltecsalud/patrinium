@@ -335,6 +335,51 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
+
+    public static function insertarDatosAdiconales($datos) {
+        try {
+            $sql = "
+                INSERT INTO public.datos_adicionales (
+                    nombre_cliente, sr_numero, date_organization, state_organization, 
+                    principal_business, managing_members, bank_account, fiscal_year, 
+                    ein, date_annual_meeting, secretary, treasurer, members, initial_manager, 
+                    fecha_creacion, fk_solicitud, createat
+                ) VALUES (
+                    :nombre_cliente, :sr_numero, :date_organization, :state_organization, 
+                    :principal_business, :managing_members, :bank_account, :fiscal_year, 
+                    :ein, :date_annual_meeting, :secretary, :treasurer, :members, :initial_manager,
+                    NOW(), :fk_solicitud, NOW()
+                );
+            ";
+    
+            // Preparar la sentencia SQL
+            $stmt = Conexion::conectar()->prepare($sql);
+    
+            // Vincular los parámetros a la sentencia preparada
+            $stmt->bindParam(':nombre_cliente', $datos['nombre_cliente'], PDO::PARAM_STR);
+            $stmt->bindParam(':sr_numero', $datos['sr_numero'], PDO::PARAM_STR);
+            $stmt->bindParam(':date_organization', $datos['date_organization'], PDO::PARAM_STR);
+            $stmt->bindParam(':state_organization', $datos['state_organization'], PDO::PARAM_STR);
+            $stmt->bindParam(':principal_business', $datos['principal_business'], PDO::PARAM_STR);
+            $stmt->bindParam(':managing_members', $datos['managing_members'], PDO::PARAM_STR);
+            $stmt->bindParam(':bank_account', $datos['bank_account'], PDO::PARAM_STR);
+            $stmt->bindParam(':fiscal_year', $datos['fiscal_year'], PDO::PARAM_STR);
+            $stmt->bindParam(':ein', $datos['ein'], PDO::PARAM_STR);
+            $stmt->bindParam(':date_annual_meeting', $datos['date_annual_meeting'], PDO::PARAM_STR);
+            $stmt->bindParam(':secretary', $datos['secretary'], PDO::PARAM_STR);
+            $stmt->bindParam(':treasurer', $datos['treasurer'], PDO::PARAM_STR);
+            $stmt->bindParam(':members', $datos['members'], PDO::PARAM_STR);
+            $stmt->bindParam(':initial_manager', $datos['initial_manager'], PDO::PARAM_STR);
+            $stmt->bindParam(':fk_solicitud', $datos['fk_solicitud'], PDO::PARAM_INT);
+    
+            // Ejecutar la consulta
+            return $stmt->execute() ? "ok" : "error";
+        } catch (Exception $e) {
+            // Manejo de errores
+            die($e->getMessage());
+        }
+    }
+       
     
 }
 ?>

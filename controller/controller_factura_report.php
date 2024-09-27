@@ -1,5 +1,5 @@
 <?php
-require_once( '../resource/fpdf/fpdf.php');
+require_once('../resource/fpdf/fpdf.php');
 require_once ('../model/modelFacturareport.php');
 
 

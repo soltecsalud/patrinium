@@ -301,6 +301,34 @@ class Solicitud_controller{
                 echo 1; // Error
             }
     }
+
+        public function insertarDatosAdicionales() {
+            $datos = [
+                'nombre_cliente' => $_POST['nombre_cliente'],
+                'sr_numero' => $_POST['sr_numero'],
+                'date_organization' => $_POST['date_organization'],
+                'state_organization' => $_POST['state_organization'],
+                'principal_business' => $_POST['principal_business'],
+                'managing_members' => $_POST['managing_members'],
+                'bank_account' => $_POST['bank_account'],
+                'fiscal_year' => $_POST['fiscal_year'],
+                'ein' => $_POST['ein'],
+                'date_annual_meeting' => $_POST['date_annual_meeting'],
+                'secretary' => $_POST['secretary'],
+                'treasurer' => $_POST['treasurer'],
+                'members' => $_POST['members'],
+                'initial_manager' => $_POST['initial_manager'],
+                'fk_solicitud' => $_POST['fk_solicitud']
+            ];
+
+            $respuesta = ModelSolicitud::insertarDatosAdiconales($datos);
+            if ($respuesta == "ok") {
+                echo json_encode(["status" => 0]); // Éxito
+            } else {
+                echo json_encode(["status" => 1]); // Error
+            }
+        }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -316,6 +344,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->insertarFactura();
         } elseif ($_POST['accion'] === 'insertarServiciosAdicionales') {
             $controlador->insertarServiciosAdicionales();
+        } elseif ($_POST['accion'] === 'guardarCliente') {
+            $controlador->insertarDatosAdicionales();
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
