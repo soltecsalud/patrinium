@@ -26,29 +26,29 @@ class PDFController extends FPDF {
         if (isset($this->companyDetails->nombre_cliente) && isset($this->companyDetails->apellido_cliente)) {
             
             $srFile = '( '.$this->companyDetails->nombre_cliente . ' ' . $this->companyDetails->apellido_cliente.' )';
-            $this->SetFont('Arial', '', 12);
+            $this->SetFont('Arial', 'B', 18);
             $this->Cell(0, 10, $srFile, 0, 1, 'C'); // Centrar SR y FILE
         } else {
             $this->Cell(0, 10, 'SR and FILE not available', 0, 1, 'C');
         }
         $this->Ln(2);
 
-        $this->SetFont('Arial', '', 12);
+        $this->SetFont('Arial', '', 6);
         $this->Cell(0, 6, '(A Delaware Limited Liability Company)', 0, 1, 'C'); // Centrar Company Information
 
         // SR y FILE
-        if (isset($this->companyDetails->sr_numero) && isset($this->companyDetails->file_numero)) {
-            $srFile = 'SR ' . $this->companyDetails->sr_numero . ' FILE ' . $this->companyDetails->file_numero;
+        if (isset($this->companyDetails->sr_numero) ){
+            $srFile = 'SR ' . $this->companyDetails->sr_numero;
             $this->SetFont('Arial', '', 12);
             $this->Cell(0, 10, $srFile, 0, 1, 'C'); // Centrar SR y FILE
         } else {
             $this->Cell(0, 10, 'SR and FILE not available', 0, 1, 'C');
         }
-        $this->Ln(2);
+        $this->Ln(5);
 
         // Información de la compañía
-        $this->SetFont('Arial', '', 12);
-        $this->Cell(0, 10, 'A Delaware Limited Liability Company', 0, 1, 'C'); // Centrar Company Info
+        $this->SetFont('Arial', 'B', 18);
+        $this->Cell(0, 10, 'COMPANY INFORMATION DETAILS', 0, 1, 'C'); // Centrar Company Info
         $this->Ln(10);
     }
 
@@ -82,29 +82,29 @@ class PDFController extends FPDF {
     
             // Imprimir cada propiedad con la sintaxis correcta para objetos
             $this->SetXY($x + 25, $y + 25);
-            $this->Cell(0, 10, $bullet . 'Datexzx of Organization and Registration: ' . (isset($details->date_organization) ? $details->date_organization : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Datexzx of Organization and Registration: ' . (isset($companyDetails->date_organization) ? $companyDetails->date_organization : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 35);
-            $this->Cell(0, 10, $bullet . 'State of Organization: ' . (isset($details->state_organization) ? $details->state_organization : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'State of Organization: ' . (isset($companyDetails->state_organization) ? $companyDetails->state_organization : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 45);
-            $this->Cell(0, 10, $bullet . 'Principal Place of Business: ' . (isset($details->principal_business) ? $details->principal_business : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Principal Place of Business: ' . (isset($companyDetails->principal_business) ? $companyDetails->principal_business : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 55);
-            $this->Cell(0, 10, $bullet . 'Managing Members: ' . (isset($details->managing_members) ? $details->managing_members : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Managing Members: ' . (isset($companyDetails->managing_members) ? $companyDetails->managing_members : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 65);
-            $this->Cell(0, 10, $bullet . 'Bank Account: ' . (isset($details->bank_account) ? $details->bank_account : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Bank Account: ' . (isset($companyDetails->bank_account) ? $companyDetails->bank_account : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 75);
-            $this->Cell(0, 10, $bullet . 'Fiscal Year: ' . (isset($details->fiscal_year) ? $details->fiscal_year : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Fiscal Year: ' . (isset($companyDetails->fiscal_year) ? $companyDetails->fiscal_year : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 85);
-            $this->Cell(0, 10, $bullet . 'EIN: ' . (isset($details->ein) ? $details->ein : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'EIN: ' . (isset($companyDetails->ein) ? $companyDetails->ein : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 95);
-            $this->Cell(0, 10, $bullet . 'Date of Annual Meeting: ' . (isset($details->date_annual_meeting) ? $details->date_annual_meeting : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Date of Annual Meeting: ' . (isset($companyDetails->date_annual_meeting) ? $companyDetails->date_annual_meeting : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 105);
-            $this->Cell(0, 10, $bullet . 'Secretary: ' . (isset($details->secretary) ? $details->secretary : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Secretary: ' . (isset($companyDetails->secretary) ? $companyDetails->secretary : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 115);
-            $this->Cell(0, 10, $bullet . 'Treasurer: ' . (isset($details->treasurer) ? $details->treasurer : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Treasurer: ' . (isset($companyDetails->treasurer) ? $companyDetails->treasurer : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 125);
-            $this->Cell(0, 10, $bullet . 'Members: ' . (isset($details->members) ? $details->members : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Members: ' . (isset($companyDetails->members) ? $companyDetails->members : 'N/A'), 0, 1);
             $this->SetXY($x + 25, $y + 135);
-            $this->Cell(0, 10, $bullet . 'Initial Temporal Manager: ' . (isset($details->initial_manager) ? $details->initial_manager : 'N/A'), 0, 1);
+            $this->Cell(0, 10, $bullet . 'Initial Temporal Manager: ' . (isset($companyDetails->initial_manager) ? $companyDetails->initial_manager : 'N/A'), 0, 1);
     
         
     }
