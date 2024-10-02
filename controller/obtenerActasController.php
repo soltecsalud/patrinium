@@ -3,7 +3,7 @@ require_once '../model/modelPlantillas.php';
 require_once '../resource/vendor/autoload.php'; // Asegúrate de tener TCPDF instalada con Composer
 
 class GenerarPdfController {
-
+//revisar git
     // Función para mostrar el contenido HTML
     public function verHtml() {
         if (isset($_POST['id_solicitud'])) {
