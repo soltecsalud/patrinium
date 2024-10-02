@@ -107,23 +107,17 @@ if (!isset($_SESSION['usuario'])) {
            <i class="fas fa-share-square"></i>
 
               <p>
-                Crear Sociedades
+                Generar Reportes
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
 
             <ul class="nav nav-treeview">
-              
+            
               <li class="nav-item">
-                <a href="./listarEmpresa.php" class="nav-link">
+                <a href="./pruebaWord.php" class="nav-link">
                 <i class="fa fa-clipboard" aria-hidden="true"></i>
-                  <p>Listar Empresa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./verSociedad.php" class="nav-link">
-                <i class="fa fa-clipboard" aria-hidden="true"></i>
-                  <p>Ver Sociedad</p>
+                  <p>Reporte</p>
                 </a>
               </li>
             

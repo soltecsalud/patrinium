@@ -23,7 +23,7 @@ include_once "../controller/solicitudController.php";
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="../css/barraFiltros.css">
+    <link rel="stylesheet" href="css/barraFiltros.css">
     <title>Registrar ESE</title>
     <style>
         .card-registroSolicitudCliente {
@@ -453,24 +453,19 @@ tr:hover {
                                 <div class="card-header">
                                     <h3 class="card-title">Documentos Download</h3>
                                 </div>
-                                    <div class="card-body">
-                                        <table id="documentosAdjuntos" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Fecha</th>
-                                                    <th>Nombre Archivo</th>
-                                                    <th>Accion</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="pdf_2.php" target="_blank" rel="noopener noreferrer">asddsa</a></td>
-                                                </tr>
-                                        
-                                            </tbody>
-                                        </table>
-                                        
-                                    </div>
+                                <div class="card-body">
+                                    <table id="actas" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Accion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Aquí se insertarán las filas dinámicamente con JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
                         </div>
                        
                        
@@ -859,6 +854,23 @@ tr:hover {
     </div>
   </div>
 </div>
+<!-- Modal para mostrar el contenido HTML -->
+<div class="modal fade" id="modalHtml" tabindex="-1" aria-labelledby="modalHtmlLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalHtmlLabel">Contenido HTML</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalHtmlContent">
+        <!-- Aquí se cargará el contenido HTML -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
    document.addEventListener('DOMContentLoaded', function() {
             // Selecciona todos los checkboxes con la clase toggle-checkbox
@@ -1067,4 +1079,98 @@ document.getElementById('agregarCampo').addEventListener('click', function() {
         });
     });
 });
+
+$(document).ready(function() {
+    let idSolicitud = "<?php echo isset($id_revisar_solicitud) ? $id_revisar_solicitud : ''; ?>";
+    
+    if (idSolicitud === '') {
+        console.error("idSolicitud no está definido.");
+    } else {
+        console.log("idSolicitud definido: ", idSolicitud);
+        // Solicitud AJAX para obtener las actas
+        $.ajax({
+            url: '../controller/obtenerActasController.php',
+            method: 'POST',
+            data: { action: 'obtenerActas', id_solicitud: idSolicitud },
+            dataType: 'json',
+            success: function(response) {
+                console.log("Respuesta del servidor: ", response);
+                if (response.status === 'success') {
+                    let acta = response.data;
+                    let tbody = $('#actas tbody');
+                    tbody.empty();
+
+                    let row = `
+                        <tr>
+                            <td>${acta.fecha}</td>
+                            <td>
+                                <button class="btn btn-primary ver-html" data-id_solicitud="${idSolicitud}">Ver HTML</button>
+                                <button class="btn btn-success generar-pdf" data-id_solicitud="${idSolicitud}">Generar PDF</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+
+                    // Adjuntar manejadores de eventos
+                    $('.ver-html').on('click', function() {
+                        let idSolicitud = $(this).data('id_solicitud');
+                        console.log("Ver HTML solicitado para id_solicitud:", idSolicitud); // Asegúrate de que este valor es correcto
+
+                        // Solicitud AJAX para obtener el contenido HTML
+                        $.ajax({
+                            url: '../controller/obtenerActasController.php',
+                            method: 'POST',
+                            data: { action: 'verHtml', id_solicitud: idSolicitud },
+                            dataType: 'json',
+                            success: function(response) {
+                                console.log("Respuesta de Ver HTML: ", response); // Depurar la respuesta
+
+                                if (response.status === 'success') {
+                                    $('#yourModal .modal-body').html(response.html); // Debe ser 'response.html'
+                                    $('#yourModal').modal('show');
+                                } else {
+                                    alert(response.message);
+                                }
+                            },
+                            error: function() {
+                                alert('Error al obtener el contenido HTML.');
+                            }
+                        });
+                    });
+
+                    $('.generar-pdf').on('click', function() {
+                        let idSolicitud = $(this).data('id_solicitud');
+                        console.log("Generar PDF solicitado para id_solicitud:", idSolicitud); // Depurar para verificar que llega el ID correcto
+
+                        // Solicitud AJAX para generar el PDF
+                        $.ajax({
+                            url: '../controller/obtenerActasController.php',
+                            method: 'POST',
+                            data: { action: 'generarPdf', id_solicitud: idSolicitud },
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    window.open(response.pdf_url, '_blank');
+                                } else {
+                                    alert(response.message);
+                                }
+                            },
+                            error: function() {
+                                alert('Error al generar el PDF.');
+                            }
+                        });
+                    });
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function() {
+                console.error('Error en la solicitud AJAX.');
+                alert('Error al cargar las actas.');
+            }
+        });
+    }
+});
+
+
 </script>
