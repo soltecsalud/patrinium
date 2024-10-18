@@ -191,8 +191,9 @@ tr:hover {
                             <button type="button" class="btn btn-tool" data-bs-toggle="modal" data-bs-target="#modalSolicitud">
                                 <i class="fas fa-briefcase"></i>
                             </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDatosAdicionales">
-                                Agregar Datos Adcionales
+                            <!-- Button to trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#serviciosModal">
+                            Ver Servicios Adicionales
                             </button>
                         </div>
                     </div>
@@ -366,25 +367,38 @@ tr:hover {
                                                                 // Recorrer el array de servicios
                                                                 foreach ($solicitud_servicios as $servicio) {
                                                                     $nombre_servicio = json_decode($servicio['servicios'], true); // Decodificar el campo 'servicios'
-                                                                    $estado = $servicio['estado'];
+                                                                   
 
                                                                     // Asignar estado
-                                                                    if ($estado == 2) {
-                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
-                                                                    } else if  ($estado == 1) {
-                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
-                                                                    }else if ($estado == 0){
-                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
-                                                                    }
+                                                                   
                                                                     
 
                                                                     // Generar filas de la tabla
                                                                     foreach ($nombre_servicio as $clave => $valor) {
                                                                         ?>
                                                                         <tr>
-                                                                            <td><?php echo $valor; ?></td>
+                                                                            <td>
+                                                                                <?php echo $valor['value']; ?></td>
                                                                         
-                                                                            <td><?php echo $estado_texto;?></td>
+                                                                            <td>
+                                                                                <?php 
+                                                                                   $estado = $valor['estado'];
+                                                                                  
+                                                                                   $estado_texto="";	
+                                                                                    if ($estado == 2) {
+                                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                                                                                    } else if  ($estado == 1) {
+                                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                                                                                    }else if ($estado == 0){
+                                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                                    }
+                                                                                    else if ($estado == 3){
+                                                                                        $estado_texto = '<span class="badge badge-warning">Insertada</span>';
+                                                                                    }
+                                                                                    echo $estado_texto;
+                                                                                ?>
+                                                                
+                                                                            </td>
                                                                         </tr>
                                                         <?php
                                                                     }
@@ -417,25 +431,35 @@ tr:hover {
                                                                 // Recorrer el array de servicios
                                                                 foreach ($solicitud_servicios as $servicio) {
                                                                     $nombre_servicio = json_decode($servicio['servicios_adicionales'], true); // Decodificar el campo 'servicios'
-                                                                    $estado = $servicio['estado'];
-
-                                                                    // Asignar estado
-                                                                    if ($estado == 2) {
-                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
-                                                                    } else if  ($estado == 1) {
-                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
-                                                                    }else if ($estado == 0){
-                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
-                                                                    }
                                                                     
+
+                                                                   
 
                                                                     // Generar filas de la tabla
                                                                     foreach ($nombre_servicio as $clave => $valor) {
                                                                         ?>
                                                                         <tr>
-                                                                            <td><?php echo $valor; ?></td>
+                                                                            <td>
+                                                                                <?php echo $valor['value']; ?></td>
                                                                         
-                                                                            <td><?php echo $estado_texto;?></td>
+                                                                            <td>
+                                                                                <?php 
+                                                                                      $estado = $valor['estado'];
+                                                                                   $estado_texto="";	
+                                                                                    if ($estado == 2) {
+                                                                                        $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                                                                                    } else if  ($estado == 1) {
+                                                                                        $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                                                                                    }else if ($estado == 0){
+                                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                                    }
+                                                                                    else if ($estado == 3){
+                                                                                        $estado_texto = '<span class="badge badge-warning">Insertada</span>';
+                                                                                    }
+                                                                                    echo $estado_texto;
+                                                                                ?>
+                                                                
+                                                                            </td>
                                                                         </tr>
                                                         <?php
                                                                     }
@@ -655,7 +679,7 @@ tr:hover {
                     ?>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label><?php echo $valor; ?></label>
+                                <label><?php echo $valor['value']; ?></label>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control">
@@ -684,7 +708,7 @@ tr:hover {
                     ?>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label><?php echo $valor; ?></label>
+                                <label><?php echo $valor['value']; ?></label>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <input type="text" placeholder="Qty" name="cantidad<?php echo $valor; ?>" class="form-control">
@@ -862,11 +886,76 @@ tr:hover {
         <h5 class="modal-title" id="modalHtmlLabel">Contenido HTML</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="modalHtmlContent">
+      <div class="modal-body">
         <!-- Aquí se cargará el contenido HTML -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap actualiza JSONB a los servicios-->
+<div class="modal fade" id="serviciosModal" tabindex="-1" role="dialog" aria-labelledby="serviciosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serviciosModalLabel">Servicios Adicionales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formActualizarOrdenServicio">
+
+          <table class="table">
+            <tr>
+              <th>Servicio</th>
+              <th>Estado</th>
+              <th>Seleccionar</th>
+            </tr>
+            <?php
+            $solicitud_servicios_json = $controlador->getServicios($id_revisar_solicitud);
+            $solicitud_servicios = json_decode($solicitud_servicios_json, true);
+            foreach ($solicitud_servicios as $servicio) {
+              $nombre_servicio = json_decode($servicio['servicios'], true);
+              $id_servicios_adicionales = $servicio['id_servicios_adicionales'];
+              foreach ($nombre_servicio as $clave => $valor) {
+            ?>
+            <tr>
+            
+              <td><?php echo $valor['value']; ?></td>
+              <td>
+                <?php
+                $estado = $valor['estado'];
+                $estado_texto = "";
+                if ($estado == 2) {
+                  $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                } else if ($estado == 1) {
+                  $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                } else if ($estado == 0) {
+                  $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                } else if ($estado == 3) {
+                  $estado_texto = '<span class="badge badge-warning">Insertada</span>';
+                }
+                echo $estado_texto;
+                ?>
+              </td>
+             
+              <td><input type="checkbox" name="servicios[]" value="<?php echo $clave; ?>">
+              <input type="hidden" name="id_servicios_solicitados" value="<?php echo $id_servicios_adicionales ;?>"></td>
+            </tr>
+            <?php
+              }
+            }
+            ?>
+          </table>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarCambiosOrdenServicio">Guardar</button>
       </div>
     </div>
   </div>
@@ -1055,7 +1144,7 @@ document.getElementById('agregarCampo').addEventListener('click', function() {
         
     });
 
-    $(document).ready(function() {
+$(document).ready(function() {
     $('#guardarDatosAdicionales').click(function(e) {
         e.preventDefault();
 
@@ -1120,14 +1209,14 @@ $(document).ready(function() {
                         $.ajax({
                             url: '../controller/obtenerActasController.php',
                             method: 'POST',
-                            data: { action: 'verHtml', id_solicitud: idSolicitud },
+                            data: { action: 'obtenerActas', id_solicitud: idSolicitud },
                             dataType: 'json',
                             success: function(response) {
                                 console.log("Respuesta de Ver HTML: ", response); // Depurar la respuesta
 
                                 if (response.status === 'success') {
-                                    $('#yourModal .modal-body').html(response.html); // Debe ser 'response.html'
-                                    $('#yourModal').modal('show');
+                                    $('#modalHtml .modal-body').html(response.data.contenido_html); // Debe ser 'response.html'
+                                    $('#modalHtml').modal('show');
                                 } else {
                                     alert(response.message);
                                 }
@@ -1140,7 +1229,7 @@ $(document).ready(function() {
 
                     $('.generar-pdf').on('click', function() {
                         let idSolicitud = $(this).data('id_solicitud');
-                        console.log("Generar PDF solicitado para id_solicitud:", idSolicitud); // Depurar para verificar que llega el ID correcto
+                        console.log("Generar PDF solicitado para id_solicitud:", idSolicitud);
 
                         // Solicitud AJAX para generar el PDF
                         $.ajax({
@@ -1149,13 +1238,17 @@ $(document).ready(function() {
                             data: { action: 'generarPdf', id_solicitud: idSolicitud },
                             dataType: 'json',
                             success: function(response) {
+                                console.log("Respuesta de Generar PDF: ", response);
+
                                 if (response.status === 'success') {
+                                    // Abrir el PDF en una nueva pestaña
                                     window.open(response.pdf_url, '_blank');
                                 } else {
                                     alert(response.message);
                                 }
                             },
-                            error: function() {
+                            error: function(xhr, status, error) {
+                                console.error("Error en la solicitud AJAX para generar PDF:", xhr.responseText);
                                 alert('Error al generar el PDF.');
                             }
                         });
@@ -1172,5 +1265,21 @@ $(document).ready(function() {
     }
 });
 
-
+$('#guardarCambiosOrdenServicio').on('click', function() {
+    var formData = $('#formActualizarOrdenServicio').serialize()+ "&accion=ActualizarServicio"; // Serializar los datos del formulario
+    console.log('Datos que se envían:', formData); 
+    $.ajax({
+        url: '../controller/solicitudController.php',  // Ajusta la URL
+        method: 'POST',
+        data: formData,
+        
+        success: function(response) {
+            alert('Servicios actualizados exitosamente.');
+            location.reload();  // Recargar la página si es necesario
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
 </script>

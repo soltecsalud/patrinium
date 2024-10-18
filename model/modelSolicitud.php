@@ -33,9 +33,8 @@ class ModelSolicitud
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "
-                    SELECT a.servicios, a.servicios_adicionales, b.estado
+                   SELECT a.id_servicios_adicionales, a.servicios, a.servicios_adicionales
                     FROM servicios_adicionales a
-                    inner join factura as b ON(a.fk_solicitud=b.id_solicitud)
                     where a.fk_solicitud =:id_solicitud
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
@@ -377,6 +376,36 @@ class ModelSolicitud
         } catch (Exception $e) {
             // Manejo de errores
             die($e->getMessage());
+        }
+    }
+
+    public static function actualizarEstadoServicio($id_servicios_adicionales, $clave_servicio, $nuevo_estado) {
+        try {
+            // Consulta para actualizar el estado del servicio específico en el JSONB
+            $sql = "UPDATE servicios_adicionales 
+                    SET servicios = jsonb_set(servicios, :ruta, :nuevo_estado::jsonb, false)
+                    WHERE id_servicios_adicionales = :id_servicios_adicionales";
+    
+            $stmt = Conexion::conectar()->prepare($sql);
+            
+            // Generar la ruta dentro del JSON
+            $ruta = '{"' . $clave_servicio . '", "estado"}'; // Ruta a la clave del estado dentro del JSON
+            
+            // Convertir el nuevo estado a JSON
+            $nuevo_estado_json = json_encode($nuevo_estado);  // Asegúrate de que es un número, no un string
+            
+            $stmt->bindParam(':id_servicios_adicionales', $id_servicios_adicionales, PDO::PARAM_INT);
+            $stmt->bindParam(':ruta', $ruta, PDO::PARAM_STR);
+            $stmt->bindParam(':nuevo_estado', $nuevo_estado_json, PDO::PARAM_STR);
+            
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return "ok"; // Éxito
+            } else {
+                return "error"; // Error
+            }
+        } catch (Exception $e) {
+            return "error"; // En caso de una excepción
         }
     }
        

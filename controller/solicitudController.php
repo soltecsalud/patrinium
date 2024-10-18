@@ -83,11 +83,14 @@ class Solicitud_controller{
     }
 
     public function insertarSolicitud() {
+        $estado = 3;
         $datos = array(
         "fk_Persona" => $_POST['selectPersona'],
         "nombre_cliente" => $_POST['nombreCliente'],
         "referido_por" => $_POST['referido_por'],
-        "necesidad" => $_POST['necesidad']
+        "necesidad" => $_POST['necesidad'],
+       
+      
          
        
         );
@@ -113,7 +116,10 @@ class Solicitud_controller{
                 foreach ($checkbox_names as $name) {
                     // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
                     if (isset($_POST[$name]) && $_POST[$name] !== '') {
-                        $checkbox[$name] = $_POST[$name];
+                        $checkbox[$name] = array(
+                            'value' => $_POST[$name],
+                            'estado' => $estado
+                        );
                     }
                 }
 
@@ -122,7 +128,10 @@ class Solicitud_controller{
                     // Verificar si el valor del campo dinámico está presente y no está vacío
                     if (isset($valor) && $valor !== '') {
                         // Agregar el valor del campo dinámico al array en el formato deseado
-                        $camposDinamicos["campoDinamico[$indice]"] = $valor;
+                        $camposDinamicos["campoDinamico[$indice]"] = array(
+                            'value' => $valor,
+                            'estado' => $estado
+                        );
                     }
                 }
       
@@ -329,6 +338,30 @@ class Solicitud_controller{
             }
         }
 
+        public function actualizarServicioJson() {
+            // Obtener los datos enviados desde el formulario
+            $id_servicios_adicionales = $_POST['id_servicios_solicitados'];
+            $servicios_seleccionados = $_POST['servicios']; // Array con los servicios seleccionados
+      
+
+           
+            // Iterar sobre los servicios seleccionados para actualizar su estado
+            foreach ($servicios_seleccionados as $clave_servicio) {
+               
+                $nuevo_estado = 2;
+        
+                // Llamar al modelo para actualizar el estado del servicio
+                $respuesta = ModelSolicitud::actualizarEstadoServicio($id_servicios_adicionales, $clave_servicio, $nuevo_estado);
+                
+                // Verificar si la actualización fue exitosa
+                if ($respuesta == "ok") {
+                    echo 0; // Éxito
+                } else {
+                    echo 1; // Error
+                }
+            }
+        }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -346,6 +379,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->insertarServiciosAdicionales();
         } elseif ($_POST['accion'] === 'guardarCliente') {
             $controlador->insertarDatosAdicionales();
+        } elseif ($_POST['accion'] === 'ActualizarServicio') {
+            $controlador->actualizarServicioJson();
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
