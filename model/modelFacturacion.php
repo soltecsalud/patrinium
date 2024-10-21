@@ -6,7 +6,7 @@ class ModelFacturacion {
     public function listarFacturas() {
 
         try {
-            $sql = "SELECT * FROM factura where estado = 0 or estado = null";
+            $sql = "SELECT * FROM factura where estado = 2 or estado = null";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);

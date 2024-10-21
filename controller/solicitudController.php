@@ -32,6 +32,8 @@ class Solicitud_controller{
         return json_encode($solicitud); 
     }
 
+
+
     public function getServiciosFactura($id_enviado_desde_vista){
         $id_solicitud = $id_enviado_desde_vista;
         $modelo = new ModelSolicitud();
@@ -362,6 +364,36 @@ class Solicitud_controller{
             }
         }
 
+        public function actualizarServiciosFactura() {
+            // Obtener los datos enviados desde el formulario
+            $id_servicios_adicionales = $_POST['id_servicios_solicitados'];
+            $servicios_seleccionados = $_POST['servicios']; // Array con los servicios seleccionados
+      
+
+           
+            // Iterar sobre los servicios seleccionados para actualizar su estado
+            foreach ($servicios_seleccionados as $clave_servicio) {
+               
+                $nuevo_estado = 0;
+        
+                // Llamar al modelo para actualizar el estado del servicio
+                $respuesta = ModelSolicitud::actualizarEstadoServiciofactura($id_servicios_adicionales, $clave_servicio, $nuevo_estado);
+                
+                // Verificar si la actualización fue exitosa
+                if ($respuesta == "ok") {
+                    echo 0; // Éxito
+                } else {
+                    echo 1; // Error
+                }
+            }
+        }
+
+        public function facturasDownload($idSolicitud) {
+        $modelo = new ModelSolicitud();
+        $facturas =  $modelo->getFacturasBySolicitud($idSolicitud);
+        echo json_encode($facturas); // Respuesta en formato JSON
+        }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -381,7 +413,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->insertarDatosAdicionales();
         } elseif ($_POST['accion'] === 'ActualizarServicio') {
             $controlador->actualizarServicioJson();
-        } else {
+        }elseif ($_POST['accion'] === 'ActualizarServicioFactura') {
+            $controlador->actualizarServiciosFactura();
+        }elseif ($_POST['accion'] == 'downloadFacturas') {          
+            $controlador->facturasDownload($_POST['id_solicitud']);
+        }
+         else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
 

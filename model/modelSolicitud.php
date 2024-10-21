@@ -47,11 +47,15 @@ class ModelSolicitud
         }
     }
 
+    
+
     public static function obtenerServiciosFactura($id_solicitud) {
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "
-            SELECT servicios, servicios_adicionales FROM solicitud where id_solicitud = :id_solicitud 
+             SELECT a.id_servicios_adicionales, a.servicios, a.servicios_adicionales
+                    FROM servicios_adicionales a
+                    where a.fk_solicitud =:id_solicitud
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
             $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
@@ -68,7 +72,7 @@ class ModelSolicitud
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "
-            select estado,datos from factura where id_solicitud=:id_solicitud 
+            SELECT servicios, servicios_adicionales FROM solicitud where id_solicitud = :id_solicitud 
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
             $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
@@ -408,7 +412,52 @@ class ModelSolicitud
             return "error"; // En caso de una excepción
         }
     }
-       
+
+    public static function actualizarEstadoServiciofactura($id_servicios_adicionales, $clave_servicio, $nuevo_estado) {
+        try {
+            // Consulta para actualizar el estado del servicio específico en el JSONB
+            $sql = "UPDATE servicios_adicionales 
+                    SET servicios = jsonb_set(servicios, :ruta, :nuevo_estado::jsonb, false)
+                    WHERE id_servicios_adicionales = :id_servicios_adicionales";
+    
+            $stmt = Conexion::conectar()->prepare($sql);
+            
+            // Generar la ruta dentro del JSON
+            $ruta = '{"' . $clave_servicio . '", "estado"}'; // Ruta a la clave del estado dentro del JSON
+            
+            // Convertir el nuevo estado a JSON
+            $nuevo_estado_json = json_encode($nuevo_estado);  // Asegúrate de que es un número, no un string
+            
+            $stmt->bindParam(':id_servicios_adicionales', $id_servicios_adicionales, PDO::PARAM_INT);
+            $stmt->bindParam(':ruta', $ruta, PDO::PARAM_STR);
+            $stmt->bindParam(':nuevo_estado', $nuevo_estado_json, PDO::PARAM_STR);
+            
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                return "ok"; // Éxito
+            } else {
+                return "error"; // Error
+            }
+        } catch (Exception $e) {
+            return "error"; // En caso de una excepción
+        }
+    }
+     
+    
+    public static function getFacturasBySolicitud($idSolicitud) {
+        try {
+            $sql = "SELECT datos, created_at, ruta_pago, tipo_consignacion, nota_pago 
+                    FROM public.factura 
+                    WHERE id_solicitud = :id_solicitud"; // Filtrar por id_solicitud
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':id_solicitud', $idSolicitud, PDO::PARAM_INT); // Pasar el id_solicitud
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ); // Devolver los resultados como objetos
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
     
 }
 ?>

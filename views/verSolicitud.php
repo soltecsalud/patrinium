@@ -334,7 +334,7 @@ tr:hover {
                                                         <th scope="col" class="table-title">Observaciones</th>
                                                         <td colspan="3"><?php echo $fila[0]['observaciones']; ?></td>
                                                     </tr>
-                                            
+                                           
                                             </tbody>
                                         </table>
                                     </div>
@@ -346,7 +346,13 @@ tr:hover {
                                     <div class="card-header">
                                         <h3 class="card-title">Servicios Solicitados</h3>
                                             <div class="card-tools">
-                                                
+                                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#serviciosModal">
+                                                    Orden Servicio
+                                                </button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#serviciosModalFactura">
+                                                    Servicios a Facturas
+                                                </button>
+                                                <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" target="_blank" rel="noopener noreferrer">xxx</a>
                                             </div>
                                         
                                     </div>
@@ -390,7 +396,7 @@ tr:hover {
                                                                                     } else if  ($estado == 1) {
                                                                                         $estado_texto = '<span class="badge badge-success">Pagada</span>';
                                                                                     }else if ($estado == 0){
-                                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                                        $estado_texto = '<span class="badge badge-primary">Para Facturada</span>';
                                                                                     }
                                                                                     else if ($estado == 3){
                                                                                         $estado_texto = '<span class="badge badge-warning">Insertada</span>';
@@ -437,6 +443,9 @@ tr:hover {
 
                                                                     // Generar filas de la tabla
                                                                     foreach ($nombre_servicio as $clave => $valor) {
+                                                                        $estado = $valor['estado'];
+                                                                       
+                                                                          
                                                                         ?>
                                                                         <tr>
                                                                             <td>
@@ -444,14 +453,14 @@ tr:hover {
                                                                         
                                                                             <td>
                                                                                 <?php 
-                                                                                      $estado = $valor['estado'];
+                                                                                   
                                                                                    $estado_texto="";	
                                                                                     if ($estado == 2) {
                                                                                         $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
                                                                                     } else if  ($estado == 1) {
                                                                                         $estado_texto = '<span class="badge badge-success">Pagada</span>';
                                                                                     }else if ($estado == 0){
-                                                                                        $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                                                                                        $estado_texto = '<span class="badge badge-primary">Para Facturada</span>';
                                                                                     }
                                                                                     else if ($estado == 3){
                                                                                         $estado_texto = '<span class="badge badge-warning">Insertada</span>';
@@ -464,6 +473,7 @@ tr:hover {
                                                         <?php
                                                                     }
                                                                 }
+                                                                
                                                         ?>
                                                     </table>
 
@@ -472,10 +482,35 @@ tr:hover {
                             </div>
                         </div>
                            
-                            
                         <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Documentos Download</h3>
+                                    <h3 class="card-title">Facturas Download</h3>
+                                </div>
+                                    <div class="card-body">
+                                    <div id="idSolicitud" style="display:none;"><?php echo $id_revisar_solicitud; ?></div>
+                                        <table id="documentosAdjuntos" class="table table-bordered table-striped">
+                                           <thead>
+                                           <tr>
+                                            <th>Fecha Creacion</th>
+                                            <th>Descargar Factura</th>
+                                            <th>Descargar Comprobante Pago</th>
+                                            <th>Tipo Consignacion</th>
+                                            <th>Nota</th>
+                                           </tr>
+                                           </thead>
+                                            <tbody id="facturasDownload" >                                              
+                                               
+                                        
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                            </div>
+                    
+                        
+                        <div class="card card-info card-outline shadow-none p-0">
+                                <div class="card-header">
+                                    <h3 class="card-title">Reportes Download</h3>
                                 </div>
                                 <div class="card-body">
                                     <table id="actas" class="table table-bordered table-striped">
@@ -528,7 +563,8 @@ tr:hover {
                             </div>
                         </div>  <!--Fin Tabal Persona-->
                        
-                        </div>
+                       
+                      
                     
                     
                 </div>
@@ -594,7 +630,7 @@ tr:hover {
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="billingModalLabel">Insertar Servicios</h5>
+                <h5 class="modal-title" id="billingModalLabel">Facturar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -676,8 +712,10 @@ tr:hover {
                                 $datos = json_decode($servicio['servicios'], true);
                                 if ($datos):
                                     foreach ($datos as $clave => $valor):
-                    ?>
+                          if($valor['estado']==0){             
+                    ?> 
                         <div class="row">
+                          
                             <div class="col-md-6 mb-3">
                                 <label><?php echo $valor['value']; ?></label>
                             </div>
@@ -689,7 +727,7 @@ tr:hover {
                             </div>
                         </div>
                     <?php
-                                    endforeach;
+                          }endforeach;
                                 else:
                     ?>
                         <h4>Error al decodificar el JSONB</h4>
@@ -711,10 +749,10 @@ tr:hover {
                                 <label><?php echo $valor['value']; ?></label>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" placeholder="Qty" name="cantidad<?php echo $valor; ?>" class="form-control">
+                                <input type="text" placeholder="Qty" name="cantidad<?php echo $valor['value']; ?>" class="form-control">
                             </div>
                             <div class="col-md-3 mb-3">
-                                <input type="text" placeholder="Unit Price" name="valor<?php echo $valor; ?>" class="form-control">
+                                <input type="text" placeholder="Unit Price" name="valor<?php echo $valor['value']; ?>" class="form-control">
                             </div>
                         </div>
                     <?php
@@ -900,7 +938,7 @@ tr:hover {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="serviciosModalLabel">Servicios Adicionales</h5>
+        <h5 class="modal-title" id="serviciosModalLabel">Orden De Servicio</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -921,14 +959,16 @@ tr:hover {
               $nombre_servicio = json_decode($servicio['servicios'], true);
               $id_servicios_adicionales = $servicio['id_servicios_adicionales'];
               foreach ($nombre_servicio as $clave => $valor) {
+                $estado = $valor['estado'];
+                $estado_texto = "";
+                if($estado == 3){
             ?>
             <tr>
             
               <td><?php echo $valor['value']; ?></td>
               <td>
                 <?php
-                $estado = $valor['estado'];
-                $estado_texto = "";
+            
                 if ($estado == 2) {
                   $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
                 } else if ($estado == 1) {
@@ -948,6 +988,7 @@ tr:hover {
             <?php
               }
             }
+        }
             ?>
           </table>
 
@@ -956,6 +997,74 @@ tr:hover {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" id="guardarCambiosOrdenServicio">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap actualiza JSONB a los servicios-->
+<div class="modal fade" id="serviciosModalFactura" tabindex="-1" role="dialog" aria-labelledby="serviciosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serviciosModalLabel">Servicio a Facturar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formActualizarServiciosFacturar">
+
+          <table class="table">
+            <tr>
+              <th>Servicio</th>
+              <th>Estado</th>
+              <th>Seleccionar</th>
+            </tr>
+            <?php
+            $solicitud_servicios_json = $controlador->getServicios($id_revisar_solicitud);
+            $solicitud_servicios = json_decode($solicitud_servicios_json, true);
+            foreach ($solicitud_servicios as $servicio) {
+              $nombre_servicio = json_decode($servicio['servicios'], true);
+              $id_servicios_adicionales = $servicio['id_servicios_adicionales'];
+              foreach ($nombre_servicio as $clave => $valor) {
+                $estado = $valor['estado'];
+                $estado_texto = "";
+                if($estado == 2){
+            ?>
+            <tr>
+            
+              <td><?php echo $valor['value']; ?></td>
+              <td>
+                <?php
+            
+                if ($estado == 2) {
+                  $estado_texto = '<span class="badge badge-info">Orden Servicio</span>';
+                } else if ($estado == 1) {
+                  $estado_texto = '<span class="badge badge-success">Pagada</span>';
+                } else if ($estado == 0) {
+                  $estado_texto = '<span class="badge badge-primary">Facturada</span>';
+                } else if ($estado == 3) {
+                  $estado_texto = '<span class="badge badge-warning">Insertada</span>';
+                }
+                echo $estado_texto;
+                ?>
+              </td>
+             
+              <td><input type="checkbox" name="servicios[]" value="<?php echo $clave; ?>">
+              <input type="hidden" name="id_servicios_solicitados" value="<?php echo $id_servicios_adicionales ;?>"></td>
+            </tr>
+            <?php
+              }
+            }
+        }
+            ?>
+          </table>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarCambiosServiciosFacturar">Guardar</button>
       </div>
     </div>
   </div>
@@ -1279,6 +1388,67 @@ $('#guardarCambiosOrdenServicio').on('click', function() {
         },
         error: function(xhr, status, error) {
             console.log(error);
+        }
+    });
+});
+
+$('#guardarCambiosServiciosFacturar').on('click', function() {
+    var formData = $('#formActualizarServiciosFacturar').serialize()+ "&accion=ActualizarServicioFactura"; // Serializar los datos del formulario
+    console.log('Datos que se envían:', formData); 
+    $.ajax({
+        url: '../controller/solicitudController.php',  // Ajusta la URL
+        method: 'POST',
+        data: formData,
+        
+        success: function(response) {
+            alert('Servicios actualizados exitosamente.');
+            location.reload();  // Recargar la página si es necesario
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
+
+$(document).ready(function(){
+    // Ejecutar la petición AJAX cuando la página esté lista o al realizar alguna acción
+    var idSolicitud = $('#idSolicitud').text(); // Obtener el valor de id_solicitud desde el div oculto
+
+    // Definir los datos para enviar, incluyendo el id_solicitud y la acción
+    var datos = { 
+        id_solicitud: idSolicitud, 
+        accion: "downloadFacturas" 
+    };
+
+    // Ejecutar la petición AJAX
+    $.ajax({
+        url: '../controller/solicitudController.php', // Ruta del controlador
+        type: 'POST',
+        data: datos, // Enviar los datos como un objeto
+        success: function(response){
+            // Parsear el JSON recibido
+            let facturas = JSON.parse(response);
+            
+            // Limpiar el contenido actual del tbody
+            $('#facturasDownload').empty();
+
+            // Iterar sobre las facturas recibidas y agregar las filas al tbody
+            facturas.forEach(function(factura) {
+                // Validar si los campos son null y asignar 'N/A' si es el caso
+                let createdAt = factura.created_at ? factura.created_at : 'N/A';
+                let rutaPago = factura.ruta_pago ? factura.ruta_pago : 'N/A';
+                let tipoConsignacion = factura.tipo_consignacion ? factura.tipo_consignacion : 'N/A';
+                let notaPago = factura.nota_pago ? factura.nota_pago : 'N/A';
+
+                // Construir la fila
+                let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td><a href='../controller/resource/<?php echo $id_revisar_solicitud;?>/" + rutaPago + "'target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td></tr>";
+                
+                // Agregar la fila al tbody
+                $('#facturasDownload').append(fila);
+            });
+        },
+        error: function(xhr, status, error){
+            console.error('Error:', error);
         }
     });
 });
