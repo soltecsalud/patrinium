@@ -191,10 +191,10 @@ tr:hover {
                             <button type="button" class="btn btn-tool" data-bs-toggle="modal" data-bs-target="#modalSolicitud">
                                 <i class="fas fa-briefcase"></i>
                             </button>
-                            <!-- Button to trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#serviciosModal">
-                            Ver Servicios Adicionales
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearSociedad">
+                            Crear Sociedad
                             </button>
+                         
                         </div>
                     </div>
                     <div class="card-body">
@@ -252,6 +252,69 @@ tr:hover {
                                                             
                             </div>
                         </div>
+                        <div class="card card-info card-outline shadow-none p-0">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Sociedades</h3>
+                                        <div class="card-tools">
+                                    
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                                
+                                
+                                </div>
+                                    </div>
+                                  
+                                    <div class="card-body">
+                                        <div class="row"> <!-- Agregamos una fila que envolverá las columnas -->
+                                            <?php
+                                                        $controlador = new Solicitud_controller();
+                                                        $solicitudes = $controlador->getSociedades($id_revisar_solicitud);
+
+                                                        // Array para agrupar representantes por sociedad
+                                                        $sociedades_representantes = [];
+
+                                                        if (isset($solicitudes)) {
+                                                            // Agrupamos los representantes por sociedad
+                                                            foreach ($solicitudes as $datosSOlicitud) {
+                                                                $sociedades_representantes[$datosSOlicitud['nombre_sociedad']][] = [
+                                                                    'nombre_completo' => $datosSOlicitud['nombre_completo'],
+                                                                    'porcentaje' => $datosSOlicitud['porcentaje']
+                                                                ];
+                                                            }
+
+                                                            // Ahora mostramos cada sociedad con sus representantes
+                                                            foreach ($sociedades_representantes as $nombre_sociedad => $representantes) {
+                                                        ?>
+                                                            <div class="col-md-4">
+                                                                <div class="info-box">
+                                                                    <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
+                                                                    <div class="info-box-content">
+                                                                        <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
+                                                                        <?php foreach ($representantes as $representante) { ?>
+                                                                            <span class="info-box-text">
+                                                                                <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%
+                                                                            </span>
+                                                                        <?php } ?>
+                                                                    </div>
+                                                                     <div class="progress">
+                                                                        <div class="progress-bar bg-info" style="width: 70%"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            echo "no hay sociedades";
+                                                        }
+    ?>
+                                        </div>
+                                    </div>
+                        </div>  <!--Fin Tabal Persona-->
+                       
+                       
+                      
+                    
+                    
+               
                         <div class="card-body">
                         
                             <div class="card card-info card-outline shadow-none p-0">
@@ -352,7 +415,7 @@ tr:hover {
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#serviciosModalFactura">
                                                     Servicios a Facturas
                                                 </button>
-                                                <a href="factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>" target="_blank" rel="noopener noreferrer">xxx</a>
+                                                
                                             </div>
                                         
                                     </div>
@@ -1069,6 +1132,58 @@ tr:hover {
     </div>
   </div>
 </div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modalCrearSociedad" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Crear Sociedad</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="formCrearSociedad">
+          <!-- Nombre de la Sociedad -->
+          <div class="form-group">
+            <label for="inputNombreSociedad">Nombre de la Sociedad</label>
+            <input type="text" class="form-control" id="inputNombreSociedad" name="nombreSociedad" placeholder="Nombre de la sociedad">
+          </div>
+
+          <!-- Contenedor para las personas y porcentajes -->
+          <div id="personasContainer">
+            <!-- Primera Persona y Porcentaje -->
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label for="selectPersona">Persona Sociedad 1</label>
+                <select class="form-control" id='selectPersona' name="personas[]">
+                  <option value="">Seleccionar persona</option>
+                  <!-- Opciones dinámicas -->
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="inputPorcentaje">Porcentaje</label>
+                <input type="number" class="form-control" name="porcentajes[]" placeholder="Porcentaje" min="0" max="100">
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón para agregar más personas -->
+          <button type="button" class="btn btn-secondary" id="btnAgregarPersona">Agregar Persona</button>
+
+          <!-- Input hidden -->
+          <input type="hidden" id="hiddenInput" name="hiddenField" value="<?php echo $id_revisar_solicitud;?>">
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="btnGuardarSociedad" class="btn btn-primary">Guardar Sociedad</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
    document.addEventListener('DOMContentLoaded', function() {
             // Selecciona todos los checkboxes con la clase toggle-checkbox
@@ -1434,14 +1549,27 @@ $(document).ready(function(){
 
             // Iterar sobre las facturas recibidas y agregar las filas al tbody
             facturas.forEach(function(factura) {
+                let jsonString = factura.datos;
+
+                // Parse the JSON string
+                let data = JSON.parse(jsonString);
+
+                // Extract the invoice_number
+                let invoiceNumber = data.invoice_number;
+
+                // Print the invoice_number to the console
+                
+              
                 // Validar si los campos son null y asignar 'N/A' si es el caso
                 let createdAt = factura.created_at ? factura.created_at : 'N/A';
                 let rutaPago = factura.ruta_pago ? factura.ruta_pago : 'N/A';
                 let tipoConsignacion = factura.tipo_consignacion ? factura.tipo_consignacion : 'N/A';
                 let notaPago = factura.nota_pago ? factura.nota_pago : 'N/A';
 
+             
+
                 // Construir la fila
-                let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td><a href='../controller/resource/<?php echo $id_revisar_solicitud;?>/" + rutaPago + "'target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td></tr>";
+                let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud;?>&invoiceNumber="+invoiceNumber+"' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td><a href='../controller/resource/<?php echo $id_revisar_solicitud;?>/" + rutaPago + "'target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td></tr>";
                 
                 // Agregar la fila al tbody
                 $('#facturasDownload').append(fila);
@@ -1452,4 +1580,102 @@ $(document).ready(function(){
         }
     });
 });
+
+$(document).ready(function() {
+    // Función para cargar las opciones en cualquier select de personas
+    function cargarPersonas(selectElement) {
+        $.ajax({
+            url: '../controller/sociedadController.php',
+            type: 'GET',
+            data: { accion: 'getSociedades' },
+            dataType: 'json',
+            success: function(data) {
+                console.log('Respuesta del servidor:', data); // Depuración
+                selectElement.empty();
+                selectElement.append('<option value="">Selecciona una Persona</option>');
+                $.each(data, function(index, item) {
+                    selectElement.append('<option value="' + item.id_sociedad + '">' + item.nombre + " " + item.apellido + '</option>');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', status, error);
+                console.log('Respuesta del servidor:', xhr.responseText);
+                alert('Error al cargar las opciones');
+            }
+        });
+    }
+
+    // Cargar personas en el primer select de personas
+    cargarPersonas($('#personasContainer').find('select').first());
+
+    // Función para agregar nuevos campos de persona y porcentaje
+    var personaIndex = 2; // Comienza en 2 porque ya tienes una persona por defecto
+    $('#btnAgregarPersona').click(function() {
+        var nuevoCampo = `
+        <div class="form-group row">
+            <div class="col-md-8">
+                <label for="selectPersona${personaIndex}">Persona Sociedad ${personaIndex}</label>
+                <select class="form-control selectPersona" name="personas[]">
+                    <option value="">Seleccionar persona</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="inputPorcentaje${personaIndex}">Porcentaje</label>
+                <input type="number" class="form-control porcentajeInput" name="porcentajes[]" placeholder="Porcentaje" min="0" max="100">
+            </div>
+        </div>
+        `;
+        $('#personasContainer').append(nuevoCampo);
+        var nuevoSelect = $('#personasContainer').find('select').last(); // Seleccionar el nuevo select
+        cargarPersonas(nuevoSelect); // Cargar las opciones en el nuevo select
+        personaIndex++;
+    });
+
+    // Validar que la suma de porcentajes no exceda 100% y mostrar mensaje en JS
+    $('#btnGuardarSociedad').click(function(e) {
+        e.preventDefault();
+
+        // Obtener todos los porcentajes
+        var totalPorcentaje = 0;
+        $('.porcentajeInput').each(function() {
+            var valor = parseFloat($(this).val()) || 0; // Si no hay valor, se asume 0
+            totalPorcentaje += valor;
+        });
+
+        // Verificar que la suma no exceda el 100%
+        if (totalPorcentaje > 100) {
+            // Mostrar mensaje en pantalla
+            alert('La suma de los porcentajes no puede exceder el 100%. Por favor ajusta los valores.');
+            return; // Detener el envío del formulario
+        }
+
+        // Si todo está bien, serializar los datos del formulario
+        var datosFormulario = $('#formCrearSociedad').serialize() + '&accion=crearSociedad';
+        console.log('Datos enviados:', datosFormulario); 
+
+        // Envío de datos con AJAX
+        $.ajax({
+            type: 'POST',
+            url: '../controller/solicitudController.php',  // Ruta hacia el controlador PHP
+            data: datosFormulario,
+            success: function(response) {
+                console.log('Respuesta del servidor:', response);
+                var resultado = JSON.parse(response);
+                if (resultado.status === 0) {
+                    alert('Sociedad creada exitosamente');
+                    $('#modalCrearSociedad').modal('hide');
+                } else {
+                    alert('Error al crear la sociedad');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Error en la solicitud AJAX:', status, error);
+                console.log('Respuesta del servidor:', xhr.responseText);
+                alert('Error al crear la sociedad');
+            }
+        });
+    });
+});
+
+
 </script>

@@ -115,7 +115,7 @@ if (!isset($_SESSION['usuario'])) {
             <ul class="nav nav-treeview">
             
               <li class="nav-item">
-                <a href="./pruebaWord.php" class="nav-link">
+                <a href="./reportes_editables.php" class="nav-link">
                 <i class="fa fa-clipboard" aria-hidden="true"></i>
                   <p>Reporte</p>
                 </a>

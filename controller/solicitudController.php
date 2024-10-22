@@ -313,6 +313,38 @@ class Solicitud_controller{
             }
     }
 
+    public function crearSociedad() {
+        // Debug para ver lo que llega desde el frontend
+      
+    
+        $nombreSociedad = $_POST['nombreSociedad'];
+        $personas = $_POST['personas']; // Array de personas
+        $porcentajes = $_POST['porcentajes']; // Array de porcentajes
+        $fk_solicitud = $_POST['hiddenField']; // ID de la solicitud o cualquier valor oculto
+        $create_user = 'usuario_ejemplo'; // Aquí pones el usuario que crea la sociedad
+    
+        // Iterar sobre cada persona y porcentaje
+        foreach ($personas as $index => $persona) {
+            $datos = [
+                'nombre_sociedad' => $nombreSociedad,
+                'fk_persona' => $persona,
+                'porcentaje' => $porcentajes[$index],
+                'fk_solicitud' => $fk_solicitud,
+                'create_user' => $create_user
+            ];
+    
+            // Insertar cada registro en la base de datos
+            $respuesta = ModelSolicitud::insertarSociedad($datos);
+            
+            if ($respuesta != "ok") {
+                echo json_encode(["status" => 1]); // Error si alguno falla
+                return;
+            }
+        }
+    
+        echo json_encode(["status" => 0]);
+    }
+
         public function insertarDatosAdicionales() {
             $datos = [
                 'nombre_cliente' => $_POST['nombre_cliente'],
@@ -394,6 +426,13 @@ class Solicitud_controller{
         echo json_encode($facturas); // Respuesta en formato JSON
         }
 
+        public function getSociedades($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            $solicitud = $modelo->obtenerSociedades($id_solicitud);
+            return $solicitud;
+        }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -417,6 +456,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->actualizarServiciosFactura();
         }elseif ($_POST['accion'] == 'downloadFacturas') {          
             $controlador->facturasDownload($_POST['id_solicitud']);
+        }elseif($_POST['accion'] == 'crearSociedad') {
+            $controlador->crearSociedad();
         }
          else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
@@ -430,6 +471,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
     }
+
+    
 }
 
 ?>

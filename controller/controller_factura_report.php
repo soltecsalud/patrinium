@@ -17,7 +17,8 @@ class MyPDF extends FPDF {
         $this->Line(5, 1, 204, 1);
        
         $id_solicitud=$_GET['numero_solicitud'];
-        $getLogo=  ReportModel::getJsonFactura($id_solicitud);
+        $numeroInvoiceSendModelo=$_GET['invoiceNumber']; // Asumiendo que numero_solicitud es un parámetro GET
+        $getLogo = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
         $name=$getLogo[0]->nombre_cliente;   
       
         $numeroInvoice="";
@@ -64,12 +65,12 @@ class MyPDF extends FPDF {
         $this->SetY(50);
         $this->SetX(10);
         $this->SetFont('Arial', 'B', 9);
-        $this->MultiCell(90, 5, "Patirnium\n\n900 SE Ocean Blvd\nSuite B118\nStuart, Florida 34994\nUnited States of America (USA)\n3059246876\nmembercloudmarketing@gmail.com", 0, 'L');
+        $this->MultiCell(90, 5, "Patirnium\n\n900 SE Ocean Blvd\nSuite B118\nStuart, Florida 34994\nUnited States of America (USA)\n3059246876\nPatrinium@gmail.com", 0, 'L');
 
         // Mover a la derecha para el texto del lado derecho del encabezado
         $this->SetY(50);
         $this->SetX(-100); // Esto coloca la posición x justo antes del margen derecho del documento
-        $this->MultiCell(90, 5, "Bill to\n\n".$name."\n Email: ". $email."\n Number Tax: ".$numberTax."\n Adress: ".$adress , 0, 'L');
+        $this->MultiCell(90, 5, "Bill to\n\n Email: ". $email."\n Number Tax: ".$numberTax."\n Adress: ".$adress , 0, 'L');
 
         // Dibuja una línea para separar el encabezado del resto de la página
         
@@ -121,8 +122,9 @@ class MyPDF extends FPDF {
 
 class InvoiceController {
         public function generatePDF() {
-            $id_solicitud = $_GET['numero_solicitud'];  // Asumiendo que numero_solicitud es un parámetro GET
-            $getDatosFactura = ReportModel::getJsonFactura($id_solicitud);
+            $id_solicitud = $_GET['numero_solicitud']; 
+            $numeroInvoiceSendModelo=$_GET['invoiceNumber']; // Asumiendo que numero_solicitud es un parámetro GET
+            $getDatosFactura = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
             $subtotal = 0;
             $array = [];
             $tax = 0;

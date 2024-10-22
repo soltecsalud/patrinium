@@ -61,7 +61,7 @@ ob_end_clean();
                         <!-- /.card-header -->
                         <div class="card-body">
                         <label for="plantilla">Seleccionar plantilla:</label>
-                                <select id="plantilla" name="plantilla">
+                                <select id="plantilla" name="plantilla" class="form-select">
                                     <option value="" disabled selected>Elige una plantilla</option>
                                     <option value="CompanyInformationDetails.docx">Company Information Details</option>
                                     <option value="Certificate_Of_Formation.docx">Certificate Of Formation</option>
@@ -69,19 +69,18 @@ ob_end_clean();
                                 </select>
                             <form id="plantillaForm">
                                 
-                                <div class="row">
-                                    <div class="col-md-12">
+                                <div class="row" style="padding-top: 2%;">
+                                    <label for="">Editar Plantilla:</label>
+                                    <div class="col-md-12" >
                                         <textarea name="editorContent" id="editor"></textarea>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="padding-top: 2%;">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="nombre">Id Solicitud</label>
-                                            <select name="id_solicitud" id="id_solicitud">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="13">3</option>
+                                            <label for="nombre">Cargar A:</label>
+                                            <select id="id_solicitud_select" name="id_solicitud" class="form-select">
+                                                <option value="" disabled selected>Elige una plantilla</option>
                                             </select>
                                         </div>
                                     </div>
@@ -155,7 +154,7 @@ $('#plantillaForm').on('submit', function (e) {
     e.preventDefault(); // Prevenir que se envíe de forma tradicional
 
     var editorContent = tinymce.get('editor').getContent(); // Obtener el contenido del editor
-    var idSolicitud = $('#id_solicitud').val(); // Obtener el valor seleccionado del select
+    var idSolicitud = $('#id_solicitud_select').val(); // Obtener el valor seleccionado del select
 
     // Verifica en la consola si el idSolicitud se obtiene correctamente
    // console.log("ID de Solicitud seleccionado: " + idSolicitud);
@@ -184,6 +183,25 @@ $('#plantillaForm').on('submit', function (e) {
         },
         error: function () {
             alert('Error al guardar el contenido.');
+        }
+    });
+});
+
+$(document).ready(function() {
+    $.ajax({
+        url: '../controller/PlantillasController.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var select = $('#id_solicitud_select');
+            select.empty();
+            select.append('<option value="" disabled selected>Elige una plantilla</option>');
+            $.each(data, function(index, item) {
+                select.append('<option value="' + item.id_solicitud + '"> Solicitud # '+item.id_solicitud + ' - ' + item.nombre_completo + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data: ', error);
         }
     });
 });

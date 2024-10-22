@@ -53,6 +53,12 @@ class PlantillasController {
             echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros']);
         }
     }
+    public function getConsecutivoSolicitud() {
+        $model = new ModelPlantillas();
+        $plantillas = $model->obtenerConsecutivos();
+        echo json_encode($plantillas);
+    }
+
 }
 
 // Procesar la solicitud
@@ -70,5 +76,10 @@ if (isset($_POST['action'])) {
         default:
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
     }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $controller = new PlantillasController();
+    $controller->getConsecutivoSolicitud();
 }
 ?>

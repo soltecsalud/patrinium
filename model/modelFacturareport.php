@@ -10,14 +10,18 @@ class ReportModel {
         ];
     }
 
-    static public function  getJsonFactura($id_solicitud){
+    static public function  getJsonFactura($id_solicitud,$invoiceNumber){
         try {
             $id_solicitud_busqueda = $id_solicitud;
+            $invoiceNumberConsulta = $invoiceNumber;
             $sqlListarJson = " select * from factura as a
             inner join solicitud as b ON (a.id_solicitud = b.id_solicitud)
-             where a.id_solicitud = :id_solicitud";
+             where a.id_solicitud = :id_solicitud
+             and (datos->>'invoice_number')=:invoiceNumber;
+             ";
             $listaJsonFactura = Conexion::conectar()->prepare($sqlListarJson);
             $listaJsonFactura->bindParam(":id_solicitud", $id_solicitud_busqueda, PDO::PARAM_INT);
+            $listaJsonFactura->bindParam(":invoiceNumber", $invoiceNumberConsulta);
             $listaJsonFactura->execute();
             return $listaJsonFactura->fetchAll(PDO::FETCH_OBJ);
             echo "error";

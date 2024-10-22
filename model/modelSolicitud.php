@@ -383,6 +383,35 @@ class ModelSolicitud
         }
     }
 
+    public static function insertarSociedad($datos) {
+        try {
+            $sql = "
+                INSERT INTO public.personas_sociedad (
+                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user
+                ) VALUES (
+                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user
+                );
+            ";
+
+            // Preparar la sentencia SQL
+            $stmt = Conexion::conectar()->prepare($sql);
+
+            // Vincular los parámetros a la sentencia preparada
+            $stmt->bindParam(':nombre_sociedad', $datos['nombre_sociedad'], PDO::PARAM_STR);
+            $stmt->bindParam(':fk_persona', $datos['fk_persona'], PDO::PARAM_INT);
+            $stmt->bindParam(':porcentaje', $datos['porcentaje'], PDO::PARAM_INT);
+            $stmt->bindParam(':fk_solicitud', $datos['fk_solicitud'], PDO::PARAM_INT);
+            $stmt->bindParam(':create_user', $datos['create_user'], PDO::PARAM_STR);
+
+            // Ejecutar la consulta
+            return $stmt->execute() ? "ok" : "error";
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    
+    }
+
+
     public static function actualizarEstadoServicio($id_servicios_adicionales, $clave_servicio, $nuevo_estado) {
         try {
             // Consulta para actualizar el estado del servicio específico en el JSONB
@@ -454,6 +483,33 @@ class ModelSolicitud
             $stmt->bindParam(':id_solicitud', $idSolicitud, PDO::PARAM_INT); // Pasar el id_solicitud
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ); // Devolver los resultados como objetos
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerSociedades($id_solicitud){
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "
+                select
+                a.nombre_sociedad,
+                CONCAT(b.nombre, ' ', b.apellido) AS nombre_completo,
+                a.porcentaje
+                from personas_sociedad a
+                inner join sociedad b ON(a.fk_persona = b.id_sociedad)
+                where a.fk_solicitud = :id_solicitud
+                group  by 1,2,3;
+
+               
+
+            ";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+          
+            return $resultados;
         } catch (Exception $e) {
             die($e->getMessage());
         }
