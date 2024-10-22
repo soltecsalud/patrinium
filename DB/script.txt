@@ -1,0 +1,15 @@
+pg_dump -U postgres -h localhost -p 5432 -F p -v -f backup_octubre.sql patrimonium
+
+
+
+
+
+
+
+
+
+
+
+
+
+
