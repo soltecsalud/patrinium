@@ -32,6 +32,24 @@ class TipoPago {
             echo json_encode(['error' => $e->getMessage()]);
         }
     }
+    public function listarSociosBoi() {
+        try {
+            $modelo = new ModelTipoPago();
+            $resultado = $modelo->consultarSociosBoi();
+            header('Content-Type: application/json'); // Asegúrate de que la respuesta sea JSON
+            echo json_encode($resultado);
+        } catch (Exception $e) {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function detalleSociedad() {
+        $id = $_POST['id'];
+        // Fetch the details based on the id
+        $detalle = ModelTipoPago::obtenerDetalleSociedad($id);
+        echo json_encode($detalle);
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'guardarTipoPago') {
@@ -42,4 +60,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarTipoPago'
     $controller = new TipoPago();
     $controller->listarTipoPago();
 }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $controller = new TipoPago();
+
+    if ($_POST['action'] == 'sociosBoi') {
+        $controller->listarSociosBoi();
+    } elseif ($_POST['action'] == 'detalleSociedad') {
+        $controller->detalleSociedad();
+    }
+}
+
+
+
 ?>

@@ -150,6 +150,7 @@ class Solicitud_controller{
 
     public function insertarRevision() {
         $id_solicitud = $_POST['id_solicitud'];
+     
         // Asumiendo que 'resource' es la carpeta dentro de la raíz del proyecto donde quieres guardar los archivos
         $uploadsDir = __DIR__ . '/resource/';
         $folderName = $id_solicitud ; // La nueva subcarpeta para las revisiones
@@ -172,13 +173,15 @@ class Solicitud_controller{
             $fileName = basename($fileName);
             $filePath = $revisionPath . $fileName;
             $descripcion = $_POST['descripcion'];
+            $sociedad =$_POST['sociedad'];
             
 
             //crer array para envio al modelo e insercion a BD
             $datos = array(
                 "nombre_archivo" => $fileName ,
                 "descripcion" => $descripcion,
-                "id_solicitud" =>$id_solicitud  
+                "id_solicitud" =>$id_solicitud,
+                "sociedad" => $sociedad  
                 );
            //envio a modulo para inserciono
             $respuesta = ModelSolicitud::insertarArchivoSolicitud($datos);    
@@ -316,16 +319,18 @@ class Solicitud_controller{
     public function crearSociedad() {
         // Debug para ver lo que llega desde el frontend
       
-    
+        
         $nombreSociedad = $_POST['nombreSociedad'];
         $personas = $_POST['personas']; // Array de personas
         $porcentajes = $_POST['porcentajes']; // Array de porcentajes
         $fk_solicitud = $_POST['hiddenField']; // ID de la solicitud o cualquier valor oculto
         $create_user = 'usuario_ejemplo'; // Aquí pones el usuario que crea la sociedad
+        $uuid = $_POST['uuid'];// Generar un UUID para la sociedad
     
         // Iterar sobre cada persona y porcentaje
         foreach ($personas as $index => $persona) {
             $datos = [
+                'uuid' => $uuid,
                 'nombre_sociedad' => $nombreSociedad,
                 'fk_persona' => $persona,
                 'porcentaje' => $porcentajes[$index],
@@ -343,6 +348,17 @@ class Solicitud_controller{
         }
     
         echo json_encode(["status" => 0]);
+    }
+
+    function generateUUID() {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
     }
 
         public function insertarDatosAdicionales() {
@@ -433,6 +449,34 @@ class Solicitud_controller{
             return $solicitud;
         }
 
+        public function obtenerDescripciones($idSolicitud) {
+            $modelo = new ModelSolicitud();
+            $descripciones = $modelo->fetchDescripciones($idSolicitud);
+            echo json_encode($descripciones);
+        }
+
+        public function insertarEgreso() {
+            $datos = [
+                'identificacion_egreso' => $_POST['identificacion_egreso'],
+                'fk_sociedad' => $_POST['sociedad_tercero'],
+                'fk_tercero' => $_POST['nombre_tercero'],
+                'valor' => $_POST['valor']
+            ];
+    
+            $respuesta = ModelSolicitud::insertarEgreso($datos);
+            if ($respuesta == "ok") {
+                echo json_encode(["status" => "success"]); // Éxito
+            } else {
+                echo json_encode(["status" => "error", "message" => "Error al insertar el egreso"]); // Error
+            }
+        }
+
+        public function getSolicitudEgresos($id_solicitud) {
+            $modelo = new ModelSolicitud();
+            $solicitud = $modelo->obtenerSolicitudEgresos($id_solicitud);
+            echo json_encode($solicitud);
+        }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -458,6 +502,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->facturasDownload($_POST['id_solicitud']);
         }elseif($_POST['accion'] == 'crearSociedad') {
             $controlador->crearSociedad();
+        }elseif($_POST['accion'] == 'insertarEgreso') {
+            $controlador->insertarEgreso();
+        }elseif ($_POST['accion'] === 'obtenerSolicitud') {
+            $idSolicitud = $_POST['id_solicitud'];
+            $solicitud = $controlador->getSolicitudEgresos($idSolicitud);
+            
         }
          else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
@@ -475,4 +525,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['accion']) && $_GET['accion'] === 'obtenerSociedadesSelect') {
+        $idSolicitud = isset($_GET['idSolicitud']) ? $_GET['idSolicitud'] : null;
+        $controller = new Solicitud_controller();
+        $controller->obtenerDescripciones($idSolicitud);
+    }
+
+}
 ?>

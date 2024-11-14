@@ -194,6 +194,9 @@ tr:hover {
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearSociedad">
                             Crear Sociedad
                             </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#egresoModal">
+                                Crear Egreso
+                            </button>
                          
                         </div>
                     </div>
@@ -266,46 +269,50 @@ tr:hover {
                                     <div class="card-body">
                                         <div class="row"> <!-- Agregamos una fila que envolverá las columnas -->
                                             <?php
-                                                        $controlador = new Solicitud_controller();
-                                                        $solicitudes = $controlador->getSociedades($id_revisar_solicitud);
+                                                $controlador = new Solicitud_controller();
+                                                $solicitudes = $controlador->getSociedades($id_revisar_solicitud);
 
-                                                        // Array para agrupar representantes por sociedad
-                                                        $sociedades_representantes = [];
+                                                // Array para agrupar representantes por sociedad
+                                                $sociedades_representantes = [];
 
-                                                        if (isset($solicitudes)) {
-                                                            // Agrupamos los representantes por sociedad
-                                                            foreach ($solicitudes as $datosSOlicitud) {
-                                                                $sociedades_representantes[$datosSOlicitud['nombre_sociedad']][] = [
-                                                                    'nombre_completo' => $datosSOlicitud['nombre_completo'],
-                                                                    'porcentaje' => $datosSOlicitud['porcentaje']
-                                                                ];
-                                                            }
+                                                if (isset($solicitudes)) {
+                                                    // Agrupamos los representantes por sociedad
+                                                    foreach ($solicitudes as $datosSOlicitud) {
+                                                        $sociedades_representantes[$datosSOlicitud['nombre_sociedad']][] = [
+                                                            'nombre_completo' => $datosSOlicitud['nombre_completo'],
+                                                            'porcentaje' => $datosSOlicitud['porcentaje'],
+                                                            'uuid' => $datosSOlicitud['uuid']
+                                                        ];
+                                                    }
 
-                                                            // Ahora mostramos cada sociedad con sus representantes
-                                                            foreach ($sociedades_representantes as $nombre_sociedad => $representantes) {
-                                                        ?>
-                                                            <div class="col-md-4">
-                                                                <div class="info-box">
-                                                                    <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
-                                                                    <div class="info-box-content">
-                                                                        <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
-                                                                        <?php foreach ($representantes as $representante) { ?>
-                                                                            <span class="info-box-text">
-                                                                                <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%
-                                                                            </span>
-                                                                        <?php } ?>
-                                                                    </div>
-                                                                     <div class="progress">
-                                                                        <div class="progress-bar bg-info" style="width: 70%"></div>
-                                                                    </div>
+                                                    // Ahora mostramos cada sociedad con sus representantes
+                                                    foreach ($sociedades_representantes as $nombre_sociedad => $representantes) {
+                                            ?>
+                                                        <div class="col-md-4">
+                                                            <div class="info-box">
+                                                                <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
+                                                                <div class="info-box-content">
+                                                                    <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
+                                                                    <?php foreach ($representantes as $representante) { ?>
+                                                                        <span class="info-box-text">
+                                                                            <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%
+                                                                        </span>
+                                                                    <?php } ?>
                                                                 </div>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar bg-info" style="width: 70%"></div>
+                                                                </div>
+                                                                <a href="#" class="small-box-footer" data-toggle="modal" data-target="#detalleModal" data-uuid="<?php echo $representantes[0]['uuid']; ?>">
+                                                                    <i class="fas fa-arrow-circle-right"></i>
+                                                                </a>
                                                             </div>
-                                                        <?php
-                                                            }
-                                                        } else {
-                                                            echo "no hay sociedades";
-                                                        }
-    ?>
+                                                        </div>
+                                            <?php
+                                                    }
+                                                } else {
+                                                    echo "no hay sociedades";
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                         </div>  <!--Fin Tabal Persona-->
@@ -602,6 +609,7 @@ tr:hover {
                                                 <tr>
                                                     <th>Fecha</th>
                                                     <th>Nombre Archivo</th>
+                                                    <th>Sociedad</th>
                                                     <th>Accion</th>
                                                 </tr>
                                             </thead>
@@ -615,6 +623,7 @@ tr:hover {
                                                 <tr>
                                                     <td><?php  echo $adjuntos->create_at?></td>
                                                     <td><?php  echo $adjuntos->nombre_archivo?></td>
+                                                    <td><?php  echo $adjuntos->nombre_sociedad?></td>
                                                     <td><a class="btn btn-primary"href="../controller/resource/<?php echo $adjuntos->id_solicitud."/".$adjuntos->nombre_archivo;?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
                                                 </tr>
                                                 <?php } ?>
@@ -670,12 +679,17 @@ tr:hover {
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del Archivo</label>
-                    <select class="form-control" id="descripcion" name="descripcion">
-                        <option value="PASAPORTE">PASAPORTE</option>
-                        <option value="VISA AMERICANA">VISA AMERICANA</option>
-                        <option value="DOCUMENTO DE IDENTIFICACION LOCAL">DOCUMENTO DE IDENTIFICACION LOCAL</option>
+                    <select class="form-control" id="descripcion_tipo_docuemnto_adjunto" name="descripcion">
+                           <!-- Options will be populated by AJAX -->
                     </select>
                 <input type="hidden" class="form-control" value='<?php echo $id_revisar_solicitud?>'id="id_descripcion" name="id_solicitud" >
+            </div>
+            <div class="form-group">
+                <label for="sociedad">Sociedad</label>
+                <select class="form-control sociedad"  name="sociedad">
+                    <!-- Options will be populated by AJAX -->
+                </select>
+                <input type="hidden" class="form-control" value='<?php echo $id_revisar_solicitud?>' id="id_descripcion" name="id_solicitud">
             </div>
             <button type="button" id="btn-cargar" class="btn btn-primary">Cargar Archivo</button>
             <!-- El tipo de botón debe ser 'button' si estás manejando el envío a través de JavaScript -->
@@ -1178,12 +1192,76 @@ tr:hover {
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <button type="button" id="btnGuardarSociedad" class="btn btn-primary">Guardar Sociedad</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        
       </div>
     </div>
   </div>
 </div>
+
+   <!-- Modal Egresos -->
+   <div class="modal fade" id="egresoModal" tabindex="-1" aria-labelledby="egresoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="egresoModalLabel">Agregar Egreso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEgreso">
+                        <div class="form-group">
+                            <label for="identificacionEgreso">Consecutivo Egreso</label>
+                            <input type="text" class="form-control" id="identificacionEgreso" name="identificacion_egreso" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombreTercero">Nombre Tercero</label>
+                            <select class="form-control" id="nombreTercero" name="nombre_tercero" required>
+                                <!-- Options will be populated by AJAX -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="aplicarSociedad">Aplicar a Sociedad</label>
+                            <select class="form-control sociedad" name="sociedad_tercero" required>
+                                <!-- Options will be populated by AJAX -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input type="number" class="form-control" id="valor" name="valor" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnAgregarEgreso">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal ver Egresosdesde card -->
+        <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleModalLabel">Detalle de Egreso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Content will be loaded by AJAX -->
+                    <div id="modalContent" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <script>
    document.addEventListener('DOMContentLoaded', function() {
             // Selecciona todos los checkboxes con la clase toggle-checkbox
@@ -1631,6 +1709,13 @@ $(document).ready(function() {
         personaIndex++;
     });
 
+    function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
     // Validar que la suma de porcentajes no exceda 100% y mostrar mensaje en JS
     $('#btnGuardarSociedad').click(function(e) {
         e.preventDefault();
@@ -1649,8 +1734,9 @@ $(document).ready(function() {
             return; // Detener el envío del formulario
         }
 
+        var uuid = generateUUID();
         // Si todo está bien, serializar los datos del formulario
-        var datosFormulario = $('#formCrearSociedad').serialize() + '&accion=crearSociedad';
+        var datosFormulario = $('#formCrearSociedad').serialize() + '&uuid=' + uuid + '&accion=crearSociedad';
         console.log('Datos enviados:', datosFormulario); 
 
         // Envío de datos con AJAX
@@ -1678,4 +1764,129 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+    // Fetch data for the new select element
+    $.ajax({
+        url: '../controller/solicitudController.php',
+        type: 'GET',
+        data: {
+            accion: 'obtenerSociedadesSelect',
+            idSolicitud: '<?php echo $id_revisar_solicitud; ?>'
+        },
+        dataType: 'json',
+        success: function(data) {
+            var select = $('.sociedad');
+            select.empty();
+            $.each(data, function(index, item) {
+                select.append('<option value="' + item.uuid + '">' + item.nombre_sociedad + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data: ', error);
+        }
+    });
+});
+
+$(document).ready(function() {
+    // Fetch data for the new select element
+    $.ajax({
+        url: '../controller/tipoDocumentoAdjunto.php', // Cambia esto por la ruta correcta a tu controlador
+                type: 'POST',
+            
+                data: { action: 'listarTipoPago' },
+                dataType: 'json',
+        success: function(data) {
+            var select = $('#descripcion_tipo_docuemnto_adjunto');
+            select.empty();
+            $.each(data, function(index, item) {
+                select.append('<option value="' + item.id_tipo_documento_adjunto + '">' + item.nombre_documento_adjunto + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data: ', error);
+        }
+    });
+});
+
+$(document).ready(function() {
+    // Fetch data for the new select element
+    $.ajax({
+        url: '../controller/terceros_controller.php', // Cambia esto por la ruta correcta a tu controlador
+        type: 'POST',
+        data: { action: 'listarTipoPago' },
+        dataType: 'json',
+        success: function(data) {
+            var select = $('#nombreTercero');
+            select.empty();
+            $.each(data, function(index, item) {
+                select.append('<option value="' + item.id_terceros + '">' +item.nombre_tercero + '</option>');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data: ', error);
+        }
+    });
+
+    // Handle the form submission with AJAX
+    $('#btnAgregarEgreso').click(function() {
+        var formData = $('#formEgreso').serialize() + '&accion=insertarEgreso';
+        $.ajax({
+            type: 'POST',
+            url: '../controller/solicitudController.php',
+            data: formData,
+            success: function(response) {
+                console.log('Response from server:', response);
+                var result = JSON.parse(response);
+                if (result.status === 'success') {
+                    alert('Egreso agregado exitosamente');
+                    $('#egresoModal').modal('hide');
+                } else {
+                    alert('Error al agregar el egreso');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error in AJAX request:', status, error);
+                alert('Error al agregar el egreso');
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $(document).on('click', '.small-box-footer', function(e) {
+        e.preventDefault();
+        var idSolicitud = $(this).data('uuid'); // Obtén el UUID del atributo data-uuid
+
+        $.ajax({
+            url: '../controller/solicitudController.php',
+            type: 'POST',
+            data: {
+                accion: 'obtenerSolicitud',
+                id_solicitud: idSolicitud
+            },
+            success: function(response) {
+                var data = JSON.parse(response);
+                var htmlContent = '<table id="egresosTable" class="display">';
+                htmlContent += '<thead><tr><th>Consecutivo Egreso</th><th>Valor</th><th>Nombre Tercero</th><th>Fecha Creación</th></tr></thead>';
+                htmlContent += '<tbody>';
+                data.forEach(function(item) {
+                    htmlContent += '<tr>';
+                    htmlContent += '<td>' + item.consecutivo_egreso + '</td>';
+                    htmlContent += '<td>' + item.valor + '</td>';
+                    htmlContent += '<td>' + item.fk_tercero + '</td>'; // Asegúrate de que el campo sea correcto
+                    htmlContent += '<td>' + item.create_at + '</td>';
+                    htmlContent += '</tr>';
+                });
+                htmlContent += '</tbody></table>';
+                $('#modalContent').html(htmlContent);
+
+                // Inicializa DataTables
+                $('#egresosTable').DataTable();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar los datos:', error);
+            }
+        });
+    });
+});
 </script>

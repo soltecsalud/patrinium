@@ -59,16 +59,16 @@ if (!isset($_SESSION['usuario'])) {
             <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-users"></i>
               <p>
-              Orden Servicios
+              BOI
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
 
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./orden_servicio.php" class="nav-link">
+                <a href="./revisar_socios_boi.php" class="nav-link">
                   <i class="nav-icon fas fa-clipboard"></i>
-                  <p>Orden Servicios</p>
+                  <p>Revisar Socios</p>
                 </a>
               </li>       
             </ul>
@@ -117,11 +117,21 @@ if (!isset($_SESSION['usuario'])) {
               <li class="nav-item">
                 <a href="./reportes_editables.php" class="nav-link">
                 <i class="fa fa-clipboard" aria-hidden="true"></i>
-                  <p>Reporte</p>
+                  <p>Informes Sociedades</p>
                 </a>
               </li>
             
             </ul>
+            <ul class="nav nav-treeview">
+            
+            <li class="nav-item">
+              <a href="./reporte_terceros.php" class="nav-link">
+              <i class="fa fa-clipboard" aria-hidden="true"></i>
+                <p>Reporte Terceros</p>
+              </a>
+            </li>
+          
+          </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link active">
@@ -148,6 +158,18 @@ if (!isset($_SESSION['usuario'])) {
                 <a href="./tipo_pagos.php" class="nav-link">
                 <i class="fa fa-list" aria-hidden="true"></i>
                   <p>Tipo Pagos</p>
+                </a>
+              </li>
+              </li> <li class="nav-item">
+                <a href="./tipo_documentos_adjuntos.php" class="nav-link">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                  <p>Tipo Documentos Adjuntos</p>
+                </a>
+              </li>
+              </li> <li class="nav-item">
+                <a href="./crear_tercero.php" class="nav-link">
+                <i class="fa fa-list" aria-hidden="true"></i>
+                  <p>Terceros</p>
                 </a>
               </li>
              

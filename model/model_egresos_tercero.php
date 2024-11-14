@@ -1,26 +1,18 @@
 <?php
 require_once('conexion.php');
 
-class ModelTipoPago{
+class ModelEgresosTercero {
 
-    public function insertTipoPago($data){
-        try {
-            $sql = "INSERT INTO tipo_pago (tipo_pago)VALUES (:tipo_pago)";
-            $consulta = Conexion::conectar()->prepare($sql);
-            $consulta->bindParam(':tipo_pago', $data['nombre_tipo_pago'], PDO::PARAM_STR);
-            if ($consulta->execute()) {
-                return "ok";
-            } else {
-                return "error";
-            }
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
-    }
 
-    public function consultarTipoPago(){
+
+    public function consultarEgresosTercero(){
         try {
-            $sql = "SELECT * FROM tipo_pago";
+            $sql = "
+           SELECT a.consecutivo_egreso, a.valor, a.create_at, 
+            b.nombre_tercero, b.tin, b.tipo_entidad, b.nombre_comercial
+            FROM egresos_sociedad as a 
+            inner join terceros as b ON(a.fk_tercero = b.id_terceros)
+           ";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
@@ -36,7 +28,7 @@ class ModelTipoPago{
             from personas_sociedad as a
             inner join sociedad as b ON(a.fk_persona=b.id_sociedad)
             where porcentaje > 25
- ";
+            ";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);

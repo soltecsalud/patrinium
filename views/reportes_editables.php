@@ -197,7 +197,7 @@ $(document).ready(function() {
             select.empty();
             select.append('<option value="" disabled selected>Elige una plantilla</option>');
             $.each(data, function(index, item) {
-                select.append('<option value="' + item.id_solicitud + '"> Solicitud # '+item.id_solicitud + ' - ' + item.nombre_completo + '</option>');
+                select.append('<option value="' + item.uuid + '"> '+item.nombre_sociedad + '</option>');
             });
         },
         error: function(xhr, status, error) {
@@ -205,5 +205,9 @@ $(document).ready(function() {
         }
     });
 });
+
+
+
+
     </script>  
   

@@ -130,12 +130,19 @@ class ModelSolicitud
     public static function obtenerAdjuntos($condicion) {
         try {
             $sqlListarSolicitud = "
-            SELECT * FROM archivo_adjunto where id_solicitud = $condicion ;
+                SELECT a.create_at, a.nombre_archivo, a.descripcion, b.nombre_sociedad
+                FROM archivo_adjunto a
+                INNER JOIN (
+                    SELECT DISTINCT uuid, nombre_sociedad
+                    FROM personas_sociedad
+                ) b ON a.sociedad_UUID = b.uuid 
+                 
+                 WHERE a.id_solicitud = :condicion;
             ";
-            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);   
-                    
-            $listaSolicutd->execute();
-            return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);
+            $listaSolicitud->bindParam(':condicion', $condicion, PDO::PARAM_INT);
+            $listaSolicitud->execute();
+            return $listaSolicitud->fetchAll(PDO::FETCH_OBJ);
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -184,13 +191,11 @@ class ModelSolicitud
     public static function obtenerSolicitudesConAdjuntos() {
         try {
             $sqlListarSolicitud ="
-                SELECT a.id_solicitud, ar.id_solicitud, a.nombre_cliente, a.referido_por, a.created_at
-                FROM solicitud as a
-                RIGHT JOIN (
-                    SELECT DISTINCT ON (id_solicitud) *
-                    FROM archivo_adjunto
-                    ORDER BY id_solicitud, id_archivo_adjunto
-                ) as ar ON a.id_solicitud = ar.id_solicitud;
+                SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,
+                b.created_at, b.id_solicitud
+                FROM personas_sociedad a
+                INNER JOIN solicitud b ON a.fk_solicitud = b.id_solicitud
+                GROUP BY b.referido_por,b.created_at,b.id_solicitud 
 
            ";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
@@ -268,12 +273,13 @@ class ModelSolicitud
     public static function insertarArchivoSolicitud($datos) {
         try {
             $sql = "INSERT INTO public.archivo_adjunto(
-                 nombre_archivo, descripcion, id_solicitud, create_at)
-                VALUES ( :nombre_archivo, :descripcion, :id_solicitud, NOW());";
+                 nombre_archivo, descripcion, id_solicitud, create_at,sociedad_uuid)
+                VALUES ( :nombre_archivo, :descripcion, :id_solicitud, NOW(), :sociedad_uuid);";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':nombre_archivo', $datos['nombre_archivo'], PDO::PARAM_STR);
             $stmt->bindParam(':descripcion', $datos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(':id_solicitud', $datos['id_solicitud'], PDO::PARAM_INT);
+            $stmt->bindParam(':sociedad_uuid', $datos['sociedad'], PDO::PARAM_INT);
             
             
            
@@ -387,9 +393,9 @@ class ModelSolicitud
         try {
             $sql = "
                 INSERT INTO public.personas_sociedad (
-                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user
+                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user, uuid
                 ) VALUES (
-                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user
+                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user,:uuid
                 );
             ";
 
@@ -402,6 +408,7 @@ class ModelSolicitud
             $stmt->bindParam(':porcentaje', $datos['porcentaje'], PDO::PARAM_INT);
             $stmt->bindParam(':fk_solicitud', $datos['fk_solicitud'], PDO::PARAM_INT);
             $stmt->bindParam(':create_user', $datos['create_user'], PDO::PARAM_STR);
+            $stmt->bindParam(':uuid', $datos['uuid'], PDO::PARAM_STR);
 
             // Ejecutar la consulta
             return $stmt->execute() ? "ok" : "error";
@@ -495,11 +502,12 @@ class ModelSolicitud
                 select
                 a.nombre_sociedad,
                 CONCAT(b.nombre, ' ', b.apellido) AS nombre_completo,
-                a.porcentaje
+                a.porcentaje,
+                a.uuid
                 from personas_sociedad a
                 inner join sociedad b ON(a.fk_persona = b.id_sociedad)
                 where a.fk_solicitud = :id_solicitud
-                group  by 1,2,3;
+                group  by 1,2,3,4;
 
                
 
@@ -514,6 +522,55 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
-    
+
+    public function fetchDescripciones($idSolicitud) {
+        try {
+                    $sql = "SELECT DISTINCT(uuid), nombre_sociedad 
+                    FROM personas_sociedad
+                    WHERE fk_solicitud = :id_solicitud";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':id_solicitud', $idSolicitud, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function insertarEgreso($datos) {
+        try {
+          
+            $sql = "INSERT INTO public.egresos_sociedad
+            (fk_tercero, valor, create_at, consecutivo_egreso, fk_sociedad)
+            VALUES (:nombre_tercero,:valor, NOW(), :identificacion_egreso,:fk_sociedad);";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':nombre_tercero', $datos['fk_tercero'], PDO::PARAM_INT);
+            $stmt->bindParam(':valor', $datos['valor'], PDO::PARAM_STR);
+            $stmt->bindParam(':identificacion_egreso', $datos['identificacion_egreso'], PDO::PARAM_STR);
+            $stmt->bindParam(':fk_sociedad', $datos['fk_sociedad'], PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            }
+        } catch (Exception $e) {
+            throw new Exception("Error al insertar el egreso: " . $e->getMessage());
+        }
+    }
+
+    public static function obtenerSolicitudEgresos($id_solicitud) {
+        try {
+            $sqlListarSolicitud = "Select a.valor, a.consecutivo_egreso, b.nombre_tercero, a.create_at
+			from egresos_sociedad as a
+			inner join terceros b ON(a.fk_tercero = b.id_terceros)
+            WHERE a.fk_sociedad = :id_solicitud";
+            $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);
+            $listaSolicutd->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
+            $listaSolicutd->execute();
+            return $listaSolicutd->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
 ?>

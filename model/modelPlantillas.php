@@ -37,12 +37,14 @@ class ModelPlantillas {
 
     public static function obtenerConsecutivos() {
         try {
-            $sql = "
+            /*$sql = "
                     select 
                     a.id_solicitud, CONCAT(b.nombre, ' ', b.apellido) AS nombre_completo
                     from solicitud as a
                     inner join sociedad b ON(a.fk_persona = b.id_sociedad) 
-                    ";
+                    ";*/
+            $sql = "SELECT DISTINCT(a.uuid), a.nombre_sociedad
+                    FROM personas_sociedad a";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC); // Usamos fetchAll porque esperamos múltiples plantillas
