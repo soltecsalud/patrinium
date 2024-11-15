@@ -456,19 +456,36 @@ class Solicitud_controller{
         }
 
         public function insertarEgreso() {
-            $datos = [
-                'identificacion_egreso' => $_POST['identificacion_egreso'],
-                'fk_sociedad' => $_POST['sociedad_tercero'],
-                'fk_tercero' => $_POST['nombre_tercero'],
-                'valor' => $_POST['valor']
-            ];
-    
-            $respuesta = ModelSolicitud::insertarEgreso($datos);
-            if ($respuesta == "ok") {
-                echo json_encode(["status" => "success"]); // Éxito
-            } else {
-                echo json_encode(["status" => "error", "message" => "Error al insertar el egreso"]); // Error
-            }
+            $rutaFactura = null;
+    if (isset($_FILES['factura']) && $_FILES['factura']['error'] === UPLOAD_ERR_OK) {
+        $directorio = '../resource/innvoice_terceros/';
+        $nombreArchivo = uniqid() . "_" . basename($_FILES['factura']['name']);
+        $rutaArchivo = $directorio . $nombreArchivo;
+
+        if (move_uploaded_file($_FILES['factura']['tmp_name'], $rutaArchivo)) {
+            $rutaFactura = $rutaArchivo;
+        } else {
+            echo json_encode(["status" => "error", "message" => "Error al cargar la factura"]);
+            return;
+        }
+    }
+
+    // Datos a insertar
+    $datos = [
+        'identificacion_egreso' => $_POST['identificacion_egreso'],
+        'fk_sociedad' => $_POST['sociedad_tercero'],
+        'fk_tercero' => $_POST['nombre_tercero'],
+        'valor' => $_POST['valor'],
+        'anticipo' => $_POST['anticipo'],
+        'factura' => $rutaFactura
+    ];
+
+    $respuesta = ModelSolicitud::insertarEgreso($datos);
+    if ($respuesta == "ok") {
+        echo json_encode(["status" => "success"]); // Éxito
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error al insertar el egreso"]); // Error
+    }
         }
 
         public function getSolicitudEgresos($id_solicitud) {

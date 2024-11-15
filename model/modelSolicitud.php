@@ -540,14 +540,17 @@ class ModelSolicitud
     public static function insertarEgreso($datos) {
         try {
           
-            $sql = "INSERT INTO public.egresos_sociedad
-            (fk_tercero, valor, create_at, consecutivo_egreso, fk_sociedad)
-            VALUES (:nombre_tercero,:valor, NOW(), :identificacion_egreso,:fk_sociedad);";
+            $sql="INSERT INTO public.egresos_sociedad
+                (fk_tercero, valor, create_at, consecutivo_egreso, fk_sociedad, anticipo, factura)
+                VALUES (:nombre_tercero, :valor, NOW(), :identificacion_egreso, :fk_sociedad, :anticipo, :factura);";
+                
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':nombre_tercero', $datos['fk_tercero'], PDO::PARAM_INT);
             $stmt->bindParam(':valor', $datos['valor'], PDO::PARAM_STR);
             $stmt->bindParam(':identificacion_egreso', $datos['identificacion_egreso'], PDO::PARAM_STR);
             $stmt->bindParam(':fk_sociedad', $datos['fk_sociedad'], PDO::PARAM_STR);
+            $stmt->bindParam(':anticipo', $datos['anticipo'], PDO::PARAM_STR);
+            $stmt->bindParam(':factura', $datos['factura'], PDO::PARAM_STR );
             if ($stmt->execute()) {
                 return "ok";
             } else {

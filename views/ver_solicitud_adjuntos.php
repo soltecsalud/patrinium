@@ -42,8 +42,9 @@ include_once "../controller/solicitudController.php";
         <thead>
             <tr>
                 <th>Fecha</th>
+                <th>Sociedades</th> 
                 <th>Nombre Del Cliente</th>
-                <th>Sociedades</th>             
+                           
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -59,7 +60,7 @@ include_once "../controller/solicitudController.php";
             <tr>
             
                 <td><?php echo  htmlspecialchars($solicitud->created_at);?></td>
-                <td><?php echo  htmlspecialchars($solicitud->nombre_sociedades);?></td>
+                <td><b><?php echo  htmlspecialchars($solicitud->nombre_sociedades);?></b></td>
                 <td><?php echo  htmlspecialchars($solicitud->referido_por);?></td>
                 <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
              

@@ -6,28 +6,25 @@ class GenerarPdfController {
 //revisar git
     // Función para mostrar el contenido HTML
     public function verHtml() {
-        if (isset($_POST['id_solicitud'])) {
-            $id_solicitud = $_POST['id_solicitud'];
-    
-            // Obtener el contenido HTML desde la base de datos
-            $acta = ModelPlantillas::obtenerActaPorSolicitud($id_solicitud);
-    
-            if ($acta) {
-                // Devolver tanto la fecha como el contenido HTML
-                echo json_encode([
-                    'status' => 'success', 
-                    'data' => [
-                        'fecha' => $acta['createat'],
-                        'contenido_html' => $acta['contenido_html']
-                    ]
-                ]);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Acta no encontrada']);
-            }
+    if (isset($_POST['id_solicitud'])) {
+        $id_solicitud = $_POST['id_solicitud'];
+
+        // Obtener el contenido HTML desde la base de datos
+        $actas = ModelPlantillas::obtenerActaPorSolicitud($id_solicitud);
+
+        if ($actas) {
+            // Devolver tanto la fecha como el contenido HTML
+            echo json_encode([
+                'status' => 'success', 
+                'data' => $actas
+            ]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros']);
+            echo json_encode(['status' => 'error', 'message' => 'Acta no encontrada']);
         }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros']);
     }
+}
     // Función para generar el PDF usando TCPDF
 
     public function generarPdf() {

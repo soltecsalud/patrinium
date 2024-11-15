@@ -1205,33 +1205,42 @@ tr:hover {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="egresoModalLabel">Agregar Egreso</h5>
+                    <h5 class="modal-title" id="egresoModalLabel">Pagos Terceros</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form id="formEgreso">
-                        <div class="form-group">
-                            <label for="identificacionEgreso">Consecutivo Egreso</label>
-                            <input type="text" class="form-control" id="identificacionEgreso" name="identificacion_egreso" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombreTercero">Nombre Tercero</label>
-                            <select class="form-control" id="nombreTercero" name="nombre_tercero" required>
-                                <!-- Options will be populated by AJAX -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="aplicarSociedad">Aplicar a Sociedad</label>
-                            <select class="form-control sociedad" name="sociedad_tercero" required>
-                                <!-- Options will be populated by AJAX -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="valor">Valor</label>
-                            <input type="number" class="form-control" id="valor" name="valor" required>
-                        </div>
+                    <div class="form-group">
+        <label for="identificacionEgreso">Consecutivo Egreso</label>
+        <input type="text" class="form-control" id="identificacionEgreso" name="identificacion_egreso" required>
+    </div>
+    <div class="form-group">
+        <label for="nombreTercero">Nombre Tercero</label>
+        <select class="form-control" id="nombreTercero" name="nombre_tercero" required>
+            <!-- Opciones pobladas por AJAX -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="aplicarSociedad">Aplicar a Sociedad</label>
+        <select class="form-control sociedad" name="sociedad_tercero" required>
+            <!-- Opciones pobladas por AJAX -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="valor">Valor</label>
+        <input type="number" class="form-control" id="valor" name="valor" required>
+    </div>
+    <!-- Nuevos campos -->
+    <div class="form-group">
+        <label for="anticipo">Anticipo</label>
+        <input type="number" class="form-control" id="anticipo" name="anticipo" required>
+    </div>
+    <div class="form-group">
+        <label for="factura">Adjuntar Factura</label>
+        <input type="file" class="form-control" id="factura" name="factura" required>
+    </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -1827,15 +1836,20 @@ $(document).ready(function() {
         }
     });
 
-    // Handle the form submission with AJAX
     $('#btnAgregarEgreso').click(function() {
-        var formData = $('#formEgreso').serialize() + '&accion=insertarEgreso';
-        $.ajax({
-            type: 'POST',
-            url: '../controller/solicitudController.php',
-            data: formData,
-            success: function(response) {
-                console.log('Response from server:', response);
+    var form = $('#formEgreso')[0];
+    var formData = new FormData(form);
+    formData.append('accion', 'insertarEgreso'); // Agregar el campo de acción manualmente
+
+    $.ajax({
+        type: 'POST',
+        url: '../controller/solicitudController.php',
+        data: formData,
+        processData: false,  // Necesario para enviar archivos
+        contentType: false,  // Necesario para enviar archivos
+        success: function(response) {
+            console.log('Response from server:', response);
+            try {
                 var result = JSON.parse(response);
                 if (result.status === 'success') {
                     alert('Egreso agregado exitosamente');
@@ -1843,13 +1857,17 @@ $(document).ready(function() {
                 } else {
                     alert('Error al agregar el egreso');
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error in AJAX request:', status, error);
-                alert('Error al agregar el egreso');
+            } catch (e) {
+                console.error("Error parsing JSON response:", e);
+                alert('Error al procesar la respuesta del servidor');
             }
-        });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error in AJAX request:', status, error);
+            alert('Error al agregar el egreso');
+        }
     });
+});
 });
 
 $(document).ready(function() {
