@@ -43,25 +43,29 @@ if (!isset($_SESSION['usuario'])) {
                             <!-- /.card-tools -->
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="tipoPagoTable"class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                    <td>Consecutivo</td>
-                                    <td>Fecha</td>
-                                    <td>Nombre_tercero</td>       
-                                    <td>TIN</td>                             
-                                    <td>Tipo de Entidad</td>
-                                    <td>Nombre Comercial</td>
-                                    <td>Valor Total</td>
-                                    <td>Anticipo</td>
-                                    <td>Saldo</td>
-                                   
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody id="egresoTecero"></tbody>
-                            </table>
+                        <div class="card-body ">
+                        
+                            <div class="table-responsive">
+                                <table id="tipoPagoTable"class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                        <td>Consecutivo</td>
+                                        <td>Fecha</td>
+                                        <td>Nombre_tercero</td>       
+                                        <td>TIN</td>                             
+                                        <td>Tipo de Entidad</td>
+                                        <td>Nombre Comercial</td>
+                                        <td>Valor Total</td>
+                                        <td>Anticipo</td>
+                                        <td>Saldo</td>
+                                        <td>Donwnload</td>
+                                    
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody id="egresoTecero"></tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -104,9 +108,10 @@ if (!isset($_SESSION['usuario'])) {
                             <td>${egresoTecero.tin}</td>
                             <td>${egresoTecero.tipo_entidad}</td>
                             <td>${egresoTecero.nombre_comercial}</td>
-                            <td>${egresoTecero.valor}</td>
-                            <td>calcular anticipo</td>
-                            <td>calcula Saldo</td>
+                            <td>$ ${egresoTecero.valor}</td>
+                            <td>$ ${egresoTecero.anticipo}</td>
+                            <td><b>$ ${egresoTecero.valor - egresoTecero.anticipo}</b></td>
+                            <td><a href="${egresoTecero.factura}" target="_BLANK" class="btn btn-danger"><i class="fa fa-download"></i></a></td>
 
                            
                             

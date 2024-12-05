@@ -1853,7 +1853,7 @@ $(document).ready(function() {
                 var result = JSON.parse(response);
                 if (result.status === 'success') {
                     alert('Egreso agregado exitosamente');
-                    $('#egresoModal').modal('hide');
+                    location.reload(); // Recargar la página
                 } else {
                     alert('Error al agregar el egreso');
                 }
@@ -1862,6 +1862,7 @@ $(document).ready(function() {
                 alert('Error al procesar la respuesta del servidor');
             }
         },
+        
         error: function(xhr, status, error) {
             console.error('Error in AJAX request:', status, error);
             alert('Error al agregar el egreso');
@@ -1885,13 +1886,15 @@ $(document).ready(function() {
             success: function(response) {
                 var data = JSON.parse(response);
                 var htmlContent = '<table id="egresosTable" class="display">';
-                htmlContent += '<thead><tr><th>Consecutivo Egreso</th><th>Valor</th><th>Nombre Tercero</th><th>Fecha Creación</th></tr></thead>';
+                htmlContent += '<thead><tr><th>Consecutivo Egreso</th><th>Valor</th><th>Nombre Tercero</th><th>Anticipo</th><th>Factura</th><th>Fecha Creación</th></tr></thead>';
                 htmlContent += '<tbody>';
                 data.forEach(function(item) {
                     htmlContent += '<tr>';
                     htmlContent += '<td>' + item.consecutivo_egreso + '</td>';
                     htmlContent += '<td>' + item.valor + '</td>';
-                    htmlContent += '<td>' + item.fk_tercero + '</td>'; // Asegúrate de que el campo sea correcto
+                    htmlContent += '<td>' + item.nombre_tercero + '</td>'; // Asegúrate de que el campo sea correcto
+                    htmlContent += '<td>' + item.anticipo + '</td>';
+                    htmlContent += '<td><a href='+item.factura+' class="btn btn-danger" target="_blank"><i class="fa fa-download"></i></td>';
                     htmlContent += '<td>' + item.create_at + '</td>';
                     htmlContent += '</tr>';
                 });

@@ -130,14 +130,13 @@ class ModelSolicitud
     public static function obtenerAdjuntos($condicion) {
         try {
             $sqlListarSolicitud = "
-                SELECT a.create_at, a.nombre_archivo, a.descripcion, b.nombre_sociedad
+               SELECT a.create_at, a.nombre_archivo, a.descripcion, b.nombre_sociedad
                 FROM archivo_adjunto a
-                INNER JOIN (
+                LEFT JOIN (
                     SELECT DISTINCT uuid, nombre_sociedad
                     FROM personas_sociedad
-                ) b ON a.sociedad_UUID = b.uuid 
-                 
-                 WHERE a.id_solicitud = :condicion;
+                ) b ON a.sociedad_UUID = b.uuid
+                WHERE a.id_solicitud = :condicion;
             ";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);
             $listaSolicitud->bindParam(':condicion', $condicion, PDO::PARAM_INT);
@@ -563,10 +562,10 @@ class ModelSolicitud
 
     public static function obtenerSolicitudEgresos($id_solicitud) {
         try {
-            $sqlListarSolicitud = "Select a.valor, a.consecutivo_egreso, b.nombre_tercero, a.create_at
+            $sqlListarSolicitud = "Select a.valor, a.consecutivo_egreso, b.nombre_tercero, a.create_at::date, a.anticipo, a.factura
 			from egresos_sociedad as a
 			inner join terceros b ON(a.fk_tercero = b.id_terceros)
-            WHERE a.fk_sociedad = :id_solicitud";
+            WHERE a.fk_sociedad =:id_solicitud";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);
             $listaSolicutd->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
             $listaSolicutd->execute();

@@ -8,8 +8,8 @@ class ModelEgresosTercero {
     public function consultarEgresosTercero(){
         try {
             $sql = "
-           SELECT a.consecutivo_egreso, a.valor, a.create_at, 
-            b.nombre_tercero, b.tin, b.tipo_entidad, b.nombre_comercial
+           SELECT a.consecutivo_egreso, a.valor, a.create_at::date, 
+            b.nombre_tercero, b.tin, b.tipo_entidad, b.nombre_comercial, a.anticipo, a.factura
             FROM egresos_sociedad as a 
             inner join terceros as b ON(a.fk_tercero = b.id_terceros)
            ";

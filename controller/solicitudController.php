@@ -457,7 +457,7 @@ class Solicitud_controller{
 
         public function insertarEgreso() {
             $rutaFactura = null;
-    if (isset($_FILES['factura']) && $_FILES['factura']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['factura']) && $_FILES['factura']['error'] === UPLOAD_ERR_OK) {
         $directorio = '../resource/innvoice_terceros/';
         $nombreArchivo = uniqid() . "_" . basename($_FILES['factura']['name']);
         $rutaArchivo = $directorio . $nombreArchivo;
