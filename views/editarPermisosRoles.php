@@ -10,10 +10,10 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 } elseif (isset($_SESSION['usuario']) && $_SESSION['seguridad'] === false) {
     echo 'Acesso no autorizado.';
-    exit();
+    exit(); 
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 
 <head>

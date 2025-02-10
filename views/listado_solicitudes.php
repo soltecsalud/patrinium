@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
-} elseif (isset($_SESSION['usuario']) && $_SESSION['configuracion'] === false) {
+} elseif (isset($_SESSION['usuario']) && $_SESSION['solicitudes'] === false) {
     echo 'Acesso no autorizado.';
     exit();
 }

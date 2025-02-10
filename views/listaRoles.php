@@ -1,7 +1,5 @@
 <?php
 session_start();
-include_once "../controller/RolesController.php";
-$roles = RolesController::ctrlListarPermisosRoles();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
@@ -9,6 +7,8 @@ if (!isset($_SESSION['usuario'])) {
     echo 'Acesso no autorizado.';
     exit();
 }
+include_once "../controller/RolesController.php";
+$roles = RolesController::ctrlListarPermisosRoles();
 ?>
 <!DOCTYPE html>
 <html lang="es">
