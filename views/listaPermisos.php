@@ -51,7 +51,7 @@ include_once "../controller/permisosController.php";
             </div>
         </div>
     </div>
-      </div>
+     </div>
 </section>
 </div>
     <?php include_once "footer/footer_views.php"; ?>
