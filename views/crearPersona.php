@@ -30,7 +30,7 @@ include_once "../controller/solicitudController.php";
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Crear Persona</h1>
+                        <h1>Nuevo Cliente</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -74,13 +74,17 @@ include_once "../controller/solicitudController.php";
                             </div>
 
                             <div class="form-row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="paisOrigen">País de Origen</label>
                                     <input type="text" name="paisOrigen" class="form-control" id="paisOrigen" required>
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="paisResidenciaFiscal">País de Residencia Fiscal</label>
                                     <input type="text" name="paisResidenciaFiscal" class="form-control" id="paisResidenciaFiscal" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="paisResidenciaFiscal">Ciudad</label>
+                                    <input type="text" name="ciudad" class="form-control" id="ciudad" required>
                                 </div>
                             </div>
 

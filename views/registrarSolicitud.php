@@ -161,35 +161,50 @@ $(document).ready(function(){
         
     });
 
-$(document).ready(function() {
+    $(document).ready(function() {
+    let totalServiciosActual = 0; // Variable para almacenar el total de servicios actuales
+    let selectedServices = new Set(); // Guardamos los checkbox seleccionados
+
+    // Función para guardar los checkbox seleccionados antes de actualizar la lista
+    function guardarSeleccionados() {
+        selectedServices.clear(); // Limpiar el conjunto antes de guardar
+        $('.servicios input[type="checkbox"]:checked').each(function() {
+            selectedServices.add($(this).attr('id')); // Guardamos los IDs de los seleccionados
+        });
+    }
+
+    // Función para restaurar la selección después de actualizar la lista
+    function restaurarSeleccionados() {
+        selectedServices.forEach(function(serviceId) {
+            $('#' + serviceId).prop('checked', true); // Restaurar la selección
+        });
+    }
+
+    // Función para listar servicios sin perder la selección
+    function listarServicios() {
+        guardarSeleccionados(); // Guardamos la selección actual antes de actualizar
+
         $.ajax({
-            url: '../controller/solicitudController.php', // Ajusta el path según sea necesario
-            method: 'POST',           
+            url: '../controller/solicitudController.php',
+            method: 'POST',
             data: { action: 'listarServicios' },
             dataType: 'json',
             success: function(response) {
                 var serviciosDiv = $('.servicios');
-                
                 serviciosDiv.empty(); // Limpiar cualquier contenido previo
 
-                // Contenedor principal
                 var servicioHtml = '<div class="row">';
-
-                // Contador para los elementos
                 var counter = 0;
-                var counter_list =1 ;
+                var counter_list = 1;
 
                 $.each(response, function(index, servicio) {
-                    // Si el contador es múltiplo de 15, cerrar la columna actual y abrir una nueva
                     if (counter % 15 === 0) {
-                        // No agregar '</div>' al principio
                         if (counter !== 0) {
                             servicioHtml += '</div>';
                         }
                         servicioHtml += '<div class="col-lg-4 col-md-6 col-sm-12">';
                     }
 
-                    // Agregar el elemento
                     servicioHtml += '<div class="custom-control custom-checkbox">';
                     servicioHtml += '<input type="checkbox" class="custom-control-input" id="' + servicio.servicio_name + '" name="' + servicio.servicio_name + '" value="' + servicio.nombre_servicio + '">';
                     servicioHtml += '<label class="custom-control-label" for="' + servicio.servicio_name + '">' + counter_list + '. ' + servicio.nombre_servicio + '</label>';
@@ -197,21 +212,58 @@ $(document).ready(function() {
 
                     counter++;
                     counter_list++;
-                    
                 });
 
-                // Cerrar la última columna y el contenedor principal
                 servicioHtml += '</div></div>';
-
                 serviciosDiv.append(servicioHtml);
-           
-                
+
+                restaurarSeleccionados(); // Restauramos la selección después de actualizar la lista
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error al obtener los servicios:', textStatus, errorThrown);
             }
         });
-    });
+    }
+
+    // Función para verificar si hay nuevos servicios en la BD
+    function verificarNuevosServicios() {
+        $.ajax({
+            url: '../controller/solicitudController.php',
+            method: 'POST',
+            data: { action: 'contarServicios' },
+            dataType: 'json',
+            success: function(response) {
+                if (response.total > totalServiciosActual) {
+                    console.log('Nuevo servicio detectado. Actualizando lista...');
+                    totalServiciosActual = response.total; // Actualizamos el total
+                    listarServicios(); // Recargar la lista solo si hay cambios
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error al contar los servicios:', textStatus, errorThrown);
+            }
+        });
+    }
+
+    // Llamamos a listarServicios() inicialmente para cargar los datos
+    listarServicios();
+
+    // Guardamos la cantidad inicial de servicios
+    setTimeout(function() {
+        $.ajax({
+            url: '../controller/solicitudController.php',
+            method: 'POST',
+            data: { action: 'contarServicios' },
+            dataType: 'json',
+            success: function(response) {
+                totalServiciosActual = response.total; // Guardamos el número inicial de servicios
+            }
+        });
+    }, 1000);
+
+    // Verificamos nuevos servicios cada 10 segundos
+    setInterval(verificarNuevosServicios, 10000);
+});
     $(document).ready(function() {
         $.ajax({
             url: '../controller/sociedadController.php',

@@ -36,6 +36,7 @@ class SociedadController{
                 "razon_consultoria" => $_POST["razonConsultoria"],
                 "requiere_registro_corporacion" => $_POST["requiereRegistroCorporacion"],                
                 "observaciones" => $_POST["observaciones"],
+                "ciudad" => $_POST["ciudad"],
                 "id_solicitud" => 189 //$_POST["id_solicitud"]
             );
     

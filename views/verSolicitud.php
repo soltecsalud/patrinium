@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
-} elseif (isset($_SESSION['usuario']) && $_SESSION['configuracion'] === false) {
+} elseif (isset($_SESSION['usuario']) && $_SESSION['configuracion general'] === false) {
     echo 'Acesso no autorizado.';
     exit();
 }
@@ -1759,6 +1759,7 @@ $(document).ready(function() {
                 if (resultado.status === 0) {
                     alert('Sociedad creada exitosamente');
                     $('#modalCrearSociedad').modal('hide');
+                    location.reload();
                 } else {
                     alert('Error al crear la sociedad');
                 }

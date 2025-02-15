@@ -14,6 +14,17 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
+    public static function obtenerNombresServicios() {
+        try {
+            $sql = "SELECT servicio_name FROM servicios";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_COLUMN, 0); // Retorna solo la columna con los nombres
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+   
     public static function obtenerAllSolicitud() {
         try {
             $sqlListarSolicitud = "
@@ -63,6 +74,19 @@ class ModelSolicitud
             $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
           
             return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function contarSociedades() {
+        try {
+            $sqlListarSolicitud = "SELECT COUNT(*) as total FROM servicios";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);
+            $listaSolicitud->execute();
+            $resultado = $listaSolicitud->fetch(PDO::FETCH_ASSOC); // Cambiar fetchAll() por fetch()
+    
+            return $resultado; // Retorna directamente el array con el total
         } catch (Exception $e) {
             die($e->getMessage());
         }

@@ -78,6 +78,8 @@ class Solicitud_controller{
         return $solicitud;
     }
 
+   
+
     public function getBancosConsignacion() {
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->getBancosConsignacion();
@@ -86,66 +88,53 @@ class Solicitud_controller{
 
     public function insertarSolicitud() {
         $estado = 3;
+        $modelo = new ModelSolicitud();
+    
         $datos = array(
-        "fk_Persona" => $_POST['selectPersona'],
-        "nombre_cliente" => $_POST['nombreCliente'],
-        "referido_por" => $_POST['referido_por'],
-        "necesidad" => $_POST['necesidad'],
-       
-      
-         
-       
+            "fk_Persona" => $_POST['selectPersona'],
+            "nombre_cliente" => $_POST['nombreCliente'],
+            "referido_por" => $_POST['referido_por'],
+            "necesidad" => $_POST['necesidad']
         );
-       
-                        $checkbox = array();
-
-                // Define un array con los nombres de las casillas de verificación
-                $checkbox_names = array(
-                    'tipoTrust', 'registroCorporacion', 'registroFIP', 'goodStanding',
-                    'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
-                    'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
-                    'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
-                    'acuerdoDeSocios', 'proteccionDivorcios', 'ProteccióndePatrimonio', 'Actas','ServiciosProfesionales',
-                    'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
-                    'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
-                    'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
-                    'reporteB13', 'reporteFincen', 'reporteBOI', 'serviciosDomicilio', 'servicioTesoreria',
-                    'servicioNomina', 'controlInventarios', 'serviciosFacturacion', 'serviciosAdministracionNegocios',
-                    'serviciosLegalesNotario', 'serviciosLegalesApostille', 'serviciosReportesEspeciales'
+    
+        // Obtiene los nombres dinámicos desde la BD
+        $checkbox_names = $modelo->obtenerNombresServicios();
+    
+        $checkbox = array();
+    
+        // Recorre los nombres obtenidos desde la BD
+        foreach ($checkbox_names as $name) {
+            if (isset($_POST[$name]) && $_POST[$name] !== '') {
+                $checkbox[$name] = array(
+                    'value' => $_POST[$name],
+                    'estado' => $estado
                 );
-
-                // Recorre el array de nombres de casillas de verificación
-                foreach ($checkbox_names as $name) {
-                    // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
-                    if (isset($_POST[$name]) && $_POST[$name] !== '') {
-                        $checkbox[$name] = array(
-                            'value' => $_POST[$name],
-                            'estado' => $estado
-                        );
-                    }
-                }
-
-                $camposDinamicos = array();
-                foreach ($_POST['campoDinamico'] as $indice => $valor) {
-                    // Verificar si el valor del campo dinámico está presente y no está vacío
-                    if (isset($valor) && $valor !== '') {
-                        // Agregar el valor del campo dinámico al array en el formato deseado
-                        $camposDinamicos["campoDinamico[$indice]"] = array(
-                            'value' => $valor,
-                            'estado' => $estado
-                        );
-                    }
-                }
-      
-        var_dump($datos);
-        $usuario="serazo";
-        $respuesta = ModelSolicitud::insertarSolicitud($datos, $checkbox, $camposDinamicos,$usuario);
-        
-        if($respuesta == "ok") {
-            echo 0; // Éxito
-        } else {
-            echo 1; // Error
+            }
         }
+    
+        // Capturar los campos dinámicos
+        $camposDinamicos = array();
+        if (isset($_POST['campoDinamico']) && is_array($_POST['campoDinamico'])) {
+            foreach ($_POST['campoDinamico'] as $indice => $valor) {
+                if (!empty($valor)) {
+                    $camposDinamicos["campoDinamico[$indice]"] = array(
+                        'value' => $valor,
+                        'estado' => $estado
+                    );
+                }
+            }
+        }
+    
+        // Debugging: Verificar datos antes de insertarlos
+        error_log("Datos: " . json_encode($datos));
+        error_log("Checkbox: " . json_encode($checkbox));
+        error_log("Campos Dinámicos: " . json_encode($camposDinamicos));
+    
+        // Insertar en BD
+        $usuario = "serazo";
+        $respuesta = ModelSolicitud::insertarSolicitud($datos, $checkbox, $camposDinamicos, $usuario);
+    
+        echo ($respuesta == "ok") ? 0 : 1;
     }
 
     public function insertarRevision() {
@@ -488,11 +477,18 @@ class Solicitud_controller{
     }
         }
 
-        public function getSolicitudEgresos($id_solicitud) {
+    public function getSolicitudEgresos($id_solicitud) {
             $modelo = new ModelSolicitud();
             $solicitud = $modelo->obtenerSolicitudEgresos($id_solicitud);
             echo json_encode($solicitud);
-        }
+    }
+
+    public function getContarSociedades() {
+        $modelo = new ModelSolicitud();
+        $sociedades = $modelo->contarSociedades();
+    
+        echo json_encode(["total" => $sociedades["total"]]); // Acceder correctamente a la clave "total"
+    }
 
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -534,7 +530,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (isset($_POST['action'])) {
         if ($_POST['action'] === 'listarServicios') {
             $controlador->getServiciosOfrecidos();
-        } else {
+        }elseif ($_POST['action'] == 'contarServicios') {
+            $controlador->getContarSociedades();
+        }
+         else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
     }

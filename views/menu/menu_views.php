@@ -22,32 +22,32 @@ if (!isset($_SESSION['usuario'])) {
             <li class="nav-item">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-clipboard"></i>
-                <p> Solicitudes <i class="right fas fa-angle-left"></i>
+                <p> Menu Preliminar <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="./crearPersona.php" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
-                    <p>Crear Persona</p>
+                    <p>Crear Clientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="./registrarSolicitud.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
-                    <p>Registrar Solicitud</p>
+                    <p>Registro Servicio</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="./listado_solicitudes.php" class="nav-link">
                     <i class="fa fa-list" aria-hidden="true"></i>
-                    <p>Listado de Solicitudes</p>
+                    <p>Estructura Preliminar Cliente</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="./ver_solicitud_adjuntos.php" class="nav-link">
                     <i class="fa fa-list" aria-hidden="true"></i>
-                    <p>Respuestas Solicitudes</p>
+                    <p>Cliente Registrado & Aprobado</p>
                   </a>
                 </li>
               </ul>

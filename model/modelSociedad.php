@@ -16,7 +16,7 @@ class modelSociedad{
                 industria, nombre_negocio_local, ubicacion_negocio_principal, 
                 tamano_negocio, contacto_ejecutivo_local, numero_empleados, 
                 numero_hijos, razon_consultoria, requiere_registro_corporacion, 
-                observaciones,  fk_solicitud, createdat)
+                observaciones,  fk_solicitud, createdat,ciudad)
                 VALUES (:nombre, :apellido, :fecha_nacimiento, :estado_civil, 
                 :pais_origen, :pais_residencia_fiscal, :pais_domicilio, 
                 :numero_pasaporte, :pais_pasaporte, :tipo_visa, :direccion_local, 
@@ -24,7 +24,7 @@ class modelSociedad{
                 :ubicacion_negocio_principal, :tamano_negocio, 
                 :contacto_ejecutivo_local, :numero_empleados, :numero_hijos, 
                 :razon_consultoria, :requiere_registro_corporacion, 
-                 :observaciones,:fk_solicitud, now())";
+                 :observaciones,:fk_solicitud, now(),:ciudad)";
 
             $stmt = Conexion::conectar()->prepare($sqlInsertarSociedad);
             $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
@@ -51,6 +51,7 @@ class modelSociedad{
             $stmt->bindParam(":requiere_registro_corporacion", $datos["requiere_registro_corporacion"], PDO::PARAM_BOOL);
             $stmt->bindParam(":observaciones", $datos["observaciones"], PDO::PARAM_STR);
             $stmt->bindParam(":fk_solicitud", $datos["id_solicitud"], PDO::PARAM_STR);
+            $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
             if ($stmt->execute()) {
                 return "ok";
             } else {
