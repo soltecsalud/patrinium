@@ -493,9 +493,13 @@ tr:hover {
                                                                     <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
                                                                     <span class="info-box-text">
                                                                         <?php 
+                                                                            $tieneMiembro = '';
                                                                             if (preg_match('/^\{.+\}$/', $representantes[0]['tieneSociedad'])) {
                                                                                 foreach ($miembrosSociedad as $miembro) {
-                                                                                    echo $miembro . "<br>";
+                                                                                    if($tieneMiembro!=$miembro && $miembro != $nombre_sociedad){
+                                                                                        echo $miembro . "<br>";
+                                                                                    }
+                                                                                    $tieneMiembro = $miembro;
                                                                                 }
                                                                             }
                                                                         
