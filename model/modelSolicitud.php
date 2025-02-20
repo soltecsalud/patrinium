@@ -153,15 +153,13 @@ class ModelSolicitud
     }
     public static function obtenerAdjuntos($condicion) {
         try {
-            $sqlListarSolicitud = "
-               SELECT a.create_at, a.nombre_archivo, a.descripcion, b.nombre_sociedad
+            $sqlListarSolicitud = "SELECT a.create_at, a.nombre_archivo, a.descripcion, b.nombre_sociedad
                 FROM archivo_adjunto a
                 LEFT JOIN (
                     SELECT DISTINCT uuid, nombre_sociedad
                     FROM personas_sociedad
                 ) b ON a.sociedad_UUID = b.uuid
-                WHERE a.id_solicitud = :condicion;
-            ";
+                WHERE a.id_solicitud = :condicion";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);
             $listaSolicitud->bindParam(':condicion', $condicion, PDO::PARAM_INT);
             $listaSolicitud->execute();
@@ -213,14 +211,11 @@ class ModelSolicitud
 
     public static function obtenerSolicitudesConAdjuntos() {
         try {
-            $sqlListarSolicitud ="
-                SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,
+            $sqlListarSolicitud ="SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,
                 b.created_at, b.id_solicitud
                 FROM personas_sociedad a
                 INNER JOIN solicitud b ON a.fk_solicitud = b.id_solicitud
-                GROUP BY b.referido_por,b.created_at,b.id_solicitud 
-
-           ";
+                GROUP BY b.referido_por,b.created_at,b.id_solicitud";
             $listaSolicutd = Conexion::conectar()->prepare($sqlListarSolicitud);           
             $listaSolicutd->execute();
             return $listaSolicutd->fetchAll(PDO::FETCH_OBJ);
@@ -414,11 +409,15 @@ class ModelSolicitud
 
     public static function insertarSociedad($datos) {
         try {
-            $sql = "
-                INSERT INTO public.personas_sociedad (
-                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user, uuid
-                ) VALUES (
-                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user,:uuid
+
+            // $datos['conjuntosociedad'] = str_replace(["{", "}"], ["{\"", "\"}"], $datos['conjuntosociedad']);
+            // $datos['conjuntosociedad'] = '{' .$datos['conjuntosociedad']. '}';
+
+
+            $sql = "INSERT INTO public.personas_sociedad (
+                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user, uuid, conjunto_sociedades
+                )VALUES (
+                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user,:uuid, :conjuntoSociedades
                 );
             ";
 
@@ -427,11 +426,13 @@ class ModelSolicitud
 
             // Vincular los parámetros a la sentencia preparada
             $stmt->bindParam(':nombre_sociedad', $datos['nombre_sociedad'], PDO::PARAM_STR);
-            $stmt->bindParam(':fk_persona', $datos['fk_persona'], PDO::PARAM_INT);
+            // $stmt->bindParam(':fk_persona', $datos['fk_persona'], PDO::PARAM_INT);
+            $stmt->bindParam(':fk_persona', $datos['conjuntopersonas'], PDO::PARAM_INT);
             $stmt->bindParam(':porcentaje', $datos['porcentaje'], PDO::PARAM_INT);
             $stmt->bindParam(':fk_solicitud', $datos['fk_solicitud'], PDO::PARAM_INT);
             $stmt->bindParam(':create_user', $datos['create_user'], PDO::PARAM_STR);
             $stmt->bindParam(':uuid', $datos['uuid'], PDO::PARAM_STR);
+            $stmt->bindParam(':conjuntoSociedades', $datos['conjuntosociedad'], PDO::PARAM_STR);
 
             // Ejecutar la consulta
             return $stmt->execute() ? "ok" : "error";
@@ -521,25 +522,56 @@ class ModelSolicitud
     public static function obtenerSociedades($id_solicitud){
         try {
             $solicitud_id = $id_solicitud;
-            $sqlListarSolicitud = "
-                select
+            $sqlListarSolicitud = "SELECT
                 a.nombre_sociedad,
                 CONCAT(b.nombre, ' ', b.apellido) AS nombre_completo,
                 a.porcentaje,
-                a.uuid
+                a.uuid,
+                a.conjunto_sociedades
                 from personas_sociedad a
                 inner join sociedad b ON(a.fk_persona = b.id_sociedad)
                 where a.fk_solicitud = :id_solicitud
-                group  by 1,2,3,4;
-
-               
-
-            ";
+                group  by 1,2,3,4,5";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
             $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
             $listaSolicitud->execute();
             $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
-          
+            
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerSociedadesSociedades($id_solicitud){
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "SELECT
+                distinct(a.conjunto_sociedades)
+                from personas_sociedad a
+                where a.fk_solicitud = :id_solicitud and a.conjunto_sociedades is not null";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+    public static function buscarSociedadxSociedad($sociedad){
+        try {
+            $sqlBuscarSociedad = "SELECT
+                distinct (nombre_sociedad) FROM personas_sociedad
+                where uuid = :identi";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlBuscarSociedad);   
+            $listaSolicitud->bindParam(':identi', $sociedad);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetch(PDO::FETCH_ASSOC);
+            
             return $resultados;
         } catch (Exception $e) {
             die($e->getMessage());
@@ -598,5 +630,66 @@ class ModelSolicitud
             die($e->getMessage());
         }
     }
+
+    static public function mdlInsertarPersonaCliente($datos){
+
+        try {
+            $sqlInsertarSociedad = "INSERT INTO personas_cliente(
+                nombre, apellido, fecha_nacimiento, estado_civil, pais_origen, 
+                pais_residencia_fiscal, pais_domicilio, numero_pasaporte, 
+                pais_pasaporte, tipo_visa, direccion_local, telefonos, emails, 
+                industria, nombre_negocio_local, ubicacion_negocio_principal, 
+                tamano_negocio, contacto_ejecutivo_local, numero_empleados, 
+                numero_hijos, razon_consultoria, requiere_registro_corporacion, 
+                observaciones,  fk_solicitud, ciudad, numero_solicitud)
+                VALUES (:nombre, :apellido, :fecha_nacimiento, :estado_civil, 
+                :pais_origen, :pais_residencia_fiscal, :pais_domicilio, 
+                :numero_pasaporte, :pais_pasaporte, :tipo_visa, :direccion_local, 
+                :telefonos, :emails, :industria, :nombre_negocio_local, 
+                :ubicacion_negocio_principal, :tamano_negocio, 
+                :contacto_ejecutivo_local, :numero_empleados, :numero_hijos, 
+                :razon_consultoria, :requiere_registro_corporacion, 
+                :observaciones,:fk_solicitud, :ciudad, :numeroSolicitud)";
+
+            $stmt = Conexion::conectar()->prepare($sqlInsertarSociedad);
+            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+            $stmt->bindParam(":apellido", $datos["apellido"], PDO::PARAM_STR);
+            $stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"]);
+            $stmt->bindParam(":estado_civil", $datos["estado_civil"], PDO::PARAM_STR);
+            $stmt->bindParam(":pais_origen", $datos["pais_origen"], PDO::PARAM_STR);
+            $stmt->bindParam(":pais_residencia_fiscal", $datos["pais_residencia_fiscal"], PDO::PARAM_STR);
+            $stmt->bindParam(":pais_domicilio", $datos["pais_domicilio"], PDO::PARAM_STR);
+            $stmt->bindParam(":numero_pasaporte", $datos["numero_pasaporte"], PDO::PARAM_STR);
+            $stmt->bindParam(":pais_pasaporte", $datos["pais_pasaporte"], PDO::PARAM_STR);
+            $stmt->bindParam(":tipo_visa", $datos["tipo_visa"], PDO::PARAM_STR);
+            $stmt->bindParam(":direccion_local", $datos["direccion_local"], PDO::PARAM_STR);
+            $stmt->bindParam(":telefonos", $datos["telefonos"], PDO::PARAM_STR);
+            $stmt->bindParam(":emails", $datos["emails"], PDO::PARAM_STR);
+            $stmt->bindParam(":industria", $datos["industria"], PDO::PARAM_STR);
+            $stmt->bindParam(":nombre_negocio_local", $datos["nombre_negocio_local"], PDO::PARAM_STR);
+            $stmt->bindParam(":ubicacion_negocio_principal", $datos["ubicacion_negocio_principal"], PDO::PARAM_STR);
+            $stmt->bindParam(":tamano_negocio", $datos["tamano_negocio"], PDO::PARAM_STR);
+            $stmt->bindParam(":contacto_ejecutivo_local", $datos["contacto_ejecutivo_local"], PDO::PARAM_STR);
+            $stmt->bindParam(":numero_empleados", $datos["numero_empleados"], PDO::PARAM_INT);
+            $stmt->bindParam(":numero_hijos", $datos["numero_hijos"], PDO::PARAM_INT);
+            $stmt->bindParam(":razon_consultoria", $datos["razon_consultoria"], PDO::PARAM_STR);
+            $stmt->bindParam(":requiere_registro_corporacion", $datos["requiere_registro_corporacion"], PDO::PARAM_BOOL);
+            $stmt->bindParam(":observaciones", $datos["observaciones"], PDO::PARAM_STR);
+            $stmt->bindParam(":fk_solicitud", $datos["id_solicitud"], PDO::PARAM_STR);
+            $stmt->bindParam(":ciudad", $datos["ciudad"], PDO::PARAM_STR);
+            $stmt->bindParam(":numeroSolicitud", $datos["numero_solicitud"], PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                return "ok";
+            } else {
+                $error = $stmt->errorInfo();
+                return "error: " . $error[2];
+            }
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
 }
 ?>

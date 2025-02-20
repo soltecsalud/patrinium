@@ -76,6 +76,20 @@ class modelSociedad{
         }
     }
 
+    static public function mdlGetPersonaSociedadySociedad(){
+        try {
+            $sqlListarSociedades = "SELECT id_sociedad,nombre || apellido AS nombre,NULL as uuid FROM sociedad AS s
+                                    UNION
+                                    SELECT id_personas_sociedad,nombre_sociedad,uuid from personas_sociedad";
+            $listaSociedades = Conexion::conectar()->prepare($sqlListarSociedades);
+            $listaSociedades->execute();
+            return $listaSociedades->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
     static public function mdlObtenerConsultoria() {
         try {
             $sqlObtenerConsultoria = "SELECT  servicios, servicios_adicionales

@@ -179,15 +179,13 @@ include_once "../controller/solicitudController.php";
                                 </div>
                             </div>
 
-                          
-
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <label for="observaciones">Observaciones y Notas</label>
                                     <textarea name="observaciones" class="form-control" id="observaciones" rows="4"></textarea>
                                 </div>
                             </div>
-                           
+        
                             <div class="form-group row">
                                 <div class="offset-4 col-8">
                                     <button name="submit" id="btnGuardarSociedad" class="btn btn-primary">Guardar</button>

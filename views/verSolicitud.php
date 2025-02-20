@@ -179,7 +179,8 @@ tr:hover {
                     <div class="card-header">
                         <h3 class="card-title">Revisar Solicitud Cliente</h3>
                         <div class="card-tools">
-                           
+                            <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalCrearCliente"><i class="fas fa-user-plus"></i></button>
+                            
                             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
                             </button>
                             <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#upload_archivos"><i class="fas  fa-upload"></i>
@@ -197,9 +198,171 @@ tr:hover {
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#egresoModal">
                                 Crear Egreso
                             </button>
-                         
                         </div>
                     </div>
+
+                    <div class="modal fade" id="modalCrearCliente" tabindex="-1" role="dialog" aria-labelledby="modalCrearClienteLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content"> 
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCrearClienteLabel">Crear Cliente</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="POST" id="frm_guardar_sociedad">
+                                        <input type="hidden" name="numeroSolicitud" name="numeroSolicitud"  value="<?php echo $_GET['numero_solicitud']; ?>" >
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text" name="nombre" class="form-control" id="nombre" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="apellido">Apellido</label>
+                                                <input type="text" name="apellido" class="form-control" id="apellido" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                                                <input type="date" name="fechaNacimiento" class="form-control" id="fechaNacimiento" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="estadoCivil">Estado Civil</label>
+                                                <select class="form-control" name="estadoCivil" id="estadoCivil">
+                                                    <option value="soltero">Soltero</option>
+                                                    <option value="casado">Casado</option>
+                                                    <option value="viudo">Viudo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-4 mb-3">
+                                                <label for="paisOrigen">País de Origen</label>
+                                                <input type="text" name="paisOrigen" class="form-control" id="paisOrigen" required>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="paisResidenciaFiscal">País de Residencia Fiscal</label>
+                                                <input type="text" name="paisResidenciaFiscal" class="form-control" id="paisResidenciaFiscal" required>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <label for="paisResidenciaFiscal">Ciudad</label>
+                                                <input type="text" name="ciudad" class="form-control" id="ciudad" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="paisDomicilio">País de Domicilio</label>
+                                                <input type="text" name="paisDomicilio" class="form-control" id="paisDomicilio" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="numeroPasaporte">Número de Pasaporte</label>
+                                                <input type="text" name="numeroPasaporte" class="form-control" id="numeroPasaporte" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="paisPasaporte">País de Pasaporte</label>
+                                                <input type="text" name="paisPasaporte" class="form-control" id="paisPasaporte" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="tipoVisa">Tipo de Visa</label>
+                                                <input type="text" name="tipoVisa" class="form-control" id="tipoVisa" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="direccionLocal">Dirección Local</label>
+                                                <input type="text" name="direccionLocal" class="form-control" id="direccionLocal" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="telefonos">Teléfonos</label>
+                                                <input type="text" name="telefonos" class="form-control" id="telefonos" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="emails">Emails</label>
+                                                <input type="email" name="emails" class="form-control" id="emails" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="industria">Industria o Sector en el que Opera</label>
+                                                <input type="text" name="industria" class="form-control" id="industria" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="nombreNegocioLocal">Nombre Principal del Negocio Local</label>
+                                                <input type="text" name="nombreNegocioLocal" class="form-control" id="nombreNegocioLocal" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="ubicacionNegocioPrincipal">Ubicación del Negocio Principal</label>
+                                                <input type="text" name="ubicacionNegocioPrincipal" class="form-control" id="ubicacionNegocioPrincipal" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="tamanoNegocio">Tamaño del Negocio</label>
+                                                <input type="text" name="tamanoNegocio" class="form-control" id="tamanoNegocio" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="contactoEjecutivoLocal">Contacto de su Ejecutivo Local</label>
+                                                <input type="text" name="contactoEjecutivoLocal" class="form-control" id="contactoEjecutivoLocal" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="numeroEmpleados">No Empleados</label>
+                                                <input type="number" name="numeroEmpleados" class="form-control" id="numeroEmpleados" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="numeroHijos">Número de Hijos</label>
+                                                <input type="number" name="numeroHijos" class="form-control" id="numeroHijos" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="razonConsultoria">Razón de la Consultoría</label>
+                                                <input type="text" name="razonConsultoria" class="form-control" id="razonConsultoria" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="requiereRegistroCorporacion">Requiere Registro de Corporación</label>
+                                                <select class="form-control" name="requiereRegistroCorporacion" id="requiereRegistroCorporacion">
+                                                    <option value="si">Sí</option>
+                                                    <option value="no">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label for="observaciones">Observaciones y Notas</label>
+                                                <textarea name="observaciones" class="form-control" id="observaciones" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="form-group row">
+                                            <div class="offset-4 col-8">
+                                                <button name="submit" id="btnGuardarPersonaCliente" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+
                     <div class="card-body">
                         
                         <div class="row">
@@ -220,8 +383,6 @@ tr:hover {
         if (is_array($solicitudes) && count($solicitudes) > 0) {
             foreach ($solicitudes as $solicitud) {
                 if (is_object($solicitud)) {
-                   
-
                     echo "<div class='info-row'>";
                     echo "<span class='info-title'>Referido Por:</span>";
                     echo "<span class='info-value'>" . htmlspecialchars($solicitud->referido_por) . "</span>";
@@ -265,23 +426,39 @@ tr:hover {
                                 
                                 </div>
                                     </div>
-                                  
+                                
                                     <div class="card-body">
                                         <div class="row"> <!-- Agregamos una fila que envolverá las columnas -->
                                             <?php
                                                 $controlador = new Solicitud_controller();
-                                                $solicitudes = $controlador->getSociedades($id_revisar_solicitud);
-
+                                                $solicitudes    = $controlador->getSociedades($id_revisar_solicitud);
+                                                $idSociedades   = $controlador->getSociedadesSociedades($id_revisar_solicitud);
+                                                $miembrosSociedad = [];
+                                                foreach ($idSociedades as $value) { 
+                                                    $uuids = explode(",", trim($value['conjunto_sociedades'], "{}"));
+                                                    foreach ($uuids as $uuid) {
+                                                        $buscarMiembroSociedad = $controlador->buscarSociedadxSociedad($uuid);
+                                                        $miembrosSociedad[] = implode(", ", $buscarMiembroSociedad);
+                                                    }
+                                                }
                                                 // Array para agrupar representantes por sociedad
                                                 $sociedades_representantes = [];
 
                                                 if (isset($solicitudes)) {
                                                     // Agrupamos los representantes por sociedad
-                                                    foreach ($solicitudes as $datosSOlicitud) {
+                                                    foreach ($solicitudes as $datosSOlicitud) { 
+                                                        $uuidString = str_replace(["{", "}"], "", $datosSOlicitud['conjunto_sociedades']);
+                                                        $uuidArray  = explode(",", $uuidString);
+
+                                                        foreach ($uuidArray as $uuid) {
+                                                            if(!empty($uuid)){
+                                                                $nombreSociedad = $controlador->buscarSociedadxSociedad($uuid);
+                                                            }
+                                                        }
                                                         $sociedades_representantes[$datosSOlicitud['nombre_sociedad']][] = [
                                                             'nombre_completo' => $datosSOlicitud['nombre_completo'],
                                                             'porcentaje' => $datosSOlicitud['porcentaje'],
-                                                            'uuid' => $datosSOlicitud['uuid']
+                                                            'uuid' => $datosSOlicitud['uuid'],
                                                         ];
                                                     }
 
@@ -293,9 +470,17 @@ tr:hover {
                                                                 <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
                                                                 <div class="info-box-content">
                                                                     <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
+                                                                    <span class="info-box-text">
+                                                                        <?php 
+                                                                            foreach ($miembrosSociedad as $miembro) {
+                                                                                echo $miembro . "<br>";
+                                                                            }
+                                                                            ?>
+                                                                    </span>
                                                                     <?php foreach ($representantes as $representante) { ?>
                                                                         <span class="info-box-text">
-                                                                            <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%
+                                                                            <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%<br>
+                                                                            
                                                                         </span>
                                                                     <?php } ?>
                                                                 </div>
@@ -1158,6 +1343,8 @@ tr:hover {
         </button>
       </div>
       <div class="modal-body">
+        <input type="url" name="conjunto_sociedades[]" id="conjunto_sociedades">
+        <input type="url" name="conjunto_personas[]" id="conjunto_personas">
         <form id="formCrearSociedad">
           <!-- Nombre de la Sociedad -->
           <div class="form-group">
@@ -1171,7 +1358,7 @@ tr:hover {
             <div class="form-group row">
               <div class="col-md-8">
                 <label for="selectPersona">Persona Sociedad 1</label>
-                <select class="form-control" id='selectPersona' name="personas[]">
+                <select class="form-control selectPersona" id='selectPersona' name="personas[]">
                   <option value="">Seleccionar persona</option>
                   <!-- Opciones dinámicas -->
                 </select>
@@ -1271,6 +1458,44 @@ tr:hover {
             </div>
         </div>
     </div>
+
+<script>
+    $(document).ready(function(){
+        $('#btnGuardarPersonaCliente').click(function(e){        
+            e.preventDefault(); // Previene el comportamiento por defecto del botón
+            var datos = $('#frm_guardar_sociedad').serialize() + "&accion=guardarSociedad";
+            var numeroSolicitud = $('#numeroSolicitud').val();
+            console.log(datos);  // Verifica que los datos se están serializando correctamente
+            $.ajax({
+                type: "POST",
+                url: "../controller/solicitudController.php",
+                data: datos,
+                success: function(r){
+                    console.log(r);  // Verifica la respuesta del servidor
+                    console.log('status=> ' ,r.status);  // Verifica la respuesta del servidor
+                    if(r.status=='ok'){
+                        alert("Persona Agregada con Exito :)");
+                        // window.location.href = "verSolicitud.php?numero_solicitud="+numeroSolicitud;
+                    }else{
+                        alert("Error al intentar registrar el cliente, intentar de nuevo");
+                    }
+                    // if(r.resultado == 0) {
+                    //     alert("fallo :(");
+                    // }else{
+                    //     alert("Persona Agregada con Exito :)");
+                    //     // window.location.href = "registrarSolicitud.php";
+                    // }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud:", status, error);
+                    alert("Error en la solicitud AJAX");
+                }
+            });
+        });
+    });
+</script>
+
+
 <script>
    document.addEventListener('DOMContentLoaded', function() {
             // Selecciona todos los checkboxes con la clase toggle-checkbox
@@ -1681,7 +1906,8 @@ $(document).ready(function() {
                 selectElement.empty();
                 selectElement.append('<option value="">Selecciona una Persona</option>');
                 $.each(data, function(index, item) {
-                    selectElement.append('<option value="' + item.id_sociedad + '">' + item.nombre + " " + item.apellido + '</option>');
+                    var idSociedad = item.uuid === null ? item.id_sociedad : item.uuid;
+                    selectElement.append('<option value="' + idSociedad + '">' + item.nombre + '</option>');
                 });
             },
             error: function(xhr, status, error) {
@@ -1692,6 +1918,7 @@ $(document).ready(function() {
         });
     }
 
+    
     // Cargar personas en el primer select de personas
     cargarPersonas($('#personasContainer').find('select').first());
 
@@ -1719,11 +1946,11 @@ $(document).ready(function() {
     });
 
     function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
 
     // Validar que la suma de porcentajes no exceda 100% y mostrar mensaje en JS
     $('#btnGuardarSociedad').click(function(e) {
@@ -1744,9 +1971,14 @@ $(document).ready(function() {
         }
 
         var uuid = generateUUID();
+        var conjunto_sociedades = document.getElementById('conjunto_sociedades').value;
+        var conjunto_personas   = document.getElementById('conjunto_personas').value;
+        var nombreSociedad = '{' + conjunto_sociedades + '}'; 
         // Si todo está bien, serializar los datos del formulario
-        var datosFormulario = $('#formCrearSociedad').serialize() + '&uuid=' + uuid + '&accion=crearSociedad';
-        console.log('Datos enviados:', datosFormulario); 
+        var datosFormulario = $('#formCrearSociedad').serialize() + '&conjuntopersonas=' + conjunto_personas + '&sociedades=' + nombreSociedad +  '&uuid=' + uuid + '&accion=crearSociedad';
+        // console.log('Datos enviados:', datosFormulario);
+        // console.log('============');
+        // console.log('conjunto_sociedades:', nombreSociedad); 
 
         // Envío de datos con AJAX
         $.ajax({
@@ -1771,6 +2003,24 @@ $(document).ready(function() {
             }
         });
     });
+});
+
+$(document).on('change', '.selectPersona', function() {
+    var selectedUUIDs  = [];
+    var selectedUUIDs2 = [];
+    $('.selectPersona').each(function() {
+        var selectedValue = $(this).val();
+        if (selectedValue) {
+            if(selectedValue.length > 2) {
+                selectedUUIDs.push(selectedValue);
+            }else{
+                selectedUUIDs2.push(selectedValue);
+            }
+        }
+    });
+    $('#conjunto_sociedades').val(selectedUUIDs.join(','));
+    $('#conjunto_personas').val(selectedUUIDs2.join(','));
+    
 });
 
 

@@ -307,6 +307,8 @@ class Solicitud_controller{
 
     public function crearSociedad() {
         // Debug para ver lo que llega desde el frontend
+
+       
       
         
         $nombreSociedad = $_POST['nombreSociedad'];
@@ -315,20 +317,34 @@ class Solicitud_controller{
         $fk_solicitud = $_POST['hiddenField']; // ID de la solicitud o cualquier valor oculto
         $create_user = 'usuario_ejemplo'; // Aquí pones el usuario que crea la sociedad
         $uuid = $_POST['uuid'];// Generar un UUID para la sociedad
+
+        $conjuntopersonas  = $_POST['conjuntopersonas'];
+        $conjuntopersonasA = explode(',', $_POST['conjuntopersonas']);
+        // echo json_encode($conjuntopersonasA);
+        // return;
+        
     
         // Iterar sobre cada persona y porcentaje
-        foreach ($personas as $index => $persona) {
+        foreach ($conjuntopersonasA as $index => $persona) {
             $datos = [
                 'uuid' => $uuid,
                 'nombre_sociedad' => $nombreSociedad,
                 'fk_persona' => $persona,
                 'porcentaje' => $porcentajes[$index],
                 'fk_solicitud' => $fk_solicitud,
-                'create_user' => $create_user
+                'create_user' => $create_user,
+                'conjuntopersonas'=> $persona,
+                'conjuntosociedad' => $_POST['sociedades']
             ];
+
+        //    echo json_encode($datos);
+        //    return;
     
             // Insertar cada registro en la base de datos
             $respuesta = ModelSolicitud::insertarSociedad($datos);
+
+            // echo json_encode('hola1');
+            // return;
             
             if ($respuesta != "ok") {
                 echo json_encode(["status" => 1]); // Error si alguno falla
@@ -438,6 +454,20 @@ class Solicitud_controller{
             return $solicitud;
         }
 
+        public function getSociedadesSociedades($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            return $modelo->obtenerSociedadesSociedades($id_solicitud);
+            // return $solicitud;
+        }
+
+        public function buscarSociedadxSociedad($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            return $modelo->buscarSociedadxSociedad($id_solicitud);
+            // return $solicitud[0];
+        }
+
         public function obtenerDescripciones($idSolicitud) {
             $modelo = new ModelSolicitud();
             $descripciones = $modelo->fetchDescripciones($idSolicitud);
@@ -490,6 +520,49 @@ class Solicitud_controller{
         echo json_encode(["total" => $sociedades["total"]]); // Acceder correctamente a la clave "total"
     }
 
+    public function guardarSociedad($datos) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //echo "hola";
+
+            $datos = array(
+                "nombre" => $_POST["nombre"],
+                "apellido" => $_POST["apellido"],
+                "fecha_nacimiento" => $_POST["fechaNacimiento"],
+                "estado_civil" => $_POST["estadoCivil"],
+                "pais_origen" => $_POST["paisOrigen"],
+                "pais_residencia_fiscal" => $_POST["paisResidenciaFiscal"],
+                "pais_domicilio" => $_POST["paisDomicilio"],
+                "numero_pasaporte" => $_POST["numeroPasaporte"],
+                "pais_pasaporte" => $_POST["paisPasaporte"],
+                "tipo_visa" => $_POST["tipoVisa"],
+                "direccion_local" => $_POST["direccionLocal"],
+                "telefonos" => $_POST["telefonos"],
+                "emails" => $_POST["emails"],
+                "industria" => $_POST["industria"],
+                "nombre_negocio_local" => $_POST["nombreNegocioLocal"],
+                "ubicacion_negocio_principal" => $_POST["ubicacionNegocioPrincipal"],
+                "tamano_negocio" => $_POST["tamanoNegocio"],
+                "contacto_ejecutivo_local" => $_POST["contactoEjecutivoLocal"],
+                "numero_empleados" => $_POST["numeroEmpleados"] == '' ? 0 : $_POST["numeroEmpleados"],
+                "numero_hijos" => $_POST["numeroHijos"] == '' ? 0 : $_POST["numeroHijos"],
+                "razon_consultoria" => $_POST["razonConsultoria"],
+                "requiere_registro_corporacion" => $_POST["requiereRegistroCorporacion"],                
+                "observaciones" => $_POST["observaciones"],
+                "ciudad" => $_POST["ciudad"],
+                "id_solicitud" => 189, //$_POST["id_solicitud"]
+                "numero_solicitud" => $_POST["numeroSolicitud"]
+            );
+    
+            $respuesta = ModelSolicitud::mdlInsertarPersonaCliente($datos);
+            header('Content-Type: application/json');
+            if ($respuesta == "ok") {
+                echo json_encode(["status" => "ok"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => $respuesta]);
+            }
+        }
+    }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -517,12 +590,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->crearSociedad();
         }elseif($_POST['accion'] == 'insertarEgreso') {
             $controlador->insertarEgreso();
+        }elseif ($_POST['accion'] === 'guardarSociedad') {
+            $controlador->guardarSociedad($_POST);
         }elseif ($_POST['accion'] === 'obtenerSolicitud') {
             $idSolicitud = $_POST['id_solicitud'];
             $solicitud = $controlador->getSolicitudEgresos($idSolicitud);
             
         }
-         else {
+        else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
 

@@ -90,6 +90,7 @@ if (!isset($_SESSION['usuario'])) {
                                         <th>Id Servicio</th>
                                         <th>Nombre Servicio</th>
                                         <th>Fecha Creacion</th>
+                                        <th colspan="2">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="servicios_patrimonium"></tbody>
@@ -100,9 +101,62 @@ if (!isset($_SESSION['usuario'])) {
                     <!-- /.card -->
                 </div>
             </div>
+
+            <div class="modal fade" id="modalActualizarServicio" tabindex="-1" role="dialog" aria-labelledby="modalActualizarServicioLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalActualizarServicioLabel">Actualizar Servicio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <!-- <div class="form-group">
+                                    <label for="id_servicio">ID Servicio</label>
+                                </div> -->
+                                <input type="hidden" class="form-control" id="id_servicio">
+                                <div class="form-group">
+                                    <label for="nombre_servicio_actualizar">Nombre Servicio</label>
+                                    <input type="text" class="form-control" id="nombre_servicio_actualizar">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="btnActualizarServicio">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalEliminarServicio" tabindex="-1" role="dialog" aria-labelledby="modalEliminarServicioLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEliminarServicioLabel">Eliminar Servicio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" class="form-control" id="id_servicio_eliminar">
+                                <p>Se eliminara el servicio: <b id="nombre_servicio_eliminar"></b></p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" id="btnEliminarServicio">Eliminar Servicio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </div>        
-  
+
 </body>
 <?php include_once "footer/footer_views.php"; ?>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -115,34 +169,34 @@ if (!isset($_SESSION['usuario'])) {
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
     
     <script>
-    $(document).ready(function() {
-        $('#serviciosForm').on('submit', function(event) {
-            event.preventDefault(); // Evita el comportamiento predeterminado del formulario
-            var datos = $(this).serialize() + "&action=guardarServicio"; // Serializa los datos del formulario
-            console.log(datos);  
-            $.ajax({
-                type: "POST",
-                url: "../controller/serviciosPatriniumController.php",
-                data: datos,
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response);
-                    if (response.resultado == 0) {
-                        alert("fallo :(");
-                    } else {
-                        alert("Agregado con éxito");
-                        window.location.href = 'servicios_patrinium.php';
+        $(document).ready(function() {
+            $('#serviciosForm').on('submit', function(event) {
+                event.preventDefault(); // Evita el comportamiento predeterminado del formulario
+                var datos = $(this).serialize() + "&action=guardarServicio"; // Serializa los datos del formulario
+                console.log(datos);  
+                $.ajax({
+                    type: "POST",
+                    url: "../controller/serviciosPatriniumController.php",
+                    data: datos,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.resultado == 0) {
+                            alert("fallo :(");
+                        } else {
+                            alert("Agregado con éxito");
+                            window.location.href = 'servicios_patrinium.php';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al enviar los datos: ', xhr.responseText);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error al enviar los datos: ', xhr.responseText);
-                }
+                });
             });
         });
-    });
-</script>
- <script>
-       $(document).ready(function() {
+    </script>
+    <script>
+        $(document).ready(function() {
             $.ajax({
                 url: '../controller/serviciosPatriniumController.php',
                 type: 'POST',
@@ -152,12 +206,21 @@ if (!isset($_SESSION['usuario'])) {
                     console.log(response);
                     let tbody = $('#servicios_patrimonium');
                     tbody.empty();
-
                     $.each(response, function(index, servicio) {
                         let row = `<tr>
                             <td>${servicio.id_servicio}</td>
                             <td>${servicio.nombre_servicio}</td>
                             <td>${servicio.created_at}</td>
+                            <td>
+                                <a style="margin-right: 10px;"  class="btn btn-success m-0" data-toggle="modal" data-target="#modalActualizarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}" data-created="${servicio.created_at}">
+                                    Actualizar
+                                </a>
+                            </td>
+                            <td>
+                                <a style="margin-right: 10px;" class="btn btn-danger m-0" data-toggle="modal" data-target="#modalEliminarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>`;
                         tbody.append(row);
                     });
@@ -169,4 +232,83 @@ if (!isset($_SESSION['usuario'])) {
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#modalActualizarServicio').on('show.bs.modal', function(event) {
+                var button  = $(event.relatedTarget); 
+                var id      = button.data('id');
+                var nombre  = button.data('nombre');
+                var created = button.data('created');
+
+                var modal = $(this);
+                modal.find('.modal-body #id_servicio').val(id);
+                modal.find('.modal-body #nombre_servicio_actualizar').val(nombre);
+                modal.find('.modal-body #created_at').val(created);
+            });
+            $('#modalEliminarServicio').on('show.bs.modal', function(event) {
+                var button  = $(event.relatedTarget); 
+                var id      = button.data('id');
+                var nombre  = button.data('nombre');
+                
+                var modal = $(this); 
+                modal.find('.modal-body #id_servicio_eliminar').val(id);
+                modal.find('.modal-body #nombre_servicio_eliminar').text(nombre);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#btnActualizarServicio').on('click', function() {
+                var id      = $('#id_servicio').val();
+                var nombre  = $('#nombre_servicio_actualizar').val();
+                $.ajax({
+                    url: '../controller/serviciosPatriniumController.php',
+                    type: 'POST',
+                    data: {
+                        action: 'actualizarServicio',
+                        id_servicio: id,
+                        nombre_servicio: nombre,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.resultado == 0) {
+                            alert("fallo :(");
+                        } else {
+                            alert("Actualizado con éxito");
+                            window.location.href = 'servicios_patrinium.php';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al enviar los datos: ', xhr.responseText);
+                    }
+                });
+            });
+            $('#btnEliminarServicio').on('click', function() {
+                var id      = $('#id_servicio_eliminar').val();
+                $.ajax({
+                    url: '../controller/serviciosPatriniumController.php',
+                    type: 'POST',
+                    data: {
+                        action: 'eliminarServicio',
+                        id_servicio: id,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.resultado == 0) {
+                            alert("fallo :(");
+                        } else {
+                            alert("Servicio eliminado con éxito");
+                            window.location.href = 'servicios_patrinium.php';
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al enviar los datos: ', xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
 </html>

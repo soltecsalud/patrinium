@@ -5,7 +5,9 @@ class Conexion{
 
     $contrasena = "root";
     $usuario = "postgres";
-    $BD = "patrimonium_noviembre15";
+    // $BD = "patrimonium_noviembre15";
+    $BD = "patrimonium";
+    // $BD      = "patrimonium_vb2";
     $rutaServidor = "127.0.0.1";
     $puerto = "5432";
 
