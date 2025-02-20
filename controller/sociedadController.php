@@ -60,9 +60,9 @@ class SociedadController{
         }
     }
     
-    public function getPersonaSociedadySociedad(){
+    public function getPersonaSociedadySociedad($idSolicitud){
         try {
-            $sociedades = modelSociedad::mdlGetPersonaSociedadySociedad(); 
+            $sociedades = modelSociedad::mdlGetPersonaSociedadySociedad($idSolicitud); 
             header('Content-Type: application/json');
             echo json_encode($sociedades);
         } catch (Exception $e) {
@@ -95,10 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
     if (isset($_GET['accion']) && $_GET['accion'] == 'getSociedades') {
+        $idSolicitud = isset($_GET['idSolicitud']) ? $_GET['idSolicitud'] : null;
         //echo "Acción recibida: getSociedades"; // 
         $controlador = new SociedadController();
         // $controlador->getSociedades();
-         $controlador->getPersonaSociedadySociedad();
+         $controlador->getPersonaSociedadySociedad($idSolicitud);
     } else {
         echo json_encode(["resultado" => 0, "mensaje" => "Acción no especificada o incorrecta este error."]);
     }

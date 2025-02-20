@@ -434,13 +434,20 @@ tr:hover {
                                                 $solicitudes    = $controlador->getSociedades($id_revisar_solicitud);
                                                 $idSociedades   = $controlador->getSociedadesSociedades($id_revisar_solicitud);
                                                 $miembrosSociedad = [];
+                                                $miembrosClientes = [];
                                                 foreach ($idSociedades as $value) { 
-                                                    $uuids = explode(",", trim($value['conjunto_sociedades'], "{}"));
+                                                    $uuids      = explode(",", trim($value['conjunto_sociedades'], "{}"));
+                                                    $idClientes = explode(",", trim($value['clientes'], "{}"));
                                                     foreach ($uuids as $uuid) {
                                                         $buscarMiembroSociedad = $controlador->buscarSociedadxSociedad($uuid);
-                                                        $miembrosSociedad[] = implode(", ", $buscarMiembroSociedad);
+                                                        $miembrosSociedad[]    = implode(", ", $buscarMiembroSociedad);
+                                                    }
+                                                    foreach ($idClientes as $uuid) {
+                                                        $buscarMiembroCliente = $controlador->buscarSociedadCliente($uuid);
+                                                        $miembrosClientes[]   = implode(", ", $buscarMiembroCliente);
                                                     }
                                                 }
+
                                                 // Array para agrupar representantes por sociedad
                                                 $sociedades_representantes = [];
 
@@ -475,7 +482,10 @@ tr:hover {
                                                                             foreach ($miembrosSociedad as $miembro) {
                                                                                 echo $miembro . "<br>";
                                                                             }
-                                                                            ?>
+                                                                            foreach ($miembrosClientes as $cliente) {
+                                                                                echo $cliente . "<br>";
+                                                                            }
+                                                                        ?>
                                                                     </span>
                                                                     <?php foreach ($representantes as $representante) { ?>
                                                                         <span class="info-box-text">
@@ -1345,6 +1355,7 @@ tr:hover {
       <div class="modal-body">
         <input type="url" name="conjunto_sociedades[]" id="conjunto_sociedades">
         <input type="url" name="conjunto_personas[]" id="conjunto_personas">
+        <input type="url" name="conjunto_clientes[]" id="conjunto_clientes">
         <form id="formCrearSociedad">
           <!-- Nombre de la Sociedad -->
           <div class="form-group">
@@ -1899,15 +1910,23 @@ $(document).ready(function() {
         $.ajax({
             url: '../controller/sociedadController.php',
             type: 'GET',
-            data: { accion: 'getSociedades' },
+            data: { accion: 'getSociedades', idSolicitud: '<?php echo $id_revisar_solicitud; ?>' },
             dataType: 'json',
             success: function(data) {
                 console.log('Respuesta del servidor:', data); // Depuración
                 selectElement.empty();
                 selectElement.append('<option value="">Selecciona una Persona</option>');
                 $.each(data, function(index, item) {
-                    var idSociedad = item.uuid === null ? item.id_sociedad : item.uuid;
-                    selectElement.append('<option value="' + idSociedad + '">' + item.nombre + '</option>');
+                    var idSociedad;
+                    if(item.uuid === null && item.idcliente === 0){
+                        idSociedad = item.id_sociedad;
+                    }else if(item.uuid === null && item.id_sociedad === 0){
+                        idSociedad = item.idcliente;
+                    }else if(item.id_sociedad === 0 && item.idcliente === 0){
+                        idSociedad = item.uuid;
+                    }
+                    // var idSociedad = item.uuid === null ? item.id_sociedad : item.uuid;
+                    selectElement.append('<option value="' + idSociedad + '" data-id="' + item.tipo + '"  >' + item.nombre + '</option>');
                 });
             },
             error: function(xhr, status, error) {
@@ -1974,8 +1993,11 @@ $(document).ready(function() {
         var conjunto_sociedades = document.getElementById('conjunto_sociedades').value;
         var conjunto_personas   = document.getElementById('conjunto_personas').value;
         var nombreSociedad = '{' + conjunto_sociedades + '}'; 
+
+        var conjunto_clientes = '{' + document.getElementById('conjunto_clientes').value + '}'; 
+
         // Si todo está bien, serializar los datos del formulario
-        var datosFormulario = $('#formCrearSociedad').serialize() + '&conjuntopersonas=' + conjunto_personas + '&sociedades=' + nombreSociedad +  '&uuid=' + uuid + '&accion=crearSociedad';
+        var datosFormulario = $('#formCrearSociedad').serialize() + '&conjuntopersonas=' + conjunto_personas + '&conjuntoclientes=' + conjunto_clientes + '&sociedades=' + nombreSociedad  +'&uuid=' + uuid + '&accion=crearSociedad';
         // console.log('Datos enviados:', datosFormulario);
         // console.log('============');
         // console.log('conjunto_sociedades:', nombreSociedad); 
@@ -2008,18 +2030,31 @@ $(document).ready(function() {
 $(document).on('change', '.selectPersona', function() {
     var selectedUUIDs  = [];
     var selectedUUIDs2 = [];
+    var selectedUUIDs3 = [];
     $('.selectPersona').each(function() {
         var selectedValue = $(this).val();
+        var selectedTipo  = $(this).find('option:selected').data('id');
+        // alert(selectedTipo);
         if (selectedValue) {
-            if(selectedValue.length > 2) {
+            if(selectedTipo == 'sociedad'){
                 selectedUUIDs.push(selectedValue);
-            }else{
+            }else if(selectedTipo == 'miembro'){
                 selectedUUIDs2.push(selectedValue);
+            }else if(selectedTipo == 'cliente'){
+                selectedUUIDs3.push(selectedValue);
             }
         }
+        // if (selectedValue) {
+        //     if(selectedValue.length > 2) {
+        //         selectedUUIDs.push(selectedValue);
+        //     }else{
+        //         selectedUUIDs2.push(selectedValue);
+        //     }
+        // }
     });
     $('#conjunto_sociedades').val(selectedUUIDs.join(','));
     $('#conjunto_personas').val(selectedUUIDs2.join(','));
+    $('#conjunto_clientes').val(selectedUUIDs3.join(','));
     
 });
 

@@ -76,12 +76,19 @@ class modelSociedad{
         }
     }
 
-    static public function mdlGetPersonaSociedadySociedad(){
+    static public function mdlGetPersonaSociedadySociedad($idSolicitud){
         try {
-            $sqlListarSociedades = "SELECT id_sociedad,nombre || apellido AS nombre,NULL as uuid FROM sociedad AS s
+            // $sqlListarSociedades = "SELECT id_sociedad,nombre || apellido AS nombre,NULL as uuid FROM sociedad AS s
+            //                         UNION
+            //                         SELECT id_personas_sociedad,nombre_sociedad,uuid from personas_sociedad";
+            $sqlListarSociedades = "SELECT DISTINCT(NULL) as uuid,id_sociedad,0 as idcliente,nombre||' ' ||apellido AS nombre,'miembro' as tipo FROM sociedad AS s
                                     UNION
-                                    SELECT id_personas_sociedad,nombre_sociedad,uuid from personas_sociedad";
+                                    SELECT DISTINCT(uuid),0,0 as idcliente,nombre_sociedad,'sociedad' as tipo from personas_sociedad
+                                    UNION
+                                    SELECT DISTINCT(NULL) as uuid,0,id_persona_cliente  as idcliente, nombre||' ' ||apellido AS nombre,'cliente' as tipo FROM personas_cliente
+                                    WHERE numero_solicitud=:id_solicitud";
             $listaSociedades = Conexion::conectar()->prepare($sqlListarSociedades);
+            $listaSociedades->bindParam(":id_solicitud", $idSolicitud, PDO::PARAM_INT);
             $listaSociedades->execute();
             return $listaSociedades->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {

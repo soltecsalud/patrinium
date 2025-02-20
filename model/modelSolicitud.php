@@ -415,9 +415,9 @@ class ModelSolicitud
 
 
             $sql = "INSERT INTO public.personas_sociedad (
-                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user, uuid, conjunto_sociedades
+                    nombre_sociedad, fk_persona, porcentaje, fk_solicitud, create_at, create_user, uuid, conjunto_sociedades, fk_persona_cliente
                 )VALUES (
-                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user,:uuid, :conjuntoSociedades
+                    :nombre_sociedad, :fk_persona, :porcentaje, :fk_solicitud, NOW(), :create_user,:uuid, :conjuntoSociedades, :fkpersonacliente
                 );
             ";
 
@@ -433,6 +433,7 @@ class ModelSolicitud
             $stmt->bindParam(':create_user', $datos['create_user'], PDO::PARAM_STR);
             $stmt->bindParam(':uuid', $datos['uuid'], PDO::PARAM_STR);
             $stmt->bindParam(':conjuntoSociedades', $datos['conjuntosociedad'], PDO::PARAM_STR);
+            $stmt->bindParam(':fkpersonacliente', $datos['conjuntoclientes']);
 
             // Ejecutar la consulta
             return $stmt->execute() ? "ok" : "error";
@@ -547,7 +548,7 @@ class ModelSolicitud
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "SELECT
-                distinct(a.conjunto_sociedades)
+                distinct(a.conjunto_sociedades),fk_persona_cliente as clientes
                 from personas_sociedad a
                 where a.fk_solicitud = :id_solicitud and a.conjunto_sociedades is not null";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
@@ -567,6 +568,22 @@ class ModelSolicitud
             $sqlBuscarSociedad = "SELECT
                 distinct (nombre_sociedad) FROM personas_sociedad
                 where uuid = :identi";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlBuscarSociedad);   
+            $listaSolicitud->bindParam(':identi', $sociedad);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetch(PDO::FETCH_ASSOC);
+            
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function buscarSociedadCliente($sociedad){
+        try {
+            $sqlBuscarSociedad = "SELECT
+                nombre||' ' ||apellido AS nombrecompleto FROM personas_cliente
+                where id_persona_cliente = :identi";
             $listaSolicitud = Conexion::conectar()->prepare($sqlBuscarSociedad);   
             $listaSolicitud->bindParam(':identi', $sociedad);        
             $listaSolicitud->execute();

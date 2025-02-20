@@ -322,23 +322,26 @@ class Solicitud_controller{
         $conjuntopersonasA = explode(',', $_POST['conjuntopersonas']);
         // echo json_encode($conjuntopersonasA);
         // return;
+
+        $conjuntoClientes = $_POST['conjuntoclientes'];
         
     
         // Iterar sobre cada persona y porcentaje
         foreach ($conjuntopersonasA as $index => $persona) {
             $datos = [
                 'uuid' => $uuid,
-                'nombre_sociedad' => $nombreSociedad,
-                'fk_persona' => $persona,
-                'porcentaje' => $porcentajes[$index],
-                'fk_solicitud' => $fk_solicitud,
-                'create_user' => $create_user,
-                'conjuntopersonas'=> $persona,
-                'conjuntosociedad' => $_POST['sociedades']
+                'nombre_sociedad'  => $nombreSociedad,
+                'fk_persona'       => $persona,
+                'porcentaje'       => $porcentajes[$index],
+                'fk_solicitud'     => $fk_solicitud,
+                'create_user'      => $create_user,
+                'conjuntopersonas' => $persona,
+                'conjuntosociedad' => $_POST['sociedades'],
+                'conjuntoclientes' => $conjuntoClientes
             ];
 
-        //    echo json_encode($datos);
-        //    return;
+            // echo json_encode($datos);
+            // return;
     
             // Insertar cada registro en la base de datos
             $respuesta = ModelSolicitud::insertarSociedad($datos);
@@ -466,6 +469,12 @@ class Solicitud_controller{
             $modelo = new ModelSolicitud();
             return $modelo->buscarSociedadxSociedad($id_solicitud);
             // return $solicitud[0];
+        }
+
+        public function buscarSociedadCliente($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            return $modelo->buscarSociedadCliente($id_solicitud);
         }
 
         public function obtenerDescripciones($idSolicitud) {
