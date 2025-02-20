@@ -318,13 +318,19 @@ class Solicitud_controller{
         $create_user = 'usuario_ejemplo'; // Aquí pones el usuario que crea la sociedad
         $uuid = $_POST['uuid'];// Generar un UUID para la sociedad
 
-        $conjuntopersonas  = $_POST['conjuntopersonas'];
-        $conjuntopersonasA = explode(',', $_POST['conjuntopersonas']);
+        $conjuntopersonas  = $_POST['conjuntopersonas'] == '' ? '0' : $_POST['conjuntopersonas'];
+
+        // echo json_encode($conjuntopersonas);
+        // return;
+
+        $conjuntopersonasA = explode(',', $conjuntopersonas);
         // echo json_encode($conjuntopersonasA);
         // return;
 
-        $conjuntoClientes = $_POST['conjuntoclientes'];
-        
+        $conjuntoClientes = $_POST['conjuntoclientes'] == '{}' ? '{1}' : $_POST['conjuntoclientes'];
+
+        // echo json_encode($conjuntoClientes);
+        // return;
     
         // Iterar sobre cada persona y porcentaje
         foreach ($conjuntopersonasA as $index => $persona) {
@@ -463,6 +469,15 @@ class Solicitud_controller{
             return $modelo->obtenerSociedadesSociedades($id_solicitud);
             // return $solicitud;
         }
+
+        public function obtenerSociedadesCliente($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            return $modelo->obtenerSociedadesCliente($id_solicitud);
+            // return $solicitud;
+        }
+
+        
 
         public function buscarSociedadxSociedad($id_revisar_solicitud){
             $id_solicitud = $id_revisar_solicitud;

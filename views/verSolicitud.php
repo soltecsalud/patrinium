@@ -433,20 +433,36 @@ tr:hover {
                                                 $controlador = new Solicitud_controller();
                                                 $solicitudes    = $controlador->getSociedades($id_revisar_solicitud);
                                                 $idSociedades   = $controlador->getSociedadesSociedades($id_revisar_solicitud);
+                                                $idClientes     = $controlador->obtenerSociedadesCliente($id_revisar_solicitud);
                                                 $miembrosSociedad = [];
                                                 $miembrosClientes = [];
                                                 foreach ($idSociedades as $value) { 
                                                     $uuids      = explode(",", trim($value['conjunto_sociedades'], "{}"));
-                                                    $idClientes = explode(",", trim($value['clientes'], "{}"));
+                                                    // $idClientes = explode(",", trim($value['clientes'], "{}"));
                                                     foreach ($uuids as $uuid) {
                                                         $buscarMiembroSociedad = $controlador->buscarSociedadxSociedad($uuid);
-                                                        $miembrosSociedad[]    = implode(", ", $buscarMiembroSociedad);
+                                                        if (is_array($buscarMiembroSociedad)) {
+                                                            $miembrosSociedad[]    = implode(", ", $buscarMiembroSociedad);
+                                                        }
                                                     }
-                                                    foreach ($idClientes as $uuid) {
+                                                    // foreach ($idClientes as $uuid) {
+                                                    //     $buscarMiembroCliente = $controlador->buscarSociedadCliente($uuid);
+                                                    //     if($buscarMiembroCliente){
+                                                    //         $miembrosClientes[]   = implode(", ", $buscarMiembroCliente);
+                                                    //     }
+                                                    // }
+                                                }
+                                                
+                                                foreach ($idClientes as $value) {
+                                                    $uuids      = explode(",", trim($value['clientes'], "{}"));
+                                                    foreach ($uuids as $uuid) {
                                                         $buscarMiembroCliente = $controlador->buscarSociedadCliente($uuid);
-                                                        $miembrosClientes[]   = implode(", ", $buscarMiembroCliente);
+                                                        if($buscarMiembroCliente){
+                                                            $miembrosClientes[]   = implode(", ", $buscarMiembroCliente);
+                                                        }
                                                     }
                                                 }
+
 
                                                 // Array para agrupar representantes por sociedad
                                                 $sociedades_representantes = [];
@@ -489,8 +505,11 @@ tr:hover {
                                                                     </span>
                                                                     <?php foreach ($representantes as $representante) { ?>
                                                                         <span class="info-box-text">
-                                                                            <?php echo $representante['nombre_completo']; ?> - <?php echo $representante['porcentaje']; ?>%<br>
-                                                                            
+                                                                            <?php  
+                                                                                if($representante['nombre_completo'] != ''){
+                                                                                    echo $representante['nombre_completo'].' '.$representante['porcentaje'].'%';
+                                                                                }
+                                                                            ?>
                                                                         </span>
                                                                     <?php } ?>
                                                                 </div>

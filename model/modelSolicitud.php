@@ -530,7 +530,7 @@ class ModelSolicitud
                 a.uuid,
                 a.conjunto_sociedades
                 from personas_sociedad a
-                inner join sociedad b ON(a.fk_persona = b.id_sociedad)
+                left join sociedad b ON(a.fk_persona = b.id_sociedad)
                 where a.fk_solicitud = :id_solicitud
                 group  by 1,2,3,4,5";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
@@ -548,7 +548,25 @@ class ModelSolicitud
         try {
             $solicitud_id = $id_solicitud;
             $sqlListarSolicitud = "SELECT
-                distinct(a.conjunto_sociedades),fk_persona_cliente as clientes
+                distinct(a.conjunto_sociedades)
+                from personas_sociedad a
+                where a.fk_solicitud = :id_solicitud and a.conjunto_sociedades is not null";
+            $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
+            $listaSolicitud->bindParam(':id_solicitud', $solicitud_id, PDO::PARAM_INT);        
+            $listaSolicitud->execute();
+            $resultados = $listaSolicitud->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $resultados;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerSociedadesCliente($id_solicitud){
+        try {
+            $solicitud_id = $id_solicitud;
+            $sqlListarSolicitud = "SELECT
+                fk_persona_cliente as clientes
                 from personas_sociedad a
                 where a.fk_solicitud = :id_solicitud and a.conjunto_sociedades is not null";
             $listaSolicitud = Conexion::conectar()->prepare($sqlListarSolicitud);   
