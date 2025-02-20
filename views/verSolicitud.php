@@ -437,20 +437,15 @@ tr:hover {
                                                 $miembrosSociedad = [];
                                                 $miembrosClientes = [];
                                                 foreach ($idSociedades as $value) { 
-                                                    $uuids      = explode(",", trim($value['conjunto_sociedades'], "{}"));
-                                                    // $idClientes = explode(",", trim($value['clientes'], "{}"));
-                                                    foreach ($uuids as $uuid) {
-                                                        $buscarMiembroSociedad = $controlador->buscarSociedadxSociedad($uuid);
-                                                        if (is_array($buscarMiembroSociedad)) {
-                                                            $miembrosSociedad[]    = implode(", ", $buscarMiembroSociedad);
+                                                    if (preg_match('/^\{.+\}$/', $value['conjunto_sociedades'])) {
+                                                        $uuids = explode(",", trim($value['conjunto_sociedades'], "{}"));
+                                                        foreach ($uuids as $uuid) {
+                                                            $buscarMiembroSociedad = $controlador->buscarSociedadxSociedad($uuid);
+                                                            if (is_array($buscarMiembroSociedad)) {
+                                                                $miembrosSociedad[]    = implode(", ", $buscarMiembroSociedad);
+                                                            }
                                                         }
                                                     }
-                                                    // foreach ($idClientes as $uuid) {
-                                                    //     $buscarMiembroCliente = $controlador->buscarSociedadCliente($uuid);
-                                                    //     if($buscarMiembroCliente){
-                                                    //         $miembrosClientes[]   = implode(", ", $buscarMiembroCliente);
-                                                    //     }
-                                                    // }
                                                 }
                                                 
                                                 foreach ($idClientes as $value) {
@@ -473,6 +468,8 @@ tr:hover {
                                                         $uuidString = str_replace(["{", "}"], "", $datosSOlicitud['conjunto_sociedades']);
                                                         $uuidArray  = explode(",", $uuidString);
 
+                                                        // $tieneSociedad = $datosSOlicitud['conjunto_sociedades'];
+
                                                         foreach ($uuidArray as $uuid) {
                                                             if(!empty($uuid)){
                                                                 $nombreSociedad = $controlador->buscarSociedadxSociedad($uuid);
@@ -482,6 +479,7 @@ tr:hover {
                                                             'nombre_completo' => $datosSOlicitud['nombre_completo'],
                                                             'porcentaje' => $datosSOlicitud['porcentaje'],
                                                             'uuid' => $datosSOlicitud['uuid'],
+                                                            'tieneSociedad' => $datosSOlicitud['conjunto_sociedades']
                                                         ];
                                                     }
 
@@ -495,9 +493,12 @@ tr:hover {
                                                                     <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
                                                                     <span class="info-box-text">
                                                                         <?php 
-                                                                            foreach ($miembrosSociedad as $miembro) {
-                                                                                echo $miembro . "<br>";
+                                                                            if (preg_match('/^\{.+\}$/', $representantes[0]['tieneSociedad'])) {
+                                                                                foreach ($miembrosSociedad as $miembro) {
+                                                                                    echo $miembro . "<br>";
+                                                                                }
                                                                             }
+                                                                        
                                                                             foreach ($miembrosClientes as $cliente) {
                                                                                 echo $cliente . "<br>";
                                                                             }
