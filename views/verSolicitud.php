@@ -502,9 +502,12 @@ tr:hover {
                                                                                     $tieneMiembro = $miembro;
                                                                                 }
                                                                             }
-                                                                        
+                                                                            $tieneCliente = '';
                                                                             foreach ($miembrosClientes as $cliente) {
-                                                                                echo $cliente . "<br>";
+                                                                                if($tieneCliente!=$cliente){
+                                                                                    echo $cliente . "<br>";
+                                                                                }
+                                                                                $tieneCliente = $cliente;
                                                                             }
                                                                         ?>
                                                                     </span>
