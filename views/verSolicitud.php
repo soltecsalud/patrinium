@@ -1372,9 +1372,9 @@ tr:hover {
         </button>
       </div>
       <div class="modal-body">
-        <input type="url" name="conjunto_sociedades[]" id="conjunto_sociedades">
-        <input type="url" name="conjunto_personas[]" id="conjunto_personas">
-        <input type="url" name="conjunto_clientes[]" id="conjunto_clientes">
+        <input type="hidden" name="conjunto_sociedades[]" id="conjunto_sociedades">
+        <input type="hidden" name="conjunto_personas[]" id="conjunto_personas">
+        <input type="hidden" name="conjunto_clientes[]" id="conjunto_clientes">
         <form id="formCrearSociedad">
           <!-- Nombre de la Sociedad -->
           <div class="form-group">
