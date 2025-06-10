@@ -265,7 +265,7 @@ include_once "../controller/solicitudController.php";
                                                    //Servicios desde JSONb 
 
                                                           
-                                                            foreach ($servicios as $servicio): ?>
+                                                            // foreach ($servicios as $servicio): ?>
                                                                     <?php if (!empty($servicio['servicios'])): ?>
                                                                         <?php
                                                                         // Decodificar el JSONB
@@ -301,39 +301,7 @@ include_once "../controller/solicitudController.php";
                                                                         }
                                                                         ?>
                                                                     <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                                <?php foreach ($servicios as $servicio_adicionales): ?>
-                                                                    <?php if (!empty($servicio['servicios_adicionales'])): ?>
-                                                                        <?php
-                                                                        // Decodificar el JSONB
-                                                                        $datos_adicionales = json_decode($servicio['servicios_adicionales'], true);
-
-                                                                        // Verificar si la decodificación fue exitosa
-                                                                        if ($datos_adicionales) {
-                                                                           
-                                                                            // Iterar sobre cada par clave-valor del JSONB
-                                                                            foreach ($datos_adicionales as $clave => $valor) {
-                                                                               
-                                                                                ?>
-                                                                             
-                                                                              <div class="row">
-                                                                                    <div class="col-md-6 mb-3">
-                                                                                        <label><?php echo $valor; ?></label>
-                                                                                    </div>
-                                                                                    <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Qty" name="cantidad<?php echo $valor; ?>" class="form-control">
-                                                                                    </div>
-                                                                                    <div class="col-md-3 mb-3">
-                                                                                        <input type="text" placeholder="Unit Price" name="valor<?php echo $valor; ?>" class="form-control">
-                                                                                    </div>
-                                                                                </div>
-                                                                                
-                                                                                <?php
-                                                                            }
-                                                                        } 
-                                                                        ?>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
+                                                                
                                                                 <hr class="my-4 primary" > 
                                                                     <div class="row"> 
                                                                             <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
