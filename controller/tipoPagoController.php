@@ -50,11 +50,51 @@ class TipoPago {
         $detalle = ModelTipoPago::obtenerDetalleSociedad($id);
         echo json_encode($detalle);
     }
+
+    public function actualizarTipopago() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id' => $_POST['id_tipopago'] ?? null,
+                'nombre_tipo_pago' => $_POST['nombre_tipopago'] ?? null
+            ];
+            
+            $modelo = new ModelTipoPago();
+            $resultado = $modelo->actualizarTipoPago($data);
+            
+            if ($resultado == "ok") {
+                echo json_encode(['resultado' => 1]); // Éxito
+            } else {
+                echo json_encode(['resultado' => 0]); // Error
+            }
+        }
+    }
+
+    public function eliminarTipoPago() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id_tipopago'] ?? null;
+            if ($id) {
+                $modelo = new ModelTipoPago();
+                $resultado = $modelo->eliminarTipoPago($id);
+                if ($resultado == "ok") {
+                    echo json_encode(['resultado' => 1]); // Éxito
+                } else {
+                    echo json_encode(['resultado' => 0]); // Error
+                }
+            } else {
+                echo json_encode(['resultado' => 0, 'error' => 'ID de banco no proporcionado']);
+            }
+        }
+    }
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'guardarTipoPago') {
     $controller = new TipoPago();
     $controller->guardar();
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'actualizartipopago') {
+    $controller = new TipoPago();
+    $controller->actualizarTipopago();
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarTipoPago') {
     $controller = new TipoPago();
@@ -68,6 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($_POST['action'] == 'detalleSociedad') {
         $controller->detalleSociedad();
     }
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'eliminarTipoPago') {
+    $controller = new TipoPago();
+    $controller->eliminarTipoPago();
 }
 
 

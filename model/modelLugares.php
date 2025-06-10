@@ -60,7 +60,7 @@ class ModelLugares
 
     static public function mdlPersonas(){
         try {
-            $sqlListarPersona = "SELECT * FROM persona ";
+            $sqlListarPersona = "SELECT * FROM persona";
             $listaPersona = Conexion::conectar()->prepare($sqlListarPersona);
             $listaPersona->execute();
             return $listaPersona->fetchAll(PDO::FETCH_ASSOC);

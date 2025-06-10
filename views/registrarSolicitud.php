@@ -19,8 +19,14 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
     <title>Registrar ESE</title>
     <style>
+        .select2-results__options {
+    max-height: 200px; /* Ajusta según tu preferencia */
+    overflow-y: auto !important;
+}
         .card-registroSolicitudCliente {
             width: 70vw;
             margin: auto;
@@ -44,7 +50,8 @@ if (!isset($_SESSION['usuario'])) {
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3>Solicitudes</h3>
+                         <h3>Servicios A Prestar</h3>
+
                     </div>
                 </div>
             </div>
@@ -53,7 +60,8 @@ if (!isset($_SESSION['usuario'])) {
             <div class="container-fluid">
                 <div class="card card-dark shadow-lg card-registroSolicitudCliente">
                     <div class="card-header">
-                        <h3 class="card-title">Registrar Solicitud Cliente</h3>
+                        <h3 class="card-title">Ingreso De Servicios Solicitados Por El Cliente</h3>
+
                         <div class="card-tools">
                             <?php echo date('d/m/Y'); ?>
                             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
@@ -66,45 +74,42 @@ if (!isset($_SESSION['usuario'])) {
 
                         <!-- Grupo de Select -->
                         <div class="form-group">
-                            <label for="selectOptions">Selecciona Una Persona Registrada:</label>
-                            <select name="selectPersona" class="form-control" id="selectPersona">
-                                <option value="">Cargando opciones...</option>
-                            </select>
+                         <select name="selectPersona" class="form-control" id="selectPersona"></select>
                         </div>
 
-                         <!-- Grupo de Nombre del Cliente -->
-                         <div class="form-group">
+                        <!-- Grupo de Nombre del Cliente -->
+                        <div class="form-group">
                             
                             <input type="hidden" name="nombreCliente" class="form-control" id="nombreCliente" placeholder="Ingresa el nombre del cliente" value="no va ">
                         </div>
 
                         <!-- Grupo de Referido de -->
-                        <div class="form-group">
+                          <div class="form-group">
                             <label for="referidoDe">Referido:</label>
-                            <input type="text" name="referido_por" class="form-control" id="referidoDe" placeholder="¿Quién te refirió?">
-                        </div>
+                            <input type="hidden" name="referido_por" class="form-control" value="patrimonium" id="referidoDe" >
+                        </div> 
 
                         <!-- Grupo de Necesidad -->
                         <div class="form-group">
                             <label for="necesidad">Necesidad:</label>
-                            <textarea class="form-control" name="necesidad" rows="3" placeholder="Describe la necesidad"></textarea>
+                            <input type="hidden" name="necesidad" class="form-control" value="patrimonium" id="referidoDe" >
+                            
                         </div>
 
-                          <div class="servicios"></div>    
-                          <div class="row">
+                        <div class="servicios"></div>    
+                        <div class="row">
                             <div class="form-group" style="display: flex; justify-content: flex-end;">
-                                <button type="button" id="agregarCampo" class="btn btn-info"><i class="fas fa-plus-square"></i></button>
+                                <button type="button" id="agregarCampo" class="btn btn-info"><i class="fas fa-plus-square"></i> Agregar Servicios Especiales</button>
                             </div>
 
-                             <!-- Contenedor donde se agregarán los campos de texto -->
-                             <div id="contenedorCampos"></div>
+                        <!-- Contenedor donde se agregarán los campos de texto -->
+                        <div id="contenedorCampos"></div>
                         </div>
-                          <div class="row">
+                        <div class="row">
                             <button type="submit" id="btnCrearSolicitud" class="btn btn-primary" style="margin-top:1.5%;">Guardar</button>
                         </div>  
                     </form>
 
-                       
                     </div>
                 </div>
             </div>
@@ -115,6 +120,8 @@ if (!isset($_SESSION['usuario'])) {
     <?php include_once "footer/footer_views.php"; ?>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/additional-methods.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 </body>
 
 </html>
@@ -138,9 +145,9 @@ document.getElementById('agregarCampo').addEventListener('click', function() {
 
 
 $(document).ready(function(){
-      $('#btnCrearSolicitud').click(function(){        
-          var datos = $('#formulario-solicitud').serialize()+ "&accion=guardarSolicitud";
-          console.log(datos);  
+    $('#btnCrearSolicitud').click(function(){        
+        var datos = $('#formulario-solicitud').serialize()+ "&accion=guardarSolicitud";
+        console.log(datos);  
         $.ajax({
             type:"POST",
             url:"../controller/solicitudController.php",
@@ -152,13 +159,12 @@ $(document).ready(function(){
                 }else{
                     alert("Agregado con éxito");
                      // Redirección a listar_empresa.php
-                     window.location.href = 'listado_solicitudes.php';
+                    window.location.href = 'listado_solicitudes.php';
                 }
             }
-          });
-          return false;
         });
-        
+        return false;
+        });
     });
 
     $(document).ready(function() {
@@ -264,28 +270,38 @@ $(document).ready(function(){
     // Verificamos nuevos servicios cada 10 segundos
     setInterval(verificarNuevosServicios, 10000);
 });
-    $(document).ready(function() {
-        $.ajax({
-            url: '../controller/sociedadController.php',
-            type: 'GET',
-            data: { accion: 'getSociedades' },
-            dataType: 'json',
-            success: function(data) {
-                console.log('Respuesta del servidor:', data); // Depuración
-                var select = $('#selectPersona');
-                select.empty();
-                select.append('<option value="">Selecciona una Persona</option>');
-                $.each(data, function(index, item) {
-                    select.append('<option value="' + item.id_sociedad + '">' + item.nombre +" " + item.apellido + 
-                   
-                     '</option>');
-                });
-            },
-            error: function(xhr, status, error) {
+$(document).ready(function() {
+    $.ajax({
+        url: '../controller/sociedadController.php',
+        type: 'GET',
+        data: { accion: 'getSociedadesRegistrarSocilitud' },
+        dataType: 'json',
+        success: function(data) {
+            var select = $('#selectPersona');
+            select.empty();
+            select.append('<option value="">Selecciona un Cliente</option>');
+            $.each(data, function(index, item) {
+                select.append('<option value="' + item.uuid + '">' + item.nombre + '</option>');
+            });
+
+            // Destruir Select2 anterior si existe
+            if ($.fn.select2 && select.hasClass("select2-hidden-accessible")) {
+                select.select2('destroy');
+            }
+
+            // Activar Select2
+            select.select2({
+                theme: 'bootstrap4', // Requiere que tengas Bootstrap 4 cargado
+                placeholder: 'Selecciona un Cliente',
+                allowClear: true,
+                width: '100%' // Para que se ajuste al ancho del formulario
+            });
+        },
+        error: function(xhr, status, error) {
             console.error('Error en la solicitud AJAX:', status, error);
             console.log('Respuesta del servidor:', xhr.responseText);
             alert('Error al cargar las opciones');
         }
-        });
     });
+});
     </script>

@@ -5,6 +5,25 @@ if (!isset($_SESSION['usuario'])) {
 }
 ?>
 <div class="wrapper">
+<style>
+
+
+.sidebar .nav-item.bg-azul       { background-color: #003366; color: white; }
+.sidebar .nav-item.bg-celeste    { background-color: #007aa3; color: white; }
+.sidebar .nav-item.bg-verdeazul  { background-color: #009999; color: white; }
+.sidebar .nav-item.bg-verde      { background-color: #00b050; color: white; }
+.sidebar .nav-item.bg-verdeoliva { background-color: #669933; color: white; }
+.sidebar .nav-item.bg-verdeosc   { background-color: #4f6228; color: white; }
+.sidebar .nav-item.bg-naranja    { background-color: #f79646; color: white; }
+.sidebar .nav-item.bg-naranjosc  { background-color: #c0504d; color: white; }
+.sidebar .nav-item.bg-morado     { background-color: #7030a0; color: white; }
+
+
+.sidebar .nav-treeview .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+</style>
   <aside class="main-sidebar sidebar-dark-primary elevation-4" id="menuVertical" style="top: -57px;">
     <!-- Brand Logo -->
     <a href="./home.php" class="brand-link" style="text-decoration: none;">
@@ -19,62 +38,70 @@ if (!isset($_SESSION['usuario'])) {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Menu desplegable  -->
           <?php if (isset($_SESSION['solicitudes']) && $_SESSION['solicitudes'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item ">
               <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-clipboard"></i>
-                <p> Menu Preliminar <i class="right fas fa-angle-left"></i>
+                <i class="nav-icon fas fa-user-plus"></i>
+                <p> Nuevos Clientes <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="./crearPersona.php" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
-                    <p>Crear Clientes</p>
+                    <p>Ingreso Nuevos Clientes</p>
                   </a>
-                </li>
+                </li>              
                 <li class="nav-item">
                   <a href="./registrarSolicitud.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
-                    <p>Registro Servicio</p>
+                    <p>Servicios Solicitados A Nuevos Clientes</p>
                   </a>
-                </li>
+                </li> 
                 <li class="nav-item">
                   <a href="./listado_solicitudes.php" class="nav-link">
                     <i class="fa fa-list" aria-hidden="true"></i>
-                    <p>Estructura Preliminar Cliente</p>
+                    <p>Clientes Con Servicios En Proceso || Crear Sociedades Y Socios || Adjuntar Archivos || Contratar Terceros || Opciones </p>
+                  </a>
+                </li>              
+                <li class="nav-item">
+                  <a href="./crear_socio_extranjero.php" class="nav-link">
+                    <i class="nav-icon fas fa-tasks"></i>
+                    <p>Ingreso De Socio Extranjero</p>
                   </a>
                 </li>
+               
+              </ul>
+            </li>
+          <?php } ?>
+        
+          <?php if (isset($_SESSION['solicitudes']) && $_SESSION['solicitudes'] == 1) { ?>
+            <li class="nav-item bg-celeste">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p> Administracion Clientes<i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              
                 <li class="nav-item">
                   <a href="./ver_solicitud_adjuntos.php" class="nav-link">
                     <i class="fa fa-list" aria-hidden="true"></i>
-                    <p>Cliente Registrado & Aprobado</p>
+                    <p>Clientes || Sociedades || Facturas || Opciones || Nuevos Servicios Solicitados  || Servicios a Facturar || Consulta_Facturas  || Consulta_actas  || Consulta_Documentos_cliente</p>
                   </a>
                 </li>
-              </ul>
-            </li>
-          <?php } ?>
-          <?php if (isset($_SESSION['boi']) && $_SESSION['boi'] == 1) { ?>
-            <li class="nav-item">
-              <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-users"></i>
-                <p> BOI <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-
-              <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./revisar_socios_boi.php" class="nav-link">
+                  <a href="./verClientesSociedades.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
-                    <p>Revisar Socios</p>
+                    <p> Consulta De Sociedades</p>
                   </a>
                 </li>
               </ul>
-
-
             </li>
           <?php } ?>
+          
+          
           <?php if (isset($_SESSION['facturacion']) && $_SESSION['facturacion'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-verdeazul">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-users"></i>
                 <p> Facturacion <i class="right fas fa-angle-left"></i>
@@ -84,54 +111,95 @@ if (!isset($_SESSION['usuario'])) {
                 <li class="nav-item">
                   <a href="./factura.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
-                    <p>Facturas</p>
+                    <p>Facturas || Pagos || Cobros</p>
                   </a>
                 </li>
               </ul>
-              <ul class="nav nav-treeview">
+              <ul class="nav nav-treeview ">
                 <li class="nav-item">
                   <a href="./facturasPagadas.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
                     <p>Facturas Pagadas</p>
                   </a>
                 </li>
+              </ul> <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./solo_factura.php" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard"></i>
+                    <p>Factura Rapidas y Nuevas</p>
+                  </a>
+                </li>
               </ul>
             </li>
           <?php } ?>
           <?php if (isset($_SESSION['generar reportes']) && $_SESSION['generar reportes'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-verde">
               <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-share-square"></i>
+                <i class="nav-icon fas fa-file-invoice-dollar"></i>
                 <p>
-                  Generar Reportes <i class="right fas fa-angle-left"></i>
+                  Entrega Sociedades <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="./reportes_editables.php" class="nav-link">
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
-                    <p>Informes Sociedades</p>
+                    <p>Documentos y plantillas Para Personalizar Clientes</p>
                   </a>
                 </li>
-              </ul>
+              </ul>            	  
+            </li>
+          <?php } ?>
+          <?php if (isset($_SESSION['generar reportes']) && $_SESSION['generar reportes'] == 1) { ?>
+            <li class="nav-item bg-verdeoliva">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-sync-alt"></i>
+                <p>
+                Proceso Renovaciones<i class="right fas fa-angle-left"></i>
+                </p>
+              </a>                        
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./reporte_terceros.php" class="nav-link">
+                  <a href="./envio_correo_renovacion.php" class="nav-link">
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
-                    <p>Reporte Terceros</p>
+                    <p>Renovaciones || Anualidades</p>
                   </a>
                 </li>
               </ul>
             </li>
           <?php } ?>
-          <?php if (isset($_SESSION['crear generales']) && $_SESSION['crear generales'] == 1) { ?>
-            <li class="nav-item">
+          <?php if (isset($_SESSION['generar reportes']) && $_SESSION['generar reportes'] == 1) { ?>
+            <li class="nav-item bg-verdeosc">
               <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-clipboard"></i>
-                <p> Crear Generales <i class="right fas fa-angle-left"></i>
+                <i class="nav-icon fas fa-receipt"></i>
+                <p>
+                Impuestos & Extensiones<i class="right fas fa-angle-left"></i>
+                </p>
+              </a>                        
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./envio_correo_renovacion.php" class="nav-link">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <p>Proceso Impuestos y Extensiones</p>
+                  </a>
+                </li>
+              </ul>			  
+            </li>
+          <?php } ?>
+          <?php if (isset($_SESSION['crear generales']) && $_SESSION['crear generales'] == 1) { ?>
+            <li class="nav-item bg-naranja">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tools"></i>
+                <p> Crear Maestros || Sociedades || Clientes <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-              <ul class="nav nav-treeview">
+              <ul class="nav nav-treeview">               
+                <li class="nav-item">
+                  <a href="./gestionar_clientes.php" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard"></i>
+                    <p>Editar Clientes</p>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a href="./bancos_consignaciones.php" class="nav-link">
                     <i class="nav-icon fas fa-clipboard"></i>
@@ -141,7 +209,13 @@ if (!isset($_SESSION['usuario'])) {
                 <li class="nav-item">
                   <a href="./servicios_patrinium.php" class="nav-link">
                     <i class="nav-icon fa fa-list" aria-hidden="true"></i>
-                    <p>Servicios</p>
+                    <p>Adicionar Servicios</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./gestionar_socios.php" class="nav-link">
+                    <i class="nav-icon fa fa-list" aria-hidden="true"></i>
+                    <p>Convertir Socio a Clientes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -153,20 +227,32 @@ if (!isset($_SESSION['usuario'])) {
                 <li class="nav-item">
                   <a href="./tipo_documentos_adjuntos.php" class="nav-link">
                     <i class="nav-icon fa fa-list" aria-hidden="true"></i>
-                    <p>Tipo Documentos Adjuntos</p>
+                    <p>Adicionar Nombres Documentos Para Sociedad</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./tipo_sociedades.php" class="nav-link">
+                    <i class="nav-icon fa fa-list" aria-hidden="true"></i>
+                    <p>Adicionar Tipos Sociedad</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="./crear_tercero.php" class="nav-link">
                     <i class="nav-icon fa fa-list" aria-hidden="true"></i>
-                    <p>Terceros</p>
+                    <p>Contratacion Terceros</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./upLoadPlantilla.php" class="nav-link">
+                    <i class="nav-icon fa fa-list" aria-hidden="true"></i>
+                    <p>UpLoad Plantillas Para Entrega de sociedades</p>
                   </a>
                 </li>
               </ul>
             </li>
           <?php } ?>
           <?php if (isset($_SESSION['agendar']) && $_SESSION['agendar'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-verdeazul">
               <a href="./agenda.php" class="nav-link active">
                 <i class="nav-icon fa fa-calendar" aria-hidden="true"></i>
                 <p>Agenda <i class="right fas fa-angle-left"></i>
@@ -189,24 +275,48 @@ if (!isset($_SESSION['usuario'])) {
             </li>
           <?php } ?>
           <?php if (isset($_SESSION['informes']) && $_SESSION['informes'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-naranjosc">
               <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-file-alt"></i>
+                <i class="nav-icon fas fa-chart-bar"></i>
                 <p> Informes <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="indicadores.php" class="nav-link">
-                    <i class="nav-icon fas fa-tasks"></i>
-                    <p>Indicadores </p>
+                  <a href="./reporte_sociedades.php" class="nav-link">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <p>Reporte sociedades</p>
                   </a>
                 </li>
               </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./reporte_terceros.php" class="nav-link">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <p>Reporte Servicios Terceros</p>
+                  </a>
+                </li>
+              </ul> <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./reporte_extension_sociedades.php" class="nav-link">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <p>Reporte Extensiones</p>
+                  </a>
+                </li>
+              </ul>
+              
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./reporte_estados.php" class="nav-link">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    <p>Reporte Estados</p>
+                  </a>
+                </li>
+              </ul>        
             </li>
             <?php } ?>
           <?php if (isset($_SESSION['configuracion general']) && $_SESSION['configuracion general'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-morado">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-gear"></i>
                 <p> Configuracion General <i class="right fas fa-angle-left"></i>
@@ -246,6 +356,29 @@ if (!isset($_SESSION['usuario'])) {
                   <a href="./listaPermisos.php" class="nav-link">
                     <i class="nav-icon fas fa-lock"></i>
                     <p>Permisos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./prueba_informes.php" class="nav-link">
+                    <i class="nav-icon fas fa-lock"></i>
+                    <p>prueba reportes</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php } ?>
+          <?php if (isset($_SESSION['boi']) && $_SESSION['boi'] == 1) { ?>
+            <li class="nav-item">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-sync-alt"></i>
+                <p> BOI <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./revisar_socios_boi.php" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard"></i>
+                    <p>Revisar Socios</p>
                   </a>
                 </li>
               </ul>

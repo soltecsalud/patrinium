@@ -19,8 +19,7 @@ class Solicitud_controller{
 
 
     public function getListadoSolicitudes() {
-      
-        $modelo = new ModelSolicitud();
+        $modelo    = new ModelSolicitud();
         $solicitud = $modelo->obtenerAllSolicitud();
         return $solicitud;
     }
@@ -29,6 +28,13 @@ class Solicitud_controller{
         $id_solicitud = $id_enviado_desde_vista;
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->obtenerServicios($id_solicitud);
+        return json_encode($solicitud); 
+    }
+
+    public function verificarServicioEnFactura($id_enviado_desde_vista){
+        $id_solicitud = $id_enviado_desde_vista;
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->mdlVerificarServicioEnFactura($id_solicitud);
         return json_encode($solicitud); 
     }
 
@@ -50,10 +56,15 @@ class Solicitud_controller{
         echo $solicitud; // Imprimir el JSON decodificado correctamente
     }
 
-    public function getSociedad($id_enviado_desde_vista){
+    public function getSociedad($id_enviado_desde_vista,$valor){
         $id_solicitud = $id_enviado_desde_vista;
         $modelo = new ModelSolicitud();
-        $solicitud = $modelo->obtenerSociedad($id_solicitud);
+        if($valor == '0'){
+            $tabla = 'sociedad';
+        }else{
+            $tabla = 'personas_cliente';
+        }
+        $solicitud = $modelo->obtenerSociedad($id_solicitud,$tabla);
         return $solicitud;
     }
 
@@ -65,7 +76,6 @@ class Solicitud_controller{
     }
 
     public function getListadoSolicitudesConAdjuntos() {
-      
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->obtenerSolicitudesConAdjuntos();
         return $solicitud;
@@ -78,8 +88,6 @@ class Solicitud_controller{
         return $solicitud;
     }
 
-   
-
     public function getBancosConsignacion() {
         $modelo = new ModelSolicitud();
         $solicitud = $modelo->getBancosConsignacion();
@@ -91,10 +99,10 @@ class Solicitud_controller{
         $modelo = new ModelSolicitud();
     
         $datos = array(
-            "fk_Persona" => $_POST['selectPersona'],
+            "fk_Persona"     => $_POST['selectPersona'],
             "nombre_cliente" => $_POST['nombreCliente'],
-            "referido_por" => $_POST['referido_por'],
-            "necesidad" => $_POST['necesidad']
+            "referido_por"   => $_POST['referido_por'],
+            "necesidad"      => $_POST['necesidad']
         );
     
         // Obtiene los nombres dinámicos desde la BD
@@ -137,10 +145,10 @@ class Solicitud_controller{
         echo ($respuesta == "ok") ? 0 : 1;
     }
 
-    public function insertarRevision() {
+     public function insertarRevision() {
         $id_solicitud = $_POST['id_solicitud'];
-     
-        // Asumiendo que 'resource' es la carpeta dentro de la raíz del proyecto donde quieres guardar los archivos
+    
+        // Asumiendo que 'resource' es la carpeta dentro de la raÃ­z del proyecto donde quieres guardar los archivos
         $uploadsDir = __DIR__ . '/resource/';
         $folderName = $id_solicitud ; // La nueva subcarpeta para las revisiones
     
@@ -153,48 +161,67 @@ class Solicitud_controller{
             if (!mkdir($revisionPath, 0777, true)) {
                 die("Error al crear la carpeta de revisiones.");
             }
+            // DespuÃ©s de crear la carpeta, se aplica el chmod para asegurar de que tenga los permisos correctos
+            chmod($revisionPath, 0777);
         }
     
         // Procesamiento del archivo subido
         if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+
+            $obtenerNombreSociedad = ModelSolicitud::buscarNombreSociedad($_POST['sociedad']);    
+
             $fileName = $_FILES['archivo']['name'];
             // Asegurarse de limpiar el nombre del archivo para evitar vulnerabilidades
-            $fileName = basename($fileName);
+            $fileName = $obtenerNombreSociedad[0]. '_'. basename($fileName);
             $filePath = $revisionPath . $fileName;
             $descripcion = $_POST['descripcion'];
             $sociedad =$_POST['sociedad'];
+            $numero_registro = ($descripcion=='10' || $descripcion=='14') ? $_POST['numeroregistro'] : null;
+            
+            if($descripcion=='10'){
+                $fecha_entrega = $_POST['fechaein'];
+            }else if($descripcion=='14'){
+                $fecha_entrega = $_POST['fecharegistro'];
+            }else{
+                $fecha_entrega = null;
+            }
+            
+            // $fecha_entrega   = ($descripcion=='10' || $descripcion=='14') ? $_POST['fechaein'] : null;
             
 
             //crer array para envio al modelo e insercion a BD
             $datos = array(
-                "nombre_archivo" => $fileName ,
-                "descripcion" => $descripcion,
-                "id_solicitud" =>$id_solicitud,
-                "sociedad" => $sociedad  
+                "nombre_archivo"  => $fileName,
+                "descripcion"     => $descripcion,
+                "id_solicitud"    => $id_solicitud,
+                "sociedad"        => $sociedad,
+                "numero_registro" => $numero_registro,
+                "fecha_entrega"   => $fecha_entrega
                 );
            //envio a modulo para inserciono
             $respuesta = ModelSolicitud::insertarArchivoSolicitud($datos);    
 
             if($respuesta == "ok") {
-                echo 0; // Éxito
+                echo 0; // Ã‰xito
             } else {
                 echo 1; // Error
             }
             // Mover el archivo al directorio de revisiones
             if (move_uploaded_file($_FILES['archivo']['tmp_name'], $filePath)) {
                 // El archivo se ha cargado correctamente
-                // Aquí se podría incluir más lógica para manejar el archivo cargado,
+                // AquÃ­ se podrÃ­a incluir mÃ¡s lÃ³gica para manejar el archivo cargado,
                 // como insertar detalles en la base de datos.
-                echo "Archivo cargado con éxito: ".$fileName."variable:$$ ".$descripcion."&&&".$id_solicitud;
+                echo "Archivo cargado con Ã©xito: ".$fileName."variable:$$ ".$descripcion."&&&".$id_solicitud;
             } else {
                 // Error al mover el archivo
                 echo "Error al mover el archivo.";
             }
         } else {
-            // No se recibió ningún archivo válido o hubo un error en la carga
-            echo "No se ha seleccionado ningún archivo o ocurrió un error al cargarlo.";
+            // No se recibiÃ³ ningÃºn archivo vÃ¡lido o hubo un error en la carga
+            echo "No se ha seleccionado ningÃºn archivo o ocurriÃ³ un error al cargarlo.";
         }
     }
+
     
     public function insertarFactura() {
         $id_solicitud_factura = $_POST['id_solicitud'];
@@ -208,161 +235,245 @@ class Solicitud_controller{
         $adress=$_POST['adress'];
         $tax=$_POST['tax'];
         $number_tax=$_POST['numberTax'];
+        $selectPersonaFactura = $_POST['selectPersonaFactura'];
 
-    $datos = [
-        
-        "logo" => $logo,
-        "Total" => $total_factura,
-        "cuenta_bancaria" => $cuenta_bancaria,
-        "observaciones" => $observaciones,
-        "invoice_number" => $invoice_number,
-        "email" => $email,
-        "adress" => $adress,
-        "tax" => $tax,
-        "number_tax" => $number_tax,
-        "servicios" => []
-    ];
+        $datos = [
+            "logo" => $logo,
+            "Total" => $total_factura,
+            "cuenta_bancaria" => $cuenta_bancaria,
+            "observaciones" => $observaciones,
+            "invoice_number" => $invoice_number,
+            "email" => $email,
+            "adress" => $adress,
+            "tax" => $tax,
+            "number_tax" => $number_tax,
+            "selectPersonaFactura" => $selectPersonaFactura,
+            "servicios" => []
+        ];
 
-    // Procesar cada servicio detectando los nombres de campos que comienzan con 'cantidad' y 'valor'
-    foreach ($_POST as $clave => $valor) {
-        if (strpos($clave, 'cantidad') === 0) {
-            $key = substr($clave, 8); // Extraer la parte después de 'cantidad'
-            $datos['servicios'][$key]['cantidad'] = $valor;
-        } elseif (strpos($clave, 'valor') === 0) {
-            $key = substr($clave, 5); // Extraer la parte después de 'valor'
-            $datos['servicios'][$key]['valor'] = $valor;
+        // Procesar cada servicio detectando los nombres de campos que comienzan con 'cantidad' y 'valor'
+        foreach ($_POST as $clave => $valor) {
+            if (strpos($clave, 'cantidad') === 0) {
+                $key = substr($clave, 8); // Extraer la parte después de 'cantidad'
+				$key = str_replace('_', ' ', $key);
+                $datos['servicios'][$key]['cantidad'] = $valor;
+            } elseif (strpos($clave, 'valor') === 0) {
+                $key = substr($clave, 5); // Extraer la parte después de 'valor'
+				$key = str_replace('_', ' ', $key);
+                $datos['servicios'][$key]['valor'] = $valor;
+            } elseif (strpos($clave, 'check') === 0) {
+                $key = substr($clave, 5);
+				$key = str_replace('_', ' ', $key);
+                $datos['servicios'][$key]['check'] = $valor;
+            }else if(strpos($clave, 'descripcionservicio') === 0){
+                $key = substr($clave, 19);
+                $key = str_replace('_', ' ', $key);
+                $datos['servicios'][$key]['descripcionservicio'] = $valor;
+            }
+        }
+
+        // foreach ($datos['servicios'] as $clave => $valores) {
+        //     if (isset($valores["check"]) && $valores["check"] === "on") {
+        //         // Acción que deseas realizar si el checkbox está activado
+        //         echo "Procesando: $clave - Cantidad: {$valores['cantidad']}, Valor: {$valores['valor']}<br>";
+        //         $actualizarServicio = ModelSolicitud::actualizarEstadoServiciofactura($id_solicitud_factura, $clave, 1);
+        //     }
+        // }
+
+        $respuesta = ModelSolicitud::insertarFactura($datos, $id_solicitud_factura, $estado);
+        if ($respuesta == "ok") {
+            echo json_encode(["status" => 0, "servisios" => $datos['servicios']]); // Éxito
+        } else {
+            echo json_encode(["status" => 1]); // Error
         }
     }
 
-    $respuesta = ModelSolicitud::insertarFactura($datos, $id_solicitud_factura, $estado);
-            if ($respuesta == "ok") {
-                echo json_encode(["status" => 0]); // Éxito
-            } else {
-                echo json_encode(["status" => 1]); // Error
+    public function insertarFacturaRapida() {
+        $estado          = $_POST['estado'];
+        $logo            = $_POST['logo'];
+        $total_factura   = $_POST['total_factura'];
+        $cuenta_bancaria = $_POST['cuenta_bancaria'];
+        $observaciones   = $_POST['observaciones'];
+        $invoice_number  = $_POST['invoice_number']; 
+        $email           = $_POST['email'];
+        $adress          = $_POST['adress'];
+        $tax             = $_POST['tax'];
+        $number_tax      = $_POST['numberTax'];
+        $clienteFactura  = $_POST['clientefactura'];
+
+
+        $datos = [
+            "logo" => $logo,
+            "Total" => $total_factura,
+            "cuenta_bancaria" => $cuenta_bancaria,
+            "observaciones" => $observaciones,
+            "invoice_number" => $invoice_number,
+            "email" => $email,
+            "adress" => $adress,
+            "tax" => $tax,
+            "number_tax" => $number_tax,
+            "clientefactura" => $clienteFactura,
+            "servicios" => []
+        ];
+
+        // Procesar cada servicio detectando los nombres de campos que comienzan con 'cantidad' y 'valor'
+        foreach ($_POST as $clave => $valor) {
+            if (strpos($clave, 'cantidad') === 0) { // Verifica si la clave comienza con 'cantidad'
+                $key = substr($clave, 8); // Extraer la parte después de 'cantidad'
+                $datos['servicios'][$key]['cantidad'] = $valor;
+            } elseif (strpos($clave, 'valor') === 0) {
+                $key = substr($clave, 5); // Extraer la parte después de 'valor'
+                $datos['servicios'][$key]['valor'] = $valor;
+            } elseif (strpos($clave, 'check') === 0) {
+                $key = substr($clave, 5);
+                $datos['servicios'][$key]['check'] = $valor;
+            }else if(strpos($clave, 'nombre') === 0){
+                $key = substr($clave, 6);
+                $datos['servicios'][$key]['nombre'] = $valor;
+            }else if(strpos($clave, 'descripcionservicio') === 0){
+                $key = substr($clave, 19);
+                $key = str_replace('_', ' ', $key);
+                $datos['servicios'][$key]['descripcionservicio'] = $valor;
             }
         }
+
+        $respuesta = ModelSolicitud::insertarFacturaRapida($datos, $estado);
+        if ($respuesta == "ok") {
+            echo json_encode(["status" => 0, "servisios" => $datos['servicios']]); // Éxito
+        } else {
+            echo json_encode(["status" => 1]); // Error
+        }
+
+    }
     
     public function validarFactura($id_revisar_solicitud) {
         $id_revisar=$id_revisar_solicitud;
         $facturaValida = ModelSolicitud::validarFactura($id_revisar);
-       return $facturaValida;
-       
+        return $facturaValida;
     }   
     public function validarDocumento($id_revisar_solicitud) {
         $id_revisar=$id_revisar_solicitud;
         $documentoValidado = ModelSolicitud::validarDocumento($id_revisar);
         return $documentoValidado;
-       
     } 
     
-
     public function insertarServiciosAdicionales() {
-                            
-                            $fk_solicitud=$_POST['fk_solicitud'];
-     
-           
-                            $checkbox = array();
+        $fk_solicitud = $_POST['fk_solicitud'];
+        $checkbox     = array();
+        $estado       = 3;
+
+
+        $checkbox_names   = ModelSolicitud::obtenerNombresServicios();
+        $servicioActuales = ModelSolicitud::obtenerServicioxSolicitud($fk_solicitud);
     
-                    // Define un array con los nombres de las casillas de verificación
-                    $checkbox_names = array(
-                        'tipoTrust', 'registroCorporacion', 'registroFIP', 'goodStanding',
-                        'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
-                        'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
-                        'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
-                        'acuerdoDeSocios', 'proteccionDivorcios', 'ProteccióndePatrimonio', 'Actas','ServiciosProfesionales',
-                        'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
-                        'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
-                        'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
-                        'reporteB13', 'reporteFincen', 'reporteBOI', 'serviciosDomicilio', 'servicioTesoreria',
-                        'servicioNomina', 'controlInventarios', 'serviciosFacturacion', 'serviciosAdministracionNegocios',
-                        'serviciosLegalesNotario', 'serviciosLegalesApostille', 'serviciosReportesEspeciales'
-                    );
+        // Define un array con los nombres de las casillas de verificación
+        // $checkbox_names = array(
+        //     'tipoTrust', 'registroCorporacion', 'registroFIP', 'goodStanding',
+        //     'certificateIncumbency', 'contratoArrendamiento', 'registroCorporacionExterior',
+        //     'contratosComerciales', 'aperturaCuentaBancosCorporativa', 'aperturaBancosCuentaPersonal',
+        //     'serviciosContabilidad', 'serviciosImpuestos', 'servicioAgenteRegistrador',
+        //     'acuerdoDeSocios', 'proteccionDivorcios', 'ProteccióndePatrimonio', 'Actas','ServiciosProfesionales',
+        //     'investigacionAntecedentes', 'compraVentaEmpresas', 'visasInversionistaUSA',
+        //     'planesNegocios', 'internacionalizacionEmpresas', 'formasW8', 'formasW8BEN',
+        //     'formasW9', 'formasFBAR', 'formas1050R', 'formas5471_2', 'reporteB12',
+        //     'reporteB13', 'reporteFincen', 'reporteBOI', 'serviciosDomicilio', 'servicioTesoreria',
+        //     'servicioNomina', 'controlInventarios', 'serviciosFacturacion', 'serviciosAdministracionNegocios',
+        //     'serviciosLegalesNotario', 'serviciosLegalesApostille', 'serviciosReportesEspeciales'
+        // );
     
-                    // Recorre el array de nombres de casillas de verificación
-                    foreach ($checkbox_names as $name) {
-                        // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
-                        if (isset($_POST[$name]) && $_POST[$name] !== '') {
-                            $checkbox[$name] = $_POST[$name];
-                        }
-                    }
-    
-                    $camposDinamicos = array();
-                    foreach ($_POST['campoDinamico'] as $indice => $valor) {
-                        // Verificar si el valor del campo dinámico está presente y no está vacío
-                        if (isset($valor) && $valor !== '') {
-                            // Agregar el valor del campo dinámico al array en el formato deseado
-                            $camposDinamicos["campoDinamico[$indice]"] = $valor;
-                        }
-                    }
-          
-            //var_dump($datos);
-            $respuesta = ModelSolicitud::insertarServiciosAdicionales( $checkbox, $camposDinamicos, $fk_solicitud);
-            
-            if($respuesta == "ok") {
-                echo 0; // Éxito
-            } else {
-                echo 1; // Error
+        // Recorre el array de nombres de casillas de verificación
+        foreach ($checkbox_names as $name) {
+            // Verifica si la casilla de verificación está seleccionada y asigna su valor al array $checkbox
+            if (isset($_POST[$name]) && $_POST[$name] !== '') {
+                // $checkbox[$name] = $_POST[$name];
+                $checkbox[$name] = array(
+                    'value'  => $_POST[$name],
+                    'estado' => $estado
+                );
             }
+        }
+
+        $camposDinamicos = array();
+        foreach ($_POST['campoDinamico'] as $indice => $valor) {
+            // Verificar si el valor del campo dinámico está presente y no está vacío
+            if (isset($valor) && $valor !== '') {
+                // Agregar el valor del campo dinámico al array en el formato deseado
+                // $camposDinamicos["campoDinamico[$indice]"] = $valor;
+                $camposDinamicos[$valor] = array(
+                    'value'  => $valor,
+                    'estado' => 0 
+                );
+            }
+        }
+        
+        //var_dump($datos);
+        $respuesta = ModelSolicitud::insertarServiciosAdicionales($checkbox, $camposDinamicos, $fk_solicitud);
+        echo json_encode($camposDinamicos);
+        // if($respuesta == "ok") {
+        //     echo 0; // Éxito
+        // }else{
+        //     echo 1; // Error
+        // }
     }
 
     public function crearSociedad() {
-        // Debug para ver lo que llega desde el frontend
-
-       
-      
-        
+        // Convertir todo el POST a JSON sin modificar la estructura
+        $datos_sociedad = json_encode($_POST, JSON_UNESCAPED_UNICODE);
+    
         $nombreSociedad = $_POST['nombreSociedad'];
         $personas = $_POST['personas']; // Array de personas
         $porcentajes = $_POST['porcentajes']; // Array de porcentajes
-        $fk_solicitud = $_POST['hiddenField']; // ID de la solicitud o cualquier valor oculto
-        $create_user = 'usuario_ejemplo'; // Aquí pones el usuario que crea la sociedad
-        $uuid = $_POST['uuid'];// Generar un UUID para la sociedad
-
-        $conjuntopersonas  = $_POST['conjuntopersonas'] == '' ? '0' : $_POST['conjuntopersonas'];
-
-        // echo json_encode($conjuntopersonas);
-        // return;
-
-        $conjuntopersonasA = explode(',', $conjuntopersonas);
-        // echo json_encode($conjuntopersonasA);
-        // return;
-
-        $conjuntoClientes = $_POST['conjuntoclientes'] == '{}' ? '{1}' : $_POST['conjuntoclientes'];
-
-        // echo json_encode($conjuntoClientes);
-        // return;
+        $fk_solicitud = $_POST['hiddenField'];
+        $create_user = 'usuario_ejemplo';
+        $uuid = $_POST['uuid'];
     
-        // Iterar sobre cada persona y porcentaje
-        foreach ($conjuntopersonasA as $index => $persona) {
+        $conjuntopersonas  = $_POST['conjuntopersonas'] == '' ? '0' : $_POST['conjuntopersonas'];
+        $conjuntopersonasA = explode(',', $conjuntopersonas);
+        $conjuntoClientes = $_POST['conjuntoclientes'] == '{}' ? '{1}' : $_POST['conjuntoclientes'];
+    
+        // foreach ($conjuntopersonasA as $index => $persona) {
             $datos = [
-                'uuid' => $uuid,
+                'uuid'             => $uuid,
                 'nombre_sociedad'  => $nombreSociedad,
-                'fk_persona'       => $persona,
-                'porcentaje'       => $porcentajes[$index],
+                'fk_persona'       => '0',
+                'porcentaje'       => '0',
                 'fk_solicitud'     => $fk_solicitud,
                 'create_user'      => $create_user,
-                'conjuntopersonas' => $persona,
+                'conjuntopersonas' => '0',
                 'conjuntosociedad' => $_POST['sociedades'],
-                'conjuntoclientes' => $conjuntoClientes
+                'conjuntoclientes' => $conjuntoClientes,
+                'datos_sociedad'   => $datos_sociedad // Incluir JSON en el array de datos
             ];
-
-            // echo json_encode($datos);
-            // return;
     
-            // Insertar cada registro en la base de datos
+            // Enviar el array con todos los datos al modelo
             $respuesta = ModelSolicitud::insertarSociedad($datos);
-
-            // echo json_encode('hola1');
-            // return;
             
             if ($respuesta != "ok") {
-                echo json_encode(["status" => 1]); // Error si alguno falla
+                // echo json_encode(["status" => 1, "message" => ]);
+                echo json_encode(["status" => 1, "message" => "Error al crear la sociedad"]); // Error si falla la inserción
                 return;
             }
-        }
-    
-        echo json_encode(["status" => 0]);
+        // }
+            // Sociedad creada exitosamente
+        // echo json_encode(["status" => 0]); // Éxito
+        echo json_encode(["status" => 0, "message" => "Sociedad creada exitosamente"]); // Éxito
     }
+
+    public function actualizarSociedad() {
+        $datos_sociedad = json_encode($_POST, JSON_UNESCAPED_UNICODE);
+        $uuid           = $_POST['idSociedad'];
+        $datos = [
+            'id_sociedad'     => $uuid,
+            'datos_sociedad'  => $datos_sociedad
+        ];
+        $respuesta = ModelSolicitud::mdlActualizarSociedad($datos);
+        if ($respuesta == "ok") {
+            echo json_encode(["status" => 0, "message" => "Sociedad actualiza exitosamente"]); // Éxito
+        } else {
+            echo json_encode(["status" => 1, "message" => "Error al actualizar la sociedad"]); // Error
+        }
+    }
+    
 
     function generateUUID() {
         return sprintf(
@@ -451,15 +562,28 @@ class Solicitud_controller{
         }
 
         public function facturasDownload($idSolicitud) {
-        $modelo = new ModelSolicitud();
-        $facturas =  $modelo->getFacturasBySolicitud($idSolicitud);
-        echo json_encode($facturas); // Respuesta en formato JSON
+            $modelo = new ModelSolicitud();
+            $facturas =  $modelo->getFacturasBySolicitud($idSolicitud);
+            echo json_encode($facturas); // Respuesta en formato JSON
+        }
+
+        public function facturasRapidasDownload() {
+            $modelo = new ModelSolicitud();
+            $facturas =  $modelo->getFacturasRapidas();
+            echo json_encode($facturas); // Respuesta en formato JSON
         }
 
         public function getSociedades($id_revisar_solicitud){
             $id_solicitud = $id_revisar_solicitud;
             $modelo = new ModelSolicitud();
             $solicitud = $modelo->obtenerSociedades($id_solicitud);
+            return $solicitud;
+        }
+
+        public function getSociedadesxJSONB($id_revisar_solicitud){
+            $id_solicitud = $id_revisar_solicitud;
+            $modelo = new ModelSolicitud();
+            $solicitud = $modelo->obtenerSociedadesxJSONB($id_solicitud);
             return $solicitud;
         }
 
@@ -500,41 +624,41 @@ class Solicitud_controller{
 
         public function insertarEgreso() {
             $rutaFactura = null;
-        if (isset($_FILES['factura']) && $_FILES['factura']['error'] === UPLOAD_ERR_OK) {
-        $directorio = '../resource/innvoice_terceros/';
-        $nombreArchivo = uniqid() . "_" . basename($_FILES['factura']['name']);
-        $rutaArchivo = $directorio . $nombreArchivo;
+            if (isset($_FILES['factura']) && $_FILES['factura']['error'] === UPLOAD_ERR_OK) {
+                $directorio = '../resource/innvoice_terceros/';
+                $nombreArchivo = uniqid() . "_" . basename($_FILES['factura']['name']);
+                $rutaArchivo = $directorio . $nombreArchivo;
 
-        if (move_uploaded_file($_FILES['factura']['tmp_name'], $rutaArchivo)) {
-            $rutaFactura = $rutaArchivo;
-        } else {
-            echo json_encode(["status" => "error", "message" => "Error al cargar la factura"]);
-            return;
-        }
-    }
+                if (move_uploaded_file($_FILES['factura']['tmp_name'], $rutaArchivo)) {
+                    $rutaFactura = $rutaArchivo;
+                } else {
+                    echo json_encode(["status" => "error", "message" => "Error al cargar la factura"]);
+                    return;
+                }
+            }
 
-    // Datos a insertar
-    $datos = [
-        'identificacion_egreso' => $_POST['identificacion_egreso'],
-        'fk_sociedad' => $_POST['sociedad_tercero'],
-        'fk_tercero' => $_POST['nombre_tercero'],
-        'valor' => $_POST['valor'],
-        'anticipo' => $_POST['anticipo'],
-        'factura' => $rutaFactura
-    ];
+            // Datos a insertar
+            $datos = [
+                'identificacion_egreso' => $_POST['identificacion_egreso'],
+                'fk_sociedad' => $_POST['sociedad_tercero'],
+                'fk_tercero' => $_POST['nombre_tercero'],
+                'valor' => $_POST['valor'],
+                'anticipo' => $_POST['anticipo'],
+                'factura' => $rutaFactura
+            ];
 
-    $respuesta = ModelSolicitud::insertarEgreso($datos);
-    if ($respuesta == "ok") {
-        echo json_encode(["status" => "success"]); // Éxito
-    } else {
-        echo json_encode(["status" => "error", "message" => "Error al insertar el egreso"]); // Error
-    }
+            $respuesta = ModelSolicitud::insertarEgreso($datos);
+            if ($respuesta == "ok") {
+                echo json_encode(["status" => "success"]); // Éxito
+            } else {
+                echo json_encode(["status" => "error", "message" => "Error al insertar el egreso"]); // Error
+            }
         }
 
     public function getSolicitudEgresos($id_solicitud) {
-            $modelo = new ModelSolicitud();
-            $solicitud = $modelo->obtenerSolicitudEgresos($id_solicitud);
-            echo json_encode($solicitud);
+        $modelo = new ModelSolicitud();
+        $solicitud = $modelo->obtenerSolicitudEgresos($id_solicitud);
+        echo json_encode($solicitud);
     }
 
     public function getContarSociedades() {
@@ -600,6 +724,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->insertarRevision();
         } elseif ($_POST['accion'] === 'insertarFactura') {
             $controlador->insertarFactura();
+        } elseif ($_POST['accion'] === 'insertarFacturaRapida') {
+            $controlador->insertarFacturaRapida();
         } elseif ($_POST['accion'] === 'insertarServiciosAdicionales') {
             $controlador->insertarServiciosAdicionales();
         } elseif ($_POST['accion'] === 'guardarCliente') {
@@ -610,8 +736,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->actualizarServiciosFactura();
         }elseif ($_POST['accion'] == 'downloadFacturas') {          
             $controlador->facturasDownload($_POST['id_solicitud']);
+        }elseif ($_POST['accion'] == 'downloadFacturasRapidas') {
+            $controlador->facturasRapidasDownload();
         }elseif($_POST['accion'] == 'crearSociedad') {
             $controlador->crearSociedad();
+        }elseif($_POST['accion'] == 'actualizarSociedad'){
+            $controlador->actualizarSociedad();
         }elseif($_POST['accion'] == 'insertarEgreso') {
             $controlador->insertarEgreso();
         }elseif ($_POST['accion'] === 'guardarSociedad') {
@@ -619,7 +749,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }elseif ($_POST['accion'] === 'obtenerSolicitud') {
             $idSolicitud = $_POST['id_solicitud'];
             $solicitud = $controlador->getSolicitudEgresos($idSolicitud);
-            
         }
         else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
@@ -632,7 +761,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }elseif ($_POST['action'] == 'contarServicios') {
             $controlador->getContarSociedades();
         }
-         else {
+        else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
         }
     }

@@ -26,7 +26,7 @@ class ModelServiciosPatrinium
     
     public function getServicios(){
         try {
-            $sql = "SELECT * FROM servicios";
+            $sql = "SELECT * FROM servicios WHERE activo=true";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);

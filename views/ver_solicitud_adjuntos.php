@@ -42,30 +42,28 @@ include_once "../controller/solicitudController.php";
         <thead>
             <tr>
                 <th>Fecha</th>
+                <th># Cliente</th>
                 <th>Sociedades</th> 
-                <th>Nombre Del Cliente</th>
-                           
+                <th>Nombre Del Cliente</th>                           
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-     <?php
+        <?php
 
         $controlador = new Solicitud_controller();
         $solicitudes = $controlador->getListadoSolicitudesConAdjuntos();
                                     
-        
         foreach ($solicitudes as $solicitud) {
         ?>
             <tr>
-            
                 <td><?php echo  htmlspecialchars($solicitud->created_at);?></td>
+                <td><?php echo  htmlspecialchars($solicitud->id_solicitud);?></td>
                 <td><b><?php echo  htmlspecialchars($solicitud->nombre_sociedades);?></b></td>
-                <td><?php echo  htmlspecialchars($solicitud->referido_por);?></td>
+                <td><?php echo  htmlspecialchars($solicitud->nombre);?></td>
                 <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
-             
             </tr>
-           <?php }?> 
+            <?php }?> 
         </tbody>
     </table>
             </div>

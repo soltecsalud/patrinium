@@ -31,11 +31,12 @@ ob_end_clean();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once "head/head_views.php"; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-	   <script src="../resource/vendor/tinymce/tinymce/tinymce.min.js"></script>
+	<script src="../resource/vendor/tinymce/tinymce/tinymce.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
     <title>PatrimoniumAPP || Bancos </title>
+
 </head>
 <body>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -61,31 +62,28 @@ ob_end_clean();
                         <!-- /.card-header -->
                         <div class="card-body">
                         <label for="plantilla">Seleccionar plantilla:</label>
-                                <select id="plantilla" name="plantilla" class="form-select">
-                                    <option value="" disabled selected>Elige una plantilla</option>
-                                    <option value="CompanyInformationDetails.docx">Company Information Details</option>
-                                    <option value="Certificate_Of_Formation.docx">Certificate Of Formation</option>
-                                    <!-- Puedes agregar más plantillas aquí -->
-                                </select>
+                                    <select id="plantilla" name="plantilla" class="form-select">
+                                        <option value="" disabled selected>Elige una plantilla</option>
+                                    </select>
                             <form id="plantillaForm">
-                                
+                            <div class="row" style="padding-top: 2%;">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="nombre">Cargar A:</label>
+                                            <select id="id_solicitud_select" name="id_solicitud" class="form-select">
+                                                <option value="" disabled selected>Elige una Sociedad</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                        
+                                </div>
                                 <div class="row" style="padding-top: 2%;">
                                     <label for="">Editar Plantilla:</label>
                                     <div class="col-md-12" >
                                         <textarea name="editorContent" id="editor"></textarea>
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top: 2%;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="nombre">Cargar A:</label>
-                                            <select id="id_solicitud_select" name="id_solicitud" class="form-select">
-                                                <option value="" disabled selected>Elige una plantilla</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                        
-                                </div>
+                              
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input type="hidden" name="">
@@ -115,25 +113,99 @@ ob_end_clean();
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.all.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script>
-            tinymce.init({
-                selector: '#editor',
-                menubar: false,
-                plugins: 'advlist autolink lists link charmap print preview anchor',
-                toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify',
-                setup: function (editor) {
-                    editor.on('init', function () {
-                        editor.setContent(<?php echo json_encode($htmlContent); ?>);
-                    });
-                }
-            });
+    <script>
+tinymce.init({
+    selector: '#editor',
+    menubar: true,
+    plugins: 'advlist autolink lists link image charmap preview anchor ' +
+             'searchreplace visualblocks code fullscreen ' +
+             'insertdatetime media table paste help wordcount',
+    toolbar: 'undo redo | formatselect fontsizeselect | ' +
+             'bold italic underline strikethrough | forecolor backcolor | ' +
+             'alignleft aligncenter alignright alignjustify | ' +
+             'bullist numlist outdent indent | removeformat',
+    font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+    height: 1600,
+    width: '100%',
+    branding: false,
+    content_style: `
+        body {
+            width: 216mm;
+            min-height: 240mm;
+            margin: auto;
+            background: white;
+            padding: 1cm;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .page-end {
+            display: block;
+            width: 100%;
+            height: 2px;
+            border-bottom: 2px dashed blue;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    `,
+    setup: function (editor) {
+        editor.on('init', function () {
+            editor.setContent(<?php echo json_encode($htmlContent); ?>);
+            updatePageMarkers(editor);
+        });
+
+        editor.on('input', function () {
+            updatePageMarkers(editor);
+        });
+    }
+});
+
+/**
+ * Insertar líneas punteadas al final de cada hoja (~240mm)
+ */
+function updatePageMarkers(editor) {
+    const body = editor.getBody();
+    body.querySelectorAll(".page-end").forEach(marker => marker.remove());
+
+    const pageHeightPx = 240 * 3.779528; // 240mm a px
+    const totalHeight = body.scrollHeight;
+    const totalPages = Math.floor(totalHeight / pageHeightPx);
+
+    for (let i = 1; i <= totalPages; i++) {
+        const marker = document.createElement("div");
+        marker.className = "page-end";
+        marker.style.position = "absolute";
+        marker.style.top = `${i * pageHeightPx}px`;
+        body.appendChild(marker);
+    }
+}
+</script>
+<script>
+/**
+ * Función para recalcular los saltos de página
+ */
+function updatePageMarkers(editor) {
+    let allMarkers = editor.getBody().querySelectorAll(".page-end");
+    allMarkers.forEach(marker => marker.remove()); // Eliminar los marcadores antiguos
+
+    let pageHeight = 240 * 3.779528; // Convertir mm a píxeles
+    let totalPages = Math.floor(editor.getBody().scrollHeight / pageHeight);
+
+    for (let i = 1; i <= totalPages; i++) {
+        let pageMarker = document.createElement("div");
+        pageMarker.className = "page-end";
+        pageMarker.style.position = "absolute";
+        pageMarker.style.top = `${i * pageHeight}px`; 
+        editor.getBody().appendChild(pageMarker);
+    }
+}
 // Evento de cambio en el select para cargar la plantilla seleccionada
 $('#plantilla').on('change', function () {
     var plantilla = $(this).val(); // Obtener el valor seleccionado (nombre del archivo .docx)
 
     // Hacer una llamada AJAX para cargar el contenido de la plantilla
     $.ajax({
-        url: '../controller/PlantillasController.php',  // Controlador para cargar la plantilla
+        url: '../controller/plantillasController.php',  // Controlador para cargar la plantilla
         method: 'POST',
         data: { 
             action: 'seleccionarPlantilla', 
@@ -166,7 +238,7 @@ $('#plantillaForm').on('submit', function (e) {
     }
 
     $.ajax({
-        url: '../controller/PlantillasController.php',
+        url: '../controller/plantillasController.php',
         method: 'POST',
         data: { 
             action: 'insertar', 
@@ -189,13 +261,13 @@ $('#plantillaForm').on('submit', function (e) {
 
 $(document).ready(function() {
     $.ajax({
-        url: '../controller/PlantillasController.php',
+        url: '../controller/plantillasController.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
             var select = $('#id_solicitud_select');
             select.empty();
-            select.append('<option value="" disabled selected>Elige una plantilla</option>');
+            select.append('<option value="" disabled selected>Elige una sociedad</option>');
             $.each(data, function(index, item) {
                 select.append('<option value="' + item.uuid + '"> '+item.nombre_sociedad + '</option>');
             });
@@ -205,9 +277,32 @@ $(document).ready(function() {
         }
     });
 });
-
-
-
-
-    </script>  
-  
+</script>  
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: '../controller/plantillasController.php?action=listar',
+        type: 'GET',
+        dataType: 'json',
+		
+        success: function(response) {
+			 console.log('====plantillas====');
+            console.log(response);
+            if (response.length > 0) {
+                response.forEach(function(plantilla) {
+                    $('#plantilla').append('<option value="' + plantilla.nombre_archivo + '">' + plantilla.nombre.toUpperCase() + '</option>');
+                });
+            } else {
+                $('#plantilla').append('<option disabled>No hay plantillas disponibles</option>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error al obtener las plantillas:', error);
+			console.error('AJAX error - Falló la petición');
+            console.log('XHR:', xhr);
+            console.log('Status:', status);
+            console.log('Error:', error);
+        }
+    });
+});
+</script>

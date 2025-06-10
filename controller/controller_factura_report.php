@@ -15,13 +15,30 @@ class MyPDF extends FPDF {
         $this->SetLineWidth(3);
         // Dibujar una línea (posición X inicial, posición Y inicial, posición X final, posición Y final)
         $this->Line(5, 1, 204, 1);
-       
+            
         $id_solicitud=$_GET['numero_solicitud'];
         $numeroInvoiceSendModelo=$_GET['invoiceNumber']; // Asumiendo que numero_solicitud es un parámetro GET
-        $getLogo = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
+        if(isset($_GET['table'])&&!empty($_GET['table'])){
+            $getLogo = ReportModel::getJsonFacturaRapida($id_solicitud,$numeroInvoiceSendModelo);
+            $nombreCliente = $getLogo[0]->nombre_cliente;
+        }else{
+            $getLogo = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
+            $getCliente = ReportModel::getCliente($id_solicitud,'sociedad');
+            if(empty($getCliente[0])){
+                $getCliente = ReportModel::getCliente($id_solicitud,'personas_cliente');
+            }
+                
+            // $nombreCliente = $getCliente[0];
+            $nombreCliente = $getLogo[0]->nombre_obtenido;
+        }
         $name=$getLogo[0]->nombre_cliente;   
+
+        // $getCliente = ReportModel::getCliente($id_solicitud);
+
+       
       
         $numeroInvoice="";
+        $nombreEmpresa="";
         foreach($getLogo as $datosLogo){
 
             $datosJson = json_decode($datosLogo->datos, true); // Decodifica como array asociativo
@@ -36,41 +53,67 @@ class MyPDF extends FPDF {
            
         }
       
-        if( $logo=="JairoVargas"){
-            $rutaImagen = "../resource/AdminLTE-3.2.0/dist/img/logo1.png";
-        }
-        elseif ($logo=="patrinium"){
+        if ($logo == "JairoVargas") {
             $rutaImagen = "imgs/logo1.png";
+            $nombreEmpresa = "Jairo Vargas";
         }
-        elseif($logo=="empresa_3"){
-            $rutaImagen = "imgs/user_149071.png";
+        elseif ($logo == "patrinium") {
+            $rutaImagen = "imgs/logo1.png";
+            $nombreEmpresa = "Patrimonium";
         }
+        elseif ($logo == "Vargas & Associates") {
+            $rutaImagen = "imgs/vargasAsso.png";
+            $nombreEmpresa = "Vargas & Associates";
+        }
+        elseif ($logo == "Tándem International Business Services") {
+            $rutaImagen = "imgs/logo_empresa.png";
+            $nombreEmpresa = "Tándem International Business Services";
+        }
+        elseif ($logo == "Lamva Investment") {
+            $rutaImagen = "imgs/LAMVA.jpg";
+            $nombreEmpresa = "Lamva Investment";
+        }
+
+        $direccionComun = "Address:\n6355 NW 36 St\nSuite 507\nVirginia Gardens, FL 33166\nEmail: jairo@patrimonium.co\nPh. 305.428.2020";
+
+       
         
      
 
-        $this->Image($rutaImagen,10, 10, 50, 0,'PNG');
+        $this->Image($rutaImagen,10, 10, 50, 0,'PNG');  
+    
+      
         // Configurar la fuente para el título
         $this->SetFont('Arial', 'B', 15);
         // Posiciona el cursor al lado derecho de la imagen
-        $this->SetX(70); // Ajusta esta posición según el tamaño de tu imagen
+        $this->SetX(100); // Ajusta esta posición según el tamaño de tu imagen
         // Fecha actual
         $dateOfIssue = date('m/d/Y'); // Formato: 05/09/2024
         // Imprime la fecha de emisión
         $this->Cell(0, 10, 'Date of issue: ' . $dateOfIssue, 0, 1, 'C');
-        $this->Cell(250, 10, 'Invoice No.'.$numeroInvoice, 0, 1, 'C');
+        $this->SetX(100);
+        $this->Cell(0, 10, 'Invoice No. '.$numeroInvoice, 0, 1, 'C');
         $this->ln(20);
-        
+
+        $this->SetY(45); // Ajusta este valor si el logo es más alto
+        $this->SetX(10); // Asegura alineación con el logo
+        $this->SetFont('Arial', 'B', 13);
+        $this->MultiCell(100, 6, $nombreEmpresa, 0, 'L');
+
+        $this->SetY(60); // Ajusta este valor si el logo es más alto
+        $this->SetX(10); // Asegura alineación con el logo
+        $this->SetFont('Arial', 'B', 10);
+        $this->MultiCell(100, 6, $direccionComun, 0, 'L');
 
         // Mover a la derecha para el texto de la izquierda del encabezado
         $this->SetY(50);
         $this->SetX(10);
         $this->SetFont('Arial', 'B', 9);
-        $this->MultiCell(90, 5, "Patirnium\n\n900 SE Ocean Blvd\nSuite B118\nStuart, Florida 34994\nUnited States of America (USA)\n3059246876\nPatrinium@gmail.com", 0, 'L');
-
-        // Mover a la derecha para el texto del lado derecho del encabezado
-        $this->SetY(50);
+        $this->MultiCell(90, 5, $addressInfo, 0, 'L');        // Mover a la derecha para el texto del lado derecho del encabezado
+        $this->SetY(55);
         $this->SetX(-100); // Esto coloca la posición x justo antes del margen derecho del documento
-        $this->MultiCell(90, 5, "Bill to\n\n Email: ". $email."\n Number Tax: ".$numberTax."\n Adress: ".$adress , 0, 'L');
+        $this->SetFont('Arial', 'B', 10);
+        $this->MultiCell(90, 5, " Bill to: ".$nombreCliente."  \nEmail: ". $email."\nAdress: ".$adress , 0, 'L');
 
         // Dibuja una línea para separar el encabezado del resto de la página
         
@@ -94,24 +137,110 @@ class MyPDF extends FPDF {
         // Número de página
         $this->Cell(0, 10, 'Página ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
+    function splitText($text, $width) {
+        $words = explode(' ', $text);
+        $lines = [];
+        $line = '';
+
+        foreach ($words as $word) {
+            $testLine = $line . ($line === '' ? '' : ' ') . $word;
+            $testWidth = $this->GetStringWidth($testLine);
+            if ($testWidth > $width) {
+                $lines[] = $line;
+                $line = $word;
+            } else {
+                $line = $testLine;
+            }
+        }
+        if ($line !== '') {
+            $lines[] = $line;
+        }
+
+        return $lines;
+    }
 
     function ImprovedTable($header, $data) {
-        
-        // Anchura de las columnas
-        
         $w = array(100, 20, 40, 30);
+    
         // Cabecera
-        for($i = 0; $i < count($header); $i++)
-            $this->Cell($w[$i], 7, $header[$i],  'B');
+        for ($i = 0; $i < count($header); $i++) {
+            $align = ($i === 0) ? 'L' : 'R'; // Solo la primera columna alineada a la izquierda
+            $this->Cell($w[$i], 7, $header[$i], 'B', 0, $align);
+        }
         $this->Ln();
+    
         // Datos
         foreach($data as $row) {
-            $this->Cell($w[0], 10, $row[0], 'B');
-            $this->Cell($w[1], 10, $row[1], 'B');
-            $this->Cell($w[2], 10, $row[2], 'B');
-            $this->Cell($w[3], 10, $row[3], 'B');
+            // $this->Cell($w[0], 10, $row[0], 'B'); // Servicio / nombre
+            // $this->Cell($w[1], 10, number_format($row[1]), 'B', 0, 'R'); // Cantidad
+            // $this->Cell($w[2], 10, number_format($row[2], 2), 'B', 0, 'R'); // Valor unitario
+            // $this->Cell($w[3], 10, number_format($row[3], 2), 'B', 0, 'R'); // Total
+            // $this->Ln();
+            // Primera línea: servicio principal (sin borde inferior)
+            //$this->MultiCell(90, 5, $addressInfo, 0, 'L');  
+            $x = $this->GetX();
+            $y = $this->GetY();
+        
+            // Imprimir la MultiCell para la primera columna (con salto si es necesario)
+            $this->SetFont('Arial', 'B', 12);
+            $this->MultiCell($w[0], 5, $row[0], 0, 'L');
+            $this->SetFont('Arial', 'I', 10);
+            // Obtener la altura que ocupó el texto de la MultiCell
+            $altura = $this->GetY() - $y;
+        
+            // Volver a la posición original + avanzar a la derecha después de la primera columna
+            $this->SetXY($x + $w[0], $y);
+        
+            // Las siguientes celdas (mismo alto que el de la MultiCell)
+            $this->Cell($w[1], $altura, number_format($row[1]), 0, 0, 'R');
+            $this->Cell($w[2], $altura, number_format($row[2], 2), 0, 0, 'R');
+            $this->Cell($w[3], $altura, number_format($row[3], 2), 0, 0, 'R');
+        
+            // Saltar a la siguiente línea
+            $this->Ln($altura);
+            // Segunda línea: nota con sangría (con borde inferior solamente)
+            $x = $this->GetX();
+            $y = $this->GetY();
+
+            $sangriaX = 5;
+            $texto = trim($row[4]);
+
+            // Ancho de texto disponible con sangría aplicada
+            $anchoTexto = $w[0] - $sangriaX;
+
+            // Guardar posición inicial
+            $this->SetX($x + $sangriaX);
+
+            // Guardar la posición actual
+            $inicioY = $this->GetY();
+
+            // Forzar corte manual de texto según ancho
+            $lineas = $this->splitText($texto, $anchoTexto);
+
+            foreach ($lineas as $linea) {
+                $this->SetX($x + $sangriaX); // aplicar sangría en cada línea
+                $this->Cell($anchoTexto, 5, $linea);
+                $this->Ln();
+            }
+
+            // Calcular altura total utilizada por las líneas de texto
+            $finY = $this->GetY();
+            $altura = $finY - $inicioY;
+
+            // Dibujar borde inferior solo al final
+            // Línea del borde izquierdo del texto
+            $this->Line($x, $finY, $x + $w[0], $finY);
+
+            // Celdas vacías alineadas a la derecha con mismo alto
+            $this->SetXY($x + $w[0], $inicioY);
+            $this->Cell($w[1], $altura, '', 'B');
+            $this->Cell($w[2], $altura, '', 'B');
+            $this->Cell($w[3], $altura, '', 'B');
+
             $this->Ln();
+            
         }
+    
         // Línea de cierre
         $this->Cell(array_sum($w), 0, '', 'T');
     }
@@ -121,10 +250,18 @@ class MyPDF extends FPDF {
 
 
 class InvoiceController {
+    
         public function generatePDF() {
-            $id_solicitud = $_GET['numero_solicitud']; 
-            $numeroInvoiceSendModelo=$_GET['invoiceNumber']; // Asumiendo que numero_solicitud es un parámetro GET
-            $getDatosFactura = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
+            $id_solicitud            = $_GET['numero_solicitud']; 
+            $numeroInvoiceSendModelo = $_GET['invoiceNumber']; // Asumiendo que numero_solicitud es un parámetro GET
+            if(isset($_GET['table'])&&!empty($_GET['table'])){
+                $getDatosFactura = ReportModel::getJsonFacturaRapida($id_solicitud,$numeroInvoiceSendModelo);
+                // print_r($getDatosFactura);
+                // exit();
+            }else{
+                $getDatosFactura = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
+            }
+            // $getDatosFactura = ReportModel::getJsonFactura($id_solicitud,$numeroInvoiceSendModelo);
             $subtotal = 0;
             $array = [];
             $tax = 0;
@@ -132,12 +269,13 @@ class InvoiceController {
             $observaciones = '';  // Variable para almacenar las observaciones
             $cuenta_bancaria = 0;  // Variable para almacenar la cuenta bancaria
             foreach ($getDatosFactura as $item) {
+                
                 $datosFactura = json_decode($item->datos, true);
 
                 
                 if (isset($datosFactura['cuenta_bancaria'])) {
                     $cuenta_bancaria = $datosFactura['cuenta_bancaria'];
-                   
+                
                 } 
 
                 if(isset($datosFactura['tax'])){
@@ -155,23 +293,40 @@ class InvoiceController {
                 } else {
                     if (isset($datosFactura['servicios'])) {
                         foreach ($datosFactura['servicios'] as $key => $servicio) {
+                            //  || !isset($servicio['check'])
                             if (!isset($servicio['valor']) || !isset($servicio['cantidad'])) {
                                 continue;
                             }
-                            $valor = (float) $servicio['valor'];
+
+                            $nombreServicio = ReportModel::getNombreServicio($key);
+                            $key = $nombreServicio[0] ?? $key;
+
+                            $valor    = (float) $servicio['valor'];
                             $cantidad = (int) $servicio['cantidad'];
-                            $array[] = array($key, $cantidad, $valor, $valor * $cantidad);
+                            $descripcionservicio = $servicio['descripcionservicio'];
+                            // Valida si es una factura rapida, si es asi toma el nombre del servicio digitado por el usuario, si no toma el que ya esta en el sistema
+                            if(isset($_GET['table'])&&!empty($_GET['table'])){
+                                $array[] = array($servicio['nombre'], $cantidad, $valor, $valor * $cantidad,$descripcionservicio);
+                            }else{
+                                $array[] = array(str_replace('_', ' ', $key), $cantidad, $valor, $valor * $cantidad, $descripcionservicio);
+                            }
                             $subtotal += $valor * $cantidad;
                         }
                     }
                 }
             }
-    
+
+          
+            // print_r($getDatosFactura);
+            // exit();
+           
            
             
             $pdf = new MyPDF();
             $pdf->AliasNbPages();
             $pdf->AddPage();
+
+           
     
             $header = array('Description', 'Qty', 'Unit Price', 'Amount');
             $pdf->SetFont('Arial', '', 12);
@@ -179,51 +334,51 @@ class InvoiceController {
             $pdf->ImprovedTable($header, $array, $useProvidedTotal);
 
             $y = $pdf->GetY() + 10;
-            $pdf->SetXY(-215, $y);
-            $pdf->Cell(130, 10, '', 0, 0, 'R');
+            $pdf->SetXY(-200, $y);
+            $pdf->Cell(115, 10, '', 0, 0, 'R');
             $pdf->Cell(30, 10, 'SUB TOTAL', 0, 0, 'R');
             $pdf->Cell(30, 10, '$' . number_format($subtotal, 2), 0, 1, 'R');
 
+           
+
             if($tax==0){
-               
-          
 
-            $y = $pdf->GetY() + 1;
-            $pdf->SetXY(-215, $y);
-            $pdf->Cell(130, 10, '', 0, 0, 'R');
-            $pdf->Cell(30, 10, 'TAX', 0, 0, 'R');
-            $pdf->Cell(30, 10, '$' . number_format($tax, 2), 0, 1, 'R');            
-        
+                $y = $pdf->GetY() + 1;
+                $pdf->SetXY(-215, $y);
+                $pdf->Cell(130, 10, '', 0, 0, 'R');
+                $pdf->Cell(30, 10, 'TAX', 0, 0, 'R');
+                $pdf->Cell(30, 10, '$' . number_format($tax, 2), 0, 1, 'R');            
+            
 
-            $y = $pdf->GetY() + 1;
-            $pdf->SetXY(-215, $y);
-            $pdf->Cell(130, 10, '', 0, 0, 'R');
-            $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
-            if ($tax < 10) {
-                $mult_tax = $tax / 10;
-            } else {
-                $mult_tax = $tax / 100;
+                $y = $pdf->GetY() + 1;
+                $pdf->SetXY(-215, $y);
+                $pdf->Cell(130, 10, '', 0, 0, 'R');
+                $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
+                if ($tax < 10) {
+                    $mult_tax = $tax / 10;
+                } else {
+                    $mult_tax = $tax / 100;
+                }
+                
+                $tax_operacion = 1+$mult_tax;
+                
+                $pdf->Cell(30, 10, '$' . number_format($subtotal*$tax_operacion,2), 0, 1, 'R');
+            }else{
+                $y = $pdf->GetY() + 1;
+                $pdf->SetXY(-215, $y);
+                $pdf->Cell(130, 10, '', 0, 0, 'R');
+                $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
+                $pdf->Cell(30, 10, '$' . number_format($subtotal, 2), 0, 1, 'R');
             }
-            
-            $tax_operacion = 1+$mult_tax;
-            
-            $pdf->Cell(30, 10, '$' . number_format($subtotal*$tax_operacion,2), 0, 1, 'R');
-        }else{
-            $y = $pdf->GetY() + 1;
-            $pdf->SetXY(-215, $y);
-            $pdf->Cell(130, 10, '', 0, 0, 'R');
-            $pdf->Cell(30, 10, 'Total', 0, 0, 'R');
-            $pdf->Cell(30, 10, '$' . number_format($subtotal, 2), 0, 1, 'R');
-        }
-            $pdf->Ln(5); 
-             // Añadir observaciones si existen
-             // Añadir observaciones si existen
+                $pdf->Ln(5); 
+                // Añadir observaciones si existen
+                // Añadir observaciones si existen
         if (!empty($observaciones)) {
             $pdf->SetX(-200);
             $pdf->SetFont('Arial', 'B', 10);  // Cambia la fuente a negrita para el título de observaciones
-            $pdf->Cell(30, 10, 'observations:', 0, 0, 'L');
+            $pdf->Cell(30, 5, 'Observations:', 0, 0, 'L');
             $pdf->SetFont('Arial', '', 10);   // Cambia la fuente a normal para el contenido de observaciones
-            $pdf->MultiCell(160, 10, $observaciones, 0, 'J');  // Ajusta el texto a justificado
+            $pdf->MultiCell(160, 5, $observaciones, 0, 'J');  // Ajusta el texto a justificado
         }
 
             // Información de la cuenta bancaria

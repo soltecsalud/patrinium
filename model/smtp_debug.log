@@ -1,0 +1,6134 @@
+[2] Extension missing: openssl
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:05:00 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <5lR6t2McWtaY7VHi7xK66ZFnr78Vodq1VbSRi61keM@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>ID Solicitud:</strong> 41</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>CARGOS LEGALES POR SU CORPORACI&Oacute;N</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Empresas Notificadas:</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol>
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745337902 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca44fe21sm25196707b3.4 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:12:22 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <uYiuYnL7XAFE4GTV06Bd7perrbeT2Ae1MwyxTLhwo1k@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>NOTIFICACI&Oacute;N:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>CARGOS LEGALES POR SU CORPORACI&Oacute;N</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse; width:100%">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Empresas Notificadas:</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol>
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745338344 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca55ed6asm25049937b3.101 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:15:21 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <VUsp04VYZz6Sg5yLVUFi5wL1GwM3WwobJRN7MBqyejc@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:1px solid #999; margin-bottom:10px;">
+
+[1] CLIENT -> SERVER: <p><strong>NOTIFICACI&Oacute;N:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="background:#c3e6e3; padding:10px; border:1px solid #999;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td>TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td>TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red;">Empresas Notificadas:</h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol>
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745338523 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e72959dba25sm2346451276.47 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:17:45 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <qzjQIne6ceZWx9o39fqk3okNx4dJeocDn7icENrk@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:1px solid #999; margin-bottom:10px;">
+
+[1] CLIENT -> SERVER: <p><strong>NOTIFICACI&Oacute;N:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="background:#c3e6e3; padding:10px; border:1px solid #999;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td>TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td>TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red;">Empresas Notificadas:</h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol>
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745338666 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca53bc10sm25326467b3.90 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:22:39 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <DncB3AGCrzhUqo6I6fN8orlqevyR3AzPPPW1MhWDTc@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Fecha Notificaci&oacute;n:</strong> Abril 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:1px solid #999; margin:10px 0;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#c3e6e3; margin-bottom:0;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin-top:10px; border:1px solid #999;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px 0 5px;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0; padding-left:20px;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745338961 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e72a0d04af2sm2138573276.13 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:48:12 +0000
+
+[1] CLIENT -> SERVER: To: vargasandassociates@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <tlCjJ4QvvwzNwmEGO9F755rJqQM6wueV0vrHcQDuU@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Fecha Notificaci&oacute;n:</strong> Abril 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:1px solid #999; margin:10px 0;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#c3e6e3; margin-bottom:0;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin-top:10px; border:1px solid #999;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px 0 5px;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0; padding-left:20px;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745340493 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e729582b8b1sm2445194276.5 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:52:09 +0000
+
+[1] CLIENT -> SERVER: To: vargasandassociates@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <vdamKiteFwlmcWAgM1iaMPQk4ZJSqXM62LGAjjpqQ@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Junio 1 de 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:93%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:93%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745340731 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e729585aaaasm2335884276.18 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:52:37 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <FGgc1rH5zyWwcppgtGkWNFw9bk6tMsozHB9nvMWHoI@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Junio 1 de 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:93%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:93%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745340758 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca491d54sm25440197b3.60 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 16:53:28 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <OBrvbBoFeBGyn0MKHPsVd6dD41xNCSQFqv0C1WHM@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Junio 1 de 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745340809 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca557289sm25403097b3.96 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 17:05:51 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <d45dXvTQTUOhT5CYOxK8ZKX49MLl4EGj1dYgogPfSI0@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Junio 1 de 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745341552 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca53bc90sm25348687b3.83 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 22 Apr 2025 17:08:28 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <FfXU82rB17SRa97eN56mqQBTRC56Z5v6xhFylsSteU@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Junio 1 de 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Maria Fajardo</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2018</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1: If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</strong></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1955.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1960.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (1 x 1960.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$1,960.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 1960,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>XSF MODERN LINE LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Jairo Vargas</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>6355 NW 36 St Ste 507</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745341709 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e729582ad49sm2325768276.12 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-7081173dffasm3976607b3.32 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-7081173dffasm3976607b3.32 - gsmtp
+
+[1] SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-7081173dffasm3976607b3.32 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-7081173dffasm3976607b3.32 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca46ef79sm26406217b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-706ca46ef79sm26406217b3.48 - gsmtp
+
+[1] SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-706ca46ef79sm26406217b3.48 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca46ef79sm26406217b3.48 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-706ca55fa74sm26881897b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-706ca55fa74sm26881897b3.116 - gsmtp
+
+[1] SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 00721157ae682-706ca55fa74sm26881897b3.116 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-706ca55fa74sm26881897b3.116 - gsmtp
+
+[2] SMTP Error: Could not authenticate.
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Thu, 24 Apr 2025 00:01:29 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <ILpewbi88TM9sonnm4O5tOEhCdlgBxIAwgjufsJAs@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> Abril 23, 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Fort</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (7 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$12,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 12.250,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>INTERNATIONAL ARTS &amp; MUSIC LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>T&amp;J USA INVESTMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>AMBAR GROUP HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>AAA INTERNATIONAL INVESTMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>AMBAR CHOCOLATE GROUP LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>INTERNATIONAL SPORT MOTORS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>J&amp;N INVESTMENT LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos, Jairo Vargas 6355 NW 36 St Ste 507 Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745452891 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70841aea981sm361347b3.97 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Thu, 24 Apr 2025 16:28:41 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <G9XLPISmXm3GVVZ69sdKCwWY6l3hRGjPQF75oXWRgA@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong> April 24, 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong> MEXICO</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1: If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</strong></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (13 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$22,750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 22.750,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC (Delaware)</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC (Florida)</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC (Delaware)</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC (Florida)</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC&nbsp;(Delaware)</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC (Florida)</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Jairo Vargas</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>6355 NW 36 St Ste 507</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745512123 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70843b4e7besm3432287b3.51 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO remote.aysainternational.com
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Fri, 25 Apr 2025 17:19:56 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <rwMTlzlLYW4p0Uclp0a0asP1G65QoY7X3PSeCIQ1U@remote.aysainternational.com>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificaci&oacute;n:</strong>&nbsp;Abril 25, 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Pa&iacute;s:</strong>&nbsp;M&eacute;xico&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">A CONTINUACI&Oacute;N ENCONTRAR&Aacute; LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL A&Ntilde;O 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;">&nbsp;</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;"><strong>NOTE # 1:</strong> If these charges are not settled immediately the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#c3e6e3; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI&Oacute;N</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border:2px solid #000; border-collapse:collapse; background-color:#e8f6f5; margin:0 auto;">
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:90%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 40.250,00&nbsp;US$ D&Oacute;LARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT&#39;L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Jairo Vargas</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>6355 NW 36 St Ste 507</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Virginia Gardens,&nbsp;FL.&nbsp;33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745601598 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70843b4e7besm8971527b3.51 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:21:30 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <7ckpi4Suca1yUY4geEvGJsbK2pAfVZo7yyr5iRbJqs@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Nelly Janethe Rodriguez Cruz</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0;"><strong>Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI��N</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (3 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 5250,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>M&amp;N LASER DESIGN LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>NERON DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>SEYDEL MER IT LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745684492 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70867a79306sm3214657b3.48 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:21:41 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <6JFCsywJHQCypJt71ZTwWYhDvB78ffXf885nGzJOCh8@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0;"><strong>Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI��N</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745684502 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70841984e9fsm14571177b3.55 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:23:00 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: "Notificaci&oacute;n CC" <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <i15Fw6C3XkUgU8yHR8VL9fL2DEt4kb1gSRkddUn0@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0;"><strong>Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI��N</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745684581 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e7303a4f54csm1445279276.6 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:29:12 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <ccIXALYYONvHWhWegeCMTWfnWLCdaSGrhI55odJxqs@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0;"><strong>Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACI��N</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745684953 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-7084198b1easm14985627b3.61 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:29:39 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <J4vIOQhlR3FnSS7kSrE9kffBofKiqVqDNO7lltuEt4@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p color:="" style="margin:0;style="><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p color:="" style="margin:0;style="><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p color:="" style="margin:0;style="><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p>Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745684981 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e7303a4fb5bsm1431424276.7 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:31:48 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <wapxikwi8FLeexxM2nWxfE5fAZUCoMhlx3bbB5y3k@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="color:#000000;">Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745685110 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70841aec724sm14736587b3.107 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:32:59 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <xk4G23loh8Hn9SYHRlTXf4ekbKgr8kGiNGaOvsFY5c4@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Cliente:</strong> Nelly Janethe Rodriguez Cruz</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:92%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (3 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 5250,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>M&amp;N LASER DESIGN LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>NERON DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>SEYDEL MER IT LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="color:#000000;">Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745685180 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e7303a4f54csm1448126276.6 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:33:27 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <VCJzxxgeNR6Lquz9mrK4mdUjP4pSkqpoQzyeZgxGs@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Cliente:</strong> Nicolas Gompf</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:91%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (3 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$5,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 5250,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>ARI POINT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BLUE SKY REALTY US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>OCEAN WIND US LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="color:#000000;">Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745685208 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-7084195899asm14608477b3.38 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Sat, 26 Apr 2025 16:34:26 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <pNQ79s0vv66sjntHZpTDj5W1UjMgB8PQhoZGYFNs@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Fecha Notificación:</strong>26 de abril de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;color:#000000;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2018</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90.5%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1745.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align: right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">1750.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 1750.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$40,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">CARGO POR SOCIEDADES EN VARIOS ESTADOS (3 x 750 USD):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$2,250.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,500.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.500,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="color:#000000;">Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1745685267 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 00721157ae682-70841af812esm14579097b3.116 - gsmtp
+
+[2] SERVER -> CLIENT: 220 smtp.gmail.com ESMTP 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: EHLO 192.168.7.10
+
+[2] SERVER -> CLIENT: 250-smtp.gmail.com at your service, [104.15.105.137]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+250-ENHANCEDSTATUSCODES
+250-PIPELINING
+250-CHUNKING
+250 SMTPUTF8
+
+[1] CLIENT -> SERVER: AUTH LOGIN
+
+[2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+[1] CLIENT -> SERVER: [credentials hidden]
+[2] SERVER -> CLIENT: 235 2.7.0 Accepted
+
+[1] CLIENT -> SERVER: MAIL FROM:<evotics28@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.0 OK 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<serazo31@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: RCPT TO:<vargasandassociates@gmail.com>
+
+[2] SERVER -> CLIENT: 250 2.1.5 OK 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: DATA
+
+[2] SERVER -> CLIENT: 354 Go ahead 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: Date: Tue, 6 May 2025 22:40:23 +0000
+
+[1] CLIENT -> SERVER: To: serazo31@gmail.com
+
+[1] CLIENT -> SERVER: From: Sistema Patrimonium <evotics28@gmail.com>
+
+[1] CLIENT -> SERVER: Cc: =?iso-8859-1?Q?Notificaci=C3=B3n_CC?= <vargasandassociates@gmail.com>
+
+[1] CLIENT -> SERVER: Subject: Resumen de sociedades y cargos
+
+[1] CLIENT -> SERVER: Message-ID: <0iZIcoTGZ1UMDDb2Pqb2IwEspKi6cOOhZwenwBYLk@192.168.7.10>
+
+[1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.2.0 (https://github.com/PHPMailer/PHPMailer)
+
+[1] CLIENT -> SERVER: MIME-Version: 1.0
+
+[1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+[1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Fecha Notificación:</strong>06 de mayo de 2025</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>Cliente:</strong> Jorge Erasto Mandujano</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0;color:#000000;"><strong>País:</strong> COLOMBIA</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="margin:10px 0; color:#000000;"><strong style="color:#000000;">Estados Asociados:</strong>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ul style="padding-left:20px; margin:5px 0; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>DELAWARE</li>
+
+[1] CLIENT -> SERVER: 	<li>EXTRANJERA</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA</li>
+
+[1] CLIENT -> SERVER: </ul>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0 0 10px;color:#000000;"><strong>Oficina:</strong> VARGAS &amp; ASSOCIATES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background-color:#ccd9f6; padding:10px; border:2px solid #999; margin:10px auto; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Observaciones:</strong></p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:0.9em;">A CONTINUACIÓN ENCONTRARÁ LAS CORPORACIONES REGISTRADAS EN EL ESTADO DE DELAWARE, A LAS QUE DEBEMOS ATENDER EL PAGO POR LAS ANUALIDADES POR EL AÑO 2025</p>
+
+[1] CLIENT -> SERVER: &nbsp;
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="margin:0; font-size:1.2em;"><b><strong>NOTE # 1:</strong> If these charges are not settled immediately, the corporations will be dissolved due to lack of legal representation in the USA and forced dissolution costs may be higher.</b></p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <table border="2" cellpadding="5" cellspacing="0" style="width:90.5%; border-collapse:collapse; margin:0 auto; background-color:#e8f6f5;">
+
+[1] CLIENT -> SERVER: 	<thead>
+
+[1] CLIENT -> SERVER: 		<tr style="background-color: #c3e6e3;">
+
+[1] CLIENT -> SERVER: 			<th colspan="2" style="font-weight:bold; text-align:center;">CARGOS LEGALES POR SU CORPORACIÓN</th>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</thead>
+
+[1] CLIENT -> SERVER: 	<tbody>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td colspan="2"><strong>CARGOS POR CORPORACIÓN</strong></td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANNUAL REPORT (23 x 1745.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">40135.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>ANONYMITY SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FRANCHAISE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>STATE TAX</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>REGISTER AGENT</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>PROCESS SERVICES</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>OTROS</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">0.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL CARGOS:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">5.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL POR TODAS LAS CORPORACIONES (23 x 5.00):</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$115.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>EXTRANJERA (4 × 300.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">1200.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr>
+
+[1] CLIENT -> SERVER: 			<td>FLORIDA (3 × 200.00)</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right;">600.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 		<tr style="font-weight:bold; background-color: #d1e7dd;">
+
+[1] CLIENT -> SERVER: 			<td style="text-align:left;">TOTAL FINAL A PAGAR:</td>
+
+[1] CLIENT -> SERVER: 			<td style="text-align:right; color:red;">$42,050.00</td>
+
+[1] CLIENT -> SERVER: 		</tr>
+
+[1] CLIENT -> SERVER: 	</tbody>
+
+[1] CLIENT -> SERVER: </table>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <div style="background:#d9d9d9; padding:10px; margin:10px auto; border:2px solid #999; width:89%;">
+
+[1] CLIENT -> SERVER: <p style="margin:0;"><strong>Son:</strong> 42.050,00&nbsp;US$ DÓLARES</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="text-align:center; margin:5px 0 0;">******************************************************</p>
+
+[1] CLIENT -> SERVER: </div>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <h4 style="color:red; margin:10px auto 5px; width:90%;"><strong>Empresas Notificadas:</strong></h4>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <ol style="margin:0 auto; padding-left:20px; width:90%; color:#000000;">
+
+[1] CLIENT -> SERVER: 	<li>BEYOND PARTNER TECH LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH CLOUD LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH PANAMA S.A</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECH USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>BEYOND TECHNOLOGY CORPORATE LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>FLORIDA TECH CITY LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GEMA US LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN GENERAL HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L CAPITALS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L FUNDS LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INT'L HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INTERNATIONAL CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN INVEST &amp; DEVELOPMENT LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>GMAN OPERATIONS HOLDING LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JE TRAINING RESOURCES LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST IRREVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>JORMAN TRUST REVOCABLE</li>
+
+[1] CLIENT -> SERVER: 	<li>MEXICAN FAMILIES COUNT FOR A BETTER LIFE FUNDATION</li>
+
+[1] CLIENT -> SERVER: 	<li>NEW VISION OF LIFE CORP</li>
+
+[1] CLIENT -> SERVER: 	<li>NGINE SERVICES USA LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>S2WORK LLC</li>
+
+[1] CLIENT -> SERVER: 	<li>WIM INTERNATIONAL LLC</li>
+
+[1] CLIENT -> SERVER: </ol>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: <p style="color:#000000;">Saludos,<br />
+
+[1] CLIENT -> SERVER: Jairo Vargas<br />
+
+[1] CLIENT -> SERVER: 6355 NW 36 St Ste 507<br />
+
+[1] CLIENT -> SERVER: Virginia Gardens, FL. 33166</p>
+
+[1] CLIENT -> SERVER: 
+
+[1] CLIENT -> SERVER: .
+
+[2] SERVER -> CLIENT: 250 2.0.0 OK  1746571225 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+
+[1] CLIENT -> SERVER: QUIT
+
+[2] SERVER -> CLIENT: 221 2.0.0 closing connection 3f1490d57ef6-e75c53d0819sm432786276.6 - gsmtp
+

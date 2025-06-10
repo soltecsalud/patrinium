@@ -6,14 +6,14 @@ class ModelPlantillas {
     public static function guardarContenido($contenido_html, $usuario, $id_solicitud) {
         try {
             $sqlInsertar = "INSERT INTO public.plantillas_save_html
-                (contenido_html, createat, usuario, fk_solicitud)
-                VALUES (:contenido_html, NOW(), :usuario, :id_solicitud)";
+                (contenido_html, createat, usuario, uuid_sociedad)
+                VALUES (:contenido_html, NOW(), :usuario, :uuid_sociedad)";
             
             // Preparar la consulta
             $stmt = Conexion::conectar()->prepare($sqlInsertar);
             $stmt->bindParam(':contenido_html', $contenido_html, PDO::PARAM_STR);
             $stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
-            $stmt->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
+            $stmt->bindParam(':uuid_sociedad', $id_solicitud, PDO::PARAM_INT);
             
             // Ejecutar la inserción
             return $stmt->execute();
@@ -24,16 +24,78 @@ class ModelPlantillas {
 
     public static function obtenerActaPorSolicitud($id_solicitud) {
         try {
-            
-            $sql = "SELECT createat, contenido_html FROM plantillas_save_html WHERE fk_solicitud = :id_solicitud";
+            $sql = "SELECT psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
+                FROM plantillas_save_html psh
+                JOIN (
+                    SELECT CAST(uuid AS UUID) AS uuid_sociedad, nombre_sociedad
+                    FROM personas_sociedad 
+                    WHERE fk_solicitud = :uuid_sociedad
+                ) ps ON psh.uuid_sociedad = ps.uuid_sociedad";
             $stmt = Conexion::conectar()->prepare($sql);
-            $stmt->bindParam(':id_solicitud', $id_solicitud, PDO::PARAM_INT);
+            $stmt->bindParam(':uuid_sociedad', $id_solicitud, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC); // Usamos fetch porque solo esperamos un acta
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Cambio importante: fetchAll()
         } catch (Exception $e) {
-            die($e->getMessage());
+            return ['error' => $e->getMessage()];
         }
     }
+
+    public static function obtenerActaPorSolicitudxSociedad($id_solicitud,$sociedad) {
+        try {
+            $sql = "SELECT psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
+                FROM plantillas_save_html psh
+                JOIN (
+                    SELECT CAST(uuid AS UUID) AS uuid_sociedad, nombre_sociedad
+                    FROM personas_sociedad 
+                    WHERE fk_solicitud = :uuid_sociedad
+                ) ps ON psh.uuid_sociedad = ps.uuid_sociedad AND psh.uuid_sociedad=:uuid";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':uuid_sociedad', $id_solicitud, PDO::PARAM_INT);
+            $stmt->bindParam(':uuid', $sociedad);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Cambio importante: fetchAll()
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public static function obtenerHtmlPorId($id_plantillas_save) {
+        try {
+            $conexion = Conexion::conectar();
+            $query = "SELECT contenido_html FROM plantillas_save_html 
+            WHERE 
+            -- id_plantillas_save = :id_plantillas_save
+            uuid_sociedad = :uuid
+            ";
+            $stmt = $conexion->prepare($query);
+            $stmt->bindParam(':uuid', $id_plantillas_save);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die(json_encode(['status' => 'error', 'message' => 'Error en la consulta SQL: ' . $e->getMessage()]));
+        }
+    }
+
+    public static function obtenerHtmlPDFPorSociedad($id_solicitud,$sociedad) {
+        try {
+            $conexion = Conexion::conectar();
+            $query = "SELECT psh.contenido_html
+                FROM plantillas_save_html psh
+                JOIN (
+                    SELECT CAST(uuid AS UUID) AS uuid_sociedad, nombre_sociedad
+                    FROM personas_sociedad 
+                    WHERE fk_solicitud = :uuid_sociedad
+                ) ps ON psh.uuid_sociedad = ps.uuid_sociedad AND psh.uuid_sociedad=:uuid";
+            $stmt = $conexion->prepare($query);
+            $stmt->bindParam(':uuid_sociedad', $id_solicitud, PDO::PARAM_INT);
+            $stmt->bindParam(':uuid', $sociedad);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die(json_encode(['status' => 'error', 'message' => 'Error en la consulta SQL: ' . $e->getMessage()]));
+        }
+    }
+    
 
     public static function obtenerConsecutivos() {
         try {
@@ -53,6 +115,75 @@ class ModelPlantillas {
         }
     }
 
+    public function obtenerPlantillas() {
+        try {
+            $sql = "SELECT id, nombre, nombre_archivo FROM plantillas ORDER BY nombre ASC";
+            $consulta = Conexion::conectar()->prepare($sql);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public static function guardarChecklist($sociedad,$solicitud,$items){ 
+        try {
+            $sqlInsertar = "INSERT INTO listas_verificacion_sociedades
+                (fk_sociedad, fk_solicitud, datos)
+                VALUES (:sociedad,:solicitud,:datos)";
+            $stmt = Conexion::conectar()->prepare($sqlInsertar);
+            $stmt->bindParam(':sociedad', $sociedad);
+            $stmt->bindParam(':solicitud', $solicitud);
+            $stmt->bindParam(':datos', $items);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function actualizarChecklist($sociedad,$solicitud,$items){
+        try {
+            $sql = "UPDATE listas_verificacion_sociedades SET datos=:datos WHERE fk_sociedad=:sociedad AND fk_solicitud=:solicitud";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':sociedad', $sociedad);
+            $stmt->bindParam(':solicitud', $solicitud);
+            $stmt->bindParam(':datos', $items);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function consultarExisteSociedad($sociedad){
+        try {
+            $sql = "SELECT listas_verificacion_sociedades_id FROM listas_verificacion_sociedades WHERE fk_sociedad=:sociedad";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':sociedad', $sociedad);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Cambio importante: fetchAll()
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public static function selectChecklist($sociedad,$solicitud){
+        try {
+            $sql = "SELECT datos FROM listas_verificacion_sociedades WHERE fk_sociedad=:sociedad AND fk_solicitud=:solicitud";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':sociedad', $sociedad);
+            $stmt->bindParam(':solicitud', $solicitud);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Cambio importante: fetchAll()
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
 }
 
+
 ?>
+
+  
+
+

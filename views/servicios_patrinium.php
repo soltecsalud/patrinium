@@ -87,7 +87,7 @@ if (!isset($_SESSION['usuario'])) {
                             <table id="serviciosTable"class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Id Servicio</th>
+                                        <th>Identificador Del Servicio</th>
                                         <th>Nombre Servicio</th>
                                         <th>Fecha Creacion</th>
                                         <th colspan="2">Acciones</th>
@@ -196,42 +196,55 @@ if (!isset($_SESSION['usuario'])) {
         });
     </script>
     <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: '../controller/serviciosPatriniumController.php',
-                type: 'POST',
-                data: { action: 'listarServicios' },
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response);
-                    let tbody = $('#servicios_patrimonium');
-                    tbody.empty();
-                    $.each(response, function(index, servicio) {
-                        let row = `<tr>
-                            <td>${servicio.id_servicio}</td>
-                            <td>${servicio.nombre_servicio}</td>
-                            <td>${servicio.created_at}</td>
-                            <td>
-                                <a style="margin-right: 10px;"  class="btn btn-success m-0" data-toggle="modal" data-target="#modalActualizarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}" data-created="${servicio.created_at}">
-                                    Actualizar
-                                </a>
-                            </td>
-                            <td>
-                                <a style="margin-right: 10px;" class="btn btn-danger m-0" data-toggle="modal" data-target="#modalEliminarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}">
-                                    Eliminar
-                                </a>
-                            </td>
-                        </tr>`;
-                        tbody.append(row);
-                    });
-                    $('#serviciosTable').DataTable();
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error al obtener los datos: ', xhr.responseText);
-                }
-            });
+    $(document).ready(function() {
+        // Inicialización del DataTable antes de cargar datos
+        const table = $('#serviciosTable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+            },
+            "order": [[0, "asc"]],
+            "columns": [
+                { "width": "10%" },
+                { "width": "35%" },
+                { "width": "25%" },
+                { "width": "15%" },
+                { "width": "15%" }
+            ]
         });
-    </script>
+
+        // Petición AJAX para obtener los datos
+        $.ajax({
+            url: '../controller/serviciosPatriniumController.php',
+            type: 'POST',
+            data: { action: 'listarServicios' },
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                
+                // Limpiar el DataTable
+                table.clear();
+                
+                // Recorrer la respuesta y añadir filas al DataTable
+                $.each(response, function(index, servicio) {
+                    table.row.add([
+                        servicio.id_servicio,
+                        servicio.nombre_servicio,
+                        servicio.created_at,
+                        `<a class="btn btn-success m-0" data-toggle="modal" data-target="#modalActualizarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}" data-created="${servicio.created_at}">
+                            Actualizar
+                        </a>`,
+                        `<a class="btn btn-danger m-0" data-toggle="modal" data-target="#modalEliminarServicio" data-id="${servicio.id_servicio}" data-nombre="${servicio.nombre_servicio}">
+                            Eliminar
+                        </a>`
+                    ]).draw(false); // Redibujar tabla
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al obtener los datos: ', xhr.responseText);
+            }
+        });
+    });
+</script>
     <script>
         $(document).ready(function() {
             $('#modalActualizarServicio').on('show.bs.modal', function(event) {

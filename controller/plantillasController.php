@@ -79,7 +79,29 @@ if (isset($_POST['action'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $controller = new PlantillasController();
-    $controller->getConsecutivoSolicitud();
+    if (isset($_GET['action']) && $_GET['action'] === 'listar') {
+        $modelo = new ModelPlantillas();
+        $plantillas = $modelo->obtenerPlantillas();
+        // Limpia el buffer antes de enviar JSON
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode($plantillas); 
+        exit();
+    }else{
+        $controller = new PlantillasController();
+        $controller->getConsecutivoSolicitud();
+    }
 }
+// if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listar') {
+//     $modelo = new ModelPlantillas();
+//     $plantillas = $modelo->obtenerPlantillas();
+
+//     // Limpia el buffer antes de enviar JSON
+//     ob_clean();
+//     header('Content-Type: application/json');
+//     echo json_encode($plantillas);
+//     exit();
+// }
+
+
 ?>

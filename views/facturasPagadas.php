@@ -48,14 +48,15 @@ if (!isset($_SESSION['usuario'])) {
                                 <thead>
                                     <tr>
                                         <th>Descargar Comprobante</th>
-                                        <th>Solicitud</th> 
+                                        <th>System Number</th> 
+                                        <th>Nombre Cliente</th> 
                                         <th>Invoice Number</th>                                                                                                                    
                                         <th>Company</th>
                                         <th>Date</th>
+                                        <th>Bank</th>
+                                        <th>Numero De Cuenta</th>
                                         <th>Total</th>
                                         <th>Observation</th>
-
-                                        
                                     </tr>
                                 </thead>
                                 <tbody id="listar_facturas"></tbody>
@@ -108,10 +109,13 @@ if (!isset($_SESSION['usuario'])) {
                     let row = `<tr>
                         <td><a class='btn btn-success' href='../controller/resource/${factura.id_solicitud}/${factura.ruta_pago}' target='_BLANK'><i class=' fas fa-download'></i></a></td>
                         <td>${factura.id_solicitud}</td>
+                        <td>${factura.nombre_obtenido}</td>
                         <td>${datos.invoice_number}</td>
                         <td>${datos.logo}</td>
                         <td>${factura.created_at}</td>
-                        <td>${total}</td>
+                        <td>${factura.nombre_banco}</td>
+                        <td>${factura.numero_cuenta}</td>
+                        <td>${Number(total).toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                         <td>${datos.observaciones}</td>
                     </tr>`;
                     tbody.append(row);

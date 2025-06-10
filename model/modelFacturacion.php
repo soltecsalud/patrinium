@@ -6,7 +6,34 @@ class ModelFacturacion {
     public function listarFacturas() {
 
         try {
-            $sql = "SELECT * FROM factura where estado = 2 or estado = null";
+           /* $sql = "SELECT * FROM factura AS f
+            INNER JOIN bancos_consignaciones AS b 
+            ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+            WHERE estado = 2 OR estado = null";*/
+			 $sql = "SELECT 
+                f.*, 
+                b.*, 
+                COALESCE(
+                    (SELECT nombre_sociedad 
+                    FROM personas_sociedad 
+                    WHERE uuid::text = f.datos->>'selectPersonaFactura' 
+                    LIMIT 1), 
+                    (SELECT CONCAT(nombre, ' ', apellido) AS nombre 
+                    FROM sociedad 
+                    WHERE uuid::text = NULLIF(f.datos->>'selectPersonaFactura', '')),
+                    (SELECT CONCAT(nombre, ' ',apellido) AS nombre FROM personas_cliente WHERE id_persona_cliente = NULLIF(f.datos->>'selectPersonaFactura', '')::int),
+                    (SELECT datos_sociedad->>'nombreSociedad' AS nombre 
+                    FROM sociedad_extranjera 
+                    WHERE id_sociedad_extranjera = NULLIF(f.datos->>'selectPersonaFactura', '')::int),
+                    'N/A'
+                ) AS nombre_obtenido
+            FROM 
+                factura AS f
+            INNER JOIN 
+                bancos_consignaciones AS b 
+                ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+            WHERE 
+                estado = 2 OR estado IS NULL";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
@@ -20,7 +47,32 @@ class ModelFacturacion {
 
         try {
             $estado = 1;
-            $sql = "SELECT * FROM factura where estado = :estado";
+           
+             $sql = "SELECT 
+                f.*, 
+                b.*, 
+                COALESCE(
+                    (SELECT nombre_sociedad 
+                    FROM personas_sociedad 
+                    WHERE uuid::text = f.datos->>'selectPersonaFactura' 
+                    LIMIT 1), 
+                    (SELECT CONCAT(nombre, ' ', apellido) AS nombre 
+                    FROM sociedad 
+                    WHERE uuid::text = NULLIF(f.datos->>'selectPersonaFactura', '')),
+                    (SELECT CONCAT(nombre, ' ',apellido) AS nombre FROM personas_cliente WHERE id_persona_cliente = NULLIF(f.datos->>'selectPersonaFactura', '')::int),
+                    (SELECT datos_sociedad->>'nombreSociedad' AS nombre 
+                    FROM sociedad_extranjera 
+                    WHERE id_sociedad_extranjera = NULLIF(f.datos->>'selectPersonaFactura', '')::int),
+                    'N/A'
+                ) AS nombre_obtenido
+            FROM 
+                factura AS f
+            INNER JOIN 
+                bancos_consignaciones AS b 
+                ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+            WHERE 
+                estado =:estado OR estado IS NULL
+            ";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->bindParam(':estado',$estado , PDO::PARAM_STR);
             $consulta->execute();
@@ -48,8 +100,7 @@ class ModelFacturacion {
 
     public static function uploadInvoice($datos){
         try {
-           
-            $sql = "update factura set estado = 1, 
+            $sql = "UPDATE factura set estado = 1, 
             tipo_consignacion = :tipo_consignacion, 
             ruta_pago = :ruta_pago,
             nota_pago = :nota_pago
@@ -62,7 +113,28 @@ class ModelFacturacion {
             $consulta->execute();
 
             return "ok";
-           
+        
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function mdlPagarFacturaRapida($datos){
+        try {
+            $sql = "UPDATE factura_rapida set estado = 1, 
+            tipo_consignacion = :tipo_consignacion, 
+            ruta = :ruta_pago,
+            nota_pago = :nota_pago
+            WHERE factura_rapida_id = :id_factura";
+            $consulta = Conexion::conectar()->prepare($sql);
+            $consulta->bindParam(':tipo_consignacion', $datos['payment_option'], PDO::PARAM_STR);
+            $consulta->bindParam(':ruta_pago', $datos['nombre_archivo'], PDO::PARAM_STR);
+            $consulta->bindParam(':nota_pago', $datos['payment_notes'], PDO::PARAM_STR);
+            $consulta->bindParam(':id_factura', $datos['idfactura']); // Usa $datos directamente
+            $consulta->execute();
+
+            return "ok";
+        
         } catch (Exception $e) {
             die($e->getMessage());
         }
@@ -82,12 +154,86 @@ class ModelFacturacion {
             $consulta->execute();
     
             return "ok";
-           
         } catch (Exception $e) {
             // Manejar la excepción y devolver un mensaje de error
             die($e->getMessage());
         }
     }
-  
+
+    public static function actualizarFactura($datos, $id_factura) { 
+        try {
+            $json_datos = json_encode($datos);
+            // Preparar la consulta SQL para actualizar el estado de la factura
+            $sql = "UPDATE factura SET datos = :datos WHERE id = :id";
+            $consulta = Conexion::conectar()->prepare($sql);
+            // Vincular los parámetros
+            $consulta->bindParam(':datos', $json_datos); 
+            $consulta->bindParam(':id', $id_factura, PDO::PARAM_INT);
+            // Ejecutar la consulta
+            $consulta->execute();
+    
+            return "ok";
+        } catch (Exception $e) {
+            // Manejar la excepción y devolver un mensaje de error
+            die($e->getMessage());
+        }
+    }
+
+    public static function eliminarFactura($id_factura) {
+        try {
+            // Preparar la consulta SQL para eliminar la factura
+            $sql = "DELETE FROM factura WHERE id = :id";
+            $consulta = Conexion::conectar()->prepare($sql);
+            // Vincular los parámetros
+            $consulta->bindParam(':id', $id_factura, PDO::PARAM_INT);
+            // Ejecutar la consulta
+            // $consulta->execute(); 
+            return $consulta->execute() ? "ok" : "error";
+        } catch (Exception $e) {
+            // Manejar la excepción y devolver un mensaje de error
+            die($e->getMessage());
+        }
+    }
+
+    public static function obtenerTiposPago() {
+        try {
+            $sql = "SELECT tipo_pago FROM tipo_pago";
+            $consulta = Conexion::conectar()->prepare($sql);
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+
+    public static function buscarInvoiceNumber($campo){ 
+        try {
+            $nombre ="%$campo%"; 
+            $sqlListarCliente = "SELECT id FROM factura WHERE (datos->>'invoice_number' LIKE :campo) OR (datos->>'invoice_number'=:numerocompleto)";
+            $listaSociedad = Conexion::conectar()->prepare($sqlListarCliente);
+            $listaSociedad->bindParam(":campo", $nombre);
+            $listaSociedad->bindParam(":numerocompleto", $campo);
+            $listaSociedad->execute();
+            return $listaSociedad->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public static function buscarInvoiceNumberFacturaRapida($campo){  
+        try {
+            $nombre ="%$campo%"; 
+            $sqlListarCliente = "SELECT factura_rapida_id FROM factura_rapida WHERE (datos->>'invoice_number' LIKE :campo) OR (datos->>'invoice_number'=:numerocompleto)";
+            $listaSociedad = Conexion::conectar()->prepare($sqlListarCliente);
+            $listaSociedad->bindParam(":campo", $nombre);
+            $listaSociedad->bindParam(":numerocompleto", $campo);
+            $listaSociedad->execute();
+            return $listaSociedad->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
 }
 ?>

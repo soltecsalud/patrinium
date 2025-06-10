@@ -56,7 +56,7 @@
 <script src="../resource/AdminLTE-3.2.0/dist/js/summernote.js"></script>
 
 <footer class="main-footer">
-    <strong>Copyright &copy; 2024 <a href="https://www.soltecsalud.com" target="_blank">Soltec Salud</a>.</strong>
+    <strong>Copyright &copy; 2024 <a href="https://tachyonit.tech" target="_blank">Tachyon</a>.</strong>
     Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
         <b>Versi&oacute;n</b> 2.0
