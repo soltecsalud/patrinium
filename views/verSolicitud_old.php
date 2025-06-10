@@ -22,7 +22,7 @@ include_once "../controller/solicitudController.php";
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Registrar ESE</title>
+    <title>Registrar ESE x</title>
     <style>
         .card-registroSolicitudCliente {
             width: 70vw;
