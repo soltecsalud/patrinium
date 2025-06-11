@@ -24,7 +24,7 @@ class ModelPlantillas {
 
     public static function obtenerActaPorSolicitud($id_solicitud) {
         try {
-            $sql = "SELECT psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
+            $sql = "SELECT psh.id_plantillas_save, psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
                 FROM plantillas_save_html psh
                 JOIN (
                     SELECT CAST(uuid AS UUID) AS uuid_sociedad, nombre_sociedad
@@ -40,9 +40,21 @@ class ModelPlantillas {
         }
     }
 
+    public static function actualizarPlantillaHtml($id_plantilla, $html_content){
+        try {
+            $sql = "UPDATE plantillas_save_html SET contenido_html = :contenido_html WHERE id_plantillas_save = :id_plantilla";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':contenido_html', $html_content, PDO::PARAM_STR);
+            $stmt->bindParam(':id_plantilla', $id_plantilla, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     public static function obtenerActaPorSolicitudxSociedad($id_solicitud,$sociedad) {
         try {
-            $sql = "SELECT psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
+            $sql = "SELECT psh.id_plantillas_save, psh.createat, psh.contenido_html, psh.uuid_sociedad, ps.nombre_sociedad
                 FROM plantillas_save_html psh
                 JOIN (
                     SELECT CAST(uuid AS UUID) AS uuid_sociedad, nombre_sociedad

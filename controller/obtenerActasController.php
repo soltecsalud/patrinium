@@ -177,6 +177,23 @@ class GenerarPdfController {
         }
     }
 
+    public function actualizarHtml() { 
+        if (isset($_POST['id_plantilla']) && isset($_POST['contenido_html'])) {
+            $id_plantilla = $_POST['id_plantilla'];
+            $html_content = $_POST['contenido_html'];
+
+            // Actualizat el HTML en la base de datos
+            $guardar = ModelPlantillas::actualizarPlantillaHtml($id_plantilla, $html_content);
+            if ($guardar) {
+                echo json_encode(['status' => 'success', 'message' => 'HTML guardado correctamente']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error al guardar el HTML']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Faltan parámetros']);
+        }
+    }
+
 }    
 
 $controller = new GenerarPdfController();
@@ -190,6 +207,9 @@ if (isset($_POST['action'])) {
             break;
         case 'generarPdf': // Agregado para generar PDF
             $controller->generarPdf();
+            break;
+        case 'actualizarHtml':
+            $controller->actualizarHtml();
             break;
         case 'guardarChecklist':
             $controller->guardarChecklist();
