@@ -337,7 +337,12 @@ class Solicitud_controller{
             }
         }
 
-        $respuesta = ModelSolicitud::insertarFacturaRapida($datos, $estado);
+        if(isset($_POST['id_factura_rapida']) && !empty($_POST['id_factura_rapida'])) {
+            $respuesta = ModelSolicitud::actualizarFacturaRapida($datos, $estado, $_POST['id_factura_rapida']);
+        } else {
+            $respuesta = ModelSolicitud::insertarFacturaRapida($datos, $estado);
+        }
+
         if ($respuesta == "ok") {
             echo json_encode(["status" => 0, "servisios" => $datos['servicios']]); // Éxito
         } else {
