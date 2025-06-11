@@ -550,7 +550,7 @@ include_once "../controller/solicitudController.php";
                                                                 'porcentaje'     => $detalle['porcentaje'],
                                                                 'tipo'           => $detalle['tipo'],
                                                                 'uuid'           => $detalle['uuid'],
-                                                                'idtiposociedad' => $detalle['selectTipoSociedad'],
+                                                                'idtiposociedad' => $detalle['selecttiposociedad'],
                                                                 'tiposociedad'   => $detalle['tiposociedad']
                                                             ];
                                                         }
@@ -912,7 +912,7 @@ include_once "../controller/solicitudController.php";
                             </div>
 
                             <div class="modal fade" id="modalContenidoHTML" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="modalLabel">Contenido del Acta</h5>
@@ -922,6 +922,14 @@ include_once "../controller/solicitudController.php";
                                             <div id="contenidoHTML">
                                                 <textarea name="editorContent" id="editor"></textarea>
                                             </div>
+                                            <form id="formGuardarHtml">
+                                                
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <input type="hidden" id="id_plantilla" name="id_plantilla" value="">
+                                            <button type="button" class="btn btn-primary" id="guardarhtml">Guardar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1946,7 +1954,7 @@ include_once "../controller/solicitudController.php";
                             filas += `<tr>
                                 <td>${item.createat}</td>
                                 <td>
-                                    <button class="btn btn-info ver-html" data-html='${item.contenido_html.replace(/'/g, "&apos;")}' data-bs-toggle="modal" data-bs-target="#modalContenidoHTML">
+                                    <button class="btn btn-info ver-html" data-id='${item.id_plantillas_save}' data-html='${item.contenido_html.replace(/'/g, "&apos;")}' data-bs-toggle="modal" data-bs-target="#modalContenidoHTML">
                                         Ver HTML
                                     </button>
                                 </td>
@@ -1976,13 +1984,13 @@ include_once "../controller/solicitudController.php";
         
         // Evento para abrir el modal con el contenido HTML
         $(document).on("click", ".ver-html", function() {
+            $("#id_plantilla").val($(this).data("id")); // Guardar el ID de la plantilla en un input oculto
             let contenidoHTML = $(this).data("html");
-            console.log(contenidoHTML);
-
-            // var contenidoHTML = '<div>HOLA</div>';
-            
-            // $("#contenidoHTML").html(contenidoHTML);
-            // tinymce.get('contenidoHTML').setContent(contenidoHTML);
+            $("#editor").empty(); // Establecer el contenido del editor
+            // Destruir instancia anterior si existe
+            if (tinymce.get('editor')) { 
+                tinymce.get('editor').destroy();
+            }
             tinymce.init({
                 selector: '#editor',
                 menubar: false,
@@ -2004,6 +2012,8 @@ include_once "../controller/solicitudController.php";
                 `,
                 setup: function (editor) {
                     editor.on('init', function () {
+                        // Vaciar antes de establecer el contenido
+                        editor.setContent(''); // Limpiar el contenido del editor
                         editor.setContent(contenidoHTML);
                         // Insertar visualmente las líneas que marcan el final de cada página
                         updatePageMarkers(editor);
@@ -2028,6 +2038,46 @@ include_once "../controller/solicitudController.php";
                     editor.getBody().appendChild(pageMarker);
                 }
             }
+        });
+
+        $(document).on("click", "#guardarhtml", function() {
+            $("#editor").each(function() {
+                var contenidoHTML = tinymce.get('editor').getContent();
+                var idPlantilla   = $("#id_plantilla").val(); // Obtener el ID de la plantilla del input oculto
+                console.log(contenidoHTML);
+
+                if(contenidoHTML.trim() === "") {
+                    alert("El contenido HTML no puede estar vacío.");
+                    return;
+                }
+
+                if(idPlantilla.trim() === "") {
+                    alert("El ID de la plantilla no puede estar vacío.");
+                    return;
+                } 
+                
+                $.ajax({
+                    url: '../controller/obtenerActasController.php',
+                    type: 'POST',
+                    data: { 
+                        action: 'actualizarHtml', 
+                        contenido_html: contenidoHTML, 
+                        id_plantilla: idPlantilla 
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === "success") {
+                            alert("Guardado exitosamente.");
+                            $("#modalContenidoHTML").modal('hide'); // Cerrar el modal
+                        } else {
+                            alert("Error al guardar HTML: " + response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error AJAX:", error);
+                    }
+                });
+            });
         });
 
         // Evento para generar el PDF y abrirlo en nueva pestaña
@@ -2564,10 +2614,11 @@ include_once "../controller/solicitudController.php";
                     if (response.status === "success") {
                         let filas = "";
                         response.data.forEach(function(item, index) {
+                            console.log('Item del reporte:', item);
                             filas += `<tr>
                                 <td>${item.createat}</td>
                                 <td>
-                                    <button class="btn btn-info ver-htmlSociedad" data-html='${item.contenido_html.replace(/'/g, "&apos;")}' data-bs-toggle="modal" data-bs-target="#modalContenidoHTML">
+                                    <button class="btn btn-info ver-htmlSociedad" data-id='${item.id_plantillas_save}' data-html='${item.contenido_html.replace(/'/g, "&apos;")}' data-bs-toggle="modal" data-bs-target="#modalContenidoHTML">
                                         Ver HTML
                                     </button>
                                 </td>
@@ -2599,22 +2650,71 @@ include_once "../controller/solicitudController.php";
             // Evento para abrir el modal con el contenido HTML
             $(document).on("click", ".ver-htmlSociedad", function(event) {
                 event.preventDefault(); // Prevent the default action
+                $("#id_plantilla").val($(this).data("id")); 
                 let contenidoHTML = $(this).data("html"); 
-                $("#contenidoHTML").html(contenidoHTML); // Use .html() to replace content instead of .append()
+                // $("#contenidoHTML").html(contenidoHTML); // Use .html() to replace content instead of .append()
+                $("#editor").empty(); // Establecer el contenido del editor
+                // Destruir instancia anterior si existe
+                if (tinymce.get('editor')) {  
+                    tinymce.get('editor').destroy();
+                }
+                tinymce.init({
+                    selector: '#editor',
+                    menubar: false,
+                    plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+                    toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | pagebreak | link image table code',
+                    height: 1600, // Espacio suficiente para múltiples páginas visibles en el editor
+                    width: '100%', // Ancho adecuado para una hoja legal en pantalla
+                    branding: false,
+                    content_style: `
+                        /* Línea punteada azul al final de cada página */
+                        .page-end {
+                            display: block;
+                            width: 100%;
+                            height: 2px;
+                            border-bottom: 2px dashed blue; 
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                        }
+                    `,
+                    setup: function (editor) {
+                        editor.on('init', function () {
+                            // Vaciar antes de establecer el contenido
+                            editor.setContent(''); // Limpiar el contenido del editor
+                            editor.setContent(contenidoHTML);
+                            // Insertar visualmente las líneas que marcan el final de cada página
+                            updatePageMarkers(editor);
+                        });
+                        editor.on('input', function () {
+                            updatePageMarkers(editor);
+                        });
+                    }
+                });
+                function updatePageMarkers(editor) {
+                    let allMarkers = editor.getBody().querySelectorAll(".page-end");
+                    allMarkers.forEach(marker => marker.remove()); // Eliminar los marcadores antiguos
+
+                    let pageHeight = 240 * 3.779528; // Convertir mm a píxeles
+                    let totalPages = Math.floor(editor.getBody().scrollHeight / pageHeight);
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        let pageMarker = document.createElement("div");
+                        pageMarker.className = "page-end";
+                        pageMarker.style.position = "absolute";
+                        pageMarker.style.top = `${i * pageHeight}px`; 
+                        editor.getBody().appendChild(pageMarker);
+                    }
+                }
             });
 
             // Evento para generar el PDF y abrirlo en nueva pestaña
             $(document).on("click", ".generar-pdfSociedad", function(event) {
                 event.preventDefault();
-                // alert(<?php echo $id_revisar_solicitud; ?>);
-                // alert(idSociedad);
-                // let id_solicitud = 18;
                 $.ajax({
                     url: '../controller/obtenerActasController.php',
                     type: 'POST',
                     data: { 
                         action: 'generarPdf', 
-                        // id_solicitud: id_solicitud 
                         id_solicitud: '<?php echo $id_revisar_solicitud; ?>',
                         idSociedad: idSociedad,
                     },

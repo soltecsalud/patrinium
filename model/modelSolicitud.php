@@ -472,6 +472,24 @@ class ModelSolicitud
         }
     }
 
+    public static function actualizarFacturaRapida($datos, $estado, $id_factura_rapida){
+        try {
+            $json_datos = json_encode($datos);
+            $sql = "UPDATE factura_rapida SET datos = :datos WHERE factura_rapida_id = :id_factura_rapida";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':datos', $json_datos);
+            $stmt->bindParam(':id_factura_rapida', $id_factura_rapida, PDO::PARAM_INT);
+            
+            if($stmt->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            } 
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     // public static function insertarServiciosAdicionales($checkbox,$camposDinamicos,$fk_solicitud) {
     //     try {
 
@@ -771,6 +789,7 @@ class ModelSolicitud
                     ruta, 
                     tipo_consignacion, 
                     nota_pago,
+                    b.id_banco,
                     b.nombre_banco
                     FROM factura_rapida AS f
                     INNER JOIN bancos_consignaciones AS b 
@@ -827,7 +846,7 @@ class ModelSolicitud
                     ps.uuid, -- Se agrega el UUID
                     -- ps.nombre_sociedad, -- Se agrega el nombre de la sociedad
                     datos_sociedad->>'nombreSociedad' AS nombre_sociedad,
-                    datos_sociedad->>'selectTipoSociedad' AS selectTipoSociedad,
+                    datos_sociedad->>'selectTipoSociedad' AS selecttiposociedad,
                     datos_sociedad->>'activarSociedad' AS activarsociedad,
                     datos_sociedad->>'declararSociedad' AS declararsociedad,
                     datos_sociedad->>'estadopais' AS estadopais,

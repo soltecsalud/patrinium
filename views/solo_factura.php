@@ -33,16 +33,13 @@ $controlador = new Solicitud_controller();
             <div class="col-md-10 offset-md-1">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Factura Rápida</h3>
+                        <h3 class="card-title">Factura R&aacute;pida</h3>
                     </div>
                     <div class="card-body">
                         <form id="billingForm">
                             <div class="row">
                                 <div class="form-group">
                                     <label for="selectOptions">Selecciona cliente</label>
-                                    <!-- <select name="clientefactura" class="form-control" id="selectPersona">
-                                        <option value="">Cargando opciones...</option>
-                                    </select> -->
                                     <input list="clientefactura" name="clientefactura" class="form-control" id="selectPersonaInput" placeholder="Selecciona cliente" required>
                                     <datalist id="clientefactura">
                                         <option value="">Cargando opciones...</option>
@@ -52,7 +49,7 @@ $controlador = new Solicitud_controller();
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="companySelect">Company Issuing Invoice:</label>
-									   <select class="form-select" id="companySelect" name="logo" required>
+									    <select class="form-select" id="companySelect" name="logo" required>
 											<option value="">Select Company</option>
 											<option value="patrinium">Patrimonium</option>
 											<option value="Vargas & Associates">Vargas & Associates</option>
@@ -109,8 +106,9 @@ $controlador = new Solicitud_controller();
                                     <button type="button" id="addServiceBtn" class="btn btn-success">Add Service</button>
                                 </div>
                             </div>
+                            <input type="hidden" name="total_factura" id="total_factura" value="0">
 
-                            <hr class="my-4">
+                            <!-- <hr class="my-4"> -->
 
                            <!-- <div class="row">
                                 <label class="mb-2 h5">In case of issuing an invoice with only a Total:</label>
@@ -158,6 +156,7 @@ $controlador = new Solicitud_controller();
                             <table id="tableFacturas"class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
+                                        <th>Acci&oacute;n</th>
                                         <th>Pagar</th>
                                         <th>Fecha Creacion</th>
                                         <th>Descargar Factura</th>
@@ -209,6 +208,125 @@ $controlador = new Solicitud_controller();
                                 </select>
                             </div>
                             <button type="submit" id="btn-payment" class="btn btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal adjuntar factura-->
+        <div class="modal fade" id="billingModal" tabindex="-1" role="dialog" aria-labelledby="billingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" position-absolute role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="billingModalLabel">Actualiza factura r&aacute;pida</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="billingFormActualizar">
+                            <input type="hidden" id="id_factura_rapida" name="id_factura_rapida">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="selectOptions">Selecciona cliente</label>
+                                    <input list="clientefacturaactualizar" name="clientefactura" class="form-control" id="selectPersonaInputActualizar" placeholder="Selecciona cliente" required>
+                                    <datalist id="clientefacturaactualizar">
+                                        <option value="">Cargando opciones...</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="hidden" id="idFactura" name="idFactura" >
+                                <div class="col-md-3">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="companySelect">
+                                        Company Issuing Invoice:
+                                    </label>
+                                    <select class="form-select" id="companySelectActualizar" name="logo" required>
+                                    <option value="">Select Company</option>
+                                    <option value="patrinium">Patrimonium</option>
+                                    <option value="Vargas & Associates">Vargas & Associates</option>
+                                    <option value="Tándem International Business Services">Tándem International Business Services</option>
+                                    <option value="Lamva Investment">Lamva Investment</option>
+
+                                </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="bankAccountSelect">
+                                        Bank Account for Deposit:
+                                    </label>
+                                    <select class="form-select" id="bankAccountSelectActualizar" name="cuenta_bancaria">
+                                        <option value="0">Select Bank</option>
+                                        <?php
+                                        $controlador = new Solicitud_controller();
+                                        $banco_consigaciones = $controlador->getBancosConsignacion();
+                                        foreach ($banco_consigaciones as $banco_consigacion): ?>
+                                            <option value="<?php echo $banco_consigacion->id_banco; ?>"><?php echo $banco_consigacion->nombre_banco."-".$banco_consigacion->nombre_cuenta."-".$banco_consigacion->numero_cuenta;?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                        Invoice Number:
+                                    </label>
+                                    <input type="text" class="form-control" id="invoiceNumberInputActualizar" name="invoice_number" placeholder="Enter invoice number">
+                                </div>
+                                <div class="col-md-3">
+                                    
+                                    <input type="hidden"   value=" "   class="form-control" id="taxActualizar" name="tax" placeholder="Enter TAX">
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="email">
+                                        Email:
+                                    </label>
+                                    <input type="text" class="form-control" id="emailActualizar" name="email" placeholder="Enter Email">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="adress">
+                                        Address:
+                                    </label>
+                                    <input type="text" class="form-control" id="adressActualizar" name="adress" placeholder="Enter Address">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="numberTax">
+                                        Number TAX:
+                                    </label>
+                                    <input type="text" class="form-control" id="numberTaxActualizar" name="numberTax" placeholder="Enter tax number">
+                                </div>
+                            </div>
+
+                            <hr class="my-4 primary">
+
+                            <div class="row">
+                                <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
+                                    Billing Services:
+                                </label>
+                                <div id="servicesContainerActualizar"></div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12 text-right">
+                                        <button type="button" id="addServiceBtnActualizar" class="btn btn-success">Add Service</button>
+                                    </div>
+                                </div>
+                            </div> 
+                            <input type="hidden" name="total_factura" id="total_factura" value="0">
+
+                            <div class="row" style="margin-bottom: 3%;">
+                                <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="observaciones">
+                                    Observations:
+                                </label>
+                                <div class="col-12">
+                                    <textarea class="form-control" rows="5" name="observaciones" id="observacionesActualizar" placeholder="Write something here"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <input type="hidden" name="id_solicitud" value="<?php echo $id_revisar_solicitud; ?>">
+                                <input type="hidden" name="estado" value="2">
+                                <button type="button" id="btnActualizarFactura" style="margin-bottom: 1%;" class="btn btn-primary">Guardar</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
@@ -280,14 +398,6 @@ $controlador = new Solicitud_controller();
         $('#btnInsertarFactura').click(function () {
             let datos = $('#billingForm').serialize();
             datos += "&accion=insertarFacturaRapida"; 
-            //console.log(datos);
-
-            // Validar que los campos requeridos estén llenos
-            // if ($('#selectPersonaInput').val() === '' || $('#invoiceNumberInput_facturarapida').val() === '') {
-            //     Swal.fire("Error", "Por favor, completa todos los campos requeridos.", "error");
-            //     return;
-            // }
-
             // Validar que el campo de cliente no esté vacío
             if ($('#selectPersonaInput').val() === '') {
                 Swal.fire("Error", "Por favor, selecciona un cliente.", "error");
@@ -357,7 +467,8 @@ $controlador = new Solicitud_controller();
             });
         });
     });
-
+    let datosFacturas = []; // Array para almacenar los datos de las facturas
+    let servicioIndexActualizar = 0;
     $(document).ready(function() {
         // Ejecutar la petición AJAX cuando la página esté lista o al realizar alguna acción
         // var idSolicitud = $('#idSolicitud').text(); // Obtener el valor de id_solicitud desde el div oculto
@@ -374,6 +485,7 @@ $controlador = new Solicitud_controller();
             success: function(response) {
                 // Parsear el JSON recibido
                 let facturas = JSON.parse(response);
+                datosFacturas.push(facturas);
 
                 // Limpiar el contenido actual del tbody
                 $('#tablefacturasrapidas').empty();
@@ -407,6 +519,7 @@ $controlador = new Solicitud_controller();
 
                     // Construir la fila 
                     let filas = `<tr>
+                    <td><input id="payment-${idFactura}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${idFactura}"  /></td>
                     <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-idfactura="${idFactura}"/></td>
                     <td>${createdAt}</td>
                     <td><a href='factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
@@ -418,9 +531,6 @@ $controlador = new Solicitud_controller();
                     <td>${total}</td>
                     <td>${nombreBanco}</td>
                     </tr> `;
-
-
-                    let fila = "<tr><td></td><td>" + createdAt + "</td><td> <a href='factura_report.php?table=facturarapida&numero_solicitud="+idFactura+"&invoiceNumber=" + invoiceNumber + "' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td><a href='../controller/resource/<?php echo $id_revisar_solicitud; ?>/" + rutaPago + "'target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td><td>" + idFactura + "</td><td>"+idNumeroFacura+"</td><td>"+total+"</td><td>"+nombreBanco+"</td></tr>";
 
                     // Agregar la fila al tbody
                     $('#tablefacturasrapidas').append(filas);
@@ -477,6 +587,130 @@ $controlador = new Solicitud_controller();
             });
         });
 
+        let mouseX = 0;
+        let mouseY = 0;
+
+        $(document).on('mousemove', function (e) {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        });
+
+        $(document).on('click', '.update-btn', function() {
+            // Obtén el de la factura del botón que fue clickeado
+            var idFactura = $(this).data('id-factura');
+            $('#idFactura').val(idFactura);
+            // Recorrer el array de datosFacturas para encontrar la factura correspondiente
+            var factura = datosFacturas[0].find(factura => factura.factura_rapida_id === idFactura);
+            // Parsear el contenido JSON de la propiedad 'datos'
+            var datos = JSON.parse(factura.datos);
+            console.log(datos);
+            
+            // Asignar los valores a los campos del formulario
+            // $("#clientefacturaactualizar").val(datos.clientefactura);
+            $('#id_factura_rapida').val(factura.factura_rapida_id);
+            $('#selectPersonaInputActualizar').empty();
+            $('#selectPersonaInputActualizar').val(datos.clientefactura);
+            $('#companySelectActualizar').val(datos.logo);
+            $('#bankAccountSelectActualizar').val(factura.id_banco);
+            $('#invoiceNumberInputActualizar').val(datos.invoice_number);
+            $('#taxActualizar').val(datos.tax);
+            $('#emailActualizar').val(datos.email);
+            $('#adressActualizar').val(datos.adress);
+            $('#numberTaxActualizar').val(datos.number_tax);
+            $('#observacionesActualizar').val(datos.observaciones);
+
+
+            //Recorrer los servicios y mostrarlos en el modal
+            $('#servicesContainerActualizar').empty(); // Limpiar el contenedor de servicios
+            if (datos.servicios && Array.isArray(datos.servicios)) {
+                datos.servicios.forEach((servicio, index) => { 
+                    servicio.descripcionservicio = servicio.descripcionservicio || ''; // Manejar caso de descripción vacía
+                    const row = `
+                        <div class="row mb-3 pt-2">
+                            <div class="col-md-6">
+                                <input type="checkbox" name="check${servicioIndexActualizar}" class="check-item" data-clave="${servicioIndexActualizar}" checked hidden>
+                                <input type="text" name="nombre${servicioIndexActualizar}" class="form-control mt-2" data-clave="${servicioIndexActualizar}" placeholder="Service Name" value="${servicio.nombre}">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="cantidad${servicioIndexActualizar}" class="form-control" placeholder="Qty" data-clave="${servicioIndexActualizar}" value="${servicio.cantidad}">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="valor${servicioIndexActualizar}" class="form-control" placeholder="Unit Price" data-clave="${servicioIndexActualizar}" value="${servicio.valor}">
+                            </div>
+                        </div>
+                        <div class="row col-12"> 
+                            <textarea class="form-control" rows="2" name="descripcionservicio${servicioIndexActualizar}" data-clave="${servicioIndexActualizar}" placeholder="Description">${servicio.descripcionservicio}</textarea>
+                        </div>
+                    `; 
+                    $('#servicesContainerActualizar').append(row);
+                    servicioIndexActualizar++;
+                });
+            } else {
+                // Si no hay servicios, mostrar un mensaje o manejar el caso
+                $('#servicesContainerActualizar').append('<p>No services found for this invoice.</p>');
+            }
+
+            
+            // Mover el modal cerca del mouse
+            const $modalDialog = $('#billingModal .modal-dialog');
+            $modalDialog.css({
+                top: mouseY + 5 + 'px',  // un poco más abajo del cursor
+                left: mouseX - 200 + 'px', // centrado horizontal aprox
+            });
+            $('#billingModal').modal('show');
+        });
+
+        // let servicioIndexActualizar = 0; 
+        document.getElementById('addServiceBtnActualizar').addEventListener('click', function () {
+            const container = document.getElementById('servicesContainerActualizar');
+            const row = document.createElement('div');
+            row.className = 'row mb-3 pt-2';
+            row.innerHTML = `
+                <div class="col-md-6">
+                    <input type="checkbox" name="check${servicioIndexActualizar}" class="check-item" data-clave="${servicioIndexActualizar}" checked hidden>
+                    <input type="text" name="nombre${servicioIndexActualizar}" class="form-control mt-2" data-clave="${servicioIndexActualizar}" placeholder="Service Name">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="cantidad${servicioIndexActualizar}" class="form-control" placeholder="Qty" data-clave="${servicioIndexActualizar}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="valor${servicioIndexActualizar}" class="form-control" placeholder="Unit Price" data-clave="${servicioIndexActualizar}">
+                </div>
+                `;
+            const row2 = document.createElement('div');
+            row2.className = 'row col-12';
+            row2.innerHTML = `
+                <textarea class="form-control" rows="2" name="descripcionservicio${servicioIndexActualizar}" data-clave="${servicioIndexActualizar}" placeholder="Description"></textarea>
+                `;
+            container.appendChild(row);
+            container.appendChild(row2);
+            servicioIndexActualizar++;
+        });
+
+        $('#btnActualizarFactura').click(function () {
+            let datos = $('#billingFormActualizar').serialize();
+            datos += "&accion=insertarFacturaRapida"; // Agregar el id de la factura
+            $.ajax({ 
+                type: "POST",
+                url: "../controller/solicitudController.php",
+                data: datos,
+                dataType: "json",
+                success: function (r) {
+                    if(r.status=='0'){
+                        Swal.fire("Éxito", "Factura actualizada con éxito.", "success")
+                            .then(() => {
+                                window.location.href = 'solo_factura.php';
+                            });
+                    }else{
+                        Swal.fire("Error", "Fallo en la inserción de la factura.", "error");
+                    }
+                },
+                error: function (r) {
+                    console.log(r);
+                    Swal.fire("Error", "Error en la comunicación con el servidor.", "error");
+                }
+            });
+        });
 
     });
 
