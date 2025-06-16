@@ -452,25 +452,42 @@ class modelSociedad{
     public static function mdlObtenerSociedadesSinDeclararMarzo() {
         try {
             $sql = "SELECT 
-                ps.id_personas_sociedad,
-                ps.datos_sociedad->>'nombreSociedad' AS nombre,
-                ts.nombre_tipo_sociedad AS tipo,
-                e.estado AS estado,
-                CASE 
-                    WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
-                    WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
-                    WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
-                    WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
-                    ELSE 'Extranjera (Colombia) - No aplica'
-                END AS formulario_fiscal
-            FROM 
-                personas_sociedad ps
-            JOIN tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
-            JOIN LATERAL 
-                jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
-            JOIN estados e ON e.id_estado = estado_codigo.codigo::int
-            JOIN sociedades_march sm ON sm.id_personas_sociedad = ps.id_personas_sociedad
-            WHERE 
+                    ps.id_personas_sociedad,
+                    ps.datos_sociedad->>'nombreSociedad' AS nombre,
+                    ts.nombre_tipo_sociedad AS tipo,
+                    e.estado AS estado,
+                    ARRAY[
+                        CASE 
+                            WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
+                            WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
+                            WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
+                            WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
+                            ELSE 'Extranjera (Colombia) - No aplica'
+                        END
+                    ] ||
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM sociedad s
+                            WHERE s.pais_pasaporte != 'USA'
+                            AND s.id_sociedad IN (
+                                SELECT elem::int
+                    FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
+                    WHERE elem ~ '^\d+$'
+                )
+                            ) THEN ARRAY['8804']
+                            ELSE ARRAY[]::text[]
+                        END AS formularios_fiscales
+                    FROM 
+                        personas_sociedad ps
+                    JOIN 
+                        tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
+                    JOIN LATERAL 
+                        jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
+                    JOIN 
+                        estados e ON e.id_estado = estado_codigo.codigo::int
+                    WHERE 
+                        
                 ps.datos_sociedad->>'declararSociedad' = 'on'
                 AND sm.declararon_marzo = FALSE";
             
