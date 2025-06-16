@@ -88,7 +88,7 @@ $(document).ready(function () {
             { data: 'nombre' },
             { data: 'tipo' },
             { data: 'estado' },
-            { data: 'formulario_fiscal' },
+            { data: 'formularios_fiscal' },
             {
                 data: 'declararon_marzo',
                 render: function (data, type, row) {
