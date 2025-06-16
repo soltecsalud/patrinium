@@ -41,7 +41,12 @@ class FacturaController {
 
     
         public function insertarRevision() {
+
+            //fecha de creación
+            date_default_timezone_set('America/Bogota');
+
             $id_solicitud = $_POST['id_solicitud'];
+            $id_factura   = $_POST['id_factura'];
             // Asumiendo que 'resource' es la carpeta dentro de la raíz del proyecto donde quieres guardar los archivos
             $uploadsDir = __DIR__ . '/resource/';
             $folderName = $id_solicitud; // La nueva subcarpeta para las revisiones
@@ -62,36 +67,48 @@ class FacturaController {
                 $fileName = $_FILES['payment_image']['name']; // Cambia 'archivo' por 'payment_image'
                 // Asegurarse de limpiar el nombre del archivo para evitar vulnerabilidades
                 $fileName = basename($fileName);
-                $filePath = $revisionPath . $fileName;
-                $payment_notes = $_POST['payment_notes'];
+                $filePath = $revisionPath . date("Ymd_His")."_".$fileName; // Agregar fecha y hora al nombre del archivo
+                $payment_type   = $_POST['payment_type'];
+                $payment_notes  = $_POST['payment_notes'];
                 $payment_option = $_POST['payment_option'];
+                $estado_factura = $payment_type == "total" ? 1 : 0; // Asignar estado según el tipo de pago
     
                 // Crear array para envío al modelo e inserción a BD
                 $datos = array(
-                    "payment_notes" => $payment_notes,
+                    "payment_type"   => $payment_type,
+                    "payment_notes"  => $payment_notes,
                     "payment_option" => $payment_option,
-                    "nombre_archivo" => $fileName,
-                    "solicitud" => $id_solicitud
+                    "nombre_archivo" => date("Ymd_His")."_".$fileName,
+                    "solicitud"      => $id_solicitud,
+                    "id_factura"     => $id_factura
                 );
-    
+
+                $dato_partial_amount = [];
+                if ($payment_type == "parcial") { 
+                    // Si es un pago parcial, también se debe enviar el monto parcial
+                    $dato_partial_amount["partial_amount"] = $_POST['partial_amount'];
+                }
+                
                 // Envío a módulo para inserción
-                $respuesta = ModelFacturacion::uploadInvoice($datos);
+                $respuesta = ModelFacturacion::uploadInvoice($datos,$estado_factura,$dato_partial_amount);
     
                 if ($respuesta == "ok") {
-                    echo 0; // Éxito
+                    // echo 0; // Éxito
+                    // Mover el archivo al directorio de revisiones
+                    if (move_uploaded_file($_FILES['payment_image']['tmp_name'], $filePath)) { // Cambia 'archivo' por 'payment_image'
+                        // El archivo se ha cargado correctamente
+                        // Aquí se podría incluir más lógica para manejar el archivo cargado,
+                        // como insertar detalles en la base de datos.
+                        // echo "Archivo cargado con éxito: " . $fileName . " variable: " . $payment_option . "&&&" . $id_solicitud;
+                        echo json_encode(['status' => 'success', 'message' => 'Archivo cargado con exito']);
+                    } else {
+                        // Error al mover el archivo
+                        // echo "Error al mover el archivo.";
+                        echo json_encode(['status' => 'error', 'message' => 'Error al mover el archivo']);
+                    }
                 } else {
                     echo 1; // Error
-                }
-    
-                // Mover el archivo al directorio de revisiones
-                if (move_uploaded_file($_FILES['payment_image']['tmp_name'], $filePath)) { // Cambia 'archivo' por 'payment_image'
-                    // El archivo se ha cargado correctamente
-                    // Aquí se podría incluir más lógica para manejar el archivo cargado,
-                    // como insertar detalles en la base de datos.
-                    echo "Archivo cargado con éxito: " . $fileName . " variable: " . $payment_option . "&&&" . $id_solicitud;
-                } else {
-                    // Error al mover el archivo
-                    echo "Error al mover el archivo.";
+                    echo json_encode(['status' => 'error', 'message' => 'Error al insertar']);
                 }
             } else {
                 // No se recibió ningún archivo válido o hubo un error en la carga
@@ -100,6 +117,8 @@ class FacturaController {
         }
 
         public function pagarFacturaRapida(){
+            //fecha de creación
+            date_default_timezone_set('America/Bogota');
             $id_factura = $_POST['id_factura'];
             // Asumiendo que 'resource' es la carpeta dentro de la raíz del proyecto donde quieres guardar los archivos
             $uploadsDir = '../documents/quick_invoices';
@@ -120,21 +139,30 @@ class FacturaController {
             if (isset($_FILES['payment_image']) && $_FILES['payment_image']['error'] === UPLOAD_ERR_OK) { // Cambia 'archivo' por 'payment_image'
                 $fileName = $_FILES['payment_image']['name']; // Cambia 'archivo' por 'payment_image'
                 // Asegurarse de limpiar el nombre del archivo para evitar vulnerabilidades
-                $fileName = basename($fileName);
-                $filePath = $revisionPath . $fileName;
-                $payment_notes = $_POST['payment_notes'];
+                $fileName       = basename($fileName);
+                $filePath       = $revisionPath . date("Ymd_His")."_".$fileName;
+                $payment_type   = $_POST['payment_type'];
+                $payment_notes  = $_POST['payment_notes'];
                 $payment_option = $_POST['payment_option'];
+                $estado_factura = $payment_type == "total" ? 1 : 0; // Asignar estado según el tipo de pago
+    
     
                 // Crear array para envío al modelo e inserción a BD
                 $datos = array(
                     "payment_notes"  => $payment_notes,
                     "payment_option" => $payment_option,
-                    "nombre_archivo" => $fileName,
+                    "nombre_archivo" => date("Ymd_His")."_".$fileName,
                     "idfactura"      => $id_factura 
                 );
+
+                $dato_partial_amount = [];
+                if ($payment_type == "parcial") { 
+                    // Si es un pago parcial, también se debe enviar el monto parcial
+                    $dato_partial_amount["partial_amount"] = $_POST['partial_amount'];
+                }
     
                 // Envío a módulo para inserción
-                $respuesta = ModelFacturacion::mdlPagarFacturaRapida($datos);
+                $respuesta = ModelFacturacion::mdlPagarFacturaRapida($datos,$estado_factura,$dato_partial_amount);
     
                 if ($respuesta == "ok") {
                     echo 0; // Éxito
@@ -270,6 +298,7 @@ class FacturaController {
                 $resultado = ModelFacturacion::obtenerTiposPago();
                 header('Content-Type: application/json');
                 echo json_encode($resultado);
+                exit();
             } catch (Exception $e) {
                 echo json_encode(['error' => $e->getMessage()]);
             }
@@ -304,12 +333,12 @@ class FacturaController {
         }
 
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] == 'obtenerTiposPago') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion']) && $_POST['accion'] == 'obtenerTiposPago') {
     $controlador = new FacturaController();
     $controlador->obtenerTiposPago();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'listarFacturas') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'listarFacturas') {
     $controller = new FacturaController();
     $controller->listarFacturas();
 }
@@ -324,12 +353,12 @@ if (isset($_POST['accion']) && $_POST['accion'] === 'insertarPagoFacturaRapida')
     $controlador->pagarFacturaRapida(); // Asegúrate de que este método existe y es el correcto
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] ==  'eliminarFactura') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])  && $_POST['accion'] ==  'eliminarFactura') {
     $controlador = new FacturaController();
     $controlador->eliminarFactura(); 
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] ==  'actualizarDatosFactura') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['accion'])  && $_POST['accion'] ==  'actualizarDatosFactura') {
     $controlador = new FacturaController();
     $controlador->actualizarDatosFactura(); 
     // echo json_encode(['status' => 'ok', 'message' => 'Método no permitido']);
@@ -337,17 +366,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['accion'] ==  'actualizarDato
 
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'listarFacturasPagadas') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])  && $_POST['action'] ==  'listarFacturasPagadas') {
     
     $controlador = new FacturaController();
     $controlador->listarFacturasPagadas(); // Asegúrate de que este método existe y es el correcto
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'listarServicios') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])  && $_POST['action'] ==  'listarServicios') {
     
     $controlador = new FacturaController();
     $controlador->listarServicios(); // Asegúrate de que este método existe y es el correcto
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] ==  'actualizarFactura') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])  && $_POST['action'] ==  'actualizarFactura') {
     
 
         $controlador = new FacturaController();

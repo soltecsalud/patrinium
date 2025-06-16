@@ -602,9 +602,7 @@ include_once "../controller/solicitudController.php";
                                     <h3 class="card-title">Datos Persona</h3>
                                 </div>
                                 <div class="card-body">
-
-                                    <table class="table">
-
+                                    <table id="tabla_datos_persona" class="table">
                                         <?php
                                         $sociedad_controller = new Solicitud_controller();
                                         $fk_cliente          = $solicitud->fk_cliente;
@@ -612,7 +610,6 @@ include_once "../controller/solicitudController.php";
                                         if(empty($fila)){
                                             $fila            = $sociedad_controller->getSociedad($fk_cliente,'1');
                                         }
-
                                         ?>
                                         <tbody>
                                             <tr>
@@ -957,8 +954,6 @@ include_once "../controller/solicitudController.php";
                                         <tbody>
                                             <?php
                                             $solicitudes = $controlador->getListadoAdjuntos($id_revisar_solicitud);
-
-
                                             foreach ($solicitudes as $adjuntos) {
                                             ?>
                                                 <tr>
@@ -971,7 +966,6 @@ include_once "../controller/solicitudController.php";
                                                     <td><a class="btn btn-primary" href="../controller/resource/<?php echo $id_revisar_solicitud . "/" . $adjuntos->nombre_archivo; ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
                                                 </tr>
                                             <?php } ?>
-
                                         </tbody>
                                     </table>
 
@@ -1238,7 +1232,7 @@ include_once "../controller/solicitudController.php";
                     ?>
 
                     <hr class="my-4 primary">
-
+                    <input type="hidden" name="total_factura" id="total_factura">
                     <!-- <div class="row">
                         <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
                             In case of issuing an invoice with only a Total:
@@ -2170,8 +2164,6 @@ include_once "../controller/solicitudController.php";
                             </option>
                         `);
 
-                        // selectElement.append('<option value="' + idSociedad + '" data-id="' + item.tipo + '"  >' + item.nombre + '</option>');
-                        // tail.select("#selectPersona" + personaIndex, {
                         if(personaIndex !== null && personaIndex !== 'factura'){
                             tail.select("#selectPersona" + personaIndex, {
                                 search: true,
@@ -2181,9 +2173,7 @@ include_once "../controller/solicitudController.php";
                                 // multiLimit: 4,
                                 multiShowCount: false,
                                 multiContainer: true
-                                
                             }).reload();
-                        
                         }else if(personaIndex=='factura'){
                             tail.select("#selectPersonaFactura", {
                                 search: true,
@@ -2203,11 +2193,8 @@ include_once "../controller/solicitudController.php";
                                 // multiLimit: 4,
                                 multiShowCount: false,
                                 multiContainer: true
-                                
                             }).reload();
                         }
-                        
-                    
                     });
                 },
                 error: function(xhr, status, error) {
@@ -2286,7 +2273,6 @@ include_once "../controller/solicitudController.php";
                         // multiLimit: 4,
                         multiShowCount: false,
                         multiContainer: true
-                        
                     }).reload();
                 },
                 error: function(xhr, status, error) {
@@ -2966,6 +2952,9 @@ include_once "../controller/solicitudController.php";
 
     $(document).ready(function() {
         $('#documentosAdjuntos').DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
             dom: 'Bfrtip',
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
@@ -3436,17 +3425,6 @@ include_once "../controller/solicitudController.php";
             $('#personasContainer').append(nuevoCampo);
             var nuevoSelect = $('#personasContainer').find('select').last(); // Seleccionar el nuevo select
             cargarPersonas(nuevoSelect,null,personaIndex); // Cargar las opciones en el nuevo select
-            // Inicializar el select2 para el nuevo select
-            // tail.select("#selectPersona" + personaIndex, {
-            //     search: true,
-            //     descriptions: true,
-            //     hideSelected: true,
-            //     hideDisabled: true,
-            //     multiLimit: 4,
-            //     multiShowCount: false,
-            //     multiContainer: true
-            // }).reload();
-            
             personaIndex++;
         });
 

@@ -47,8 +47,7 @@ class ModelFacturacion {
 
         try {
             $estado = 1;
-           
-             $sql = "SELECT 
+            $sql = "SELECT 
                 f.*, 
                 b.*, 
                 COALESCE(
@@ -98,18 +97,27 @@ class ModelFacturacion {
 
     }
 
-    public static function uploadInvoice($datos){
+    public static function uploadInvoice($datos,$estado_factura,$dato_partial_amount){
         try {
-            $sql = "UPDATE factura set estado = 1, 
+            $sql = "UPDATE factura SET 
+            datos = datos || :datos::jsonb,
+            estado = :estado, 
             tipo_consignacion = :tipo_consignacion, 
             ruta_pago = :ruta_pago,
             nota_pago = :nota_pago
-            where id_solicitud = :id_solicitud";
-            $consulta = Conexion::conectar()->prepare($sql);
+            where id_solicitud = :id_solicitud AND id = :id_factura";
+            $consulta = Conexion::conectar()->prepare($sql); 
+            // Convertir $datos a JSON
+            // $json_datos = json_encode($dato_partial_amount,JSON_UNESCAPED_UNICODE);
+            $json_datos = !empty($dato_partial_amount) ? json_encode($dato_partial_amount, JSON_UNESCAPED_UNICODE) : '{}';
+            // Vincular los parámetros
+            $consulta->bindParam(':datos', $json_datos, PDO::PARAM_STR);
+            $consulta->bindParam(':estado', $estado_factura, PDO::PARAM_INT);
             $consulta->bindParam(':tipo_consignacion', $datos['payment_option'], PDO::PARAM_STR);
             $consulta->bindParam(':ruta_pago', $datos['nombre_archivo'], PDO::PARAM_STR);
             $consulta->bindParam(':nota_pago', $datos['payment_notes'], PDO::PARAM_STR);
             $consulta->bindParam(':id_solicitud', $datos['solicitud'], PDO::PARAM_STR); // Usa $datos directamente
+            $consulta->bindParam(':id_factura', $datos['id_factura'], PDO::PARAM_INT); // Usa $datos directamente
             $consulta->execute();
 
             return "ok";
@@ -119,14 +127,21 @@ class ModelFacturacion {
         }
     }
 
-    public static function mdlPagarFacturaRapida($datos){
+    public static function mdlPagarFacturaRapida($datos,$estado_factura,$dato_partial_amount){
         try {
-            $sql = "UPDATE factura_rapida set estado = 1, 
+            $sql = "UPDATE factura_rapida set estado =  :estado, 
+            datos = datos || :datos::jsonb,
             tipo_consignacion = :tipo_consignacion, 
             ruta = :ruta_pago,
             nota_pago = :nota_pago
             WHERE factura_rapida_id = :id_factura";
             $consulta = Conexion::conectar()->prepare($sql);
+
+            // Convertir $datos a JSON
+            $json_datos = !empty($dato_partial_amount) ? json_encode($dato_partial_amount, JSON_UNESCAPED_UNICODE) : '{}';
+            // Vincular los parámetros
+            $consulta->bindParam(':datos', $json_datos, PDO::PARAM_STR);
+            $consulta->bindParam(':estado', $estado_factura, PDO::PARAM_INT);
             $consulta->bindParam(':tipo_consignacion', $datos['payment_option'], PDO::PARAM_STR);
             $consulta->bindParam(':ruta_pago', $datos['nombre_archivo'], PDO::PARAM_STR);
             $consulta->bindParam(':nota_pago', $datos['payment_notes'], PDO::PARAM_STR);
