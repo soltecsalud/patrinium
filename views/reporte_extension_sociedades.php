@@ -88,7 +88,7 @@ $(document).ready(function () {
             { data: 'nombre' },
             { data: 'tipo' },
             { data: 'estado' },
-            { data: 'formularios_fiscal' },
+            { data: 'formularios_fiscales' },
             {
                 data: 'declararon_marzo',
                 render: function (data, type, row) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
             { data: 'nombre' },
             { data: 'tipo' },
             { data: 'estado' },
-            { data: 'formulario_fiscal' }
+            { data: 'formulario_fiscales' }
         ],
         dom: 'Bfrtip',
         buttons: [
