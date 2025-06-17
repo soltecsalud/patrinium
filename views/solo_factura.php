@@ -109,17 +109,20 @@ $controlador = new Solicitud_controller();
                             <input type="hidden" name="total_factura" id="total_factura" value="0">
 
                             <!-- <hr class="my-4"> -->
-
-                           <!-- <div class="row">
-                                <label class="mb-2 h5">In case of issuing an invoice with only a Total:</label>
+                            <!-- <div class="row">
+                                <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="invoiceNumberInput">
+                                    In case of issuing an invoice with partial payment:
+                                </label>
                                 <div class="col-md-6 mb-3">
-                                    <label for="total_factura">Total Invoice</label>
+                                    <label for="total_factura">
+                                        Total Invoice
+                                        Partial Invoice
+                                    </label>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <input type="text" placeholder="Price" name="total_factura" class="form-control">
+                                    <input type="text" placeholder="Write the partial price" name="total_factura" id="total_factura" class="form-control">
                                 </div>
-                            </div>-->
-
+                            </div> -->
                             <hr class="my-4 primary">
 
                             <div class="row mb-3">
@@ -192,6 +195,19 @@ $controlador = new Solicitud_controller();
                         <form id="paymentForm">
                             <input type="hidden" id="invoiceNumber" name="id_factura">
                             <div class="form-group">
+                                <label for="paymentType">Tipo de Pago</label>
+                                <select class="form-control" id="paymentType" name="payment_type" required>
+                                    <option value="">Seleccione un tipo de pago</option>
+                                    <option value="total">Total</option>
+                                    <option value="parcial">Parcial</option>
+                                </select>
+                                <!-- Activar input si el pago es parcial -->
+                                <div class="form-group" id="partialAmountGroup" style="display: none;">
+                                    <label for="partialAmount">Monto Parcial</label>
+                                    <input type="number" class="form-control" id="partialAmount" name="partial_amount" placeholder="Ingrese el monto parcial">
+                                </div>
+                            </div>        
+                            <div class="form-group">
                                 <label for="paymentImage">Imagen de Pago</label>
                                 <input type="file" class="form-control-file" id="paymentImage" name="payment_image">
                             </div>
@@ -200,11 +216,14 @@ $controlador = new Solicitud_controller();
                                 <textarea class="form-control" id="paymentNotes" name="payment_notes" rows="3"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="paymentOption">Opción de Pago</label>
-                                <select class="form-control" id="paymentOption" name="payment_option">
+                                <label for="paymentOption">Opci&oacute;n de Pago</label>
+                                <!-- <select class="form-control" id="paymentOption" name="payment_option">
                                     <option value="Transferencia">Transferencia</option>
                                     <option value="Cheque">Cheque</option>
                                     <option value="Efectivo">Efectivo</option>
+                                </select> -->
+                                <select class="form-control" id="paymentOption" name="payment_option">
+                                    <!-- Opciones cargadas dinámicamente vía AJAX -->
                                 </select>
                             </div>
                             <button type="submit" id="btn-payment" class="btn btn-primary">Enviar</button>
@@ -367,7 +386,24 @@ $controlador = new Solicitud_controller();
         servicioIndex++;
     });
 
-    $(document).ready(function () {
+    $(document).ready(function () { 
+        $.ajax({
+            url: '../controller/facturaController.php',
+            method: 'POST',
+            data: { accion: 'obtenerTiposPago' },
+            dataType: 'json',
+            success: function(response) {
+                let select = $('#paymentOption');
+                select.empty(); // Limpia el select
+                response.forEach(function(item) {
+                    select.append(`<option value="${item.tipo_pago}">${item.tipo_pago}</option>`);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar tipos de pago:', error);
+                console.log('Respuesta del servidor:', xhr.responseText); 
+            }
+        });
 
         $.ajax({
             url: '../controller/sociedadController.php',
@@ -712,6 +748,16 @@ $controlador = new Solicitud_controller();
             });
         });
 
+    });
+
+    $(document).ready(function() {
+        $('#paymentType').change(function() {
+            if ($(this).val() === 'parcial') {
+                $('#partialAmountGroup').show();
+            } else {
+                $('#partialAmountGroup').hide();
+            }
+        });
     });
 
 

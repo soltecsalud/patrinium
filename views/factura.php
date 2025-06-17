@@ -178,6 +178,7 @@ include_once "../controller/solicitudController.php";
 
                             </div>
                         </div> 
+                        <input type="hidden" name="total_factura">
 
                         <div class="row" style="margin-bottom: 3%;">
                             <label class="mb-2 h5" style="margin-top: 2%; padding-bottom: 2%;" for="observaciones">
@@ -200,7 +201,58 @@ include_once "../controller/solicitudController.php";
         </div>
     </div>
 
-
+    <!-- Modal -->
+    <div class="modal fade" id="tuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Formulario de Pago</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario -->
+                <form id="paymentForm">
+                <!-- Campo oculto para invoice_number -->
+                <input type="hidden" id="invoiceNumber" name="id_solicitud">
+                <!-- Campo oculto para idFactura -->
+                <input type="hidden" id="id_factura" name="id_factura">
+                <!-- Select si el pago es parcial o total -->
+                <div class="form-group">
+                    <label for="paymentType">Tipo de Pago</label>
+                    <select class="form-control" id="paymentType" name="payment_type" required>
+                        <option value="">Seleccione un tipo de pago</option>
+                        <option value="total">Total</option>
+                        <option value="parcial">Parcial</option>
+                    </select>
+                    <!-- Activar input si el pago es parcial -->
+                    <div class="form-group" id="partialAmountGroup" style="display: none;">
+                        <label for="partialAmount">Monto Parcial</label>
+                        <input type="number" class="form-control" id="partialAmount" name="partial_amount" placeholder="Ingrese el monto parcial">
+                    </div>
+                </div>        
+                <!-- Input de archivo -->
+                <div class="form-group">
+                    <label for="paymentImage">Imagen de Pago</label>
+                    <input type="file" class="form-control-file" id="paymentImage" name="payment_image">
+                </div>
+                <!-- Área de texto -->
+                <div class="form-group">
+                    <label for="paymentNotes">Notas</label>
+                    <textarea class="form-control" id="paymentNotes" name="payment_notes" rows="3"></textarea>
+                </div>
+                <!-- Select -->
+                <div class="form-group">
+                    <label for="paymentOption">Opci&oacute;n de Pago</label>
+                    <select class="form-control" id="paymentOption" name="payment_option">
+                        <!-- Opciones cargadas dinámicamente vía AJAX -->
+                    </select>
+                </div>
+                <!-- Botón de envío -->
+                <button type="submit" id="btn-payment" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
 
 
 </body>
@@ -214,28 +266,27 @@ include_once "../controller/solicitudController.php";
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/tail-select/js/tail.select-full.js"></script>
-   
 
-
-    <script>
-$(document).ready(function() {
-    $.ajax({
-        url: '../controller/facturaController.php',
-        method: 'POST',
-        data: { accion: 'obtenerTiposPago' },
-        dataType: 'json',
-        success: function(response) {
-            let select = $('#paymentOption');
-            select.empty(); // Limpia el select
-            response.forEach(function(item) {
-                select.append(`<option value="${item.tipo_pago}">${item.tipo_pago}</option>`);
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Error al cargar tipos de pago:', error);
-        }
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '../controller/facturaController.php',
+            method: 'POST',
+            data: { accion: 'obtenerTiposPago' },
+            dataType: 'json',
+            success: function(response) {
+                let select = $('#paymentOption');
+                select.empty(); // Limpia el select
+                response.forEach(function(item) {
+                    select.append(`<option value="${item.tipo_pago}">${item.tipo_pago}</option>`);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar tipos de pago:', error);
+                console.log('Respuesta del servidor:', xhr.responseText); 
+            }
+        });
     });
-});
 </script>
     <script>
         function cargarPersonas(selectElement,idSeleccionado = null,personaIndex = null, idSolicitud = null) {
@@ -337,7 +388,7 @@ $(document).ready(function() {
             data: { action: 'listarFacturas' },
             dataType: 'json',
             success: function(response) {
-                console.log(response); // Añade esto para ver la respuesta en la consola
+                // console.log(response); // Añade esto para ver la respuesta en la consola
                 let tbody = $('#listar_facturas');
                 tbody.empty(); // Limpia cualquier dato anterior
 
@@ -355,7 +406,7 @@ $(document).ready(function() {
                     });
                     datosFacturas.push(factura);
                     let row = `<tr>
-                        <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-id-solicitud="${factura.id_solicitud}"/></td>
+                        <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment"  data-id-factura="${factura.id}" data-id-solicitud="${factura.id_solicitud}"/></td>
                         <td><input id="payment-${factura.id}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${factura.id}"  /></td>
                         <td><input id="payment-${factura.id}" class="btn btn-danger delete-btn" type="button" value="Eliminar" data-id-factura="${factura.id}"  /></td>
                         <td>${factura.id_solicitud}</td>
@@ -390,6 +441,7 @@ $(document).ready(function() {
             var idSolicitud = $(this).data('id-solicitud');
             // Actualiza el valor del campo oculto en el formulario
             $('#invoiceNumber').val(idSolicitud);
+            $('#id_factura').val($(this).data('id-factura')); // Actualiza el id_factura en el formulario
             // Muestra el modal
             $('#tuModal').modal('show');
         });
@@ -408,18 +460,29 @@ $(document).ready(function() {
                 data: formData,
                 contentType: false,
                 processData: false,
+                dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-                    Swal.fire({
+                    // console.log(response);
+                    if(response.status == 'success') {
+                        Swal.fire({
                         title: '¡Éxito!',
                         text: '¡Archivo guardado exitosamente!',
                         icon: 'success',
-                        confirmButtonText: 'Aceptar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'factura.php'; // Redireccionar a la página de factura
-                        }
-                    });
+                        confirmButtonText: 'Aceptar',
+                        location:  'top-end',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'factura.php'; // Redireccionar a la página de factura
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se pudo guardar el archivo.',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -439,7 +502,7 @@ $(document).ready(function() {
                     },
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         if(response.status=='ok'){
                             Swal.fire("Éxito", "Factura eliminada", "success")
                             .then(() => {
@@ -543,7 +606,7 @@ $(document).ready(function() {
                 url: "../controller/facturaController.php",
                 data: datos,
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     // var m = JSON.parse(response)
                     // console.log(m.status);
                     // console.log(response.message);
@@ -564,44 +627,20 @@ $(document).ready(function() {
         });
 
     });
+
+    $(document).ready(function() {
+        $('#paymentType').change(function() {
+            if ($(this).val() === 'parcial') {
+                $('#partialAmountGroup').show();
+            } else {
+                $('#partialAmountGroup').hide();
+            }
+        });
+    });
+
 </script>
 
-    <!-- Modal -->
-    <div class="modal fade" id="tuModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Formulario de Pago</h5>
-           
-        </div>
-        <div class="modal-body">
-            <!-- Formulario -->
-            <form id="paymentForm">
-            <!-- Campo oculto para invoice_number -->
-            <input type="hidden" id="invoiceNumber" name="id_solicitud">
-            <!-- Input de archivo -->
-            <div class="form-group">
-                <label for="paymentImage">Imagen de Pago</label>
-                <input type="file" class="form-control-file" id="paymentImage" name="payment_image">
-            </div>
-            <!-- Área de texto -->
-            <div class="form-group">
-                <label for="paymentNotes">Notas</label>
-                <textarea class="form-control" id="paymentNotes" name="payment_notes" rows="3"></textarea>
-            </div>
-            <!-- Select -->
-            <div class="form-group">
-                <label for="paymentOption">Opción de Pago</label>
-                <select class="form-control" id="paymentOption" name="payment_option">
-                    <!-- Opciones cargadas dinámicamente vía AJAX -->
-                </select>
-            </div>
-            <!-- Botón de envío -->
-            <button type="submit" id="btn-payment" class="btn btn-primary">Enviar</button>
-            </form>
-        </div>
-        </div>
-    </div>
-    </div>
+    
 </html>
+
 

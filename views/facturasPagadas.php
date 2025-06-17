@@ -19,6 +19,56 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="css/estilos generales.css">
     <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
     <title>PatrimoniumAPP || Pagos </title>
+    <style>
+        .switch-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: not-allowed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #28a745;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+    </style>
 </head>
 <body>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -48,6 +98,8 @@ if (!isset($_SESSION['usuario'])) {
                                 <thead>
                                     <tr>
                                         <th>Descargar Comprobante</th>
+                                        <th>Full/Partial Payment</th>
+                                        <th>Payment value</th>
                                         <th>System Number</th> 
                                         <th>Nombre Cliente</th> 
                                         <th>Invoice Number</th>                                                                                                                    
@@ -106,8 +158,27 @@ if (!isset($_SESSION['usuario'])) {
                         // Multiplica valor por cantidad y suma al total
                         total += Number(detalleServicio.valor) * Number(detalleServicio.cantidad);
                     });
+
+                    let full_payment = Number(total).toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    let value_paid   = datos.partial_amount!=null ? datos.partial_amount : full_payment; // Maneja el caso de pago parcial
+                    let partial_amount = datos.partial_amount || 0; // Maneja el caso de pago parcial
+                    
+                    let esParcial = partial_amount != 0;
+                    let etiqueta  = esParcial ? 'Parcial' : 'Total';
+
+                    let switchCheckbox = `
+                    <div class="switch-container" title="Tipo de pago: ${etiqueta}">
+                    <label class="switch">
+                        <input type="checkbox" ${esParcial ? 'checked' : ''} disabled>
+                        <span class="slider"></span>
+                    </label>
+                    <span>${etiqueta}</span>
+                    </div>`;
+
                     let row = `<tr>
                         <td><a class='btn btn-success' href='../controller/resource/${factura.id_solicitud}/${factura.ruta_pago}' target='_BLANK'><i class=' fas fa-download'></i></a></td>
+                        <td>${switchCheckbox}</td>
+                        <td>${value_paid}</td>
                         <td>${factura.id_solicitud}</td>
                         <td>${factura.nombre_obtenido}</td>
                         <td>${datos.invoice_number}</td>
@@ -115,12 +186,19 @@ if (!isset($_SESSION['usuario'])) {
                         <td>${factura.created_at}</td>
                         <td>${factura.nombre_banco}</td>
                         <td>${factura.numero_cuenta}</td>
-                        <td>${Number(total).toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        <td>${full_payment}</td>
                         <td>${datos.observaciones}</td>
                     </tr>`;
                     tbody.append(row);
                 });
-                $('#facturaTable').DataTable();
+                $('#facturaTable').DataTable({
+                    "responsive": true,
+                    "lengthChange": true,
+                    "autoWidth": false,
+                    "searching": false,
+                    "paging": false,
+                    "info": false
+                });
             },
             error: function(xhr, status, error) {
                 console.error('Error al obtener los datos: ', xhr.responseText);
