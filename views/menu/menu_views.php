@@ -4,7 +4,7 @@ if (!isset($_SESSION['usuario'])) {
   exit();
 }
 ?>
-<link rel="stylesheet" href="css/estilos generales.css">
+
 <div class="wrapper">
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4" id="menuVertical" style="top: -57px;">

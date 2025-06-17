@@ -1,0 +1,31 @@
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-azul > .nav-link {
+  background-color: #003366 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-celeste > .nav-link {
+  background-color: #007aa3 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-verdeazul > .nav-link {
+  background-color: #009999 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-verde > .nav-link {
+  background-color: #00b050 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-verdeoliva > .nav-link {
+  background-color: #669933 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-verdeosc > .nav-link {
+  background-color: #4f6228 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-naranja > .nav-link {
+  background-color: #f79646 !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-naranjosc > .nav-link {
+  background-color: #c0504d !important; color: white !important;
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado > .nav-link {
+  background-color: #7030a0 !important; color: white !important;
+}
+
+.sidebar .nav-treeview .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
