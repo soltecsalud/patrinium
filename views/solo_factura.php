@@ -197,7 +197,7 @@ $controlador = new Solicitud_controller();
                             <div class="form-group">
                                 <label for="paymentType">Tipo de Pago</label>
                                 <select class="form-control" id="paymentType" name="payment_type" required>
-                                    <option value="">Seleccione un tipo de pago</option>
+                                    <option value="">selecciona Una Forma De Pago</option>
                                     <option value="total">Total</option>
                                     <option value="parcial">Parcial</option>
                                 </select>
