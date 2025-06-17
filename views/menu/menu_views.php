@@ -4,26 +4,9 @@ if (!isset($_SESSION['usuario'])) {
   exit();
 }
 ?>
+<link rel="stylesheet" href="css/estilos generales.css">
 <div class="wrapper">
-<style>
 
-
-.sidebar .nav-item.bg-azul       { background-color: #003366; color: white; }
-.sidebar .nav-item.bg-celeste    { background-color: #007aa3; color: white; }
-.sidebar .nav-item.bg-verdeazul  { background-color: #009999; color: white; }
-.sidebar .nav-item.bg-verde      { background-color: #00b050; color: white; }
-.sidebar .nav-item.bg-verdeoliva { background-color: #669933; color: white; }
-.sidebar .nav-item.bg-verdeosc   { background-color: #4f6228; color: white; }
-.sidebar .nav-item.bg-naranja    { background-color: #f79646; color: white; }
-.sidebar .nav-item.bg-naranjosc  { background-color: #c0504d; color: white; }
-.sidebar .nav-item.bg-morado     { background-color: #7030a0; color: white; }
-
-
-.sidebar .nav-treeview .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-</style>
   <aside class="main-sidebar sidebar-dark-primary elevation-4" id="menuVertical" style="top: -57px;">
     <!-- Brand Logo -->
     <a href="./home.php" class="brand-link" style="text-decoration: none;">
