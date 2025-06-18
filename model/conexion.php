@@ -3,12 +3,12 @@
 class Conexion{
     static public function conectar(){
 
-    $contrasena = "Crooked13*/";
+    $contrasena = "2eALqPZXb8Qo@Qhuy!$7Kp";
     $usuario = "postgres";
     // $BD = "patrimonium_noviembre15";
-    $BD = "patrimonium";
+    $BD = "patrimonium_produccion_abril2025";
     // $BD      = "patrimonium_vb2";
-    $rutaServidor = "178.16.142.82";
+    $rutaServidor = "127.0.0.1";
     $puerto = "5432";
 
     $base_de_datos = null;

@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Brand Logo -->
     <a href="./home.php" class="brand-link" style="text-decoration: none;">
       <img src="../resource/AdminLTE-3.2.0/dist/img/logo1.jpg" alt="Por ti mujer Logo" class="brand-image" width="80" height="80" style="opacity: .8">
-      <span class="brand-text font-weight-light">Patrimonium</span>
+      <span class="brand-text font-weight-light">Patrimonium </span>
     </a>
 
     <!-- Sidebar -->
@@ -21,14 +21,14 @@ if (!isset($_SESSION['usuario'])) {
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Menu desplegable  -->
           <?php if (isset($_SESSION['solicitudes']) && $_SESSION['solicitudes'] == 1) { ?>
-            <li class="nav-item ">
+            <li class="nav-item bg-celeste ">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-user-plus"></i>
                 <p> Nuevos Clientes <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item ">
                   <a href="./crearPersona.php" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Ingreso Nuevos Clientes</p>
@@ -46,19 +46,19 @@ if (!isset($_SESSION['usuario'])) {
                     <p>Clientes Con Servicios En Proceso || Crear Sociedades Y Socios || Adjuntar Archivos || Contratar Terceros || Opciones </p>
                   </a>
                 </li>              
-                <li class="nav-item">
+                <!--<li class="nav-item">
                   <a href="./crear_socio_extranjero.php" class="nav-link">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Ingreso De Socio Extranjero</p>
                   </a>
-                </li>
+                </li>-->
                
               </ul>
             </li>
           <?php } ?>
         
           <?php if (isset($_SESSION['solicitudes']) && $_SESSION['solicitudes'] == 1) { ?>
-            <li class="nav-item bg-celeste">
+            <li class="nav-item ">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-users-cog"></i>
                 <p> Administracion Clientes<i class="right fas fa-angle-left"></i>

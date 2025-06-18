@@ -204,6 +204,29 @@ include_once "../controller/solicitudController.php";
         .fondo-rojo {
             background-color: #f8d7da !important;
         }
+        .btn-verde, .btn-amarillo {
+                    width: 160px;               /* Ancho uniforme */
+                    height: 40px;               /* Alto consistente */
+                    font-size: 14px;            /* Tamaño de texto más legible */
+                    font-weight: bold;          /* Texto más visible */
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;                   /* Espacio entre ícono y texto */
+                    border-radius: 10px;        /* Bordes redondeados */
+                }
+
+                .btn-verde {
+                    background-color: #28a745 !important;
+                    color: white !important;
+                    border: none;
+                }
+
+                .btn-amarillo {
+                    background-color: #ffc107 !important;
+                    color: black !important;
+                    border: none;
+                }
 
     </style>
 </head>
@@ -212,12 +235,12 @@ include_once "../controller/solicitudController.php";
     <div class="content-wrapper">
         <div id="filtros-bar">
          
-            <button type="button" id="fa-bars" class="btn  btn-xs barra first-child " data-toggle="modal" data-target="#billingModal">
-                <i class="fas fa-file-invoice"></i>Crear Factura
+            <button type="button" class="btn btn-xs barra btn-verde" data-toggle="modal" data-target="#billingModal">
+                <i class="fas fa-file-invoice"></i> Crear Factura
             </button>
 
-            <button type="button" id="fa-minus-circle" class="btn  btn-xs barra first-child " data-toggle="modal" data-target="#upload_archivos">
-                <i class="fas fa-upload"></i>Cargar Archivo
+            <button type="button" class="btn btn-xs barra btn-amarillo" data-toggle="modal" data-target="#upload_archivos">
+                <i class="fas fa-upload"></i> Cargar Archivo
             </button>
 
 
