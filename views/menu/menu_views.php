@@ -299,7 +299,7 @@ if (!isset($_SESSION['usuario'])) {
             </li>
             <?php } ?>
           <?php if (isset($_SESSION['configuracion general']) && $_SESSION['configuracion general'] == 1) { ?>
-            <li class="nav-item bg-morado">
+            <li class="nav-item bg-morado3">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-gear"></i>
                 <p> Configuracion General <i class="right fas fa-angle-left"></i>
@@ -322,7 +322,7 @@ if (!isset($_SESSION['usuario'])) {
             </li>
           <?php } ?>
           <?php if (isset($_SESSION['seguridad']) && $_SESSION['seguridad'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-morado5">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fa fa-shield"></i>
                 <p> Seguridad <i class="right fas fa-angle-left"></i>
@@ -351,7 +351,7 @@ if (!isset($_SESSION['usuario'])) {
             </li>
           <?php } ?>
           <?php if (isset($_SESSION['boi']) && $_SESSION['boi'] == 1) { ?>
-            <li class="nav-item">
+            <li class="nav-item bg-morado4">
               <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-sync-alt"></i>
                 <p> BOI <i class="right fas fa-angle-left"></i>

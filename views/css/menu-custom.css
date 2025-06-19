@@ -25,7 +25,21 @@
 .sidebar-dark-primary .nav-sidebar .nav-item.bg-morado > .nav-link {
   background-color: #7030a0 !important; color: white !important;
 }
-
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado1 > .nav-link {
+  background-color: #8e44ad !important; color: white !important; /* Morado vibrante */
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado2 > .nav-link {
+  background-color: #9b59b6 !important; color: white !important; /* Lavanda profundo */
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado3 > .nav-link {
+  background-color: #6a0dad !important; color: white !important; /* Púrpura oscuro */
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado4 > .nav-link {
+  background-color: #5e4b8b !important; color: white !important; /* Morado clásico */
+}
+.sidebar-dark-primary .nav-sidebar .nav-item.bg-morado5 > .nav-link {
+  background-color: #a569bd !important; color: white !important; /* Lavanda claro */
+}
 .sidebar .nav-treeview .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
