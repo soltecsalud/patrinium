@@ -471,7 +471,8 @@ $controlador = new Solicitud_controller();
                 return;
             }
             
-
+            // Bloquear boton
+            $(this).prop('disabled', true);
             $.ajax({
                 type: "POST",
                 url: "../controller/solicitudController.php",

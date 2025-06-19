@@ -3038,6 +3038,9 @@ include_once "../controller/solicitudController.php";
                 Swal.fire("Error", "El Invoice Number ingresado ya existe.", "error");
                 return;
             }
+
+            // Bloquear boton
+            $(this).prop('disabled', true);
             $.ajax({
                 type: "POST",
                 url: "../controller/solicitudController.php",
