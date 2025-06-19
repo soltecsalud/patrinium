@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario'])) {
     <div class="wrapper">
         <section class="content">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-md-12"> <!-- col-md-8 offset-md-2 -->
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Clientes Patrimoniun</h3>
@@ -204,16 +204,11 @@ if (!isset($_SESSION['usuario'])) {
                                 <textarea name="observaciones" class="form-control" id="observaciones" rows="4"></textarea>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="offset-4 col-8">
-                                <button name="submit" id="btnGuardarSociedad" class="btn btn-primary">Guardar</button>
-                            </div>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnActualizarServicio">Guardar Cambios</button>
+                    <button name="submit" id="btnGuardarSociedad" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             </div>
         </div>

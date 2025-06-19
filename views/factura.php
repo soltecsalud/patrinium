@@ -70,16 +70,16 @@ include_once "../controller/solicitudController.php";
                             <table id="facturaTable" class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
-                                        <th colspan="3">Action</th>
-                                        <th>N&uacute;mero de cliente</th> 
-										<th>Nombre del cliente</th>
-                                        <th>Invoice Number</th>                                                                                                                    
-                                        <th>Company</th>
-                                        <th>Bank</th>
+                                        <th colspan="3">Acciones</th>
+                                        <!-- <th>N&uacute;mero de cliente</th>  -->
+										<th>Persona facturada</th>
+                                        <th>N&uacute;mero factura</th>                                                                                                                    
+                                        <th>Facturado por</th>
+                                        <th>Banco</th>
                                         <th>N&uacute;mero de cuenta</th>
-                                        <th>Date</th>
+                                        <th>Fecha</th>
                                         <th>Total</th>
-                                        <th>Observation</th>
+                                        <th>Observaci&oacute;nes</th>
                                     </tr>
                                 </thead>
                                 <tbody id="listar_facturas"></tbody>
@@ -405,12 +405,12 @@ include_once "../controller/solicitudController.php";
                         total += Number(detalleServicio.valor) * Number(detalleServicio.cantidad);
                     });
                     datosFacturas.push(factura);
+                    // <td>${factura.id_solicitud}</td>
                     let row = `<tr>
                         <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment"  data-id-factura="${factura.id}" data-id-solicitud="${factura.id_solicitud}"/></td>
                         <td><input id="payment-${factura.id}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${factura.id}"  /></td>
                         <td><input id="payment-${factura.id}" class="btn btn-danger delete-btn" type="button" value="Eliminar" data-id-factura="${factura.id}"  /></td>
-                        <td>${factura.id_solicitud}</td>
-						<td>${factura.nombre_obtenido}</td>
+                        <td>${factura.nombre_obtenido}</td>
                         <td>${datos.invoice_number}</td>
                         <td>${datos.logo}</td>
                         <td>${factura.nombre_banco}</td>

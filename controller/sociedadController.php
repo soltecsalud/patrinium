@@ -221,7 +221,7 @@ class SociedadController{
     // Actualizar, se cambia de socio a cliente, pasando el campo es_socio de false a true
     public function actualizarTipoSocio($id, $tipo){
         try {
-            $socios = modelSociedad::mdlactualizarTipoSocio($id,$tipo); 
+            $socios = modelSociedad::mdlActualizarTipoSocio($id,$tipo);
             header('Content-Type: application/json');
             if ($socios) {
                 echo json_encode(["status" => "ok"]);

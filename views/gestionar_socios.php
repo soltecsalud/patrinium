@@ -39,7 +39,7 @@ if (!isset($_SESSION['usuario'])) {
                                     <tr>
                                         <th>Nombre Socio</th>
                                         <th>Cliente del Socio</th>
-                                        <th>Fecha Creacion</th>
+                                        <th>Fecha Creaci&oacute;n</th>
                                         <th colspan="2">Pasar de socio a cliente</th>
                                     </tr>
                                 </thead>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['usuario'])) {
                         let row = `<tr>
                             <td>${socio.nombre}</td>
                             <td>${socio.nombrecliente}</td>
-                            <td>${socio.created_at}</td>
+                            <td>${socio.createdat}</td>
                             <td>
                                 <input type="checkbox" id="checktipo" data-id="${socio.id_persona_cliente}" name="checktipo" ${socio.essocio ? 'checked' : ''}>
                                 <label for="checktipo" id="labelchecktipo${socio.id_persona_cliente}">${socio.essocio ? 'Cliente' : 'Socio'}</label>

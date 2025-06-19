@@ -157,14 +157,14 @@ class modelSociedad{
     static public function mdlConsultarSocios(){
         try {
             $sqlListarSocios= "SELECT 
-            id_persona_cliente, 
-            CONCAT(p.nombre, ' ',p.apellido) AS nombre, 
-            p.createdat, 
-           CONCAT(sc.nombre, ' ',sc.apellido) AS nombrecliente,
-            es_socio AS essocio
-	        FROM personas_cliente AS p
-            INNER JOIN solicitud AS s ON (p.numero_solicitud=s.id_solicitud)
-	       INNER JOIN sociedad AS sc ON (s.fk_cliente=sc.uuid)";
+                id_persona_cliente, 
+                CONCAT(p.nombre, ' ',p.apellido) AS nombre, 
+                p.createdat, 
+                CONCAT(sc.nombre, ' ',sc.apellido) AS nombrecliente,
+                es_socio AS essocio
+	            FROM personas_cliente AS p
+                    INNER JOIN solicitud AS s ON (p.numero_solicitud=s.id_solicitud)
+	                INNER JOIN sociedad AS sc ON (s.fk_cliente=sc.uuid)";
             $listaSocios = Conexion::conectar()->prepare($sqlListarSocios);
             $listaSocios->execute();
             return $listaSocios->fetchAll(PDO::FETCH_ASSOC); 
@@ -206,7 +206,7 @@ class modelSociedad{
                 SELECT DISTINCT(NULL) as uuid,0,0,id_sociedad_extranjera,datos_sociedad->>'nombreSociedad','socio_extranjero' FROM sociedad_extranjera
                 UNION 
                 SELECT DISTINCT(NULL) as uuid,0,id_persona_cliente  as idcliente, 0,nombre||' ' ||apellido AS nombre,'cliente' as tipo FROM personas_cliente
-                WHERE numero_solicitud=:id_solicitud";
+                WHERE numero_solicitud=:id_solicitud AND es_socio=false";
 
             $listaSociedades = Conexion::conectar()->prepare($sqlListarSociedades);
             $listaSociedades->bindParam(":id_solicitud", $idSolicitud, PDO::PARAM_INT);

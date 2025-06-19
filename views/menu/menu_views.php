@@ -161,7 +161,7 @@ if (!isset($_SESSION['usuario'])) {
               </a>                        
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./envio_correo_renovacion.php" class="nav-link">
+                  <a href="./reporte_extension_sociedades.php" class="nav-link">
                     <i class="fa fa-clipboard" aria-hidden="true"></i>
                     <p>Proceso Impuestos y Extensiones</p>
                   </a>

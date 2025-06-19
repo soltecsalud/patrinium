@@ -72,12 +72,15 @@ class ModelPlantillas {
     }
 
     public static function obtenerHtmlPorId($id_plantillas_save) {
+        // 19 de junio de 2025, estaba comentado la linea 80, se descomento para que se busque por el ID de la plantilla y no por el de la sociedad, 
+        // porque una sociedad puede tener varias plantillas guardadas, pero al parecer primero se estaba buscando por el id de la plantilla y se cambio
+        // Si se necesita cambiar por alguna razon la manera de filtrar, se puede comentar la linea 80 y descomentar la linea 81, pero tener presente que este metodo funciona para ver los PDF en la vista de verSolicitud
         try {
             $conexion = Conexion::conectar();
             $query = "SELECT contenido_html FROM plantillas_save_html 
             WHERE 
-            -- id_plantillas_save = :id_plantillas_save
-            uuid_sociedad = :uuid
+            id_plantillas_save = :uuid
+            -- uuid_sociedad = :uuid
             ";
             $stmt = $conexion->prepare($query);
             $stmt->bindParam(':uuid', $id_plantillas_save);

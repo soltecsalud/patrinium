@@ -10,7 +10,7 @@ class ModelFacturacion {
             INNER JOIN bancos_consignaciones AS b 
             ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
             WHERE estado = 2 OR estado = null";*/
-			 $sql = "SELECT 
+			$sql = "SELECT 
                 f.*, 
                 b.*, 
                 COALESCE(
@@ -20,7 +20,8 @@ class ModelFacturacion {
                     LIMIT 1), 
                     (SELECT CONCAT(nombre, ' ', apellido) AS nombre 
                     FROM sociedad 
-                    WHERE uuid::text = NULLIF(f.datos->>'selectPersonaFactura', '')),
+                    WHERE id_sociedad::text = NULLIF(f.datos->>'selectPersonaFactura', '')),
+                    -- WHERE uuid::text = NULLIF(f.datos->>'selectPersonaFactura', '')),
                     (SELECT CONCAT(nombre, ' ',apellido) AS nombre FROM personas_cliente WHERE id_persona_cliente = NULLIF(f.datos->>'selectPersonaFactura', '')::int),
                     (SELECT datos_sociedad->>'nombreSociedad' AS nombre 
                     FROM sociedad_extranjera 

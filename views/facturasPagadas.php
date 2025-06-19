@@ -100,6 +100,7 @@ input:checked + .slider:before {
                                         <th>Descargar Comprobante</th>
                                         <th>Full/Partial Payment</th>
                                         <th>Payment value</th>
+                                        <th>Pending value</th>
                                         <th>System Number</th> 
                                         <th>Nombre Cliente</th> 
                                         <th>Invoice Number</th>                                                                                                                    
@@ -161,7 +162,7 @@ input:checked + .slider:before {
 
                     let full_payment = Number(total).toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                     let value_paid   = datos.partial_amount!=null ? datos.partial_amount : full_payment; // Maneja el caso de pago parcial
-                    let partial_amount = datos.partial_amount || 0; // Maneja el caso de pago parcial
+                    let partial_amount = Number(datos.partial_amount || 0); // Maneja el caso de pago parcial
                     
                     let esParcial = partial_amount != 0;
                     let etiqueta  = esParcial ? 'Parcial' : 'Total';
@@ -175,10 +176,13 @@ input:checked + .slider:before {
                     <span>${etiqueta}</span>
                     </div>`;
 
+                    var pending_amount = !isNaN(partial_amount) ? (Number(total)-partial_amount) : Number(total);
+
                     let row = `<tr>
                         <td><a class='btn btn-success' href='../controller/resource/${factura.id_solicitud}/${factura.ruta_pago}' target='_BLANK'><i class=' fas fa-download'></i></a></td>
                         <td>${switchCheckbox}</td>
                         <td>${value_paid}</td>
+                        <td>${pending_amount}</td>
                         <td>${factura.id_solicitud}</td>
                         <td>${factura.nombre_obtenido}</td>
                         <td>${datos.invoice_number}</td>

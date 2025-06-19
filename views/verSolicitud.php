@@ -900,11 +900,11 @@ include_once "../controller/solicitudController.php";
 
                             <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title pt-1">Consulta Reportes Actas </h3>
+                                    <h3 class="card-title pt-1">Kit Entrega de Servicios A Clientes</h3>
                                     &nbsp;
                                     <button 
                                         class="btn btn-primary btn-sm btnVerActas">
-                                        Clic para ver actas
+                                        Clic Para Ver Archivos & Actas
                                     </button>
                                 </div>
                                 <div class="card-body">
@@ -959,7 +959,7 @@ include_once "../controller/solicitudController.php";
 
                             <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Consulta Documentos Clientes</h3>
+                                    <h3 class="card-title">Consulta De Archivos & Documentos Del Cliente</h3>
                                 </div>
                                 <div class="card-body">
                                     <table id="documentosAdjuntos" class="table table-bordered table-striped">
@@ -977,6 +977,7 @@ include_once "../controller/solicitudController.php";
                                         <tbody>
                                             <?php
                                             $solicitudes = $controlador->getListadoAdjuntos($id_revisar_solicitud);
+                                            if(!empty($solicitudes)){
                                             foreach ($solicitudes as $adjuntos) {
                                             ?>
                                                 <tr>
@@ -988,7 +989,7 @@ include_once "../controller/solicitudController.php";
                                                     <td><?php echo $adjuntos->fecha_entrega; ?></td>
                                                     <td><a class="btn btn-primary" href="../controller/resource/<?php echo $id_revisar_solicitud . "/" . $adjuntos->nombre_archivo; ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
                                                 </tr>
-                                            <?php } ?>
+                                            <?php }} ?>
                                         </tbody>
                                     </table>
 
@@ -1977,7 +1978,7 @@ include_once "../controller/solicitudController.php";
                                 </td>
                                 <td>${item.nombre_sociedad}</td>
                                 <td>
-                                    <button class="btn btn-danger generar-pdf" data-id="${item.id_solicitud}" data-sociedad="${item.uuid_sociedad}">
+                                    <button class="btn btn-danger generar-pdf" data-id="${item.id_plantillas_save}" data-sociedad="${item.uuid_sociedad}">
                                         PDF
                                     </button>
                                 </td>
@@ -2099,16 +2100,13 @@ include_once "../controller/solicitudController.php";
 
         // Evento para generar el PDF y abrirlo en nueva pestaña
         $(document).on("click", ".generar-pdf", function() {
-            // alert(<?php echo $id_revisar_solicitud; ?>);
-
-            // let id_solicitud = 18;
             $.ajax({
                 url: '../controller/obtenerActasController.php',
                 type: 'POST',
                 data: { 
-                    action: 'generarPdf', 
+                    action: 'generarPdf',  
                     // id_solicitud: id_solicitud 
-                    id_solicitud: $(this).data("sociedad")
+                    id_solicitud: $(this).data("id")
                 },
                 dataType: 'json',
                 success: function(response) {
