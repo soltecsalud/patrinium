@@ -84,25 +84,25 @@ $(document).ready(function () {
             dataSrc: ''
         },
         columns: [
-            { data: 'id_personas_sociedad' },
+            { data: 'uuid' },
             { data: 'nombre' },
             { data: 'tipo' },
             { data: 'estado' },
             { data: 'formularios_fiscales' },
             {
-                data: 'declararon_marzo',
-                render: function (data, type, row) {
-                    const checked = data ? 'checked' : '';
-                    return `
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input marzo-switch"
-                                   id="switch_${row.id_personas_sociedad}" 
-                                   data-id="${row.id_personas_sociedad}" ${checked}>
-                            <label class="custom-control-label" for="switch_${row.id_personas_sociedad}"></label>
-                        </div>`;
+                    data: 'declararon_marzo',
+                    render: function (data, type, row) {
+                        const checked = data ? 'checked' : '';
+                        return `
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input marzo-switch"
+                                    id="switch_${row.uuid}" 
+                                    data-id="${row.uuid}" ${checked}>
+                                <label class="custom-control-label" for="switch_${row.uuid}"></label>
+                            </div>`;
+                    }
                 }
-            }
-        ],
+            ],
         dom: 'Bfrtip',
         buttons: [
             { extend: 'copyHtml5', className: 'btn btn-secondary', text: 'Copiar' },
@@ -124,11 +124,11 @@ $(document).ready(function () {
             dataSrc: ''
         },
         columns: [
-            { data: 'id_personas_sociedad' },
+            { data: 'uuid' },
             { data: 'nombre' },
             { data: 'tipo' },
             { data: 'estado' },
-            { data: 'formulario_fiscales' }
+            { data: 'formularios_fiscales' }
         ],
         dom: 'Bfrtip',
         buttons: [

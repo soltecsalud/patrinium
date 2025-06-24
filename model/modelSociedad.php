@@ -382,7 +382,7 @@ class modelSociedad{
     public static function mdlObtenerExtensionSociedades(){
         try {
             $sql = "SELECT 
-                    ps.id_personas_sociedad,
+                    ps.uuid,
                     ps.datos_sociedad->>'nombreSociedad' AS nombre,
                     ts.nombre_tipo_sociedad AS tipo,
                     e.estado AS estado,
@@ -427,69 +427,67 @@ class modelSociedad{
         }
     }
 
-    public static function mdlActualizarDeclaracionMarzo($id_personas_sociedad, $estado) {
-        try {
-            $db = Conexion::conectar();
-    
-            // Upsert: inserta si no existe, actualiza si ya existe
-            $sql = "INSERT INTO sociedades_march (id_personas_sociedad, declararon_marzo)
-                    VALUES (:id, :estado)
-                    ON CONFLICT (id_personas_sociedad)
-                    DO UPDATE SET declararon_marzo = EXCLUDED.declararon_marzo";
-    
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':id', $id_personas_sociedad, PDO::PARAM_INT);
-            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
-            $stmt->execute();
-    
-            return ["success" => true];
-        } catch (Exception $e) {
-            throw new Exception("Error al actualizar declaración: " . $e->getMessage());
+   public static function mdlActualizarDeclaracionMarzo($uuid, $estado) {
+            try {
+                $db = Conexion::conectar();
+
+                $sql = "INSERT INTO sociedades_march (fk_personas_sociedad_uuid, declararon_marzo, created_at)
+                        VALUES (:uuid, :estado, NOW())";
+
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
+                $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
+                $stmt->execute();
+
+                return ["success" => true];
+            } catch (Exception $e) {
+                throw new Exception("Error al insertar declaración: " . $e->getMessage());
+            }
         }
-    }
 
 
     public static function mdlObtenerSociedadesSinDeclararMarzo() {
         try {
-            $sql = "SELECT 
-                    ps.id_personas_sociedad,
-                    ps.datos_sociedad->>'nombreSociedad' AS nombre,
-                    ts.nombre_tipo_sociedad AS tipo,
-                    e.estado AS estado,
-                    ARRAY[
-                        CASE 
-                            WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
-                            WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
-                            WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
-                            WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
-                            ELSE 'Extranjera (Colombia) - No aplica'
-                        END
-                    ] ||
-                    CASE 
-                        WHEN EXISTS (
-                            SELECT 1
-                            FROM sociedad s
-                            WHERE s.pais_pasaporte != 'USA'
-                            AND s.id_sociedad IN (
-                                SELECT elem::int
-                    FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
-                    WHERE elem ~ '^\d+$'
-                )
-                            ) THEN ARRAY['8804']
-                            ELSE ARRAY[]::text[]
-                        END AS formularios_fiscales
-                    FROM 
-                        personas_sociedad ps
-                    JOIN 
-                        tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
-                    JOIN LATERAL 
-                        jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
-                    JOIN 
-                        estados e ON e.id_estado = estado_codigo.codigo::int
-                    WHERE 
-                        
-                ps.datos_sociedad->>'declararSociedad' = 'on'
-                AND sm.declararon_marzo = FALSE";
+            $sql = "        SELECT 
+    ps.uuid,
+    ps.datos_sociedad->>'nombreSociedad' AS nombre,
+    ts.nombre_tipo_sociedad AS tipo,
+    e.estado AS estado,
+    ARRAY[
+        CASE 
+            WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
+            WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
+            WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
+            WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
+            ELSE 'Extranjera (Colombia) - No aplica'
+        END
+    ] ||
+    CASE 
+        WHEN EXISTS (
+            SELECT 1
+            FROM sociedad s
+            WHERE s.pais_pasaporte != 'USA'
+              AND s.id_sociedad IN (
+                  SELECT elem::int
+                  FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
+                  WHERE elem ~ '^\d+$'
+              )
+        ) THEN ARRAY['8804']
+        ELSE ARRAY[]::text[]
+    END AS formularios_fiscales
+FROM 
+    personas_sociedad ps
+JOIN 
+    tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
+JOIN LATERAL 
+    jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
+JOIN 
+    estados e ON e.id_estado = estado_codigo.codigo::int
+LEFT JOIN sociedades_march sm 
+  ON sm.fk_personas_sociedad_uuid = ps.uuid::uuid
+WHERE 
+    ps.datos_sociedad->>'declararSociedad' = 'on'
+    AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)";
             
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
