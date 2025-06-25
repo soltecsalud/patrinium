@@ -1594,7 +1594,14 @@ include_once "../controller/solicitudController.php";
                             <span class="checkmark"></span>
                             <p id='declararSociedadTexto'></p>
                         </label>
+                        <div class="form-group " id="divTipoCorporacion">
+                            <label for="tipoCorporacion">¿Elige Declarar  Como  Corporacion?</label>
+                            <select class="form-control" id="tipoCorporacion" name="tipoCorporacion">
+                                <option value="no">No aplica</option>
+                            </select>
+                        </div>
                     </div>
+                    <hr>
                     <div class="form-group">
                         <label for="inputNombreSociedad">Nombre de la Sociedad</label>
                         <input type="text" class="form-control" id="inputNombreSociedad" name="nombreSociedad" placeholder="Nombre de la sociedad">
@@ -2469,11 +2476,21 @@ include_once "../controller/solicitudController.php";
             }
             // Cuando el check declararSociedad cambie de valor, cambiar el texto
             $('#declararSociedad').change(function() {
-                if ($(this).is(':checked')) {
-                    $('#declararSociedadTexto').text('Declarando');
-                } else {
-                    $('#declararSociedadTexto').text('No esta Declarando');
-                }
+               if ($(this).is(':checked')) {
+                        $('#declararSociedadTexto').text('Declarando');
+
+                        // Mostrar el select y cargar opciones C y S
+                        $('#divTipoCorporacion').show();
+                        $('#tipoCorporacion').html(`
+                            <option value="C">Corporación C</option>
+                            <option value="S">Corporación S</option> 
+                            <option value="NA">No aplica</option>
+                        `);
+                    } else {
+                        $('#declararSociedadTexto').text('No está Declarando');
+
+                        
+                    }
             });
             // alert($(this).data('tiposociedad'));
 
