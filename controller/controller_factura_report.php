@@ -301,7 +301,7 @@ class InvoiceController {
 
                             $valor    = (float) $servicio['valor'];
                             $cantidad = (int) $servicio['cantidad'];
-                            $descripcionservicio = $servicio['descripcionservicio'];
+                            $descripcionservicio = $servicio['descripcionservicio'] ?? '';
                             // Valida si es una factura rapida, si es asi toma el nombre del servicio digitado por el usuario, si no toma el que ya esta en el sistema
                             if(isset($_GET['table'])&&!empty($_GET['table'])){
                                 $array[] = array($servicio['nombre'], $cantidad, $valor, $valor * $cantidad,$descripcionservicio);
