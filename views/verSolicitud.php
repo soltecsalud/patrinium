@@ -1964,7 +1964,7 @@ include_once "../controller/solicitudController.php";
            if (respuesta.total_personas >= 2) {
                 $('#divTipoCorporacion').show();
                 $('#tipoCorporacion').html(`
-                    <option value="LLL 1065">LLC 1065</option>
+                    <option value="llc 1065">LLC 1065</option>
                     <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
                     <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
                 `);
@@ -2518,7 +2518,7 @@ include_once "../controller/solicitudController.php";
                         //`);
                         
 
-                           const idSolicituduuid = $(this).data('id_solicitud');
+                            const idSolicituduuid = $(this).data('id_solicitud');
                             consultarPersonasPorSociedad(idSolicituduuid);
                     } else {
                             $('#declararSociedadTexto').text('No está Declarando');
