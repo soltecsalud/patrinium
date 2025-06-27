@@ -43,3 +43,18 @@
 .sidebar .nav-treeview .nav-link:hover {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
+
+.menulateral-bg-azul       { background-color: #003366 !important; color: white !important; }
+.menulateral-bg-celeste    { background-color: #007aa3 !important; color: white !important; }
+.menulateral-bg-verdeazul  { background-color: #009999 !important; color: white !important; }
+.menulateral-bg-verde      { background-color: #00b050 !important; color: white !important; }
+.menulateral-bg-verdeoliva { background-color: #669933 !important; color: white !important; }
+.menulateral-bg-verdeosc   { background-color: #4f6228 !important; color: white !important; }
+.menulateral-bg-naranja    { background-color: #f79646 !important; color: white !important; }
+.menulateral-bg-naranjosc  { background-color: #c0504d !important; color: white !important; }
+.menulateral-bg-morado     { background-color: #7030a0 !important; color: white !important; }
+.menulateral-bg-morado1    { background-color: #8e44ad !important; color: white !important; }
+.menulateral-bg-morado2    { background-color: #9b59b6 !important; color: white !important; }
+.menulateral-bg-morado3    { background-color: #6a0dad !important; color: white !important; }
+.menulateral-bg-morado4    { background-color: #5e4b8b !important; color: white !important; }
+.menulateral-bg-morado5    { background-color: #a569bd !important; color: white !important; }

@@ -37,16 +37,21 @@ if (isset($_POST['usuarioLogin']) && isset($_POST['contrasenaLogin'])) {
                 array_push($asignados, $row['id_permiso']);
             }
 
+            // print_r($asignados); exit;
+            
             $permisos = PermisosModelo::mdlConsultarPermisos();
 
+            // Se inicializa el array de permisos en la sesión
+            $_SESSION['permisos'] = []; // Inicializar el array de permisos
+
             foreach ($permisos as $permiso) {
-                $nombre_permiso = $permiso['nombre'];
-                if (in_array($permiso['id'], $asignados)) {
-                    $_SESSION[$nombre_permiso] = true;
-                } else {
-                    $_SESSION[$nombre_permiso] = false;
+                $clave = $permiso['permiso_relacionado'];
+                if(!empty($clave)) {    
+                    $_SESSION['permisos'][$clave] = in_array($permiso['id_submenu'], $asignados); // Asignar el permiso como true o false
                 }
             }
+
+            // print_r($_SESSION['permisos']); exit;
 
             echo '<script language="javascript">swal("Bienvenido", "Bienvenido ' . $usuario . '", "success");</script>';
 

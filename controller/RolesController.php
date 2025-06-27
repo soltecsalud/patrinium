@@ -1,6 +1,7 @@
 <?php
 include_once "../model/RolesModelo.php";
 include_once "../model/permisosModelo.php";
+include_once "../model/modelMenus.php";
 include_once "../classes/Random/random.php";
 
 class RolesController
@@ -111,4 +112,67 @@ class RolesController
         }
     }
 
+    static public function ctrlConsultarPermisosYMenusRol($rol){
+        if (!$rol) { // Verificamos si el rol está definido
+            echo json_encode([]);
+            exit;
+        }
+
+        // Consultamos los permisos asignados al rol
+        $permisosRol = RolesModelo::mdlConsultarPermisosRolId($rol);
+        $idsAsignados = array_column($permisosRol, 'id_permiso'); // Extraemos los IDs de los permisos asignados
+        
+        $menusYSubmenus = ModelMenus::mdlConsultarMenusYSubmenusAgrupados(); // Consultamos los menús y submenús agrupados
+
+        foreach ($menusYSubmenus as &$menu) { // Iteramos sobre cada menú
+            foreach ($menu['submenus'] as &$submenu) { // Iteramos sobre cada submenú del menú
+                $submenu['activo'] = in_array($submenu['id_submenu'], $idsAsignados); // Verificamos si el submenú está activo según los permisos asignados
+            }
+        }
+
+        // Retornamos los datos en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($menusYSubmenus); // Retornamos los menús y submenús con su estado de permisos
+        exit;
+
+    }
+    
+    static public function ctrlEditarPermisosRol(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id_rol   = $_POST['rol'] ?? null;
+            $permisos = $_POST['permisos'] ?? [];
+
+            if (!$id_rol) {
+                echo json_encode(['status' => 'error', 'message' => 'Rol no especificado.']);
+                exit;
+            } 
+
+            try { 
+                RolesModelo::mdlEliminarPermisos($id_rol); // Eliminamos los permisos existentes del rol
+                foreach ($permisos as $permiso) { // Iteramos sobre los permisos seleccionados
+                    if (empty($permiso)) {
+                        continue; // Si el permiso está vacío, lo saltamos
+                    }
+                    RolesModelo::mdlRegistrarPermisoRol($id_rol, $permiso); // Registramos los nuevos permisos
+                }
+                echo json_encode(['status' => 'success', 'message' => 'Permisos actualizados correctamente.']);
+            } catch (\Throwable $th) {
+                // Manejo de errores
+                echo json_encode(['status' => 'error', 'message' => 'Error al actualizar los permisos: ' . $th->getMessage()]);
+            }
+
+        }else{
+            echo json_encode(['status' => 'error', 'message' => 'Método no permitido.']);
+        }
+    }
+
+}
+
+if($_REQUEST['accion'] == 'consultarPermisosRol') { // Verificamos si la acción es consultar permisos de un rol
+    $rol = $_GET['id_rol'] ?? null; // Obtener el rol desde la solicitud POST
+    // Llamamos al método para consultar los permisos de un rol
+    RolesController::ctrlConsultarPermisosYMenusRol($rol);
+}else if($_REQUEST['accion'] == 'editarPermisosRol') { // Verificamos si la acción es editar permisos de un rol
+    // Llamamos al método para editar los permisos de un rol
+    RolesController::ctrlEditarPermisosRol();
 }

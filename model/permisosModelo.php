@@ -8,7 +8,8 @@ class PermisosModelo
     static public function mdlConsultarPermisos()
     {
         try {
-            $sql = "SELECT * FROM permisos";
+            // $sql = "SELECT * FROM permisos";
+            $sql = "SELECT * FROM submenus"; // Cambié a submenus para la prueba
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
 

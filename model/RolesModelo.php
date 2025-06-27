@@ -90,17 +90,33 @@ class RolesModelo
         }
     }
 
+    /*===========================================================
+    MODELO para consultar los permisos asignados a un rol a traves del id del rol
+    =============================================================*/
+    static public function mdlConsultarPermisosRolId($id_rol)
+    {
+        try {
+            $sql = "SELECT roles_has_permiso.id_permiso
+                            FROM roles_has_permiso
+                            INNER JOIN roles AS rol ON rol.id = roles_has_permiso.id_rol 
+                            WHERE rol.id=:idRol";
+            $consulta = Conexion::conectar()->prepare($sql);
+            $consulta->bindParam(':idRol', $id_rol, PDO::PARAM_STR);
+            $consulta->execute();
+
+            return $consulta->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
     /*=============================================
     MODELO para registrar un permiso a un rol
     ===============================================*/
     static public function mdlRegistrarPermisoRol($id_rol, $id_permiso)
     {
         try {
-            $sql = "INSERT 
-                            INTO roles_has_permiso 
-                                (id_rol, id_permiso	) 
-                            VALUES 
-                                (:id_rol, :id_permiso)";
+            $sql = "INSERT INTO roles_has_permiso (id_rol, id_permiso) VALUES (:id_rol, :id_permiso)";
             $consulta = Conexion::conectar()->prepare($sql);
             // Bind de parámetros
             $consulta->bindParam(':id_rol', $id_rol, PDO::PARAM_STR);

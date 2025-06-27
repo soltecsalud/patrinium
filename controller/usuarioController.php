@@ -24,11 +24,11 @@ class UsuarioController
             isset($_POST['primer_apellido']) &&
             isset($_POST['correo']) &&
             isset($_POST['telefono']) &&
-            isset($_POST['id_sede']) &&
-            isset($_POST['id_especialidad']) &&
-            isset($_POST['id_servicio']) &&
-            isset($_POST['rol']) &&
-            isset($_POST['id_eps'])
+            // isset($_POST['id_sede']) &&
+            // isset($_POST['id_especialidad']) &&
+            // isset($_POST['id_servicio']) &&
+            isset($_POST['rol'])
+            // isset($_POST['id_eps'])
         ) {
 
             // Se genera el id de tipo uuuidV4
@@ -53,11 +53,11 @@ class UsuarioController
                 'segundo_apellido' => ucfirst($_POST['segundo_apellido']) ?? null,
                 'correo' => $_POST['correo'],
                 'telefono' => $_POST['telefono'],
-                'id_sede' => $_POST['id_sede'],
-                'id_especialidad' => $_POST['id_especialidad'],
-                'id_servicio' => $_POST['id_servicio'],
+                // 'id_sede' => $_POST['id_sede'],
+                // 'id_especialidad' => $_POST['id_especialidad'],
+                // 'id_servicio' => $_POST['id_servicio'],
                 'rol' => $_POST['rol'],
-                'id_eps' => $_POST['id_eps'],
+                // 'id_eps' => $_POST['id_eps'],
                 'estado' => $estado,
                 'fecha_creacion' => $fechaRegistro,
                 'usuario_add' => $usuario
@@ -114,9 +114,71 @@ class UsuarioController
         }
     }
 
-    static public function ctrlConsultarUsuarios()
-    {
-        return Usuarios::consultarUsuarios();
+    // static public function ctrlConsultarUsuarios()
+    // {
+    //     return Usuarios::consultarUsuarios();
+    // }
+
+    static public function ctrlConsultarUsuarios(){
+        try {
+            // Obtienes los datos de las remisiones de la base de datos
+            $listados = Usuarios::consultarUsuarios();
+
+            $data =[]; 
+            /* declaramos el array */                                      
+            foreach ($listados as $row) {
+
+                $id_usuario = $row['id_usuario'];
+
+                $nombres = $row['primer_nombre'].' '.$row['segundo_nombre'];
+
+                $apellidos = $row['primer_apellido'].''.$row['segundo_apellido'];
+        
+                $verMas =  "<div class='btn-group'>
+                                <button type='button' class='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Ver m&aacute;s'>
+                                    <i class='fa fa-plus-circle' aria-hidden='true'></i>
+                                </button> 
+                            </div>";
+
+                $acciones = "<div class='btn-group'>
+                                <a href='editar_usuario.php?id=$id_usuario' class='btn btn-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>
+                                <a href='cambiar_clave.php?id=$id_usuario' class='btn btn-info'><i class='fa fa-key' aria-hidden='true'></i></a>
+                                <a href='' class='btn btn-danger delete-usuario' data-id='$id_usuario'><i class='fa fa-trash' aria-hidden='true'></i></a>
+                            </div>";
+            
+
+                // $numDocumento_decrypt = Encryption::decrypt($row['num_documento'], 'soltecsalud');
+                $listados = [
+                    "VerMas"            => $verMas, 
+                    "Acciones"          => $acciones, 
+                    "Identificacion"    => $row['identificacion'], 
+                    "Usuario"           => $row['usuario'],
+                    "Nombres"           => $nombres,
+                    "Apellidos"         => $apellidos,
+                    "Correo"            => $row['correo'],
+                    "Telefono"          => $row['telefono'],
+                    // "Especialidad"      => $row['id_especialidad'],
+                    // "IPS"               => $row['nombre_ips'],
+                    // "ESE"               => $row['ese'],
+                    // "EPS"               => $row['nombre_eps'],
+                    "Rol"               => $row['rol'],
+                    "Estado"            => $row['estado'],
+                    "FechaCreacion" => $row['fecha_creacion'],
+                    "FechaBaja"     => $row['delete_at'],
+                    "Creador"           => $row['usuario_add']
+                ];
+                array_push($data, $listados);
+            }
+
+            return json_encode(
+                $data
+            );
+            
+        } catch (Exception $e) {
+            // Manejo de errores
+            echo "Error: " . $e->getMessage();
+            return []; // Retorna un array vacío en caso de error
+        }
     }
 
     static public function ctrlConsultarUsuarioId($id_usuario)
@@ -124,10 +186,11 @@ class UsuarioController
         return Usuarios::consultarUsuarioId($id_usuario);
     }
 
-    static public function ctrlEditarUsuario()
+    static public function ctrlEditarUsuario($id_usuario)
     {
             // Validamos que los campos no vengan vacios 
             if (
+                !empty($id_usuario) &&
                 isset($_POST['identificacion']) &&
                 isset($_POST['usuario']) &&
                 isset($_POST['tipo_doc']) &&
@@ -135,16 +198,17 @@ class UsuarioController
                 isset($_POST['primer_apellido']) &&
                 isset($_POST['correo']) &&
                 isset($_POST['telefono']) &&
-                isset($_POST['id_sede']) &&
-                isset($_POST['id_especialidad']) &&
-                isset($_POST['id_servicio']) &&
-                isset($_POST['rol']) &&
-                isset($_POST['id_eps'])
+                // isset($_POST['id_sede']) &&
+                // isset($_POST['id_especialidad']) &&
+                // isset($_POST['id_servicio']) &&
+                isset($_POST['rol'])
+                // isset($_POST['id_eps']) 
             ) {
 
                 // // Creamos un array con los datos del usuario
                 $datosUsuario = array(
-                    'id_usuario' => $_POST['id_usuario'],
+                    // 'id_usuario' => $_POST['id_usuario'],
+                    'id_usuario' => $id_usuario,
                     'identificacion' => $_POST['identificacion'],
                     'usuario' => $_POST['usuario'],
                     'tipo_doc' => $_POST['tipo_doc'],
@@ -154,11 +218,11 @@ class UsuarioController
                     'segundo_apellido' => $_POST['segundo_apellido'] ?? null,
                     'correo' => $_POST['correo'],
                     'telefono' => $_POST['telefono'],
-                    'id_sede' => $_POST['id_sede'],
-                    'id_especialidad' => $_POST['id_especialidad'],
-                    'id_servicio' => $_POST['id_servicio'],
+                    // 'id_sede' => $_POST['id_sede'],
+                    // 'id_especialidad' => $_POST['id_especialidad'],
+                    // 'id_servicio' => $_POST['id_servicio'],
                     'rol' => $_POST['rol'],
-                    'id_eps' => $_POST['id_eps']
+                    // 'id_eps' => $_POST['id_eps']
                 );
 
                 // Enviamos la informacion recogida de los campos al modelo para ejecutar la consulta
