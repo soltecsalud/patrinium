@@ -1961,7 +1961,7 @@ include_once "../controller/solicitudController.php";
         success: function (respuesta) {
             console.log('🔍 Respuesta de contarPersonasSociedad:', respuesta);
 
-           if (respuesta.total_personas >= 2) {
+            if (respuesta.total_personas >= 2) {
                 $('#divTipoCorporacion').show();
                 $('#tipoCorporacion').html(`
                     <option value="llc 1065">LLC 1065</option>
@@ -2492,7 +2492,9 @@ include_once "../controller/solicitudController.php";
             $('#inputNombreSociedad').val(nombreSociedad);
             $('#idSociedad').val($(this).data('id'));
             document.getElementById('declararSociedad').setAttribute('data-id_solicitudUUID', $(this).data('id'));
-                console.log(document.getElementById("declararSociedad").dataset.id_solicitud);
+                // console.log('uuid1=> ',document.getElementById("declararSociedad").dataset.id_solicitud);
+
+            let idSolicituduuid = $(this).data('id');
 
 
             // Mostrar el check activado o desactivado segun lo que viene de la BD
@@ -2518,8 +2520,8 @@ include_once "../controller/solicitudController.php";
                         //`);
                         
 
-                            const idSolicituduuid = $(this).data('id_solicitud');
-                            consultarPersonasPorSociedad(idSolicituduuid);
+                            // const idSolicituduuid = $(this).data('id_solicitudUUID');
+                            consultarPersonasPorSociedad(idSolicituduuid); 
                     } else {
                             $('#declararSociedadTexto').text('No está Declarando');
                             $('#divTipoCorporacion').hide();
