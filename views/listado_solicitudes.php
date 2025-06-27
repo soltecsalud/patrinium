@@ -61,7 +61,7 @@ include_once "../controller/solicitudController.php";
                                 <td><?php echo  htmlspecialchars($solicitud->nombre); ?></td>
                                 <td><?php echo  htmlspecialchars($solicitud->necesidad); ?></td>
                                 <td><?php echo  htmlspecialchars($solicitud->referido_por); ?></td>
-                                <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud ?>" class="btn btn-success">Crear Sociedad - Adjuntar Archivos - Opciones</a></td>
+                                <td><a href="../views/verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud ?>" class="btn btn-success">Crear Sociedad - Adjuntar Archivos - Opciones</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

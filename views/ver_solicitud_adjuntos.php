@@ -57,7 +57,7 @@ include_once "../controller/solicitudController.php";
                 <td><?php echo  htmlspecialchars($solicitud->id_solicitud);?></td>
                 <td><b><?php echo  htmlspecialchars($solicitud->nombre_sociedades);?></b></td>
                 <td><?php echo  htmlspecialchars($solicitud->nombre);?></td>
-                <td><a href="verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
+                <td><a href="../views/verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
             </tr>
             <?php }?> 
         </tbody>
