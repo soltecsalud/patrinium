@@ -556,7 +556,7 @@ $controlador = new Solicitud_controller();
                     <td><input id="payment-${idFactura}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${idFactura}"  /></td>
                     <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-idfactura="${idFactura}"/></td>
                     <td>${createdAt}</td>
-                    <td><a href='factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
+                    <td><a href='../views/factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
                     <td><a href='../documents/quick_invoices/${idFactura}/${rutaPago}' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td>
                     <td>${tipoConsignacion}</td>
                     <td>${notaPago}</td>
