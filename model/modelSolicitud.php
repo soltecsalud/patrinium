@@ -1098,6 +1098,23 @@ class ModelSolicitud
         }
     }
 
+    public static function contarPersonasPorSolicitud($id_solicitud) {
+        try {
+        $sql = "SELECT jsonb_array_length(datos_sociedad -> 'personas') AS cant_personas, uuid
+                FROM personas_sociedad
+                WHERE datos_sociedad ->> 'selectTipoSociedad' = '5'
+                  AND uuid = :id_solicitud";
 
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':id_solicitud', $id_solicitud);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC); // ✅ ahora devuelves todo el array asociativo
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error en modelo: ' . $e->getMessage()]);
+            exit;
+        }
+    }
 }
 ?>

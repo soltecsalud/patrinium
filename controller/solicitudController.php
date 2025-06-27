@@ -754,6 +754,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }elseif ($_POST['accion'] === 'obtenerSolicitud') {
             $idSolicitud = $_POST['id_solicitud'];
             $solicitud = $controlador->getSolicitudEgresos($idSolicitud);
+        }elseif ($_POST['accion'] === 'contarPersonasSociedad') {
+            header('Content-Type: application/json');
+
+            $idSolicitudUUID = $_POST['id_solicitud'];
+            $modelo = new ModelSolicitud();
+            $resultado = $modelo->contarPersonasPorSolicitud($idSolicitudUUID);
+
+            echo json_encode($resultado); // ✅ ahora se envía el objeto completo (cant_personas + uuid)
         }
         else {
             echo json_encode(['status' => 'error', 'message' => 'Acción no válida']);
@@ -782,4 +790,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
 }
+
+
 ?>

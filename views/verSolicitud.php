@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 
 include_once "../controller/solicitudController.php";
 
-
+ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725'; 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -1590,7 +1590,7 @@ include_once "../controller/solicitudController.php";
                             Activar Sociedad
                         </label>
                         <label class="checkbox-container">
-                            <input type="checkbox" name="declararSociedad" id="declararSociedad">
+                            <input type="checkbox" name="declararSociedad" id="declararSociedad" data-id_solicitudUUID="">
                             <span class="checkmark"></span>
                             <p id='declararSociedadTexto'></p>
                         </label>
@@ -1951,6 +1951,37 @@ include_once "../controller/solicitudController.php";
     function eliminarItem(boton) {
         boton.parentElement.remove();
     }
+
+  function consultarPersonasPorSociedad(idSolicitud) {
+    console.log('🧪 ID recibido en consultarPersonasPorSociedad:', idSolicitud);
+    $.ajax({
+        url: '../controller/solicitudController.php',
+        method: 'POST',
+        data: {
+            accion: 'contarPersonasSociedad',
+            id_solicitud: idSolicitud
+        },
+        dataType: 'json',
+        success: function (respuesta) {
+            console.log('🔍 Respuesta de contarPersonasSociedad:', respuesta);
+
+           if (respuesta.total_personas >= 2) {
+                $('#divTipoCorporacion').show();
+                $('#tipoCorporacion').html(`
+                    <option value="LLL 1065">LLC 1065</option>
+                    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
+                    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
+                `);
+            } else { 
+                $('#divTipoCorporacion').hide();
+                $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Error AJAX:', error);
+        }
+    });
+}
 </script>
 <script>
   $('#archivoInput').on('change', function () {
@@ -2464,6 +2495,9 @@ include_once "../controller/solicitudController.php";
             // Llenar el campo del nombre de la sociedad
             $('#inputNombreSociedad').val(nombreSociedad);
             $('#idSociedad').val($(this).data('id'));
+            document.getElementById('declararSociedad').setAttribute('data-id_solicitudUUID', $(this).data('id'));
+                console.log(document.getElementById("declararSociedad").dataset.id_solicitud);
+
 
             // Mostrar el check activado o desactivado segun lo que viene de la BD
             $('#activarSociedad').prop('checked', $(this).data('activarsociedad') == 'on' ? true : false);
@@ -2480,14 +2514,22 @@ include_once "../controller/solicitudController.php";
                         $('#declararSociedadTexto').text('Declarando');
 
                         // Mostrar el select y cargar opciones C y S
-                        $('#divTipoCorporacion').show();
-                        $('#tipoCorporacion').html(`
-                            <option value="C">Corporación C</option>
-                            <option value="S">Corporación S</option> 
-                            <option value="NA">No aplica</option>
-                        `);
+                        //$('#divTipoCorporacion').show();
+                       // $('#tipoCorporacion').html(`
+                        //    <option value="LLL 1065">LLC 1065</option>
+                        //    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
+                        //    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
+                        //`);
+                        
+
+                           const idSolicituduuid = $(this).data('id_solicitud');
+                            consultarPersonasPorSociedad(idSolicituduuid);
                     } else {
-                        $('#declararSociedadTexto').text('No está Declarando');
+                            $('#declararSociedadTexto').text('No está Declarando');
+                            $('#divTipoCorporacion').hide();
+                            $('#tipoCorporacion').html(`
+                                <option value="no">No aplica</option>
+                            `);
 
                         
                     }
