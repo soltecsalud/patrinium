@@ -1,12 +1,9 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['usuario'])) {
-        header('Location: ../index.php');
-        exit();
-    } elseif (isset($_SESSION['usuario']) && $_SESSION['crear generales'] === false) {
-        echo 'Acesso no autorizado.';
-        exit();
-    }
+// session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: ../index.php');
+    exit();
+} 
 ?>
 
 <!DOCTYPE html>

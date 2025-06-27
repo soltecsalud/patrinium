@@ -1,10 +1,11 @@
 <?php
-session_start();
+// session_start();
 include_once "../controller/usuarioController.php";
-// if (!isset($_SESSION['usuario'])) {
-//     header('Location: ../index.php');
-//     exit();
-// } elseif (isset($_SESSION['usuario']) && $_SESSION['configuracion'] === false) {
+if (!isset($_SESSION['usuario'])) {
+    header('Location: ../index.php');
+    exit();
+} 
+// elseif (isset($_SESSION['usuario']) && $_SESSION['configuracion'] === false) {
 //     echo 'Acesso no autorizado.';
 //     exit();
 // }

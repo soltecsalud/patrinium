@@ -1,13 +1,9 @@
 <?php
-session_start();
+// session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
-} elseif ($_SESSION['crear generales'] === false) {
-    echo 'Acceso no autorizado.';
-    exit();
 }
-
 setlocale(LC_TIME, 'es_ES.UTF-8', 'Spanish_Spain.1252'); 
 ?>
 

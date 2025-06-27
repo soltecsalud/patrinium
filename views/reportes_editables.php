@@ -1,13 +1,9 @@
 <?php
-session_start();
+// session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
-} elseif (isset($_SESSION['usuario']) && $_SESSION['generar reportes'] === false) {
-    echo 'Acesso no autorizado.';
-    exit();
-}
-
+} 
 require_once '../resource/vendor/autoload.php';
 
 use PhpOffice\PhpWord\IOFactory;
