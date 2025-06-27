@@ -109,7 +109,7 @@ class MyPDF extends FPDF {
         $this->SetY(50);
         $this->SetX(10);
         $this->SetFont('Arial', 'B', 9);
-        $this->MultiCell(90, 5, $addressInfo, 0, 'L');        // Mover a la derecha para el texto del lado derecho del encabezado
+        $this->MultiCell(90, 5, 'hola estoy aca', 0, 'L');        // Mover a la derecha para el texto del lado derecho del encabezado
         $this->SetY(55);
         $this->SetX(-100); // Esto coloca la posición x justo antes del margen derecho del documento
         $this->SetFont('Arial', 'B', 10);
