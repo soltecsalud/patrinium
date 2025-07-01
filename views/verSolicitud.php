@@ -554,14 +554,15 @@ include_once "../controller/solicitudController.php";
                                                         $infoSociedades = [];
                                                         foreach ($detalles as $detalle) {
                                                             //Se concatena los nombres y porcentajes de las personas asociadas a cada sociedad sin repetir el nombre de la sociedad.
-                                                            $personas[]      = "{$detalle['nombre_obtenido']} {$detalle['porcentaje']}%";
-                                                            $idSociedad      = $detalle['uuid'];
-                                                            $idtipoSociedad  = $detalle['selecttiposociedad'];
-                                                            $tipoSociedad    = $detalle['tiposociedad'];
-                                                            $nombre_archivo  = $detalle['nombre_archivo'];
-                                                            $activarSociedad = $detalle['activarsociedad'];
+                                                            $personas[]       = "{$detalle['nombre_obtenido']} {$detalle['porcentaje']}%";
+                                                            $idSociedad       = $detalle['uuid'];
+                                                            $idtipoSociedad   = $detalle['selecttiposociedad'];
+                                                            $tipoSociedad     = $detalle['tiposociedad'];
+                                                            $nombre_archivo   = $detalle['nombre_archivo'];
+                                                            $activarSociedad  = $detalle['activarsociedad'];
                                                             $declararSociedad = $detalle['declararsociedad'];
-                                                            $estadopais      = $detalle['estadopais'];
+                                                            $tipocorporacion  = $detalle['tipocorporacion'];
+                                                            $estadopais       = $detalle['estadopais'];
                                                             //Se crea un array con la información de las personas asociadas a cada sociedad.
                                                             $infoSociedades[] = [
                                                                 'nombre'         => $detalle['nombre_obtenido'],
@@ -585,6 +586,7 @@ include_once "../controller/solicitudController.php";
                                                         data-tiposociedad="<?php echo $tipoSociedad; ?>"
                                                         data-activarsociedad="<?php echo $activarSociedad; ?>"
                                                         data-declararsociedad="<?php echo $declararSociedad;?>"
+                                                        data-tipocorporacion="<?php echo $tipocorporacion; ?>"
                                                         data-estadopais='<?php echo $estadopais; ?>'
                                                         data-personas='<?php echo htmlspecialchars(json_encode($infoSociedades, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8'); ?>'  
                                                         class="btn btn-primary btn-sm mt-2 btnVerDetalles">
@@ -1590,7 +1592,7 @@ include_once "../controller/solicitudController.php";
                             <span class="checkmark"></span>
                             <p id='declararSociedadTexto'></p>
                         </label>
-                        <div class="form-group " id="divTipoCorporacion">
+                        <div class="form-group " id="divTipoCorporacion" style="display: none;">
                             <label for="tipoCorporacion">¿Elige Declarar  Como  Corporacion?</label>
                             <select class="form-control" id="tipoCorporacion" name="tipoCorporacion">
                                 <option value="no">No aplica</option>
@@ -1948,8 +1950,15 @@ include_once "../controller/solicitudController.php";
         boton.parentElement.remove();
     }
 
-  function consultarPersonasPorSociedad(idSolicitud) {
+  function consultarPersonasPorSociedad(idSolicitud,tipocorporacion,idtiposociedad) {
     console.log('🧪 ID recibido en consultarPersonasPorSociedad:', idSolicitud);
+    // Si idtiposociedad es diferente de 5, no se ejecuta la consulta
+    if (idtiposociedad != 5) {
+        $('#divTipoCorporacion').hide();
+        $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
+        return;
+    }
+    
     $.ajax({
         url: '../controller/solicitudController.php',
         method: 'POST',
@@ -1960,9 +1969,10 @@ include_once "../controller/solicitudController.php";
         dataType: 'json',
         success: function (respuesta) {
             console.log('🔍 Respuesta de contarPersonasSociedad:', respuesta);
-
-            if (respuesta.total_personas >= 2) {
-                $('#divTipoCorporacion').show();
+            
+            // if (respuesta.total_personas >= 2) {
+            if (respuesta.cant_personas >= 2) {
+                $('#divTipoCorporacion').show(); 
                 $('#tipoCorporacion').html(`
                     <option value="llc 1065">LLC 1065</option>
                     <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
@@ -1972,11 +1982,16 @@ include_once "../controller/solicitudController.php";
                 $('#divTipoCorporacion').hide();
                 $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
             }
+            if(tipocorporacion){ 
+                $('#tipoCorporacion').val(tipocorporacion);
+            }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error);
         }
     });
+
+
 }
 </script>
 <script>
@@ -2472,7 +2487,8 @@ include_once "../controller/solicitudController.php";
             // 🔹 2️⃣ Eliminar elementos agregados dinámicamente
             checklistList.querySelectorAll(".dynamic-item").forEach(item => item.remove());
         });
-
+        let idSolicituduuid;
+        let tipocorporacion;
         $('.btnVerDetalles').click(function () {
 
             // alert($(this).data('estadopais'));
@@ -2494,7 +2510,11 @@ include_once "../controller/solicitudController.php";
             document.getElementById('declararSociedad').setAttribute('data-id_solicitudUUID', $(this).data('id'));
                 // console.log('uuid1=> ',document.getElementById("declararSociedad").dataset.id_solicitud);
 
-            let idSolicituduuid = $(this).data('id');
+            idSolicituduuid = null;   
+            idSolicituduuid = $(this).data('id');
+            tipocorporacion = null;
+            tipocorporacion = $(this).data('tipocorporacion') == null ? null : $(this).data('tipocorporacion');
+            var idtiposociedad = $(this).data('idtiposociedad') == null ? null : $(this).data('idtiposociedad');
 
 
             // Mostrar el check activado o desactivado segun lo que viene de la BD
@@ -2503,14 +2523,16 @@ include_once "../controller/solicitudController.php";
             // Si el check declararSociedad es true, agregar texto a la etiqueta p
             if ($(this).data('declararsociedad') == 'on') {
                 $('#declararSociedadTexto').text('Declarando');
+                // Si idtiposociedad es igual a 5 ejcutar la funcion consultarPersonasPorSociedad
+                if(idtiposociedad == 5) consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
             } else {
                 $('#declararSociedadTexto').text('No esta Declarando');
+                $('#divTipoCorporacion').hide();
             }
             // Cuando el check declararSociedad cambie de valor, cambiar el texto
-            $('#declararSociedad').change(function() {
-               if ($(this).is(':checked')) {
-                        $('#declararSociedadTexto').text('Declarando');
-
+            $('#declararSociedad').change(function() { 
+                if ($(this).is(':checked')) {
+                    $('#declararSociedadTexto').text('Declarando');
                         // Mostrar el select y cargar opciones C y S
                         //$('#divTipoCorporacion').show();
                        // $('#tipoCorporacion').html(`
@@ -2518,23 +2540,19 @@ include_once "../controller/solicitudController.php";
                         //    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
                         //    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
                         //`);
-                        
-
-                            // const idSolicituduuid = $(this).data('id_solicitudUUID');
-                            consultarPersonasPorSociedad(idSolicituduuid); 
-                    } else {
-                            $('#declararSociedadTexto').text('No está Declarando');
-                            $('#divTipoCorporacion').hide();
-                            $('#tipoCorporacion').html(`
-                                <option value="no">No aplica</option>
-                            `);
-
-                        
-                    }
+                        // const idSolicituduuid = $(this).data('id_solicitudUUID');
+                        // consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion); 
+                        if(idtiposociedad == 5) consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
+                } else {
+                        $('#declararSociedadTexto').text('No está Declarando');
+                        $('#divTipoCorporacion').hide();
+                        $('#tipoCorporacion').html(`
+                            <option value="no">No aplica</option>
+                        `);
+                }
             });
             // alert($(this).data('tiposociedad'));
 
-            var idtiposociedad = $(this).data('idtiposociedad') == null ? null : $(this).data('idtiposociedad');
             var tiposociedad   = $(this).data('tiposociedad')   == null ? null : $(this).data('tiposociedad');
 
             cargarTipoSociedad(idtiposociedad, tiposociedad);
@@ -2678,7 +2696,7 @@ include_once "../controller/solicitudController.php";
                     if (response.status === "success") {
                         let filas = "";
                         response.data.forEach(function(item, index) {
-                            console.log('Item del reporte:', item);
+                            // console.log('Item del reporte:', item);
                             filas += `<tr>
                                 <td>${item.createat}</td>
                                 <td>

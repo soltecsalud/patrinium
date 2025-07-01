@@ -849,6 +849,7 @@ class ModelSolicitud
                     datos_sociedad->>'selectTipoSociedad' AS selecttiposociedad,
                     datos_sociedad->>'activarSociedad' AS activarsociedad,
                     datos_sociedad->>'declararSociedad' AS declararsociedad,
+                    datos_sociedad->>'tipoCorporacion' AS tipocorporacion,
                     datos_sociedad->>'estadopais' AS estadopais,
                     jsonb_array_elements_text(datos_sociedad->'personas') AS persona, -- Se extrae cada elemento de personas                                    
                     jsonb_array_elements_text(datos_sociedad->'porcentajes') AS porcentaje,
@@ -863,6 +864,7 @@ class ModelSolicitud
                 jd.selecttiposociedad,
                 jd.activarSociedad,
                 jd.declararsociedad,
+                jd.tipocorporacion,
                 jd.estadopais,
                 jd.persona,
                 jd.porcentaje,
@@ -1103,7 +1105,7 @@ class ModelSolicitud
         $sql = "SELECT jsonb_array_length(datos_sociedad -> 'personas') AS cant_personas, uuid
                 FROM personas_sociedad
                 WHERE datos_sociedad ->> 'selectTipoSociedad' = '5'
-                  AND uuid = :id_solicitud";
+                AND uuid = :id_solicitud";
 
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':id_solicitud', $id_solicitud);
