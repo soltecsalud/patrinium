@@ -1952,13 +1952,6 @@ include_once "../controller/solicitudController.php";
 
   function consultarPersonasPorSociedad(idSolicitud,tipocorporacion,idtiposociedad) {
     console.log('🧪 ID recibido en consultarPersonasPorSociedad:', idSolicitud);
-    // Si idtiposociedad es diferente de 5, no se ejecuta la consulta
-    if (idtiposociedad != 5) {
-        $('#divTipoCorporacion').hide();
-        $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
-        return;
-    }
-    
     $.ajax({
         url: '../controller/solicitudController.php',
         method: 'POST',
@@ -2534,7 +2527,7 @@ include_once "../controller/solicitudController.php";
             if ($(this).data('declararsociedad') == 'on') {
                 $('#declararSociedadTexto').text('Declarando');
                 // Si idtiposociedad es igual a 5 ejcutar la funcion consultarPersonasPorSociedad
-                if(idtiposociedad == 5) consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
+                consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
             } else {
                 $('#declararSociedadTexto').text('No esta Declarando');
                 $('#divTipoCorporacion').hide();
@@ -2552,7 +2545,7 @@ include_once "../controller/solicitudController.php";
                         //`);
                         // const idSolicituduuid = $(this).data('id_solicitudUUID');
                         // consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion); 
-                        if(idtiposociedad == 5) consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
+                        consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
                 } else {
                         $('#declararSociedadTexto').text('No está Declarando');
                         $('#divTipoCorporacion').hide();
