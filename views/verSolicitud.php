@@ -1970,15 +1970,25 @@ include_once "../controller/solicitudController.php";
         success: function (respuesta) {
             console.log('🔍 Respuesta de contarPersonasSociedad:', respuesta);
             
-            // if (respuesta.total_personas >= 2) {
-            if (respuesta.cant_personas >= 2) {
+          
+            if (respuesta.cant_personas >= 2 && respuesta.tipo_sociedad == '5') {
+                // LLCs
                 $('#divTipoCorporacion').show(); 
                 $('#tipoCorporacion').html(`
                     <option value="llc 1065">LLC 1065</option>
                     <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
                     <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
                 `);
-            } else { 
+            } else if (respuesta.cant_personas >= 2 && (respuesta.tipo_sociedad == '6' || respuesta.tipo_sociedad == '7')) {
+                // Corporaciones Regulares
+                $('#divTipoCorporacion').show();
+                $('#tipoCorporacion').html(`
+                    <option value="1120">Corporación Regular C (1120)</option>
+                    <option value="1065">Corporación Colectiva (1065)</option>
+                    <option value="1120-S">S Corporación (1120-S)</option>
+                `);
+            } else {
+                // Caso general: ocultar y mostrar "No aplica"
                 $('#divTipoCorporacion').hide();
                 $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
             }

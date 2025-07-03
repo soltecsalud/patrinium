@@ -1102,10 +1102,11 @@ class ModelSolicitud
 
     public static function contarPersonasPorSolicitud($id_solicitud) {
         try {
-        $sql = "SELECT jsonb_array_length(datos_sociedad -> 'personas') AS cant_personas, uuid
+        $sql = "SELECT jsonb_array_length(datos_sociedad -> 'personas') AS cant_personas, 
+                uuid, datos_sociedad ->> 'selectTipoSociedad' as tipo_sociedad
                 FROM personas_sociedad
-                WHERE datos_sociedad ->> 'selectTipoSociedad' = '5'
-                AND uuid = :id_solicitud";
+                WHERE 
+                uuid = :id_solicitud";
 
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':id_solicitud', $id_solicitud);

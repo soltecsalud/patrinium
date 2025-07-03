@@ -382,42 +382,45 @@ class modelSociedad{
     public static function mdlObtenerExtensionSociedades(){
         try {
             $sql = "SELECT 
-                    ps.uuid,
-                    ps.datos_sociedad->>'nombreSociedad' AS nombre,
-                    ts.nombre_tipo_sociedad AS tipo,
-                    e.estado AS estado,
-                    ARRAY[
-                        CASE 
-                            WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
-                            WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
-                            WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
-                            WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
-                            ELSE 'Extranjera (Colombia) - No aplica'
-                        END
-                    ] ||
+                ps.uuid,
+                ps.datos_sociedad->>'nombreSociedad' AS nombre,
+                ts.nombre_tipo_sociedad AS tipo,
+                e.estado AS estado,
+                ARRAY[
                     CASE 
-                        WHEN EXISTS (
-                            SELECT 1
-                            FROM sociedad s
-                            WHERE s.pais_pasaporte != 'USA'
-                            AND s.id_sociedad IN (
-                                SELECT elem::int
-                    FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
-                    WHERE elem ~ '^\d+$'
-                )
-                            ) THEN ARRAY['8804']
-                            ELSE ARRAY[]::text[]
-                        END AS formularios_fiscales
-                    FROM 
-                        personas_sociedad ps
-                    JOIN 
-                        tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
-                    JOIN LATERAL 
-                        jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
-                    JOIN 
-                        estados e ON e.id_estado = estado_codigo.codigo::int
-                    WHERE 
-                        ps.datos_sociedad->>'declararSociedad' = 'on';";
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'llc 1065' THEN 'Cada Member obtiene una K-1 y Cada Member en una 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  C  8832' THEN 'Como Corporacion C 1120 y paga 21%'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  S  2553' THEN '1120 - S NO paga Impuestos Cada Member Obtiene una K-1 Cada Member en una 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120' THEN 'Paga 21% Si Distribuye Dividendos, pagan Personal del 0% - 20% Doble Tributacion En El 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1065' THEN 'no Paga Taxes Cada Socio Recibe K-1 y Cada Socio 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120-S' THEN 'corporacion Evita Doble Tributacion 1120 - S no paga taxes, cada Socio Recibe K-1 y Cada Socio 1040'
+                        ELSE 'No aplica  O solo member 1040'
+                    END
+                ] ||
+                CASE 
+                    WHEN EXISTS (
+                        SELECT 1
+                        FROM sociedad s
+                        WHERE s.pais_pasaporte != 'USA'
+                        AND s.id_sociedad IN (
+                            SELECT elem::int
+                            FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
+                            WHERE elem ~ '^\d+$'
+                        )
+                    ) THEN ARRAY['8804']
+                    ELSE ARRAY[]::text[]
+                END AS formularios_fiscales
+            FROM 
+                personas_sociedad ps
+            JOIN 
+                tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
+            JOIN LATERAL 
+                jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
+            JOIN 
+                estados e ON e.id_estado = estado_codigo.codigo::int
+            WHERE 
+                ps.datos_sociedad->>'declararSociedad' = 'on';
+            ";
             
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
