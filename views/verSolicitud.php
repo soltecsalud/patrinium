@@ -230,17 +230,13 @@ include_once "../controller/solicitudController.php";
 <body>
     <div class="content-wrapper">
         <div id="filtros-bar">
-         
-            <button type="button" class="btn btn-xs barra btn-verde" data-toggle="modal" data-target="#billingModal">
+            <button type="button" id="btn_crear_factura" class="btn btn-xs barra btn-verde" data-toggle="modal" data-target="#billingModal">
                 <i class="fas fa-file-invoice"></i> Crear Factura
             </button>
 
             <button type="button" class="btn btn-xs barra btn-amarillo" data-toggle="modal" data-target="#upload_archivos">
                 <i class="fas fa-upload"></i> Cargar Archivo
             </button>
-
-
-
 
         </div>
         <section class="content-header">
@@ -1098,11 +1094,10 @@ include_once "../controller/solicitudController.php";
                             </label>
                             <select class="form-select" id="companySelect" name="logo" required>
                                 <option value="">Select Company</option>
-                                <option value="patrinium">Patrimonium</option>
+                                <!-- <option value="patrinium">Patrimonium</option>
                                 <option value="Vargas & Associates">Vargas & Associates</option>
                                 <option value="Tándem International Business Services">Tándem International Business Services</option>
-                                <option value="Lamva Investment">Lamva Investment</option>
-
+                                <option value="Lamva Investment">Lamva Investment</option> -->
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -3089,6 +3084,34 @@ include_once "../controller/solicitudController.php";
             cargarPersonas(personaafacturar,null,'factura'); 
 
 
+        // Cargar los select companySelect/empresas
+        $('#btn_crear_factura').click(function() {
+            var companySelect = $('#companySelect');
+            $.ajax({
+                url: '../controller/empresasController.php',
+                type: 'POST',
+                data: { action: 'listarEmpresas' },
+                dataType: 'json',
+                success: function(response) { 
+                    if (response.status === "success") {
+                        response.data.forEach(function(company) {
+                            companySelect.append(new Option(company.nombre_empresa, company.id_empresa));
+                        });
+                    } else {
+                        console.error("Error al cargar las empresas:", response.mensaje);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
+            // ver las empresas cuando cambia el select
+            // companySelect.change(function() {
+            //     var selectedCompany = $(this).val();
+            //     console.log("Empresa seleccionada:", selectedCompany); // Para depuración
+            // });
+        });
+        
         $('#btnInsertarFactura').click(function() {
             var datos = $('#billingForm').serialize();
             datos += "&accion=insertarFactura"; // Añadir acción específica para el controlador

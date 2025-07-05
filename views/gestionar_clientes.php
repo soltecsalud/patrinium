@@ -329,7 +329,7 @@ if (!isset($_SESSION['usuario'])) {
                         if(response.status=='ok'){
                             Swal.fire("Éxito", "Cliente actualizado", "success")
                             .then(() => {
-                                window.location.href = 'gestionar_clientes.php';
+                                location.reload();
                             });
                         }else{
                             Swal.fire("Error", "Fallo la actualización del cliente", "error");

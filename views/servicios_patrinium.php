@@ -182,7 +182,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Agregado con éxito");
-                            window.location.href = 'servicios_patrinium.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -286,7 +286,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Actualizado con éxito");
-                            window.location.href = 'servicios_patrinium.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -310,7 +310,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Servicio eliminado con éxito");
-                            window.location.href = 'servicios_patrinium.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {

@@ -178,7 +178,7 @@ if (!isset($_SESSION['usuario'])) {
                         } else {
                             alert("Agregado con éxito");
                             // Redirección a listar_empresa.php
-                            window.location.href = 'tipo_documentos_adjuntos.php';
+                            location.reload();
                         }
                     }
                 });
@@ -265,7 +265,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Actualizado con éxito");
-                            window.location.href = 'tipo_documentos_adjuntos.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -290,7 +290,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Tipo de documento eliminado con éxito");
-                            window.location.href = 'tipo_documentos_adjuntos.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {

@@ -158,7 +158,7 @@ if (!isset($_SESSION['usuario'])) {
                         alert("fallo :(");
                     }else{
                         alert("Agregado con éxito");
-                        window.location.href = 'tipo_sociedades.php';
+                        location.reload(); 
                     }
                 }
             });
@@ -241,7 +241,7 @@ if (!isset($_SESSION['usuario'])) {
                         alert("fallo :(");
                     } else {
                         alert("Actualizado con éxito");
-                        window.location.href = 'tipo_sociedades.php';
+                        location.reload();
                     }
                 },
                 error: function(xhr, status, error) {
@@ -266,7 +266,7 @@ if (!isset($_SESSION['usuario'])) {
                         alert("fallo :(");
                     } else {
                         alert("Tipo sociedad eliminado con éxito");
-                        window.location.href = 'tipo_sociedades.php';
+                        location.reload();
                     }
                 },
                 error: function(xhr, status, error) {

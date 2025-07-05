@@ -339,7 +339,7 @@ if (!isset($_SESSION['usuario'])) {
                         } else {
                             alert("Agregado con éxito");
                             // Redirección a listar_empresa.php
-                            window.location.href = 'bancos_consignaciones.php';
+                            location.reload();
                         }
                     }
                 });
@@ -359,7 +359,7 @@ if (!isset($_SESSION['usuario'])) {
                         } else {
                             alert("Actualizado con éxito"); 
                             // Redirección a listar_empresa.php
-                            window.location.href = 'bancos_consignaciones.php';
+                            location.reload();
                         }
                     }
                 });
@@ -375,10 +375,10 @@ if (!isset($_SESSION['usuario'])) {
                         console.log(r);
                         if (r.resultado == 0) { 
                             alert("fallo :(");
-                        } else {
+                        } else { 
                             alert("Agregado con éxito"); 
                             // Redirección a listar_empresa.php
-                            window.location.href = 'bancos_consignaciones.php';
+                            location.reload();
                         }
                     }
                 });
@@ -490,7 +490,7 @@ if (!isset($_SESSION['usuario'])) {
                             alert("fallo :(");
                         } else {
                             alert("Banco eliminado con éxito");
-                            window.location.href = 'bancos_consignaciones.php';
+                            location.reload();
                         }
                     },
                     error: function(xhr, status, error) {

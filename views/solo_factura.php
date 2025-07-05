@@ -48,12 +48,11 @@ $controlador = new Solicitud_controller();
                                     <label for="companySelect">Company Issuing Invoice:</label>
 									    <select class="form-select" id="companySelect" name="logo" required>
 											<option value="">Select Company</option>
-											<option value="patrinium">Patrimonium</option>
+											<!-- <option value="patrinium">Patrimonium</option>
 											<option value="Vargas & Associates">Vargas & Associates</option>
 											<option value="Tándem International Business Services">Tándem International Business Services</option>
-											<option value="Lamva Investment">Lamva Investment</option>
-
-										</select>
+											<option value="Lamva Investment">Lamva Investment</option> -->
+                                        </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="bankAccountSelect">Bank Account for Deposit:</label>
@@ -259,13 +258,12 @@ $controlador = new Solicitud_controller();
                                         Company Issuing Invoice:
                                     </label>
                                     <select class="form-select" id="companySelectActualizar" name="logo" required>
-                                    <option value="">Select Company</option>
-                                    <option value="patrinium">Patrimonium</option>
-                                    <option value="Vargas & Associates">Vargas & Associates</option>
-                                    <option value="Tándem International Business Services">Tándem International Business Services</option>
-                                    <option value="Lamva Investment">Lamva Investment</option>
-
-                                </select>
+                                        <!-- <option value="">Select Company</option>
+                                        <option value="patrinium">Patrimonium</option>
+                                        <option value="Vargas & Associates">Vargas & Associates</option>
+                                        <option value="Tándem International Business Services">Tándem International Business Services</option>
+                                        <option value="Lamva Investment">Lamva Investment</option> -->
+                                    </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label class="text-center mb-2" style="font-size: smaller;" for="bankAccountSelect">
@@ -355,8 +353,30 @@ $controlador = new Solicitud_controller();
 <?php include_once "footer/footer_views.php"; ?>
 <script src="js/factura.js"></script>
 <script>
-    let servicioIndex = 0;
 
+    var companySelect = $('#companySelect' || $('#companySelectActualizar')); // Selecciona el elemento del select de la compañia
+    $.ajax({
+        url: '../controller/empresasController.php',
+        type: 'POST',
+        data: { action: 'listarEmpresas' },
+        dataType: 'json',
+        success: function(response) { 
+            if (response.status === "success") {
+                response.data.forEach(function(company) {
+                    companySelect.append(new Option(company.nombre_empresa, company.id_empresa));
+                });
+            } else {
+                console.error("Error al cargar las empresas:", response.mensaje);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error en la solicitud AJAX:", error);
+        }
+    });
+
+
+
+    let servicioIndex = 0;
     document.getElementById('addServiceBtn').addEventListener('click', function () {
         const container = document.getElementById('servicesContainer');
         const row = document.createElement('div');
@@ -476,12 +496,11 @@ $controlador = new Solicitud_controller();
                 data: datos,
                 dataType: "json",
                 success: function (r) {
-                    console.log('===');
-                    console.log(r);
                     if(r.status=='0'){
                         Swal.fire("Éxito", "Factura insertada con éxito.", "success")
                             .then(() => {
-                                window.location.href = 'solo_factura.php';
+                                // window.location.href = 'solo_factura.php';
+                                location.reload();
                             });
                     }else{
                         Swal.fire("Error", "Fallo en la inserción de la factura.", "error");
@@ -611,7 +630,8 @@ $controlador = new Solicitud_controller();
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = 'solo_factura.php'; // Redireccionar a la página de factura
+                            // window.location.href = 'solo_factura.php'; // Redireccionar a la página de factura
+                            location.reload(); // Recargar la página para mostrar los cambios
                         }
                     });
                 },
@@ -630,6 +650,7 @@ $controlador = new Solicitud_controller();
         });
 
         $(document).on('click', '.update-btn', function() {
+
             // Obtén el de la factura del botón que fue clickeado
             var idFactura = $(this).data('id-factura');
             $('#idFactura').val(idFactura);
@@ -637,14 +658,14 @@ $controlador = new Solicitud_controller();
             var factura = datosFacturas[0].find(factura => factura.factura_rapida_id === idFactura);
             // Parsear el contenido JSON de la propiedad 'datos'
             var datos = JSON.parse(factura.datos);
-            console.log(datos);
+            // console.log(datos);
             
             // Asignar los valores a los campos del formulario
             // $("#clientefacturaactualizar").val(datos.clientefactura);
             $('#id_factura_rapida').val(factura.factura_rapida_id);
             $('#selectPersonaInputActualizar').empty();
             $('#selectPersonaInputActualizar').val(datos.clientefactura);
-            $('#companySelectActualizar').val(datos.logo);
+            // $('#companySelectActualizar').val(datos.logo);
             $('#bankAccountSelectActualizar').val(factura.id_banco);
             $('#invoiceNumberInputActualizar').val(datos.invoice_number);
             $('#taxActualizar').val(datos.tax);
@@ -653,6 +674,32 @@ $controlador = new Solicitud_controller();
             $('#numberTaxActualizar').val(datos.number_tax);
             $('#observacionesActualizar').val(datos.observaciones);
 
+            var companySelect = $('#companySelectActualizar'); // Selecciona el elemento del select de la compañia
+            $.ajax({
+                url: '../controller/empresasController.php',
+                type: 'POST',
+                data: { action: 'listarEmpresas' },
+                dataType: 'json',
+                success: function(response) { 
+                    if (response.status === "success") {
+                        // Limpia el select antes de agregar las opciones
+                        companySelect.empty();
+                        response.data.forEach(function(company) {
+                            // Agrega la opción de la empresa actual
+                            if (company.id_empresa === parseInt(datos.logo)) {
+                                companySelect.append(new Option(company.nombre_empresa, company.id_empresa, true, true));
+                            }else{ // Agrega las demás opciones
+                                companySelect.append(new Option(company.nombre_empresa, company.id_empresa));
+                            }
+                        });
+                    } else {
+                        console.error("Error al cargar las empresas:", response.mensaje);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
 
             //Recorrer los servicios y mostrarlos en el modal
             $('#servicesContainerActualizar').empty(); // Limpiar el contenedor de servicios
@@ -733,7 +780,7 @@ $controlador = new Solicitud_controller();
                     if(r.status=='0'){
                         Swal.fire("Éxito", "Factura actualizada con éxito.", "success")
                             .then(() => {
-                                window.location.href = 'solo_factura.php';
+                                location.reload(); // Recargar la página para mostrar los cambios
                             });
                     }else{
                         Swal.fire("Error", "Fallo en la inserción de la factura.", "error");

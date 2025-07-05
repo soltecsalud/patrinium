@@ -111,13 +111,12 @@ include_once "../controller/solicitudController.php";
                                     Company Issuing Invoice:
                                 </label>
                                 <select class="form-select" id="companySelect" name="logo" required>
-                                <option value="">Select Company</option>
-                                <option value="patrinium">Patrimonium</option>
-                                <option value="Vargas & Associates">Vargas & Associates</option>
-                                <option value="Tándem International Business Services">Tándem International Business Services</option>
-                                <option value="Lamva Investment">Lamva Investment</option>
-
-                            </select>
+                                    <!-- <option value="">Select Company</option>
+                                    <option value="patrinium">Patrimonium</option>
+                                    <option value="Vargas & Associates">Vargas & Associates</option>
+                                    <option value="Tándem International Business Services">Tándem International Business Services</option>
+                                    <option value="Lamva Investment">Lamva Investment</option> -->
+                                </select>
                             </div>
                             <div class="col-md-3">
                                 <label class="text-center mb-2" style="font-size: smaller;" for="bankAccountSelect">
@@ -537,6 +536,34 @@ include_once "../controller/solicitudController.php";
             $('#adress').val(datos.adress);
             $('#numberTax').val(datos.number_tax);
             $('#observaciones').val(datos.observaciones);
+
+            var companySelect = $('#companySelect'); 
+            $.ajax({
+                url: '../controller/empresasController.php',
+                type: 'POST',
+                data: { action: 'listarEmpresas' },
+                dataType: 'json',
+                success: function(response) { 
+                    if (response.status === "success") {
+                        // Limpia el select antes de agregar las opciones
+                        companySelect.empty(); 
+                        companySelect.append(new Option("Seleccionar empresa", "", true, true)); // Opción por defecto
+                        response.data.forEach(function(company) { 
+                            // Agrega la opción de la empresa actual
+                            if (company.id_empresa === parseInt(datos.logo)) {
+                                companySelect.append(new Option(company.nombre_empresa, company.id_empresa, true, true));
+                            }else{ // Agrega las demás opciones
+                                companySelect.append(new Option(company.nombre_empresa, company.id_empresa));
+                            }
+                        });
+                    } else {
+                        console.error("Error al cargar las empresas:", response.mensaje);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la solicitud AJAX:", error);
+                }
+            });
 
 
             var campoPersonaFacturar = `
