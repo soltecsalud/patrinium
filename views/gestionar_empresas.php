@@ -243,10 +243,10 @@ if (!isset($_SESSION['usuario'])) {
         // Actualizar empresa
         $('#btnActualizarEmpresa').click(function(e) {
             e.preventDefault();
+            // Validar que se haya seleccionado un archivo para el logo
             var formData = new FormData($('#actualizarempresaForm')[0]);
             formData.append('action', 'gestionarEmpresa');
             formData.append('ejecutar', 'actualizarEmpresa');
-
             $.ajax({
                 type: "POST",
                 url: "../controller/empresasController.php",
@@ -257,7 +257,7 @@ if (!isset($_SESSION['usuario'])) {
                     var res = JSON.parse(response);
                     if (res.resultado == 1) {
                         alert("Empresa actualizada con éxito");
-                        location.reload();
+                        location.reload(); // Recargar la página para mostrar los cambios
                     } else {
                         alert("Error al actualizar la empresa");
                     }

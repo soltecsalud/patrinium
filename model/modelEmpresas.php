@@ -46,7 +46,7 @@ class ModelEmpresas
     static public function eliminarEmpresa($id_empresa)// Se inabilita la empresa en lugar de eliminarla, para eso estado pasa a falso
     {
         try {
-            $sql = "UPDATE empresas SET estado = false WHERE id_empresa = :id_empresa";
+            $sql = "UPDATE empresas SET estado = false WHERE id_empresa = :id_empresa";// Cambiamos el estado a false en lugar de eliminar
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':id_empresa', $id_empresa);
             if ($stmt->execute()) {

@@ -37,7 +37,7 @@ class EmpresasController {
             if (isset($_POST['ejecutar']) && $_POST['ejecutar'] == 'actualizarEmpresa') {
                 $data['id_empresa'] = $_POST['id_empresa_modal'] ?? null; // Obtener el ID de la empresa a actualizar
                 $resultado = $modelo->actualizarEmpresa($data);
-            } else {
+            } else { // Si no se está actualizando, se asume que es una inserción
                 $resultado = $modelo->insertEmpresa($data);
             }
             

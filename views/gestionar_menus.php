@@ -353,7 +353,7 @@ $submenus = ModelMenus::mdlConsultarSubmenus();  // Obtener todos los submenús
             const ruta = $(`.campo-submenu-ruta[data-id="${id}"]`).val();
             const icono = $(`.campo-submenu-icono[data-id="${id}"]`).val();
             const menu_padre = $(`.campo-submenu-menupadre[data-id="${id}"]`).val();
-            console.log(`Editar submenú: ${id}, Nombre: ${nombre}, Ruta: ${ruta}, Ícono: ${icono}, Menú Padre: ${menu_padre}`);
+            // console.log(`Editar submenú: ${id}, Nombre: ${nombre}, Ruta: ${ruta}, Ícono: ${icono}, Menú Padre: ${menu_padre}`);
             if (!nombre || !ruta || !icono || !menu_padre) {
                 alert('⚠️ Por favor, completa todos los campos antes de editar.');
                 return;
@@ -370,7 +370,7 @@ $submenus = ModelMenus::mdlConsultarSubmenus();  // Obtener todos los submenús
                     menu_padre,
                     accion: 'editarSubmenu'
                 },
-                success: function (response) {
+                success: function (response) { 
                     try {
                         const res = JSON.parse(response);
                         if (res.status === 'success') {
