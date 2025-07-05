@@ -1585,7 +1585,7 @@ include_once "../controller/solicitudController.php";
                         <label class="checkbox-container">
                             <input type="checkbox" name="activarSociedad" id="activarSociedad" checked="true">
                             <span class="checkmark"></span>
-                            Activar Sociedad
+                            Sociedad Activa
                         </label>
                         <label class="checkbox-container">
                             <input type="checkbox" name="declararSociedad" id="declararSociedad" data-id_solicitudUUID="">

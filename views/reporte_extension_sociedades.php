@@ -23,7 +23,7 @@ if (!isset($_SESSION['usuario'])) {
 <div class="container mt-4">
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Extensión Sociedades</h3>
+            <h3 class="card-title">Declaracion De Sociedades Con Formularios</h3>
         </div>
         <div class="card-body">
             <table id="tablaExtensionSociedades" class="table table-bordered table-striped w-100">
@@ -32,7 +32,7 @@ if (!isset($_SESSION['usuario'])) {
                         <th>System Number Sociedades</th>
                         <th>Nombre Corporación</th>
                         <th>Tipo Sociedad</th>
-                        <th>Estado de Registro</th>
+                        <th>Estado de Registro U operacion</th>
                         <th>Formulario Fiscal</th>
                         <th>Declararon en Marzo</th>
                     </tr>
@@ -41,7 +41,7 @@ if (!isset($_SESSION['usuario'])) {
             </table>
 
             <hr>
-            <h4 class="mt-4">Sociedades sin declarar en marzo</h4>
+            <h4 class="mt-4">Sociedades Para Extension </h4>
             <table id="tablaSinMarzo" class="table table-bordered table-striped w-100">
                 <thead>
                     <tr>
