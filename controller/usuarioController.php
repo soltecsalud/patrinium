@@ -96,11 +96,11 @@ class UsuarioController
                                 // Validamos que metodo registrarUsuario devuelva True
                                 if ($resultadoRegistro == 1) {
                                     echo '<script language="javascript">swal("Registro Exitoso", "Usuario registrado con exito.", "success");</script>';
-                                    echo '<meta http-equiv="refresh" content="2;url=../views/crear_usuario.php">';
+                                    // echo '<meta http-equiv="refresh" content="2;url=../views/crear_usuario.php">';
                                     // Registro exitoso, redirigir o mostrar mensaje de éxito
                                 } else {
                                     echo '<script language="javascript">swal("Error al registrar", "Ocurrio un error al registrar el usuario", "error");</script>';
-                                    echo '<meta http-equiv="refresh" content="2;url=../views/crear_usuario.php">';
+                                    // echo '<meta http-equiv="refresh" content="2;url=../views/crear_usuario.php">';
                                     // Registro exitoso, redirigir o mostrar mensaje de éxito                                    
                                 }
                             } catch (PDOException $e) {
@@ -141,12 +141,11 @@ class UsuarioController
                             </div>";
 
                 $acciones = "<div class='btn-group'>
-                                <a href='editar_usuario.php?id=$id_usuario' class='btn btn-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>
-                                <a href='cambiar_clave.php?id=$id_usuario' class='btn btn-info'><i class='fa fa-key' aria-hidden='true'></i></a>
-                                <a href='' class='btn btn-danger delete-usuario' data-id='$id_usuario'><i class='fa fa-trash' aria-hidden='true'></i></a>
+                                <a href='../views/editar_usuario.php?id=$id_usuario' class='btn btn-success'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>
+                                <a href='../views/cambiar_clave.php?id=$id_usuario' class='btn btn-info'><i class='fa fa-key' aria-hidden='true'></i></a>
                             </div>";
-            
-
+                // boton para eliminar el usuario, se tiene que hacer un modal de confirmacion antes para desahbilitar el usuario no eliminar
+                //     <a href='' class='btn btn-danger delete-usuario' data-id='$id_usuario'><i class='fa fa-trash' aria-hidden='true'></i></a>       
                 // $numDocumento_decrypt = Encryption::decrypt($row['num_documento'], 'soltecsalud');
                 $listados = [
                     "VerMas"            => $verMas, 

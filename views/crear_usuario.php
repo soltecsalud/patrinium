@@ -18,8 +18,8 @@ if (!isset($_SESSION['usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
     <?php include_once "../views/head/head_views.php"; ?>
-    <link rel="stylesheet" href="css/estilos generales.css">
-    <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
+    <link rel="stylesheet" href="../views/css/estilos generales.css">
+    <link rel="stylesheet" href="../views/css/estilosPersonalizadosSelect2.css">
 </head>
 
 <body>
@@ -102,13 +102,13 @@ if (!isset($_SESSION['usuario'])) {
                                         <option value="Colposcopista">Colposcopista</option>
                                     </select>
                                 </div> -->
-                                <div class="form-group col-md-12 col-sm-12 col-12">
+                                <!-- <div class="form-group col-md-12 col-sm-12 col-12">
                                     <label for="firma"><i class="fas fa-signature"></i> Firma:</label>
                                     <div class="input-group-prepend border border-info bg-light d-flex justify-content-center">
                                         <canvas id="firma_canvas" width="600" height="150" style="background-color: #ffffff;"></canvas>
                                         <input type="hidden" name="firma_base64" id="firma_base64">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group col-md-3 col-sm-6 col-12">
                                     <label for="usuario">Usuario:</label>
                                     <input type="text" id="usuario" name="usuario" class="form-control" autocomplete="off" required>
@@ -130,7 +130,7 @@ if (!isset($_SESSION['usuario'])) {
                             </div>
 
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-success mt-4 pr-5 pl-5">Crear Usuario</button>
+                                <button type="submit" id="btn_crearusuario" class="btn btn-success mt-4 pr-5 pl-5">Crear Usuario</button>
                             </div>
 
                         </form>
@@ -151,9 +151,9 @@ if (!isset($_SESSION['usuario'])) {
         <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>
         <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/additional-methods.min.js"></script>
         <!-- <script src="./js/SelectEPS.js"></script> -->
-        <script src="./js/SelectUsuario.js"></script>
-        <script src="js/select2.js"></script>
-        <script src="./js/validacionFormularios.js"></script>
+        <script src="../views/js/SelectUsuario.js"></script>
+        <script src="../views/js/select2.js"></script>
+        <script src="../views/js/validacionFormularios.js"></script>
         <script>
             const canvas = document.getElementById('firma_canvas');
             const ctx = canvas.getContext('2d');

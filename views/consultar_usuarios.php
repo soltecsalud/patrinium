@@ -97,7 +97,6 @@ include_once "../controller/usuarioController.php";
     <script src="js/dataTableSearchPane.js"></script>
     <script src="js/delete_usuario.js"></script>
     <script>
-        // const data = <?php echo json_encode(UsuarioController::ctrlConsultarUsuarios()); ?>;
         const data = <?php echo UsuarioController::ctrlConsultarUsuarios(); ?>;
 
         console.log(data);
