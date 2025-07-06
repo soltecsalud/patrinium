@@ -15,8 +15,8 @@ $controlador = new Solicitud_controller();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once "head/head_views.php"; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="css/estilos generales.css">
-    <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
+    <link rel="stylesheet" href="../views/css/estilos generales.css">
+    <link rel="stylesheet" href="../views/css/estilosPersonalizadosSelect2.css">
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="../resource/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.all.js"></script>
@@ -351,7 +351,7 @@ $controlador = new Solicitud_controller();
 </div>
 
 <?php include_once "footer/footer_views.php"; ?>
-<script src="js/factura.js"></script>
+<script src="../views/js/factura.js"></script>
 <script>
 
     var companySelect = $('#companySelect' || $('#companySelectActualizar')); // Selecciona el elemento del select de la compañia
@@ -499,20 +499,11 @@ $controlador = new Solicitud_controller();
                     if(r.status=='0'){
                         Swal.fire("Éxito", "Factura insertada con éxito.", "success")
                             .then(() => {
-                                // window.location.href = 'solo_factura.php';
                                 location.reload();
                             });
                     }else{
                         Swal.fire("Error", "Fallo en la inserción de la factura.", "error");
                     }
-                    // if (r.resultado == 0) {
-                    //     Swal.fire("Error", "Fallo en la inserción de la factura.", "error");
-                    // } else {
-                    //     Swal.fire("Éxito", "Factura insertada con éxito.", "success")
-                    //         .then(() => {
-                    //             window.location.href = 'solo_factura.php';
-                    //         });
-                    // }
                 },
                 error: function () {
                     Swal.fire("Error", "Error en la comunicación con el servidor.", "error");
@@ -630,7 +621,6 @@ $controlador = new Solicitud_controller();
                         confirmButtonText: 'Aceptar'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // window.location.href = 'solo_factura.php'; // Redireccionar a la página de factura
                             location.reload(); // Recargar la página para mostrar los cambios
                         }
                     });

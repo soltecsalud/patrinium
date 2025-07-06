@@ -468,7 +468,7 @@ include_once "../controller/solicitudController.php";
                         location:  'top-end',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = 'factura.php'; // Redireccionar a la página de factura
+                                location.reload(); // Recargar la página para mostrar los cambios
                             }
                         });
                     }else{
@@ -501,8 +501,8 @@ include_once "../controller/solicitudController.php";
                         // console.log(response);
                         if(response.status=='ok'){
                             Swal.fire("Éxito", "Factura eliminada", "success")
-                            .then(() => {
-                                window.location.href = 'factura.php';
+                            .then(() => { 
+                                location.reload(); // Recargar la página para mostrar los cambios
                             });
                         }else{
                             Swal.fire("Error", "Fallo la creacion del socio", "error");
@@ -637,7 +637,7 @@ include_once "../controller/solicitudController.php";
                     if(response.status==="ok"){
                         Swal.fire("Éxito", "Factura actualizada", "success")
                         .then(() => {
-                            window.location.href = 'factura.php';
+                            location.reload();
                         });
                     }else{
                         Swal.fire("Error", "Fallo la actualización de la factura", "error");

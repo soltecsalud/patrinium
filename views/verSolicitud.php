@@ -3,10 +3,10 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
     exit();
-} 
+}
 include_once "../controller/solicitudController.php";
 
- $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725'; 
+$uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,7 +24,6 @@ include_once "../controller/solicitudController.php";
     <script src="../resource/vendor/tinymce/tinymce/tinymce.min.js"></script>
     <title>Datos Solicitud # <?php echo $_GET['numero_solicitud']; ?></title>
     <style>
-       
         .text-na {
             color: red;
             font-weight: bold;
@@ -175,7 +174,7 @@ include_once "../controller/solicitudController.php";
             margin-right: 10px;
         }
 
-        .checkbox-container input:checked + .checkmark {
+        .checkbox-container input:checked+.checkmark {
             background-color: #007bff;
             border-color: #0056b3;
         }
@@ -190,9 +189,10 @@ include_once "../controller/solicitudController.php";
             display: none;
         }
 
-        .checkbox-container input:checked + .checkmark::after {
+        .checkbox-container input:checked+.checkmark::after {
             display: block;
         }
+
         .fondo-verde {
             background-color: #d4edda !important;
         }
@@ -200,30 +200,37 @@ include_once "../controller/solicitudController.php";
         .fondo-rojo {
             background-color: #f8d7da !important;
         }
-        .btn-verde, .btn-amarillo {
-                    width: 160px;               /* Ancho uniforme */
-                    height: 40px;               /* Alto consistente */
-                    font-size: 14px;            /* Tamaño de texto más legible */
-                    font-weight: bold;          /* Texto más visible */
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 6px;                   /* Espacio entre ícono y texto */
-                    border-radius: 10px;        /* Bordes redondeados */
-                }
 
-                .btn-verde {
-                    background-color: #28a745 !important;
-                    color: white !important;
-                    border: none;
-                }
+        .btn-verde,
+        .btn-amarillo {
+            width: 160px;
+            /* Ancho uniforme */
+            height: 40px;
+            /* Alto consistente */
+            font-size: 14px;
+            /* Tamaño de texto más legible */
+            font-weight: bold;
+            /* Texto más visible */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            /* Espacio entre ícono y texto */
+            border-radius: 10px;
+            /* Bordes redondeados */
+        }
 
-                .btn-amarillo {
-                    background-color: #ffc107 !important;
-                    color: black !important;
-                    border: none;
-                }
+        .btn-verde {
+            background-color: #28a745 !important;
+            color: white !important;
+            border: none;
+        }
 
+        .btn-amarillo {
+            background-color: #ffc107 !important;
+            color: black !important;
+            border: none;
+        }
     </style>
 </head>
 
@@ -249,23 +256,23 @@ include_once "../controller/solicitudController.php";
             </div>
         </section>
         <section class="content">
-                    <div class="container-fluid">
-                                <div class="card card-dark shadow-lg card-registroSolicitudCliente">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Informacion General</h3>
-                                        <div class="d-flex justify-content-center w-100">
-                        <button type="button" class="btn btn-primary mr-2 crearSociedad" data-toggle="modal" data-target="#modalCrearSociedad">
-                            Crear Sociedad
-                        </button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnModalSolicitud" data-bs-target="#modalSolicitud">
+            <div class="container-fluid">
+                <div class="card card-dark shadow-lg card-registroSolicitudCliente">
+                    <div class="card-header">
+                        <h3 class="card-title">Informacion General</h3>
+                        <div class="d-flex justify-content-center w-100">
+                            <button type="button" class="btn btn-primary mr-2 crearSociedad" data-toggle="modal" data-target="#modalCrearSociedad">
+                                Crear Sociedad
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnModalSolicitud" data-bs-target="#modalSolicitud">
                                 Nuevos Servicios A Facturar
                             </button>
-                       
-                    </div>
-                    <div class="card-tools">
-                        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bars"></i> Opciones
-                        </button>
+
+                        </div>
+                        <div class="card-tools">
+                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bars"></i> Opciones
+                            </button>
 
                             <!-- Menú desplegable -->
                             <div class="dropdown-menu dropdown-menu-right bg-primary text-white" aria-labelledby="dropdownMenuButton">
@@ -278,7 +285,7 @@ include_once "../controller/solicitudController.php";
                                 <a class="dropdown-item text-white" href="#" data-toggle="modal" data-target="#billingModal">
                                     <i class="fas fa-file-invoice"></i> Crear Factura
                                 </a>
-                                
+
                                 <a class="dropdown-item text-white" href="#" data-toggle="modal" data-target="#egresoModal">
                                     <i class="fas fa-handshake"></i> Contratar Terceros
                                 </a>
@@ -286,7 +293,7 @@ include_once "../controller/solicitudController.php";
                                     <i class="fas fa-expand"></i> Maximizar
                                 </a>
                             </div>
-                    </div>
+                        </div>
                     </div>
 
                     <div class="modal fade" id="modalCrearCliente" tabindex="-1" role="dialog" aria-labelledby="modalCrearClienteLabel" aria-hidden="true">
@@ -453,33 +460,33 @@ include_once "../controller/solicitudController.php";
 
                     <div class="card-body">
 
-                        <div class="row mb-3" >
-                           
+                        <div class="row mb-3">
+
                             <div class="col-md-12">
 
                                 <div class="card-serazo">
-                                    <div class="card-number-serazo"><?php 
-                                    
-                                     if (isset($_GET['numero_solicitud'])) {
-                                         $id_revisar_solicitud = $_GET['numero_solicitud'];
-                                     }
+                                    <div class="card-number-serazo"><?php
 
-                                     $controlador = new Solicitud_controller();
-                                     $solicitudes = $controlador->getSolicitud($id_revisar_solicitud);
+                                                                    if (isset($_GET['numero_solicitud'])) {
+                                                                        $id_revisar_solicitud = $_GET['numero_solicitud'];
+                                                                    }
 
-                                     if (is_array($solicitudes) && count($solicitudes) > 0) {
-                                         foreach ($solicitudes as $solicitud) {
-                                             if (is_object($solicitud)) {
-                                               //  echo "hola";
-                                             } else {
-                                                // echo "<p>No se encontraron solicitudes.</p>";
-                                             }
-                                         }
-                                     } else {
-                                        // echo "<p>No se encontraron solicitudes.</p>";
-                                     }
-                                    
-                                     echo $id_revisar_solicitud ?></div>
+                                                                    $controlador = new Solicitud_controller();
+                                                                    $solicitudes = $controlador->getSolicitud($id_revisar_solicitud);
+
+                                                                    if (is_array($solicitudes) && count($solicitudes) > 0) {
+                                                                        foreach ($solicitudes as $solicitud) {
+                                                                            if (is_object($solicitud)) {
+                                                                                //  echo "hola";
+                                                                            } else {
+                                                                                // echo "<p>No se encontraron solicitudes.</p>";
+                                                                            }
+                                                                        }
+                                                                    } else {
+                                                                        // echo "<p>No se encontraron solicitudes.</p>";
+                                                                    }
+
+                                                                    echo $id_revisar_solicitud ?></div>
                                     <div class="card-text-serazo">Numero Cliente</div>
                                 </div>
 
@@ -573,22 +580,22 @@ include_once "../controller/solicitudController.php";
                                                         echo implode(" <br> ", $personas);
                                                         ?>
                                                     </span>
-                                                    <input type="hidden" id='inputIdSociedad_<?php echo $idSociedad; ?>'  value='<?php echo $idSociedad; ?>'>
+                                                    <input type="hidden" id='inputIdSociedad_<?php echo $idSociedad; ?>' value='<?php echo $idSociedad; ?>'>
                                                     <!-- Botón para abrir el modal -->
-                                                    <button 
+                                                    <button
                                                         data-id="<?php echo $idSociedad; ?>"
-                                                        data-nombre="<?php echo $nombre_sociedad; ?>" 
+                                                        data-nombre="<?php echo $nombre_sociedad; ?>"
                                                         data-idtiposociedad="<?php echo $idtipoSociedad; ?>"
                                                         data-tiposociedad="<?php echo $tipoSociedad; ?>"
                                                         data-activarsociedad="<?php echo $activarSociedad; ?>"
-                                                        data-declararsociedad="<?php echo $declararSociedad;?>"
+                                                        data-declararsociedad="<?php echo $declararSociedad; ?>"
                                                         data-tipocorporacion="<?php echo $tipocorporacion; ?>"
                                                         data-estadopais='<?php echo $estadopais; ?>'
-                                                        data-personas='<?php echo htmlspecialchars(json_encode($infoSociedades, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8'); ?>'  
+                                                        data-personas='<?php echo htmlspecialchars(json_encode($infoSociedades, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT), ENT_QUOTES, 'UTF-8'); ?>'
                                                         class="btn btn-primary btn-sm mt-2 btnVerDetalles">
                                                         Ver Detalles
                                                     </button>
-                                                    <?php if($nombre_archivo!=''){ ?> 
+                                                    <?php if ($nombre_archivo != '') { ?>
                                                         <a class="btn" style="background-color: #28a745; color: white; border-color: #28a745;" href="../controller/resource/<?php echo $id_revisar_solicitud . '/' . $nombre_archivo; ?>" target="_blank" rel="noopener noreferrer">EIN</a>
 
                                                     <?php } ?>
@@ -598,14 +605,14 @@ include_once "../controller/solicitudController.php";
                                                 </a>
                                             </div>
                                         </div>
-                                <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
                             </div>
                         </div> <!--Fin Tabal Persona-->
 
-                        
+
 
 
 
@@ -623,9 +630,9 @@ include_once "../controller/solicitudController.php";
                                         <?php
                                         $sociedad_controller = new Solicitud_controller();
                                         $fk_cliente          = $solicitud->fk_cliente;
-                                        $fila                = $sociedad_controller->getSociedad($fk_cliente,'0');
-                                        if(empty($fila)){
-                                            $fila            = $sociedad_controller->getSociedad($fk_cliente,'1');
+                                        $fila                = $sociedad_controller->getSociedad($fk_cliente, '0');
+                                        if (empty($fila)) {
+                                            $fila            = $sociedad_controller->getSociedad($fk_cliente, '1');
                                         }
                                         ?>
                                         <tbody>
@@ -723,33 +730,33 @@ include_once "../controller/solicitudController.php";
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <?php
-                                                    $solicitud_servicios_json   = $controlador->getServicios($id_revisar_solicitud);
-                                                    $verificarServicioEnFactura = $controlador->verificarServicioEnFactura($id_revisar_solicitud);
+                                                        <?php
+                                                        $solicitud_servicios_json   = $controlador->getServicios($id_revisar_solicitud);
+                                                        $verificarServicioEnFactura = $controlador->verificarServicioEnFactura($id_revisar_solicitud);
 
-                                                    // Decodificar el JSON a un array asociativo
-                                                    $solicitud_servicios = json_decode($solicitud_servicios_json, true);
-                                                    $factura_servicios   = json_decode($verificarServicioEnFactura, true);
+                                                        // Decodificar el JSON a un array asociativo
+                                                        $solicitud_servicios = json_decode($solicitud_servicios_json, true);
+                                                        $factura_servicios   = json_decode($verificarServicioEnFactura, true);
 
-                                                    // Extraer los nombres de servicios facturados en un array plano
-                                                    $servicios_facturados = array_map(function ($item) {
-                                                        return trim($item['descripcion']); // Eliminamos espacios en blanco
-                                                    }, $factura_servicios);
+                                                        // Extraer los nombres de servicios facturados en un array plano
+                                                        $servicios_facturados = array_map(function ($item) {
+                                                            return trim($item['descripcion']); // Eliminamos espacios en blanco
+                                                        }, $factura_servicios);
 
-                                                    // print_r($servicios_facturados);
-                                                    // Recorrer el array de servicios
-                                                    $nombre_servicio = [];
-                                                    foreach ($solicitud_servicios as $servicio) {
-                                                        $nombre_servicio = json_decode($servicio['servicios'], true); // Decodificar el campo 'servicios'
-                                                        // Asignar estado
-                                                        // Generar filas de la tabla
-                                                        foreach ($nombre_servicio as $clave => $valor) {
-                                                            // Verificar si el servicio está en la factura
-                                                            // $en_factura = in_array($valor['value'], $servicios_factura);
-                                                            $servicio_value = trim($valor['value']);
-                                                            $en_factura     = in_array($servicio_value, $servicios_facturados);
-                                                    ?>
-                                                            
+                                                        // print_r($servicios_facturados);
+                                                        // Recorrer el array de servicios
+                                                        $nombre_servicio = [];
+                                                        foreach ($solicitud_servicios as $servicio) {
+                                                            $nombre_servicio = json_decode($servicio['servicios'], true); // Decodificar el campo 'servicios'
+                                                            // Asignar estado
+                                                            // Generar filas de la tabla
+                                                            foreach ($nombre_servicio as $clave => $valor) {
+                                                                // Verificar si el servicio está en la factura
+                                                                // $en_factura = in_array($valor['value'], $servicios_factura);
+                                                                $servicio_value = trim($valor['value']);
+                                                                $en_factura     = in_array($servicio_value, $servicios_facturados);
+                                                        ?>
+
                                                                 <tr>
                                                                     <td>
                                                                         <?php echo $valor['value']; ?></td>
@@ -770,7 +777,7 @@ include_once "../controller/solicitudController.php";
                                                                         if ($en_factura) {
                                                                             echo '<span class="badge badge-dark">En Factura</span>';
                                                                             // Aquí puedes realizar la acción que necesites
-                                                                        }else{
+                                                                        } else {
                                                                             echo $estado_texto;
                                                                         }
                                                                         // echo $estado_texto;
@@ -778,12 +785,12 @@ include_once "../controller/solicitudController.php";
 
                                                                     </td>
                                                                 </tr>
-                                                            
-                                                    <?php
+
+                                                        <?php
+                                                            }
                                                         }
-                                                    }
-                                                    $jsonNombre_servicio= json_encode($nombre_servicio);
-                                                    ?>
+                                                        $jsonNombre_servicio = json_encode($nombre_servicio);
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -804,13 +811,13 @@ include_once "../controller/solicitudController.php";
 
                                                 <?php
                                                 $solicitud_servicios_json   = $controlador->getServicios($id_revisar_solicitud);
-												$verificarServicioEnFactura = $controlador->verificarServicioEnFactura($id_revisar_solicitud);
+                                                $verificarServicioEnFactura = $controlador->verificarServicioEnFactura($id_revisar_solicitud);
 
                                                 // Decodificar el JSON a un array asociativo 
                                                 $solicitud_servicios = json_decode($solicitud_servicios_json, true);
-												$factura_servicios   = json_decode($verificarServicioEnFactura, true);
-												
-												// Extraer los nombres de servicios facturados en un array plano
+                                                $factura_servicios   = json_decode($verificarServicioEnFactura, true);
+
+                                                // Extraer los nombres de servicios facturados en un array plano
                                                 $servicios_facturados = array_map(function ($item) {
                                                     return trim($item['descripcion']); // Eliminamos espacios en blanco
                                                 }, $factura_servicios);
@@ -821,7 +828,7 @@ include_once "../controller/solicitudController.php";
                                                     // Generar filas de la tabla
                                                     foreach ($nombre_servicioAdicionales as $clave => $valor) {
                                                         $estado         = $valor['estado'];
-														$servicio_value = trim($valor['value']);
+                                                        $servicio_value = trim($valor['value']);
                                                         $en_factura     = in_array($servicio_value, $servicios_facturados);
 
 
@@ -844,7 +851,7 @@ include_once "../controller/solicitudController.php";
                                                                 }
                                                                 if ($en_factura) {
                                                                     echo '<span class="badge badge-dark">En Factura</span>';
-                                                                }else{
+                                                                } else {
                                                                     echo $estado_texto;
                                                                 }
                                                                 ?>
@@ -863,7 +870,7 @@ include_once "../controller/solicitudController.php";
                                 </div>
                             </div>
 
-                            <div class="card card-info card-outline shadow-none p-0"> 
+                            <div class="card card-info card-outline shadow-none p-0">
                                 <div class="card-header">
                                     <h3 class="card-title">Consulta Facturas Creadas</h3>
                                 </div>
@@ -896,7 +903,7 @@ include_once "../controller/solicitudController.php";
                                 <div class="card-header">
                                     <h3 class="card-title pt-1">Kit Entrega de Servicios A Clientes</h3>
                                     &nbsp;
-                                    <button 
+                                    <button
                                         class="btn btn-primary btn-sm btnVerActas">
                                         Clic Para Ver Archivos & Actas
                                     </button>
@@ -937,7 +944,7 @@ include_once "../controller/solicitudController.php";
                                                 <textarea name="editorContent" id="editor"></textarea>
                                             </div>
                                             <form id="formGuardarHtml">
-                                                
+
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -962,7 +969,7 @@ include_once "../controller/solicitudController.php";
                                                 <th>Fecha upload</th>
                                                 <th>Nombre archivo</th>
                                                 <th>Sociedad</th>
-                                                <th>Tipo  Documento</th>
+                                                <th>Tipo Documento</th>
                                                 <th>N&uacute;mero de registro</th>
                                                 <th>Fecha Registro</th>
                                                 <th>Download Document</th>
@@ -971,19 +978,20 @@ include_once "../controller/solicitudController.php";
                                         <tbody>
                                             <?php
                                             $solicitudes = $controlador->getListadoAdjuntos($id_revisar_solicitud);
-                                            if(!empty($solicitudes)){
-                                            foreach ($solicitudes as $adjuntos) {
+                                            if (!empty($solicitudes)) {
+                                                foreach ($solicitudes as $adjuntos) {
                                             ?>
-                                                <tr>
-                                                    <td><?php echo $adjuntos->create_at; ?></td>
-                                                    <td><?php echo $adjuntos->nombre_archivo; ?></td>
-                                                    <td><?php echo $adjuntos->nombre_sociedad; ?></td>
-                                                    <td><?php echo $adjuntos->nombre_documento_adjunto; ?></td>
-                                                    <td><?php echo $adjuntos->numero_registro; ?></td>
-                                                    <td><?php echo $adjuntos->fecha_entrega; ?></td>
-                                                    <td><a class="btn btn-primary" href="../controller/resource/<?php echo $id_revisar_solicitud . "/" . $adjuntos->nombre_archivo; ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
-                                                </tr>
-                                            <?php }} ?>
+                                                    <tr>
+                                                        <td><?php echo $adjuntos->create_at; ?></td>
+                                                        <td><?php echo $adjuntos->nombre_archivo; ?></td>
+                                                        <td><?php echo $adjuntos->nombre_sociedad; ?></td>
+                                                        <td><?php echo $adjuntos->nombre_documento_adjunto; ?></td>
+                                                        <td><?php echo $adjuntos->numero_registro; ?></td>
+                                                        <td><?php echo $adjuntos->fecha_entrega; ?></td>
+                                                        <td><a class="btn btn-primary" href="../controller/resource/<?php echo $id_revisar_solicitud . "/" . $adjuntos->nombre_archivo; ?>" target="_blank" rel="noopener noreferrer"><i class="fa fa-download"></i></a></td>
+                                                    </tr>
+                                            <?php }
+                                            } ?>
                                         </tbody>
                                     </table>
 
@@ -1060,7 +1068,7 @@ include_once "../controller/solicitudController.php";
                         </select>
                         <input type="hidden" class="form-control" value='<?php echo $id_revisar_solicitud ?>' id="id_descripcion" name="id_solicitud">
                     </div>
-                    <button type="button" id="btn-cargar" class="btn btn-primary">Cargar Archivo</button>
+                    <button type="button" id="btn-cargar" class="btn btn-primary">Cargar Archivox</button>
                     <!-- El tipo de botón debe ser 'button' si estás manejando el envío a través de JavaScript -->
                 </form>
             </div>
@@ -1110,7 +1118,7 @@ include_once "../controller/solicitudController.php";
                                 $banco_consigaciones = $controlador->getBancosConsignacion();
                                 foreach ($banco_consigaciones as $banco_consigacion): ?>
                                     <!-- <option value="<?php echo $banco_consigacion->id_banco; ?>"><?php echo $banco_consigacion->nombre_banco; ?></option> -->
-                                    <option value="<?php echo $banco_consigacion->id_banco; ?>"><?php echo $banco_consigacion->nombre_banco."-".$banco_consigacion->nombre_cuenta."-".$banco_consigacion->numero_cuenta;?></option>
+                                    <option value="<?php echo $banco_consigacion->id_banco; ?>"><?php echo $banco_consigacion->nombre_banco . "-" . $banco_consigacion->nombre_cuenta . "-" . $banco_consigacion->numero_cuenta; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -1118,20 +1126,20 @@ include_once "../controller/solicitudController.php";
                             <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
                                 Invoice Number:
                             </label>
-                            <input type="text" class="form-control" id="invoiceNumberInput"  name="invoice_number" placeholder="Enter invoice number" required>
+                            <input type="text" class="form-control" id="invoiceNumberInput" name="invoice_number" placeholder="Enter invoice number" required>
                             <div id="divinvoicenumberencontrado" style="display: none;">
                                 <p style="color: red;font-weight: bold;"><i>El Invoice Number ingresado ya existe</i></p>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            
-                            <input type="hidden" class="form-control" id="tax" name="tax" value =" " placeholder="Enter TAX">
+
+                            <input type="hidden" class="form-control" id="tax" name="tax" value=" " placeholder="Enter TAX">
                         </div>
                     </div>
 
                     <div class="row mt-4">
                         <div class="col-md-4">
-                            <label class="text-center mb-2" style="font-size: smaller;" for="email" >
+                            <label class="text-center mb-2" style="font-size: smaller;" for="email">
                                 Email Cliente:
                             </label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email" required>
@@ -1166,14 +1174,14 @@ include_once "../controller/solicitudController.php";
                     // Extraer los nombres de servicios facturados en un array plano
                     $servicios_facturados = array_map(function ($item) {
                         return trim($item['descripcion']); // Eliminamos espacios en blanco
-                    }, $factura_servicios); 
+                    }, $factura_servicios);
 
                     foreach ($servicios as $servicio):
                         if (!empty($servicio['servicios'])):
                             // servicios y serviciones adicionales 
                             $datos       = json_decode($servicio['servicios'], true);
                             // $adicionales = json_decode($servicio['servicios_adicionales'], true);
-                            
+
                             // Combinar los servicios base y adicionales en un solo array
                             // $todos_los_servicios = array_merge(
                             //     is_array($datos) ? $datos : [],
@@ -1183,26 +1191,26 @@ include_once "../controller/solicitudController.php";
                             if ($datos):
                                 foreach ($datos as $clave => $valor):
                                     $en_factura = in_array(trim($valor['value']), $servicios_facturados);
-                                    if(!$en_factura && $valor['estado'] == 0){ 
+                                    if (!$en_factura && $valor['estado'] == 0) {
                                         // if ($valor['estado'] == 0) { 
                     ?>
-                                            <div class="row  col-12">
-                                                <div class="col-md-6 mb-3">
-                                                    <input type="checkbox" id="check<?php echo $clave; ?>" name="check<?php echo $clave; ?>" class="check-item" data-clave="<?php echo $clave; ?>">
-                                                    &nbsp;
-                                                    <label><?php echo $valor['value']; ?></label>
-                                                </div>
-                                                <div class="col-md-3 mb-2">
-                                                    <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control" data-clave="<?php echo $clave; ?>" disabled>
-                                                </div>
-                                                <div class="col-md-3 mb-2">
-                                                    <input type="text" placeholder="Unit Price USD" name="valor<?php echo $clave; ?>" class="form-control" data-clave="<?php echo $clave; ?>" disabled>
-                                                </div>
+                                        <div class="row  col-12">
+                                            <div class="col-md-6 mb-3">
+                                                <input type="checkbox" id="check<?php echo $clave; ?>" name="check<?php echo $clave; ?>" class="check-item" data-clave="<?php echo $clave; ?>">
+                                                &nbsp;
+                                                <label><?php echo $valor['value']; ?></label>
                                             </div>
-                                            <div class="row col-12">
-                                                <textarea class="form-control" rows="2" name="descripcionservicio<?php echo $clave; ?>" data-clave="<?php echo $clave; ?>" placeholder="Description" disabled></textarea>
+                                            <div class="col-md-3 mb-2">
+                                                <input type="text" placeholder="Qty" name="cantidad<?php echo $clave; ?>" class="form-control" data-clave="<?php echo $clave; ?>" disabled>
                                             </div>
-                                            <br>
+                                            <div class="col-md-3 mb-2">
+                                                <input type="text" placeholder="Unit Price USD" name="valor<?php echo $clave; ?>" class="form-control" data-clave="<?php echo $clave; ?>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row col-12">
+                                            <textarea class="form-control" rows="2" name="descripcionservicio<?php echo $clave; ?>" data-clave="<?php echo $clave; ?>" placeholder="Description" disabled></textarea>
+                                        </div>
+                                        <br>
                                 <?php
                                         // }
                                     }
@@ -1223,23 +1231,23 @@ include_once "../controller/solicitudController.php";
                             if ($datos_adicionales):
                                 foreach ($datos_adicionales as $clave => $valor):
                                     $en_factura = in_array(trim($valor['value']), $servicios_facturados);
-                                    if(!$en_factura){
+                                    if (!$en_factura) {
                     ?>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label><?php echo $valor['value']; ?></label>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label><?php echo $valor['value']; ?></label>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <input type="text" placeholder="Qty" name="cantidad<?php echo $valor['value']; ?>" class="form-control">
+                                            </div>
+                                            <div class="col-md-3 mb-3">btnInsertarFactura
+                                                <input type="text" placeholder="Unit Price" name="valor<?php echo $valor['value']; ?>" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <input type="text" placeholder="Qty" name="cantidad<?php echo $valor['value']; ?>" class="form-control">
+                                        <div class="row col-12">
+                                            <textarea class="form-control" rows="2" name="descripcionservicio<?php echo $clave; ?>" placeholder="Description"></textarea>
                                         </div>
-                                        <div class="col-md-3 mb-3">btnInsertarFactura
-                                            <input type="text" placeholder="Unit Price" name="valor<?php echo $valor['value']; ?>" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="row col-12">
-                                        <textarea class="form-control" rows="2" name="descripcionservicio<?php echo $clave; ?>" placeholder="Description"></textarea>
-                                    </div>
-                                    <br>
+                                        <br>
                     <?php
                                     }
                                 endforeach;
@@ -1588,7 +1596,7 @@ include_once "../controller/solicitudController.php";
                             <p id='declararSociedadTexto'></p>
                         </label>
                         <div class="form-group " id="divTipoCorporacion" style="display: none;">
-                            <label for="tipoCorporacion">¿Elige Declarar  Como  Corporacion?</label>
+                            <label for="tipoCorporacion">¿Elige Declarar Como Corporacion?</label>
                             <select class="form-control" id="tipoCorporacion" name="tipoCorporacion">
                                 <option value="no">No aplica</option>
                             </select>
@@ -1614,7 +1622,7 @@ include_once "../controller/solicitudController.php";
                         <label for="inputEstado">Estado</label>
                         <select id="selectEstado" name="estadopais[]" multiple class="form-control">
                             <option value="">Seleccionar tipo de sociedad</option>
-                        </select> 
+                        </select>
                         <!-- <input type="text" class="form-control" id="selectEstado" name="estadopais" placeholder="Estado/pais de la sociedad"> -->
                     </div>
 
@@ -1644,7 +1652,7 @@ include_once "../controller/solicitudController.php";
 
                     <!-- Documentos de la Sociedad -->
                     <div id="documentosSociedad" class="form-group pt-2" style="display: none;">
-                        <hr/>
+                        <hr />
                         <label for="documentosSociedad">Documentos de la Sociedad</label>
                         <div id="tableDocumentosSociedadContainer_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <table id="documentosAdjuntosxSociedad" class="table table-bordered table-striped">
@@ -1667,7 +1675,7 @@ include_once "../controller/solicitudController.php";
 
                     <!-- Reportes por cada Sociedad -->
                     <div id="reportesSociedad" class="form-group pt-2" style="display: none;">
-                        <hr/>
+                        <hr />
                         <label for="reportesSociedad">Reportes de la Sociedad</label>
                         &nbsp;
                         <div class="row col-md-8">
@@ -1676,11 +1684,11 @@ include_once "../controller/solicitudController.php";
                                     Abrir lista de chequeo
                                 </button>
                             </div>
-                            
+
                             <div id="pdf-lista-check" class="col-md-3">
                             </div>
                         </div>
-                        
+
                         <div id="reportesSociedadContainer" class="pt-2">
                             <table id="reportesSociedadTabla" class="table table-bordered table-striped">
                                 <thead>
@@ -1697,7 +1705,7 @@ include_once "../controller/solicitudController.php";
                         </div>
                     </div>
 
-                    
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -1708,14 +1716,14 @@ include_once "../controller/solicitudController.php";
     </div>
 </div>
 
-    <div class="modal fade" id="checklistModal" tabindex="-1" aria-labelledby="checklistModalLabel" aria-hidden="true">
-        <div class="modal-dialog" id="modal_nuevo_servicos"> 
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="checklistModalLabel">Lista de Verificaci&oacute;n</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <!-- <div class="modal-body">
+<div class="modal fade" id="checklistModal" tabindex="-1" aria-labelledby="checklistModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="modal_nuevo_servicos">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checklistModalLabel">Lista de Verificaci&oacute;n</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- <div class="modal-body">
                     <form id="checklistForm">
                         <ul class="list-group" id="checklistItems">
                             <li class="list-group-item"><input class="form-check-input me-2" type="checkbox"> General and specific Delaware's Corporation - Advice / Consulting</li>
@@ -1752,54 +1760,54 @@ include_once "../controller/solicitudController.php";
                         </div>
                     </form>
                 </div> -->
-                <div class="modal-body">
-                    <form id="checklistForm">
-                        <div class="row">
-                            <!-- Lista de verificación en 3 columnas -->
-                            <div class="col-md-8">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <ul class="list-group" id="checklistColumn1"></ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul class="list-group" id="checklistColumn2"></ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <ul class="list-group" id="checklistColumn3"></ul>
-                                    </div>
+            <div class="modal-body">
+                <form id="checklistForm">
+                    <div class="row">
+                        <!-- Lista de verificación en 3 columnas -->
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul class="list-group" id="checklistColumn1"></ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-group" id="checklistColumn2"></ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="list-group" id="checklistColumn3"></ul>
                                 </div>
                             </div>
-
-                            <!-- Sección para elementos agregados -->
-                            <div class="col-md-4">
-                                <h5>Elementos Agregados</h5>
-                                <ul class="list-group" id="checklistAdded"></ul>
-                            </div>
                         </div>
 
-                        <!-- Sección para agregar elementos dinámicamente -->
-                        <div class="mt-3">
-                            <label class="form-label">Customize Numbered Stock Certificate</label>
-                            <div class="input-group mb-2">
-                                <input type="text" id="einText" class="form-control" placeholder="Escribe el contenido">
-                                <button type="button" class="btn btn-success" onclick="agregarItem('Customize Numbered Stock Certificate', 'einText')">+</button>
-                            </div>
-                            
-                            <label class="form-label">Agregar Customizable Numbered Stock Certificate</label>
-                            <div class="input-group">
-                                <input type="text" id="stockText" class="form-control" placeholder="Escribe el contenido">
-                                <button type="button" class="btn btn-success" onclick="agregarItem('Customizable Numbered Stock Certificate', 'stockText')">+</button>
-                            </div>
+                        <!-- Sección para elementos agregados -->
+                        <div class="col-md-4">
+                            <h5>Elementos Agregados</h5>
+                            <ul class="list-group" id="checklistAdded"></ul>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="guardarBtn">Guardar Selección</button>
-                </div>
+                    </div>
+
+                    <!-- Sección para agregar elementos dinámicamente -->
+                    <div class="mt-3">
+                        <label class="form-label">Customize Numbered Stock Certificate</label>
+                        <div class="input-group mb-2">
+                            <input type="text" id="einText" class="form-control" placeholder="Escribe el contenido">
+                            <button type="button" class="btn btn-success" onclick="agregarItem('Customize Numbered Stock Certificate', 'einText')">+</button>
+                        </div>
+
+                        <label class="form-label">Agregar Customizable Numbered Stock Certificate</label>
+                        <div class="input-group">
+                            <input type="text" id="stockText" class="form-control" placeholder="Escribe el contenido">
+                            <button type="button" class="btn btn-success" onclick="agregarItem('Customizable Numbered Stock Certificate', 'stockText')">+</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="guardarBtn">Guardar Selección</button>
             </div>
         </div>
     </div>
+</div>
 
 <!-- Modal Egresos -->
 <div class="modal fade" id="egresoModal" tabindex="-1" aria-labelledby="egresoModalLabel" aria-hidden="true">
@@ -1878,7 +1886,6 @@ include_once "../controller/solicitudController.php";
 
 
 <script>
-
     const checklistItems = [
         "General and specific Delaware's Corporation - Advice / Consulting",
         "Letter of Delivery",
@@ -1945,70 +1952,65 @@ include_once "../controller/solicitudController.php";
         boton.parentElement.remove();
     }
 
-  function consultarPersonasPorSociedad(idSolicitud,tipocorporacion,idtiposociedad) {
-    console.log('🧪 ID recibido en consultarPersonasPorSociedad:', idSolicitud);
-    $.ajax({
-        url: '../controller/solicitudController.php',
-        method: 'POST',
-        data: {
-            accion: 'contarPersonasSociedad',
-            id_solicitud: idSolicitud
-        },
-        dataType: 'json',
-        success: function (respuesta) {
-            console.log('🔍 Respuesta de contarPersonasSociedad:', respuesta);
-            
-          
-            if (respuesta.cant_personas >= 2 && respuesta.tipo_sociedad == '5') {
-                // LLCs
-                $('#divTipoCorporacion').show(); 
-                $('#tipoCorporacion').html(`
-                    <option value="llc 1065">LLC 1065</option>
-                    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
-                    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
-                `);
-            } else if (respuesta.cant_personas >= 2 && (respuesta.tipo_sociedad == '6' || respuesta.tipo_sociedad == '7')) {
-                // Corporaciones Regulares
-                $('#divTipoCorporacion').show();
-                $('#tipoCorporacion').html(`
-                    <option value="1120">Corporación Regular C (1120)</option>
-                    <option value="1065">Corporación Colectiva (1065)</option>
-                    <option value="1120-S">S Corporación (1120-S)</option>
-                `);
-            } else {
-                // Caso general: ocultar y mostrar "No aplica"
-                $('#divTipoCorporacion').hide();
-                $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
+    function consultarPersonasPorSociedad(idSolicitud, tipocorporacion, idtiposociedad) {
+        // console.log('🧪 ID recibido en consultarPersonasPorSociedad:', idSolicitud);
+        $.ajax({
+            url: '../controller/solicitudController.php',
+            method: 'POST',
+            data: {
+                accion: 'contarPersonasSociedad',
+                id_solicitud: idSolicitud
+            },
+            dataType: 'json',
+            success: function(respuesta) {
+                if (respuesta.cant_personas >= 2 && respuesta.tipo_sociedad == '5') {
+                    // LLCs
+                    $('#divTipoCorporacion').show();
+                    $('#tipoCorporacion').html(`
+                        <option value="llc 1065">LLC 1065</option>
+                        <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
+                        <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
+                    `);
+                } else if (respuesta.cant_personas >= 2 && (respuesta.tipo_sociedad == '6' || respuesta.tipo_sociedad == '7')) {
+                    // Corporaciones Regulares
+                    $('#divTipoCorporacion').show();
+                    $('#tipoCorporacion').html(`
+                        <option value="1120">Corporación Regular C (1120)</option>
+                        <option value="1065">Corporación Colectiva (1065)</option>
+                        <option value="1120-S">S Corporación (1120-S)</option>
+                    `);
+                } else {
+                    // Caso general: ocultar y mostrar "No aplica"
+                    $('#divTipoCorporacion').hide();
+                    $('#tipoCorporacion').html(`<option value="no">No aplica</option>`);
+                }
+                if (tipocorporacion) {
+                    $('#tipoCorporacion').val(tipocorporacion);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error AJAX:', error);
             }
-            if(tipocorporacion){ 
-                $('#tipoCorporacion').val(tipocorporacion);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error AJAX:', error);
-        }
-    });
-
-
-}
+        });
+    }
 </script>
 <script>
-  $('#archivoInput').on('change', function () {
-    // Obtener el nombre del archivo
-    let fileName = $(this).val().split('\\').pop();
-    // Reemplazar el texto del label con el nombre del archivo
-    $(this).next('.custom-file-label').html(fileName);
-  });
+    $('#archivoInput').on('change', function() {
+        // Obtener el nombre del archivo
+        let fileName = $(this).val().split('\\').pop();
+        // Reemplazar el texto del label con el nombre del archivo
+        $(this).next('.custom-file-label').html(fileName);
+    });
 </script>
 <script>
     $(document).ready(function() {
-        
+
         $(document).on("click", ".btnVerActas", function() {
             $.ajax({
                 url: '../controller/obtenerActasController.php',
                 type: 'POST',
-                data: { 
-                    action: 'obtenerActas', 
+                data: {
+                    action: 'obtenerActas',
                     id_solicitud: '<?php echo $id_revisar_solicitud; ?>'
                 },
                 dataType: 'json',
@@ -2033,11 +2035,11 @@ include_once "../controller/solicitudController.php";
                         });
                         $("#tablaPlantillas tbody").html(filas);
                     } else {
-                        if(response.message=='Acta no encontrada'){
+                        if (response.message == 'Acta no encontrada') {
                             alert('No se encontraron actas');
-                        }else{
+                        } else {
                             alert("Error: " + response.message);
-                        } 
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
@@ -2045,15 +2047,15 @@ include_once "../controller/solicitudController.php";
                 }
             });
         });
-        
-        
+
+
         // Evento para abrir el modal con el contenido HTML
         $(document).on("click", ".ver-html", function() {
             $("#id_plantilla").val($(this).data("id")); // Guardar el ID de la plantilla en un input oculto
             let contenidoHTML = $(this).data("html");
             $("#editor").empty(); // Establecer el contenido del editor
             // Destruir instancia anterior si existe
-            if (tinymce.get('editor')) { 
+            if (tinymce.get('editor')) {
                 tinymce.get('editor').destroy();
             }
             tinymce.init({
@@ -2075,19 +2077,20 @@ include_once "../controller/solicitudController.php";
                         margin-bottom: 10px;
                     }
                 `,
-                setup: function (editor) {
-                    editor.on('init', function () {
+                setup: function(editor) {
+                    editor.on('init', function() {
                         // Vaciar antes de establecer el contenido
                         editor.setContent(''); // Limpiar el contenido del editor
                         editor.setContent(contenidoHTML);
                         // Insertar visualmente las líneas que marcan el final de cada página
                         updatePageMarkers(editor);
                     });
-                    editor.on('input', function () {
+                    editor.on('input', function() {
                         updatePageMarkers(editor);
                     });
                 }
             });
+
             function updatePageMarkers(editor) {
                 let allMarkers = editor.getBody().querySelectorAll(".page-end");
                 allMarkers.forEach(marker => marker.remove()); // Eliminar los marcadores antiguos
@@ -2099,7 +2102,7 @@ include_once "../controller/solicitudController.php";
                     let pageMarker = document.createElement("div");
                     pageMarker.className = "page-end";
                     pageMarker.style.position = "absolute";
-                    pageMarker.style.top = `${i * pageHeight}px`; 
+                    pageMarker.style.top = `${i * pageHeight}px`;
                     editor.getBody().appendChild(pageMarker);
                 }
             }
@@ -2108,26 +2111,24 @@ include_once "../controller/solicitudController.php";
         $(document).on("click", "#guardarhtml", function() {
             $("#editor").each(function() {
                 var contenidoHTML = tinymce.get('editor').getContent();
-                var idPlantilla   = $("#id_plantilla").val(); // Obtener el ID de la plantilla del input oculto
-                console.log(contenidoHTML);
-
-                if(contenidoHTML.trim() === "") {
+                var idPlantilla = $("#id_plantilla").val(); // Obtener el ID de la plantilla del input oculto
+                if (contenidoHTML.trim() === "") {
                     alert("El contenido HTML no puede estar vacío.");
                     return;
                 }
 
-                if(idPlantilla.trim() === "") {
+                if (idPlantilla.trim() === "") {
                     alert("El ID de la plantilla no puede estar vacío.");
                     return;
-                } 
-                
+                }
+
                 $.ajax({
                     url: '../controller/obtenerActasController.php',
                     type: 'POST',
-                    data: { 
-                        action: 'actualizarHtml', 
-                        contenido_html: contenidoHTML, 
-                        id_plantilla: idPlantilla 
+                    data: {
+                        action: 'actualizarHtml',
+                        contenido_html: contenidoHTML,
+                        id_plantilla: idPlantilla
                     },
                     dataType: 'json',
                     success: function(response) {
@@ -2150,8 +2151,8 @@ include_once "../controller/solicitudController.php";
             $.ajax({
                 url: '../controller/obtenerActasController.php',
                 type: 'POST',
-                data: { 
-                    action: 'generarPdf',  
+                data: {
+                    action: 'generarPdf',
                     // id_solicitud: id_solicitud 
                     id_solicitud: $(this).data("id")
                 },
@@ -2173,135 +2174,135 @@ include_once "../controller/solicitudController.php";
 </script>
 
 <script>
-    var selectSociedades        = [];
-    var selectMiembros          = [];
-    var selectClientes          = [];
+    var selectSociedades = [];
+    var selectMiembros = [];
+    var selectClientes = [];
     var selectSociosExtranjeros = [];
 </script>
 
 <script>
-    function cargarPersonas(selectElement,idSeleccionado = null,personaIndex = null) {
-            // alert(selectElement + ' # ' + idSeleccionado + ' # ' + personaIndex);
-            $.ajax({
-                url: '../controller/sociedadController.php',
-                type: 'GET',
-                data: {
-                    accion: 'getSociedades',
-                    idSolicitud: '<?php echo $id_revisar_solicitud; ?>'
-                },
-                dataType: 'json',
-                success: function(data) {
-                    // console.log('Respuesta del servidor:', data); // Depuración
-                    selectElement.empty();
-                    selectElement.append('<option value="">SELECCIONE SOCIO</option>');
-                    $.each(data, function(index, item) {
-                        var idSociedadItem;
-                        if (item.uuid === null && item.idcliente === 0 && item.idextranjero === 0) {
-                            idSociedadItem = item.id_sociedad;
-                        } else if (item.uuid === null && item.id_sociedad === 0 && item.idextranjero === 0) {
-                            idSociedadItem = item.idcliente;
-                        } else if (item.id_sociedad === 0 && item.idcliente === 0 && item.idextranjero === 0) {
-                            idSociedadItem = item.uuid;
-                        }else if(item.uuid === null && item.id_sociedad === 0 && item.idcliente === 0){
-                            idSociedadItem = item.idextranjero;
-                        }
+    function cargarPersonas(selectElement, idSeleccionado = null, personaIndex = null) {
+        // alert(selectElement + ' # ' + idSeleccionado + ' # ' + personaIndex);
+        $.ajax({
+            url: '../controller/sociedadController.php',
+            type: 'GET',
+            data: {
+                accion: 'getSociedades',
+                idSolicitud: '<?php echo $id_revisar_solicitud; ?>'
+            },
+            dataType: 'json',
+            success: function(data) {
+                selectElement.empty();
+                selectElement.append('<option value="">SELECCIONE SOCIO</option>');
+                $.each(data, function(index, item) {
+                    var idSociedadItem;
+                    if (item.uuid === null && item.idcliente === 0 && item.idextranjero === 0) {
+                        idSociedadItem = item.id_sociedad;
+                    } else if (item.uuid === null && item.id_sociedad === 0 && item.idextranjero === 0) {
+                        idSociedadItem = item.idcliente;
+                    } else if (item.id_sociedad === 0 && item.idcliente === 0 && item.idextranjero === 0) {
+                        idSociedadItem = item.uuid;
+                    } else if (item.uuid === null && item.id_sociedad === 0 && item.idcliente === 0) {
+                        idSociedadItem = item.idextranjero;
+                    }
 
-                        // var tipo = "<span style="color: red;">${tipo}</span>";
-                        var tipoTexto, tipoColor;
-                        if (item.tipo === 'sociedad') {
-                            tipoTexto = "Sociedad";
-                            tipoColor = "blue";
-                        } else if (item.tipo === 'socio_extranjero') {
-                            tipoTexto = "Socio extranjero";
-                            tipoColor = "orange";
-                        }else if(item.tipo === 'miembro'){
-                            tipoTexto = "Cliente";
-                            tipoColor = "purple";
-                        }
-                        
-                        // Verificar si es la opción preseleccionada
-                        var selected = (idSeleccionado && idSeleccionado == idSociedadItem) ? 'selected' : '';
-                        // selectElement.append(`<option value="${idSociedadItem}" ${selected}  data-id="${item.tipo}" data-description="<span style='color:${tipoColor}; font-weight: bold;'>${item.nombre}</option>`);
+                    // var tipo = "<span style="color: red;">${tipo}</span>";
+                    var tipoTexto, tipoColor;
+                    if (item.tipo === 'sociedad') {
+                        tipoTexto = "Sociedad";
+                        tipoColor = "blue";
+                    } else if (item.tipo === 'socio_extranjero') {
+                        tipoTexto = "Socio extranjero";
+                        tipoColor = "orange";
+                    } else if (item.tipo === 'miembro') {
+                        tipoTexto = "Cliente";
+                        tipoColor = "purple";
+                    }
 
-                        // El color se coloca en data-description en vez de dentro de <option>
-                        // Tail Select usa data-description para mostrar el color dentro del menú desplegable.
-                        selectElement.append(`
+                    // Verificar si es la opción preseleccionada
+                    var selected = (idSeleccionado && idSeleccionado == idSociedadItem) ? 'selected' : '';
+                    // selectElement.append(`<option value="${idSociedadItem}" ${selected}  data-id="${item.tipo}" data-description="<span style='color:${tipoColor}; font-weight: bold;'>${item.nombre}</option>`);
+
+                    // El color se coloca en data-description en vez de dentro de <option>
+                    // Tail Select usa data-description para mostrar el color dentro del menú desplegable.
+                    selectElement.append(`
                             <option value="${idSociedadItem}" ${selected} data-id="${item.tipo}" 
                                 data-description="<span style='color:${tipoColor}; font-weight: bold;'>${tipoTexto}</span>">
                                 ${item.nombre}
                             </option>
                         `);
 
-                        if(personaIndex !== null && personaIndex !== 'factura'){
-                            tail.select("#selectPersona" + personaIndex, {
-                                search: true,
-                                descriptions: true, // Activa la descripción con estilos
-                                hideSelected: true,
-                                hideDisabled: true,
-                                // multiLimit: 4,
-                                multiShowCount: false,
-                                multiContainer: true
-                            }).reload();
-                        }else if(personaIndex=='factura'){
-                            tail.select("#selectPersonaFactura", {
-                                search: true,
-                                descriptions: true, // Activa la descripción con estilos
-                                hideSelected: true,
-                                hideDisabled: true,
-                                // multiLimit: 4,
-                                multiShowCount: false,
-                                multiContainer: true
-                            }).reload();
-                        }else{
-                            tail.select("#selectPersona", {
-                                search: true,
-                                descriptions: true, // Activa la descripción con estilos
-                                hideSelected: true,
-                                hideDisabled: true,
-                                // multiLimit: 4,
-                                multiShowCount: false,
-                                multiContainer: true
-                            }).reload();
-                        }
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error en la solicitud AJAX:', status, error);
-                    console.log('Respuesta del servidor:', xhr.responseText);
-                    alert('Error al cargar las opciones');
-                }
-            });
-        }
+                    if (personaIndex !== null && personaIndex !== 'factura') {
+                        tail.select("#selectPersona" + personaIndex, {
+                            search: true,
+                            descriptions: true, // Activa la descripción con estilos
+                            hideSelected: true,
+                            hideDisabled: true,
+                            // multiLimit: 4,
+                            multiShowCount: false,
+                            multiContainer: true
+                        }).reload();
+                    } else if (personaIndex == 'factura') {
+                        tail.select("#selectPersonaFactura", {
+                            search: true,
+                            descriptions: true, // Activa la descripción con estilos
+                            hideSelected: true,
+                            hideDisabled: true,
+                            // multiLimit: 4,
+                            multiShowCount: false,
+                            multiContainer: true
+                        }).reload();
+                    } else {
+                        tail.select("#selectPersona", {
+                            search: true,
+                            descriptions: true, // Activa la descripción con estilos
+                            hideSelected: true,
+                            hideDisabled: true,
+                            // multiLimit: 4,
+                            multiShowCount: false,
+                            multiContainer: true
+                        }).reload();
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', status, error);
+                console.log('Respuesta del servidor:', xhr.responseText);
+                alert('Error al cargar las opciones');
+            }
+        });
+    }
 </script>
 
 <script>
     $(document).ready(function() {
 
-        $('#btnCerrarModalSociedad').click(function () {
+        $('#btnCerrarModalSociedad').click(function() {
             $('#modalCrearSociedad').modal('hide');
         });
 
-        $('#btnCerrarModalSociedad2').click(function () {
+        $('#btnCerrarModalSociedad2').click(function() {
             $('#modalCrearSociedad').modal('hide');
         });
 
-        function cargarTipoSociedad(id,tipo){
+        function cargarTipoSociedad(id, tipo) {
             $.ajax({
                 url: '../controller/tipoSociedadController.php', // Cambia esto por la ruta correcta a tu controlador
                 type: 'POST',
-                data: { action: 'listarTipoSociedad' },
+                data: {
+                    action: 'listarTipoSociedad'
+                },
                 dataType: 'json',
                 success: function(response) {
-                    // console.log(response);
                     var selectTipoSociedad = $('#selectTipoSociedad');
                     selectTipoSociedad.empty();
-                    if(id !== null){
+                    if (id !== null) {
                         selectTipoSociedad.append(`<option value="${id}" selected>${tipo}</option>`);
-                    }else{
+                    } else {
                         selectTipoSociedad.append('<option value="">Selecciona un tipo de sociedad</option>');
                     }
                     $.each(response, function(index, tipoSociedad) {
-                        if(id !== tipoSociedad.id_tipo_sociedad){
+                        if (id !== tipoSociedad.id_tipo_sociedad) {
                             selectTipoSociedad.append(`<option value="${tipoSociedad.id_tipo_sociedad}">${tipoSociedad.nombre_tipo_sociedad}</option>`);
                         }
                     });
@@ -2312,7 +2313,7 @@ include_once "../controller/solicitudController.php";
             });
         }
 
-        function cargarEstados(estadosSeleccionados = []){
+        function cargarEstados(estadosSeleccionados = []) {
             $.ajax({
                 url: '../controller/estadosController.php',
                 type: 'GET',
@@ -2321,16 +2322,15 @@ include_once "../controller/solicitudController.php";
                 },
                 dataType: 'json',
                 success: function(data) {
-                    // console.log('Respuesta del servidor de ESTADOS:', data); // Depuración
                     // Cargar los estados en el select multiples
                     var selectEstado = $('#selectEstado');
-                    selectEstado.empty(); 
+                    selectEstado.empty();
                     // selectEstado.append('<option value="">Seleccionar Estado/Pais</option>');
-                    
-                    $.each(data, function(index, item) { 
+
+                    $.each(data, function(index, item) {
                         var selected = estadosSeleccionados.includes(item.id_estado) ? 'selected' : '';
-                
-                        selectEstado.append('<option value="' + item.id_estado + '" '+selected+' >' + item.estado + '</option>');
+
+                        selectEstado.append('<option value="' + item.id_estado + '" ' + selected + ' >' + item.estado + '</option>');
                     });
                     // Inicializar el select con tail.select
                     tail.select("#selectEstado", {
@@ -2349,7 +2349,7 @@ include_once "../controller/solicitudController.php";
             });
         }
 
-        $('.crearSociedad').click(function () {
+        $('.crearSociedad').click(function() {
 
             // Limpiar el contenedor de personas antes de agregar nuevas
             // $('#conjunto_sociedades').val('');
@@ -2374,7 +2374,7 @@ include_once "../controller/solicitudController.php";
             //     alert('El select NO existe 0');
             // }
 
-            
+
             // if ($('#selectPersona').length) {
             //     alert('El select existe 1');
             // } else {
@@ -2393,8 +2393,8 @@ include_once "../controller/solicitudController.php";
             // $('#selectPersona' + 2).remove();
 
 
-            var personasContainer = $('#personasContainer .row'); 
-            if(personasContainer.length > 0){
+            var personasContainer = $('#personasContainer .row');
+            if (personasContainer.length > 0) {
                 // alert('personasContainer');
                 for (var i = 0; i < personasContainer.length; i++) {
                     personasContainer[i].remove();
@@ -2402,7 +2402,7 @@ include_once "../controller/solicitudController.php";
                 $('#personasContainer .row').find('select').first().val('');
                 $('#personasContainer .row').find('select').first().remove();
                 // $('#personasContainer .row').find('select').first().empty(); 
-                
+
                 // if ($('#selectPersona').length) {
                 //     alert('El select existe 3');
                 // } else {
@@ -2439,19 +2439,19 @@ include_once "../controller/solicitudController.php";
             var primerSelectSociedades = $('#personasContainer').find('select').last(); // Seleccionar el nuevo select
             cargarPersonas(primerSelectSociedades);
 
-            
+
             // $('#personasContainer .row').find('select').first().empty();
             // alert($('#personasContainer .row').find('select').first().val());
 
-            cargarTipoSociedad(null,null);
+            cargarTipoSociedad(null, null);
             cargarEstados();
-            
+
             divActivarSociedad = $('#divActivarSociedad');
             divActivarSociedad.hide();
             $('#activarSociedad').prop('checked', true);
 
             // Limpiar el contenedor de personas antes de agregar nuevas
-            if($('#idSociedad').val() !== ''){
+            if ($('#idSociedad').val() !== '') {
                 $('.selectPersona').empty();
             }
             $('#idSociedad').val('');
@@ -2468,14 +2468,14 @@ include_once "../controller/solicitudController.php";
             $('#modalCrearSociedad .modal-title').text('Crear Sociedad');
             $('#modalCrearSociedad .modal-dialog').removeAttr('id', 'modal_nuevo_servicos');
             $('#modalCrearSociedad').modal('show');
-            
+
         });
 
         let checklistModal = document.getElementById("checklistModal");
 
-        checklistModal.addEventListener("hidden.bs.modal", function () {
+        checklistModal.addEventListener("hidden.bs.modal", function() {
             // alert('cerrando modal');
-            let checklistList = document.getElementById("checklistItems"); 
+            let checklistList = document.getElementById("checklistItems");
 
             // 🔹 1️⃣ Desmarcar todos los checkboxes
             // checklistList.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
@@ -2487,28 +2487,25 @@ include_once "../controller/solicitudController.php";
         });
         let idSolicituduuid;
         let tipocorporacion;
-        $('.btnVerDetalles').click(function () {
+        $('.btnVerDetalles').click(function() {
 
             // alert($(this).data('estadopais'));
-            var estadopais =  $(this).data('estadopais');
-            console.log(estadopais.map(Number));
+            var estadopais = $(this).data('estadopais');
             estadopais = estadopais.map(Number);
             cargarEstados(estadopais);
-            
+
 
             $('#divActivarSociedad').show();
             $('#activarSociedad').prop('checked', false);
 
             // Obtener datos de la sociedad desde los atributos del botón
             var nombreSociedad = $(this).data('nombre');
-            var personas       = $(this).data('personas');
+            var personas = $(this).data('personas');
             // Llenar el campo del nombre de la sociedad
             $('#inputNombreSociedad').val(nombreSociedad);
             $('#idSociedad').val($(this).data('id'));
             document.getElementById('declararSociedad').setAttribute('data-id_solicitudUUID', $(this).data('id'));
-                // console.log('uuid1=> ',document.getElementById("declararSociedad").dataset.id_solicitud);
-
-            idSolicituduuid = null;   
+            idSolicituduuid = null;
             idSolicituduuid = $(this).data('id');
             tipocorporacion = null;
             tipocorporacion = $(this).data('tipocorporacion') == null ? null : $(this).data('tipocorporacion');
@@ -2522,36 +2519,36 @@ include_once "../controller/solicitudController.php";
             if ($(this).data('declararsociedad') == 'on') {
                 $('#declararSociedadTexto').text('Declarando');
                 // Si idtiposociedad es igual a 5 ejcutar la funcion consultarPersonasPorSociedad
-                consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
+                consultarPersonasPorSociedad(idSolicituduuid, tipocorporacion, idtiposociedad); // Cargar las personas de la sociedad
             } else {
                 $('#declararSociedadTexto').text('No esta Declarando');
                 $('#divTipoCorporacion').hide();
             }
             // Cuando el check declararSociedad cambie de valor, cambiar el texto
-            $('#declararSociedad').change(function() { 
+            $('#declararSociedad').change(function() {
                 if ($(this).is(':checked')) {
                     $('#declararSociedadTexto').text('Declarando');
-                        // Mostrar el select y cargar opciones C y S
-                        //$('#divTipoCorporacion').show();
-                       // $('#tipoCorporacion').html(`
-                        //    <option value="LLL 1065">LLC 1065</option>
-                        //    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
-                        //    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
-                        //`);
-                        // const idSolicituduuid = $(this).data('id_solicitudUUID');
-                        // consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion); 
-                        consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion,idtiposociedad); // Cargar las personas de la sociedad
+                    // Mostrar el select y cargar opciones C y S
+                    //$('#divTipoCorporacion').show();
+                    // $('#tipoCorporacion').html(`
+                    //    <option value="LLL 1065">LLC 1065</option>
+                    //    <option value="Corporacion  C  8832">LLC Como Corporacion  C  8832 Para Eleccion</option>
+                    //    <option value="Corporacion  S  2553">LLC Como Corporacion  S  2553 Para Eleccion</option>
+                    //`);
+                    // const idSolicituduuid = $(this).data('id_solicitudUUID');
+                    // consultarPersonasPorSociedad(idSolicituduuid,tipocorporacion); 
+                    consultarPersonasPorSociedad(idSolicituduuid, tipocorporacion, idtiposociedad); // Cargar las personas de la sociedad
                 } else {
-                        $('#declararSociedadTexto').text('No está Declarando');
-                        $('#divTipoCorporacion').hide();
-                        $('#tipoCorporacion').html(`
+                    $('#declararSociedadTexto').text('No está Declarando');
+                    $('#divTipoCorporacion').hide();
+                    $('#tipoCorporacion').html(`
                             <option value="no">No aplica</option>
                         `);
                 }
             });
             // alert($(this).data('tiposociedad'));
 
-            var tiposociedad   = $(this).data('tiposociedad')   == null ? null : $(this).data('tiposociedad');
+            var tiposociedad = $(this).data('tiposociedad') == null ? null : $(this).data('tiposociedad');
 
             cargarTipoSociedad(idtiposociedad, tiposociedad);
 
@@ -2576,7 +2573,7 @@ include_once "../controller/solicitudController.php";
             }
 
             // Validar si realmente es un array antes de usar forEach
-            var selectedUUIDs  = [];
+            var selectedUUIDs = [];
             var selectedUUIDs2 = [];
             var selectedUUIDs3 = [];
             var selectedUUIDs4 = [];
@@ -2607,8 +2604,8 @@ include_once "../controller/solicitudController.php";
                     // Cargar las opciones en el select recién agregado y preseleccionar la persona actual
                     var nuevoSelect = $('#personasContainer').find('select').last();
                     cargarPersonas(nuevoSelect, persona.id, personaIndex);
-                    
-                    if(persona.tipo === 'cliente'){
+
+                    if (persona.tipo === 'cliente') {
                         $('#conjunto_clientes').val(persona.id);
                     }
 
@@ -2618,7 +2615,7 @@ include_once "../controller/solicitudController.php";
                         selectedUUIDs2.push(persona.id);
                     } else if (persona.tipo == 'cliente') {
                         selectedUUIDs3.push(persona.id);
-                    }else if (persona.tipo == 'socio_extranjero') {
+                    } else if (persona.tipo == 'socio_extranjero') {
                         selectedUUIDs4.push(persona.id);
                     }
 
@@ -2631,7 +2628,7 @@ include_once "../controller/solicitudController.php";
                 console.error("Error: personas no es un array", personas);
             }
 
-			// Destruir la tabla si ya existe
+            // Destruir la tabla si ya existe
             if ($.fn.DataTable.isDataTable('#documentosAdjuntosxSociedad')) {
                 $('#documentosAdjuntosxSociedad').DataTable().clear().destroy();
             }
@@ -2647,10 +2644,10 @@ include_once "../controller/solicitudController.php";
                 },
                 dataType: 'json',
                 success: function(data) {
-					let nuevoDocumento = '';
+                    let nuevoDocumento = '';
                     $.each(data, function(index, item) {
                         var numero_registro = item.numero_registro === null ? 'N/A' : item.numero_registro;
-                        var fecha_entrega   = item.fecha_entrega === null ? 'N/A' : item.fecha_entrega;
+                        var fecha_entrega = item.fecha_entrega === null ? 'N/A' : item.fecha_entrega;
                         nuevoDocumento += `
                             <tr>
                                 <td>${item.create_at}</td>
@@ -2664,10 +2661,10 @@ include_once "../controller/solicitudController.php";
                             </tr>
                         `;
                     });
-					$('#documentosSociedadBody').append(nuevoDocumento); 
+                    $('#documentosSociedadBody').append(nuevoDocumento);
                     $("#documentosAdjuntosxSociedad").DataTable({
                         "destroy": true,
-                        "responsive": true, 
+                        "responsive": true,
                         "lengthChange": true,
                         "autoWidth": false,
                         "buttons": ["excel", "pdf"]
@@ -2684,8 +2681,8 @@ include_once "../controller/solicitudController.php";
             $.ajax({
                 url: '../controller/obtenerActasController.php',
                 type: 'POST',
-                data: { 
-                    action: 'obtenerActas', 
+                data: {
+                    action: 'obtenerActas',
                     id_solicitud: '<?php echo $id_revisar_solicitud; ?>',
                     idSociedad: idSociedad,
                 },
@@ -2694,7 +2691,6 @@ include_once "../controller/solicitudController.php";
                     if (response.status === "success") {
                         let filas = "";
                         response.data.forEach(function(item, index) {
-                            // console.log('Item del reporte:', item);
                             filas += `<tr>
                                 <td>${item.createat}</td>
                                 <td>
@@ -2711,13 +2707,13 @@ include_once "../controller/solicitudController.php";
                         });
                         $("#reportesSociedadTabla tbody").html(filas);
                     } else {
-                        if(response.message=='Acta no encontrada'){
+                        if (response.message == 'Acta no encontrada') {
                             let filas = "";
                             filas += `<tr>
                                 <td colspan="3">No se encontraron actas</td>
                             </tr>`;
                             $("#reportesSociedadTabla tbody").html(filas);
-                        }else{
+                        } else {
                             alert("Error: " + response.message);
                         }
                     }
@@ -2730,12 +2726,12 @@ include_once "../controller/solicitudController.php";
             // Evento para abrir el modal con el contenido HTML
             $(document).on("click", ".ver-htmlSociedad", function(event) {
                 event.preventDefault(); // Prevent the default action
-                $("#id_plantilla").val($(this).data("id")); 
-                let contenidoHTML = $(this).data("html"); 
+                $("#id_plantilla").val($(this).data("id"));
+                let contenidoHTML = $(this).data("html");
                 // $("#contenidoHTML").html(contenidoHTML); // Use .html() to replace content instead of .append()
                 $("#editor").empty(); // Establecer el contenido del editor
                 // Destruir instancia anterior si existe
-                if (tinymce.get('editor')) {  
+                if (tinymce.get('editor')) {
                     tinymce.get('editor').destroy();
                 }
                 tinymce.init({
@@ -2757,19 +2753,20 @@ include_once "../controller/solicitudController.php";
                             margin-bottom: 10px;
                         }
                     `,
-                    setup: function (editor) {
-                        editor.on('init', function () {
+                    setup: function(editor) {
+                        editor.on('init', function() {
                             // Vaciar antes de establecer el contenido
                             editor.setContent(''); // Limpiar el contenido del editor
                             editor.setContent(contenidoHTML);
                             // Insertar visualmente las líneas que marcan el final de cada página
                             updatePageMarkers(editor);
                         });
-                        editor.on('input', function () {
+                        editor.on('input', function() {
                             updatePageMarkers(editor);
                         });
                     }
                 });
+
                 function updatePageMarkers(editor) {
                     let allMarkers = editor.getBody().querySelectorAll(".page-end");
                     allMarkers.forEach(marker => marker.remove()); // Eliminar los marcadores antiguos
@@ -2781,7 +2778,7 @@ include_once "../controller/solicitudController.php";
                         let pageMarker = document.createElement("div");
                         pageMarker.className = "page-end";
                         pageMarker.style.position = "absolute";
-                        pageMarker.style.top = `${i * pageHeight}px`; 
+                        pageMarker.style.top = `${i * pageHeight}px`;
                         editor.getBody().appendChild(pageMarker);
                     }
                 }
@@ -2793,8 +2790,8 @@ include_once "../controller/solicitudController.php";
                 $.ajax({
                     url: '../controller/obtenerActasController.php',
                     type: 'POST',
-                    data: { 
-                        action: 'generarPdf', 
+                    data: {
+                        action: 'generarPdf',
                         id_solicitud: '<?php echo $id_revisar_solicitud; ?>',
                         idSociedad: idSociedad,
                     },
@@ -2818,22 +2815,21 @@ include_once "../controller/solicitudController.php";
             $('#modalCrearSociedad .modal-dialog').attr('id', 'modal_nuevo_servicos');
             $('#modalCrearSociedad').modal('show');
 
-            
-            document.getElementById('btnCheckList').addEventListener('click', function () {
-                var inputIdSociedad = $('#inputIdSociedad_'+idSociedad).val();
+
+            document.getElementById('btnCheckList').addEventListener('click', function() {
+                var inputIdSociedad = $('#inputIdSociedad_' + idSociedad).val();
                 // alert(inputIdSociedad);
                 $.ajax({
                     url: '../controller/obtenerActasController.php',
                     type: 'POST',
-                    data: { 
-                        action: 'selectChecklist', 
+                    data: {
+                        action: 'selectChecklist',
                         id_solicitud: '<?php echo $id_revisar_solicitud; ?>',
                         idSociedad: inputIdSociedad,
                     },
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response.data);
-                        let checklistList  = document.getElementById("checklistItems");
+                        let checklistList = document.getElementById("checklistItems");
                         let columns = [
                             document.getElementById("checklistColumn1"),
                             document.getElementById("checklistColumn2"),
@@ -2842,7 +2838,7 @@ include_once "../controller/solicitudController.php";
                         let checklistAdded = document.getElementById("checklistAdded");
                         if (response.status === "success") {
                             let checklistItems = JSON.parse(response.data[0].datos);
-                            
+
                             // Limpiar solo los elementos dinámicos agregados anteriormente
                             checklistAdded.innerHTML = "";
 
@@ -2868,13 +2864,13 @@ include_once "../controller/solicitudController.php";
                                 let itemEncontrado = checklistItems.find(item => item.text.trim() === texto);
                                 if (itemEncontrado && itemEncontrado.checked === "true") {
                                     checkbox.checked = true;
-                                }else{
+                                } else {
                                     checkbox.checked = false;
                                 }
                             });
 
-                            checklistItems.forEach(item => { 
-                                if (!textosEnLista.has(item.text.trim())) { 
+                            checklistItems.forEach(item => {
+                                if (!textosEnLista.has(item.text.trim())) {
                                     let li = document.createElement("li");
                                     li.classList.add("list-group-item", "dynamic-item");
                                     li.innerHTML = `<div>
@@ -2889,11 +2885,10 @@ include_once "../controller/solicitudController.php";
                             // alert("Error: " + response.message);
                             checklistAdded.innerHTML = "";
                             // checklistList.querySelectorAll(".dynamic-item").forEach(item => item.remove());
-                            $('#checklistItems input[type="checkbox"]').each(function () {
+                            $('#checklistItems input[type="checkbox"]').each(function() {
                                 if ($(this).prop('checked')) { // Si está marcado 
-                                    console.log('Desmarcando:', $(this).parent().text().trim());
                                     $(this).prop('checked', false); // Lo desmarca
-                                }  
+                                }
                             });
                         }
                     },
@@ -2904,11 +2899,11 @@ include_once "../controller/solicitudController.php";
             });
             // Agregar el boton para mostrar el PDF de la lista de chequeo
             $('#pdf-lista-check').empty();
-            let btnPDF = "<a class='btn btn-danger' href='pdf_listas_verificacion_sociedades.php?idSolicitud=<?php echo $id_revisar_solicitud; ?>&sociedad="+$('#inputIdSociedad_'+idSociedad).val()+"' target='_blank' rel='noopener noreferrer'>PDF</a>";
+            let btnPDF = "<a class='btn btn-danger' href='pdf_listas_verificacion_sociedades.php?idSolicitud=<?php echo $id_revisar_solicitud; ?>&sociedad=" + $('#inputIdSociedad_' + idSociedad).val() + "' target='_blank' rel='noopener noreferrer'>PDF</a>";
             $('#pdf-lista-check').append(btnPDF);
 
             // <a href="pdf_listas_verificacion_sociedades.php" target="_blank" rel="noopener noreferrer"></a>
-                        
+
 
             // document.getElementById('guardarBtn').addEventListener('click', function () {
 
@@ -2960,26 +2955,16 @@ include_once "../controller/solicitudController.php";
             e.preventDefault(); // Previene el comportamiento por defecto del botón
             var datos = $('#frm_guardar_sociedad').serialize() + "&accion=guardarSociedad";
             var numeroSolicitud = $('#numeroSolicitud').val();
-            console.log(datos); // Verifica que los datos se están serializando correctamente
             $.ajax({
                 type: "POST",
                 url: "../controller/solicitudController.php",
                 data: datos,
                 success: function(r) {
-                    console.log(r); // Verifica la respuesta del servidor
-                    console.log('status=> ', r.status); // Verifica la respuesta del servidor
                     if (r.status == 'ok') {
                         alert("Persona Agregada con Exito :)");
-                        // window.location.href = "verSolicitud.php?numero_solicitud="+numeroSolicitud;
                     } else {
                         alert("Error al intentar registrar el cliente, intentar de nuevo");
                     }
-                    // if(r.resultado == 0) {
-                    //     alert("fallo :(");
-                    // }else{
-                    //     alert("Persona Agregada con Exito :)");
-                    //     // window.location.href = "registrarSolicitud.php";
-                    // }
                 },
                 error: function(xhr, status, error) {
                     console.error("Error en la solicitud:", status, error);
@@ -3025,7 +3010,6 @@ include_once "../controller/solicitudController.php";
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    console.log(response);
                     Swal.fire({
                         title: '¡Éxito!',
                         text: '¡File Saved Successfully!',
@@ -3060,16 +3044,16 @@ include_once "../controller/solicitudController.php";
 
     $(document).ready(function() {
 
-        $(".check-item").change(function () {
-            var clave     = $(this).data("clave");
+        $(".check-item").change(function() {
+            var clave = $(this).data("clave");
             var isChecked = $(this).is(":checked");
 
             // Habilitar o deshabilitar los inputs correspondientes
-            $("input[name='cantidad" + clave + "'], input[name='valor" + clave + "'], textarea[name='descripcionservicio" + clave + "']") 
+            $("input[name='cantidad" + clave + "'], input[name='valor" + clave + "'], textarea[name='descripcionservicio" + clave + "']")
                 .prop("disabled", !isChecked);
         });
-        
-            var campoPersonaFacturar = `
+
+        var campoPersonaFacturar = `
                 <div class="form-group row">
                     <div class="col-md-8">
                         <label for="selectPersona">Persona a facturar</label>
@@ -3079,9 +3063,9 @@ include_once "../controller/solicitudController.php";
                     </div>
                 </div>
             `;
-            $('#personaafacturar').append(campoPersonaFacturar);
-            var personaafacturar = $('#personaafacturar').find('select').last(); // Seleccionar el nuevo select
-            cargarPersonas(personaafacturar,null,'factura'); 
+        $('#personaafacturar').append(campoPersonaFacturar);
+        var personaafacturar = $('#personaafacturar').find('select').last(); // Seleccionar el nuevo select
+        cargarPersonas(personaafacturar, null, 'factura');
 
 
         // Cargar los select companySelect/empresas
@@ -3090,9 +3074,11 @@ include_once "../controller/solicitudController.php";
             $.ajax({
                 url: '../controller/empresasController.php',
                 type: 'POST',
-                data: { action: 'listarEmpresas' },
+                data: {
+                    action: 'listarEmpresas'
+                },
                 dataType: 'json',
-                success: function(response) { 
+                success: function(response) {
                     if (response.status === "success") {
                         response.data.forEach(function(company) {
                             companySelect.append(new Option(company.nombre_empresa, company.id_empresa));
@@ -3108,32 +3094,31 @@ include_once "../controller/solicitudController.php";
             // ver las empresas cuando cambia el select
             // companySelect.change(function() {
             //     var selectedCompany = $(this).val();
-            //     console.log("Empresa seleccionada:", selectedCompany); // Para depuración
             // });
         });
-        
+
         $('#btnInsertarFactura').click(function() {
             var datos = $('#billingForm').serialize();
             datos += "&accion=insertarFactura"; // Añadir acción específica para el controlador
-            console.log(datos); // Para depuración
             if ($('#selectPersonaFactura').val() === '') {
                 Swal.fire("Error", "Por favor, selecciona una persona a facturar.", "error");
                 return false; // Detener la ejecución si no se selecciona una persona
             }
-            if ($('#companySelect').val() === '') {  
+            if ($('#companySelect').val() === '') {
                 Swal.fire("Error", "Por favor, selecciona una compañia.", "error");
                 return;
             }
             if ($('#bankAccountSelect').val() === '') {
                 Swal.fire("Error", "Por favor, selecciona el banco", "error");
                 return false; // Detener la ejecución si no se ingresa una fecha
-            } if($('#invoiceNumberInput').val() === '') {
+            }
+            if ($('#invoiceNumberInput').val() === '') {
                 Swal.fire("Error", "Por favor, ingresa el Invoice Number.", "error");
                 return false; // Detener la ejecución si no se ingresa un número de factura
             }
 
             // Validar que el invoice number no exista
-            if ($('#divinvoicenumberencontrado').is(':visible')) { 
+            if ($('#divinvoicenumberencontrado').is(':visible')) {
                 Swal.fire("Error", "El Invoice Number ingresado ya existe.", "error");
                 return;
             }
@@ -3145,7 +3130,6 @@ include_once "../controller/solicitudController.php";
                 url: "../controller/solicitudController.php",
                 data: datos,
                 success: function(r) {
-                    console.log(r); // Para depuración
                     if (r.resultado == 0) {
                         alert("Fallo en la inserción de la factura.");
                     } else {
@@ -3171,12 +3155,6 @@ include_once "../controller/solicitudController.php";
                 },
                 dataType: 'json',
                 success: function(response) {
-
-                    console.log('===== 1');
-                    console.log(response);
-                    console.log('===== 2');
-                    
-
                     var serviciosDiv = $('.nuevos_servicios');
                     serviciosDiv.empty(); // Limpiar cualquier contenido previo
                     // Contenedor principal
@@ -3185,8 +3163,8 @@ include_once "../controller/solicitudController.php";
                     var counter = 0;
                     var counter_list = 1;
 
-                    var servicios = <?php echo $jsonNombre_servicio;?>;
-                    
+                    var servicios = <?php echo $jsonNombre_servicio; ?>;
+
                     $.each(response, function(index, servicio) {
                         // Si el contador es múltiplo de 15, cerrar la columna actual y abrir una nueva
                         if (counter % 15 === 0) {
@@ -3246,22 +3224,16 @@ include_once "../controller/solicitudController.php";
     $(document).ready(function() {
         $('#btnServiciosAdicionales').click(function() {
             var datos = $('#formulario-insertar-servicios').serialize() + "&accion=insertarServiciosAdicionales";
-            console.log(datos);
             $.ajax({
                 type: "POST",
                 url: "../controller/solicitudController.php",
                 data: datos,
                 success: function(r) {
-                    console.log(r);
-                    // Mostrar r que es un Array
-
-                    
                     if (r.resultado == 0) {
                         alert("fallo :(");
                     } else {
                         alert("Agregado con éxito");
                         window.location.href = 'verSolicitud.php?numero_solicitud=<?php echo $id_revisar_solicitud; ?>';
-
                     }
                 }
             });
@@ -3301,7 +3273,6 @@ include_once "../controller/solicitudController.php";
         if (idSolicitud === '') {
             console.error("idSolicitud no está definido.");
         } else {
-            // console.log("idSolicitud definido: ", idSolicitud);
             // Solicitud AJAX para obtener las actas
             // $.ajax({
             //     url: '../controller/obtenerActasController.php',
@@ -3312,7 +3283,6 @@ include_once "../controller/solicitudController.php";
             //     },
             //     dataType: 'json',
             //     success: function(response) {
-            //         console.log("Respuesta del servidor: ", response);
             //         if (response.status === 'success') {
             //             let acta = response.data;
             //             let tbody = $('#actas tbody');
@@ -3329,40 +3299,9 @@ include_once "../controller/solicitudController.php";
             //         `;
             //             tbody.append(row);
 
-            //             // Adjuntar manejadores de eventos
-            //             // $('.ver-html').on('click', function() {
-            //             //     let idSolicitud = $(this).data('id_solicitud');
-            //             //     console.log("Ver HTML solicitado para id_solicitud:", idSolicitud); // Asegúrate de que este valor es correcto
-
-            //             //     // Solicitud AJAX para obtener el contenido HTML
-            //             //     $.ajax({
-            //             //         url: '../controller/obtenerActasController.php',
-            //             //         method: 'POST',
-            //             //         data: {
-            //             //             action: 'obtenerActas',
-            //             //             id_solicitud: idSolicitud
-            //             //         },
-            //             //         dataType: 'json',
-            //             //         success: function(response) {
-            //             //             console.log("Respuesta de Ver HTML: ", response); // Depurar la respuesta
-
-            //             //             if (response.status === 'success') {
-            //             //                 $('#modalHtml .modal-body').html(response.data.contenido_html); // Debe ser 'response.html'
-            //             //                 $('#modalHtml').modal('show');
-            //             //             } else {
-            //             //                 alert(response.message);
-            //             //             }
-            //             //         },
-            //             //         error: function() {
-            //             //             alert('Error al obtener el contenido HTML.');
-            //             //         }
-            //             //     });
-            //             // });
-
             //             $('.generar-pdf').on('click', function() {
             //                 let idSolicitud = $(this).data('id_solicitud');
-            //                 console.log("Generar PDF solicitado para id_solicitud:", idSolicitud);
-
+            
             //                 // Solicitud AJAX para generar el PDF
             //                 $.ajax({
             //                     url: '../controller/obtenerActasController.php',
@@ -3373,10 +3312,8 @@ include_once "../controller/solicitudController.php";
             //                     },
             //                     dataType: 'json',
             //                     success: function(response) {
-            //                         console.log("Respuesta de Generar PDF: ", response);
-
+            
             //                         if (response.status === 'success') {
-            //                             // Abrir el PDF en una nueva pestaña
             //                             window.open(response.pdf_url, '_blank');
             //                         } else {
             //                             alert(response.message);
@@ -3402,12 +3339,10 @@ include_once "../controller/solicitudController.php";
 
     $('#guardarCambiosOrdenServicio').on('click', function() {
         var formData = $('#formActualizarOrdenServicio').serialize() + "&accion=ActualizarServicio"; // Serializar los datos del formulario
-        console.log('Datos que se envían:', formData);
         $.ajax({
             url: '../controller/solicitudController.php', // Ajusta la URL
             method: 'POST',
             data: formData,
-
             success: function(response) {
                 alert('Servicios actualizados exitosamente.');
                 location.reload(); // Recargar la página si es necesario
@@ -3420,7 +3355,6 @@ include_once "../controller/solicitudController.php";
 
     $('#guardarCambiosServiciosFacturar').on('click', function() {
         var formData = $('#formActualizarServiciosFacturar').serialize() + "&accion=ActualizarServicioFactura"; // Serializar los datos del formulario
-        console.log('Datos que se envían:', formData);
         $.ajax({
             url: '../controller/solicitudController.php', // Ajusta la URL
             method: 'POST',
@@ -3467,18 +3401,18 @@ include_once "../controller/solicitudController.php";
 
                     // Extract the invoice_number
                     let invoiceNumber = data.invoice_number;
-                    
+
                     // Validar si los campos son null y asignar 'N/A' si es el caso
-                    let createdAt        = factura.created_at ? factura.created_at : "<span class='text-na'>N/A</span>";
-                    let rutaPago         = factura.ruta_pago ? factura.ruta_pago : "<span class='text-na'>N/A</span>";
+                    let createdAt = factura.created_at ? factura.created_at : "<span class='text-na'>N/A</span>";
+                    let rutaPago = factura.ruta_pago ? factura.ruta_pago : "<span class='text-na'>N/A</span>";
                     let tipoConsignacion = factura.tipo_consignacion ? factura.tipo_consignacion : "<span class='text-na'>N/A</span>";
-                    let notaPago         = factura.nota_pago ? factura.nota_pago : "<span class='text-na'>N/A</span>";
-                    let idFactura        = factura.id ? factura.id : "<span class='text-na'>N/A</span>";
-                    let idNumeroFacura   = factura.numerofactura ? factura.numerofactura : "<span class='text-na'>N/A</span>";
-                    let nombreBanco      = factura.nombre_banco ? factura.nombre_banco : "<span class='text-na'>N/A</span>";
-                    let comprobanteHTML = (factura.ruta_pago && factura.ruta_pago !== 'N/A')
-                                            ? "<a href='../controller/resource/<?php echo $id_revisar_solicitud; ?>/" + rutaPago + "' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a>"
-                                            : "<span class='text-na'>N/A</span>";
+                    let notaPago = factura.nota_pago ? factura.nota_pago : "<span class='text-na'>N/A</span>";
+                    let idFactura = factura.id ? factura.id : "<span class='text-na'>N/A</span>";
+                    let idNumeroFacura = factura.numerofactura ? factura.numerofactura : "<span class='text-na'>N/A</span>";
+                    let nombreBanco = factura.nombre_banco ? factura.nombre_banco : "<span class='text-na'>N/A</span>";
+                    let comprobanteHTML = (factura.ruta_pago && factura.ruta_pago !== 'N/A') ?
+                        "<a href='../controller/resource/<?php echo $id_revisar_solicitud; ?>/" + rutaPago + "' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a>" :
+                        "<span class='text-na'>N/A</span>";
 
                     // Determinar si hay comprobante o no
                     let tieneComprobante = factura.ruta_pago && factura.ruta_pago !== 'N/A';
@@ -3494,7 +3428,7 @@ include_once "../controller/solicitudController.php";
 
                     // Construir la fila
                     //let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud; ?>&invoiceNumber=" + invoiceNumber + "' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td><a href='../controller/resource/<?php echo $id_revisar_solicitud; ?>/" + rutaPago + "'target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td><td>" + idFactura + "</td><td>"+idNumeroFacura+"</td><td>"+total+"</td><td>"+nombreBanco+"</td></tr>";
-                    let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud; ?>&invoiceNumber=" + invoiceNumber + "' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td>" + comprobanteHTML + "</td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td><td>" + idFactura + "</td><td class='" + claseColorFactura + "'>"+idNumeroFacura+"</td><td>"+total+"</td><td>"+nombreBanco+"</td></tr>";
+                    let fila = "<tr><td>" + createdAt + "</td><td> <a href='factura_report.php?numero_solicitud=<?php echo $id_revisar_solicitud; ?>&invoiceNumber=" + invoiceNumber + "' target='_blank' rel='noopener noreferrer'>Descargar </a></td><td>" + comprobanteHTML + "</td><td>" + tipoConsignacion + "</td><td>" + notaPago + "</td><td>" + idFactura + "</td><td class='" + claseColorFactura + "'>" + idNumeroFacura + "</td><td>" + total + "</td><td>" + nombreBanco + "</td></tr>";
 
                     // Agregar la fila al tbody
                     $('#facturasDownload').append(fila);
@@ -3524,7 +3458,7 @@ include_once "../controller/solicitudController.php";
 
     $(document).ready(function() {
         // Función para cargar las opciones en cualquier select de personas
-        
+
 
 
         // Cargar personas en el primer select de personas
@@ -3549,21 +3483,21 @@ include_once "../controller/solicitudController.php";
             `;
             $('#personasContainer').append(nuevoCampo);
             var nuevoSelect = $('#personasContainer').find('select').last(); // Seleccionar el nuevo select
-            cargarPersonas(nuevoSelect,null,personaIndex); // Cargar las opciones en el nuevo select
+            cargarPersonas(nuevoSelect, null, personaIndex); // Cargar las opciones en el nuevo select
             personaIndex++;
         });
 
         // Función para eliminar la última persona agregada
         $('#btnEliminarPersona').click(function() {
-            var conjuntoSociedadCrearSociedad  = $('#personasContainer .persona-item'); 
+            var conjuntoSociedadCrearSociedad = $('#personasContainer .persona-item');
             var conjuntoSociedadEditarSociedad = $('#personasContainer .row');
 
             var personas = conjuntoSociedadCrearSociedad.length > 0 ? conjuntoSociedadCrearSociedad : conjuntoSociedadEditarSociedad;
 
-            if (personas.length > 0) { 
+            if (personas.length > 0) {
                 alert('Eliminando persona');
                 var lastSelect = personas.last().find('select').val(); // Obtener el valor del último select
-                var lastTipo   = personas.last().find('select option:selected').data('id'); // Obtener el tipo del último select
+                var lastTipo = personas.last().find('select option:selected').data('id'); // Obtener el tipo del último select
 
                 // Eliminar el último elemento del contenedor
                 personas.last().remove();
@@ -3580,7 +3514,7 @@ include_once "../controller/solicitudController.php";
                 } else if (lastTipo == 'cliente') {
                     selectClientes = selectClientes.filter(item => item !== lastSelect);
                     $('#conjunto_clientes').val(selectClientes.join(','));
-                } else if (lastTipo == 'socio_extranjero') { 
+                } else if (lastTipo == 'socio_extranjero') {
                     selectSociosExtranjeros = selectSociosExtranjeros.filter(item => item !== lastSelect);
                     $('#conjunto_socios_extranjeros').val(selectSociosExtranjeros.join(','));
                 }
@@ -3607,7 +3541,7 @@ include_once "../controller/solicitudController.php";
             });
 
             // Verificar que la suma no exceda el 100%
-            if (totalPorcentaje > 100) { 
+            if (totalPorcentaje > 100) {
                 // Mostrar mensaje en pantalla
                 alert('La suma de los porcentajes no puede exceder el 100%. Por favor ajusta los valores.');
                 return; // Detener el envío del formulario
@@ -3625,22 +3559,12 @@ include_once "../controller/solicitudController.php";
 
             // Si todo está bien, serializar los datos del formulario
             var datosFormulario = $('#formCrearSociedad').serialize() + '&conjuntosociosextranjeros=' + conjunto_socios_extranjeros + '&conjuntopersonas=' + conjunto_personas + '&conjuntoclientes=' + conjunto_clientes + '&sociedades=' + nombreSociedad + '&uuid=' + uuid + '&accion=' + accion;
-            // console.log('Datos enviados:', datosFormulario);
-            // console.log('============');
-            // console.log('conjunto_sociedades:', conjunto_sociedades); 
-            // console.log('conjunto_personas:', conjunto_personas);
-            // console.log('conjunto_clientes:', conjunto_clientes);
-            // console.log('conjunto_socios_extranjeros:', conjunto_socios_extranjeros);
-
-
-            // console.log(datosFormulario); 
             // Envío de datos con AJAX
             $.ajax({
                 type: 'POST',
                 url: '../controller/solicitudController.php', // Ruta hacia el controlador PHP
                 data: datosFormulario,
                 success: function(response) {
-                    // console.log('Respuesta del servidor:', response);
                     var resultado = JSON.parse(response);
                     if (resultado.status === 0) {
                         alert(resultado.message);
@@ -3675,12 +3599,12 @@ include_once "../controller/solicitudController.php";
             success: function(data) {
                 var select = $('.sociedad');
                 select.empty();
-                if(data.length > 0){
+                if (data.length > 0) {
                     select.append('<option value="">Seleccionar sociedad</option>');
                     $.each(data, function(index, item) {
                         select.append('<option value="' + item.uuid + '">' + item.nombre_sociedad + '</option>');
                     });
-                }else{
+                } else {
                     select.append('<option value="Sin Sociedad<">Sin Sociedad</option>');
                 }
                 // $.each(data, function(index, item) {
@@ -3719,22 +3643,22 @@ include_once "../controller/solicitudController.php";
         var selectTipoArchivo = $('#descripcion_tipo_docuemnto_adjunto');
         selectTipoArchivo.on('change', function() {
             var selectTipoArchivo = $(this).val();
-            if(selectTipoArchivo == 10){
+            if (selectTipoArchivo == 10) {
                 $('#divfechaein').show();
                 $('#divfecharegistro').hide();
                 $('#divnumeroregistro').show();
-            }else if(selectTipoArchivo == 14){
+            } else if (selectTipoArchivo == 14) {
                 $('#divfechaein').hide();
                 $('#divfecharegistro').show();
                 $('#divnumeroregistro').show();
-            }else{
+            } else {
                 $('#divfechaein').hide();
                 $('#divfecharegistro').hide();
                 $('#divnumeroregistro').hide();
             }
 
         });
-        
+
     });
 
     $(document).ready(function() {
@@ -3770,7 +3694,6 @@ include_once "../controller/solicitudController.php";
                 processData: false, // Necesario para enviar archivos
                 contentType: false, // Necesario para enviar archivos
                 success: function(response) {
-                    console.log('Response from server:', response);
                     try {
                         var result = JSON.parse(response);
                         if (result.status === 'success') {
@@ -3806,8 +3729,6 @@ include_once "../controller/solicitudController.php";
                     id_solicitud: idSolicitud
                 },
                 success: function(response) {
-                    console.log(response);
-                    
                     var data = JSON.parse(response);
                     var htmlContent = '<table id="egresosTable" class="display">';
                     htmlContent += '<thead><tr><th>Consecutivo Egreso</th><th>Valor</th><th>Nombre Tercero</th><th>Anticipo</th><th>Factura</th><th>Fecha Creación</th></tr></thead>';
@@ -3840,38 +3761,26 @@ include_once "../controller/solicitudController.php";
     $(document).ready(function() {
 
 
-        $('#checklistModal').on('hidden.bs.modal', function () {
-            // alert('HOLAA');
+        $('#checklistModal').on('hidden.bs.modal', function() {
             let checklistAdded = document.getElementById("checklistAdded");
             checklistAdded.innerHTML = "";
             location.reload();
-            // $('#checklistItems input[type="checkbox"]').attr('checked', false);
-            // setTimeout(() => {
-            //     $('#checklistItems input[type="checkbox"]').prop('checked', false);
-            // }, 200);
-            // console.log($('#checklistItems input[type="checkbox"]'));
-            // $('#checklistItems input[type="checkbox"]').prop('checked', false);
-            $('#checklistItems input[type="checkbox"]').each(function () {
+            $('#checklistItems input[type="checkbox"]').each(function() {
                 if ($(this).prop('checked')) { // Si está marcado 
                     console.log('Desmarcando:', $(this).parent().text().trim());
                     $(this).prop('checked', false); // Lo desmarca
-                }  
+                }
             });
         });
 
         // Prevent multiple event bindings for the "Guardar Selección" button
-        $('#guardarBtn').off('click').on('click', function () {
+        $('#guardarBtn').off('click').on('click', function() {
             let selectedItems = [];
 
             $('#checklistColumn1 input[type="checkbox"]:checked, #checklistColumn2 input[type="checkbox"]:checked, #checklistColumn3 input[type="checkbox"]:checked')
-                .each(function () {
-                    // let itemText = $(this).closest("li").contents().not("input, button").text().trim(); // Extrae solo el texto sin el botón
-                    // selectedItems.push({
-                    //     text: itemText,
-                    //     checked: true
-                    // });
-                    let itemText = $(this).closest("li").clone().children().remove().end().text().trim(); 
-                    if (itemText) {  // Solo agregar si hay texto válido
+                .each(function() {
+                    let itemText = $(this).closest("li").clone().children().remove().end().text().trim();
+                    if (itemText) { // Solo agregar si hay texto válido
                         selectedItems.push({
                             text: itemText,
                             checked: true
@@ -3879,10 +3788,10 @@ include_once "../controller/solicitudController.php";
                     }
                 });
 
-             // Seleccionar checkboxes marcados en la lista de elementos agregados (checklistAdded)
-            $('#checklistAdded input[type="checkbox"]:checked').each(function () {
+            // Seleccionar checkboxes marcados en la lista de elementos agregados (checklistAdded)
+            $('#checklistAdded input[type="checkbox"]:checked').each(function() {
                 let itemText = $(this).closest("li").clone().children("input, button").remove().end().text().trim();
-                if (itemText) {  
+                if (itemText) {
                     selectedItems.push({
                         text: itemText,
                         checked: true
@@ -3906,8 +3815,8 @@ include_once "../controller/solicitudController.php";
                 $.ajax({
                     url: '../controller/obtenerActasController.php',
                     type: 'POST',
-                    data: { 
-                        action: 'guardarChecklist', 
+                    data: {
+                        action: 'guardarChecklist',
                         id_solicitud: '<?php echo $id_revisar_solicitud; ?>',
                         items: selectedItems,
                         idSociedad: $('#idSociedad').val(),

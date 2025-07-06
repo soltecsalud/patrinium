@@ -13,8 +13,8 @@ if (!isset($_SESSION['usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once "head/head_views.php"; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="css/estilos generales.css">
-    <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
+    <link rel="stylesheet" href="../views/css/estilos generales.css">
+    <link rel="stylesheet" href="../views/css/estilosPersonalizadosSelect2.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
     <title>Registrar ESE</title>
@@ -154,8 +154,9 @@ $(document).ready(function(){
                 alert("fallo :(");
                 }else{
                     alert("Agregado con éxito");
-                     // Redirección a listar_empresa.php
-                    window.location.href = 'listado_solicitudes.php';
+                    // Redirección a listar_empresa.php
+                    const ruta = 'listado_solicitudes.php';
+                    window.location.href = `router.php?vista=${ruta}`;
                 }
             }
         });

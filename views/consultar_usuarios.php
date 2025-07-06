@@ -22,9 +22,9 @@ include_once "../controller/usuarioController.php";
     <!-- hoja de estilo para los datatable -->
     <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/preview/searchPane/dataTables.searchPane.min.css">
     <!-- hoja de estilo para el SearchPane del datatable -->
-    <link rel="stylesheet" href="css/dataTableSearchPanes.css">
+    <link rel="stylesheet" href="../views/css/dataTableSearchPanes.css">
     <!-- hoja de estilo personalizada para searchPane -->
-    <link rel="stylesheet" href="css/estilos generales.css">
+    <link rel="stylesheet" href="../views/css/estilos generales.css">
     <title>Administracion de Usuarios</title>
     <style>
         .btn-success {
@@ -94,8 +94,8 @@ include_once "../controller/usuarioController.php";
 
     <?php include_once "footer/footer_views.php"; ?>
     <!-- script para el SearchPane del datatable -->
-    <script src="js/dataTableSearchPane.js"></script>
-    <script src="js/delete_usuario.js"></script>
+    <script src="../views/js/dataTableSearchPane.js"></script>
+    <script src="../views/js/delete_usuario.js"></script>
     <script>
         const data = <?php echo UsuarioController::ctrlConsultarUsuarios(); ?>;
 

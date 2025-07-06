@@ -295,7 +295,7 @@ $menus = ModelMenus::mdlConsultarMenus(); // Obtener todos los menús y submenú
                         swal("Éxito", "Menú registrado correctamente.", "success");
                         // Aquí puedes redirigir o actualizar la vista
                         setTimeout(function() { 
-                            window.location.href = '../views/registrar_menus.php'; // Redirigir a la lista de menús
+                            location.reload(); // Recargar la página para mostrar los cambios
                         }, 1000); // Esperar 2 segundos antes de redirigir
                     } else {
                         swal("Error", "No se pudo registrar el menú.", "error");
@@ -342,7 +342,7 @@ $menus = ModelMenus::mdlConsultarMenus(); // Obtener todos los menús y submenú
                         swal("Éxito", "Submenú registrado correctamente.", "success");
                         // Aquí puedes redirigir o actualizar la vista
                         setTimeout(function() { 
-                            window.location.href = '../views/registrar_menus.php'; // Redirigir a la lista de menús
+                            location.reload(); // Recargar la página para mostrar los cambios
                         }, 2000); // Esperar 2 segundos antes de redirigir
                     } else {
                         swal("Error", "No se pudo registrar el submenú.", "error");

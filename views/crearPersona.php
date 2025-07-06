@@ -15,9 +15,9 @@ include_once "../controller/solicitudController.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once "head/head_views.php"; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="css/estilos generales.css">
-    <link rel="stylesheet" href="css/estilosPersonalizadosSelect2.css">
-    <!-- Agregando css de librería HandsonTable -->
+    <link rel="stylesheet" href="../views/css/estilos generales.css">
+    <link rel="stylesheet" href="../views/css/estilosPersonalizadosSelect2.css">
+    <!-- Agregando css de librería HandsonTable --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
     <style>
         #section_handsontable {
@@ -238,7 +238,7 @@ include_once "../controller/solicitudController.php";
     <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/additional-methods.min.js"></script>
     <!-- Agregando JS de librería HandsonTable -->
     <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
-    <script src="js/cliente.js"></script>
+    <script src="../views/js/cliente.js"></script>
 
     <!-- <script>
         function buscarPaciente(input,div){
@@ -449,15 +449,9 @@ include_once "../controller/solicitudController.php";
                     if (todoBien) {
                         // hot.loadData(dataBD);
                         alert("Todos los datos guardados");
-                        window.location.href = "gestionar_clientes.php";
+                        const ruta = "gestionar_clientes.php";
+                        window.location.href = `router.php?vista=${ruta}`;
                     }
-
-
-                    // alert(response.message);
-                    // setTimeout(function() {
-                    //     // location.reload();
-                    //     window.location.href = "gestionar_clientes.php";
-                    // }, 1000); 
 
                 },
                 error: function(xhr, status, error) {
@@ -465,7 +459,6 @@ include_once "../controller/solicitudController.php";
                     console.error('Error al enviar los datos:', error);
                 }
             });
-
         }
 
     </script>
@@ -480,18 +473,28 @@ $(document).ready(function(){
     $('#btnGuardarSociedad').click(function(e){        
         e.preventDefault(); // Previene el comportamiento por defecto del botón
         var datos = $('#frm_guardar_sociedad').serialize() + "&accion=guardarSociedad";
-        console.log(datos);  // Verifica que los datos se están serializando correctamente
+        // console.log(datos);  // Verifica que los datos se están serializando correctamente
+
+        // Validar campos requeridos
+        if (!$('#frm_guardar_sociedad')[0].checkValidity()) {
+            e.preventDefault(); // Previene el envío del formulario si hay campos inválidos
+            alert("Por favor, completa todos los campos requeridos.");
+            return;
+        }
+        // Realizar la solicitud AJAX
         $.ajax({
             type: "POST",
             url: "../controller/sociedadController.php",
             data: datos,
             success: function(r){
                 console.log(r);  // Verifica la respuesta del servidor
-                if (r.resultado == 0) {
+                // var r = JSON.parse(r); // Asegúrate de que la respuesta sea un objeto JSON
+                if (r.status == 'error') {
                     alert("fallo :(");
-                } else {
+                } else { 
                     alert("Persona Agregada con Exito :)");
-                    window.location.href = "registrarSolicitud.php";
+                    // Redirigir a la página de registrar solicitud
+                    window.location.href = "router.php?vista=registrarSolicitud.php";
                 }
             },
             error: function(xhr, status, error) {

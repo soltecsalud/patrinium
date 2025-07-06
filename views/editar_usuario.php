@@ -138,7 +138,7 @@ $usuario = UsuarioController::ctrlConsultarUsuarioId($usuario_id);
         <?php include_once "footer/footer_views.php"; ?>
         <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/jquery.validate.min.js"></script>
         <script src="../resource/AdminLTE-3.2.0/plugins/jquery-validation/additional-methods.min.js"></script>
-        <script src="./js/SelectEPS.js"></script>
+        <!-- <script src="./js/SelectEPS.js"></script> -->
         <script src="./js/SelectUsuario.js"></script>
         <script src="js/select2.js"></script>
         <script src="./js/validacionFormularios.js"></script>  

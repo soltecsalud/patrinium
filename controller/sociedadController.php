@@ -8,9 +8,6 @@ class SociedadController{
 
     public function guardarSociedad($datos) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //echo "hola";
-
-            
             $datos = array(
                 "nombre" => $_POST["nombre"],
                 "apellido" => $_POST["apellido"],
@@ -246,11 +243,8 @@ class SociedadController{
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['accion']) && $_POST['accion'] == 'guardarSociedad') {
-        error_log("Acción guardarSociedad recibida");
-        error_log(print_r($_POST, true)); // Imprime los datos recibidos en el log de errores
         $controlador = new SociedadController();
         $controlador->guardarSociedad($_POST);
-
     }else if(isset($_POST['accion']) && $_POST['accion'] == 'crearSociedadExtranjera'){
         $controlador = new SociedadController();
         $controlador->guardarSociedadExtranjera($_POST);

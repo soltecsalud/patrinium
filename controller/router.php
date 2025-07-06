@@ -7,7 +7,7 @@
 
         // Validar sesión
         if (!isset($_SESSION['usuario'])) { // Verificar si la sesión del usuario está activa
-            header('Location: login.php');
+            header('Location: crear_usuario.php');
             exit();
         }
 

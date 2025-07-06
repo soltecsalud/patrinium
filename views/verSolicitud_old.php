@@ -453,7 +453,8 @@ include_once "../controller/solicitudController.php";
                             confirmButtonText: 'Aceptar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = 'ver_solicitud_adjuntos.php'; // Redireccionar a la página de solicitud adjuntos
+                                const ruta = "gestionar_clientes.php";
+                                window.location.href = `router.php?vista=${ruta}`;
                             }
                         });
                     },

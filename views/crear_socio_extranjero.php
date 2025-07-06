@@ -155,7 +155,7 @@
                         if(response.status=='ok'){
                             Swal.fire("Éxito", "Socio extranjero creado", "success")
                             .then(() => {
-                                window.location.href = 'crear_socio_extranjero.php';
+                                location.reload(); // Recargar la página para mostrar los cambios
                             });
                         }else{
                             Swal.fire("Error", "Fallo la creacion del socio", "error");
