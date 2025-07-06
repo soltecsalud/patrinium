@@ -1588,7 +1588,8 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                         <label class="checkbox-container">
                             <input type="checkbox" name="activarSociedad" id="activarSociedad" checked="true">
                             <span class="checkmark"></span>
-                            Sociedad Activa
+                            <p id='activarSociedadTexto'></p>
+                            <!-- Sociedad Activa -->
                         </label>
                         <label class="checkbox-container">
                             <input type="checkbox" name="declararSociedad" id="declararSociedad" data-id_solicitudUUID="">
@@ -2209,7 +2210,7 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                     // var tipo = "<span style="color: red;">${tipo}</span>";
                     var tipoTexto, tipoColor;
                     if (item.tipo === 'sociedad') {
-                        tipoTexto = "Sociedad";
+                        tipoTexto = " ";
                         tipoColor = "blue";
                     } else if (item.tipo === 'socio_extranjero') {
                         tipoTexto = "Socio extranjero";
@@ -2514,6 +2515,24 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 
             // Mostrar el check activado o desactivado segun lo que viene de la BD
             $('#activarSociedad').prop('checked', $(this).data('activarsociedad') == 'on' ? true : false);
+
+            // Si el check activarSociedad es true, mostrar el div de activarSociedad
+            if ($(this).data('activarsociedad') == 'on') {
+                $('#activarSociedadTexto').text('Activada');
+            } else {
+                $('#activarSociedadTexto').text('Desactivada');
+            }
+
+            $('#activarSociedad').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#activarSociedadTexto').text('Activada');
+                } else {
+                    $('#activarSociedadTexto').text('Desactivada');
+                }
+            });
+
+
+
             $('#declararSociedad').prop('checked', $(this).data('declararsociedad') == 'on' ? true : false);
             // Si el check declararSociedad es true, agregar texto a la etiqueta p
             if ($(this).data('declararsociedad') == 'on') {
