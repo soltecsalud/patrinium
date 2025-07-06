@@ -7,7 +7,8 @@ class ModelEmpresas
     static public function insertEmpresa($data)
     {
         try {
-            $sql = "INSERT INTO empresas (nombre_empresa, direccion_empresa, ruta_logo, correo) VALUES (:nombre_empresa, :direccion, :logo, :correo)";
+            $sql = "INSERT INTO empresas (nombre_empresa, direccion_empresa, ruta_logo, correo) 
+            VALUES (:nombre_empresa, :direccion, :logo, :correo)";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':nombre_empresa', $data['nombre']);
             $stmt->bindParam(':direccion', $data['direccion']);

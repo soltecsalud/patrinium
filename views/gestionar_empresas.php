@@ -88,9 +88,7 @@ if (!isset($_SESSION['usuario'])) {
                                 <tbody id="empresas_tbody"></tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
         </section>
@@ -152,13 +150,12 @@ if (!isset($_SESSION['usuario'])) {
     <script>
         $(document).ready(function(){
             $('#btn_insertar_empresa').click(function(e){        
-                // var datos = $('#form_empresa').serialize() + "&action=guardarEmpresa"; // Cambio aquí: añadir el # antes de form_empresa
                 e.preventDefault();
+                // Validar que se haya seleccionado un archivo para el logo
                 var formData = new FormData($('#form_empresa')[0]);
                 formData.append('action', 'gestionarEmpresa');
                 formData.append('ejecutar', 'insertarEmpresa');
-
-                $.ajax({
+                $.ajax({ 
                     type: "POST",
                     url: "../controller/empresasController.php",
                     data: formData,

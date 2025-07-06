@@ -53,7 +53,7 @@ class EmpresasController {
         try {
             $modelo = new ModelEmpresas();
             $resultado = $modelo->listarEmpresas();
-            if($resultado){
+            if($resultado){ // Verificar si se encontraron empresas
                 echo json_encode(['status' => 'success', 'data' => $resultado]); // Éxito
             }else{
                 echo json_encode(['status' => 'error', 'mensaje' => $resultado]); // No se encontraron empresas
