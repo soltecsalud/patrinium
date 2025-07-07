@@ -129,6 +129,7 @@ class ModelSolicitud
     //     }
     // }
 
+    // Verifica si un servicio está presente en la factura de una solicitud específica
     public static function mdlVerificarServicioEnFactura($id_solicitud) {
         try {
             $sql = "SELECT 
@@ -136,34 +137,36 @@ class ModelSolicitud
                     FROM 
                         factura AS f
                     JOIN 
+                        /* Obtener servicios y servicios adicionales de la solicitud */
                         servicios_adicionales AS s ON s.fk_solicitud = f.id_solicitud
                     JOIN 
+                        /* Unir servicios y servicios adicionales en una sola tabla */
                         LATERAL (
                             SELECT *
                             FROM (
-                                SELECT * FROM jsonb_each(
+                                SELECT * FROM jsonb_each( /* Obtener servicios de la solicitud */
                                     CASE 
-                                        WHEN jsonb_typeof(s.servicios) = 'object' THEN s.servicios 
+                                        WHEN jsonb_typeof(s.servicios) = 'object' THEN s.servicios /* Verificar si es un objeto JSON */
                                         ELSE '{}' 
                                     END
                                 )
                                 UNION ALL
-                                SELECT * FROM jsonb_each(
+                                SELECT * FROM jsonb_each( /* Obtener servicios adicionales de la solicitud */
                                     CASE 
                                         WHEN jsonb_typeof(s.servicios_adicionales) = 'object' THEN s.servicios_adicionales 
                                         ELSE '{}' 
                                     END
                                 )
-                            ) AS union_servicios(servicio, info_servicio)
-                        ) AS servicios_finales ON TRUE
+                            ) AS union_servicios(servicio, info_servicio) /* Unir servicios y servicios adicionales */
+                        ) AS servicios_finales ON TRUE /* Unir servicios y servicios adicionales */
                     JOIN 
-                        LATERAL jsonb_each(
+                        LATERAL jsonb_each( /* Obtener servicios de la factura */
                             CASE 
                                 WHEN jsonb_typeof(f.datos->'servicios') = 'object' THEN f.datos->'servicios' 
-                                ELSE '{}' 
+                                ELSE '{}' /* Verificar si es un objeto JSON */
                             END
-                        ) AS serv_factura(servicio, datos_servicio) 
-                        ON replace(serv_factura.servicio, '_', ' ') = servicios_finales.servicio
+                        ) AS serv_factura(servicio, datos_servicio)  /* Unir servicios de la factura */
+                        ON replace(serv_factura.servicio, '_', ' ') = servicios_finales.servicio /* Reemplazar guiones bajos por espacios */
                     WHERE 
                         f.id_solicitud = :id_solicitud";
             $sql = Conexion::conectar()->prepare($sql);   

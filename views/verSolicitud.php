@@ -776,11 +776,9 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                                                         }
                                                                         if ($en_factura) {
                                                                             echo '<span class="badge badge-dark">En Factura</span>';
-                                                                            // Aquí puedes realizar la acción que necesites
                                                                         } else {
                                                                             echo $estado_texto;
                                                                         }
-                                                                        // echo $estado_texto;
                                                                         ?>
 
                                                                     </td>
@@ -826,6 +824,7 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                                 foreach ($solicitud_servicios as $servicio) {
                                                     $nombre_servicioAdicionales = json_decode($servicio['servicios_adicionales'], true); // Decodificar el campo 'servicios'
                                                     // Generar filas de la tabla
+                                                    // print_r($nombre_servicioAdicionales);
                                                     foreach ($nombre_servicioAdicionales as $clave => $valor) {
                                                         $estado         = $valor['estado'];
                                                         $servicio_value = trim($valor['value']);

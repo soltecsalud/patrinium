@@ -125,9 +125,10 @@ class Solicitud_controller{
         if (isset($_POST['campoDinamico']) && is_array($_POST['campoDinamico'])) {
             foreach ($_POST['campoDinamico'] as $indice => $valor) {
                 if (!empty($valor)) {
-                    $camposDinamicos["campoDinamico[$indice]"] = array(
-                        'value' => $valor,
-                        'estado' => $estado
+                    // $camposDinamicos["campoDinamico[$indice]"] = array(
+                    $camposDinamicos[$valor] = array(
+                        'value'  => $valor,
+                        'estado' => 0
                     );
                 }
             }
