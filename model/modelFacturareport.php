@@ -22,9 +22,10 @@ class ReportModel {
             $sqlListarJson = "WITH json_data AS (
                 SELECT 
                     a.id, a.datos, a.created_at, a.id_solicitud, a.estado, a.ruta_pago, a.tipo_consignacion, a.nota_pago,
-                    datos->>'selectPersonaFactura' AS persona
+                    datos->>'selectPersonaFactura' AS persona,c.nombre_empresa,c.ruta_logo
                 FROM factura AS a
                 INNER JOIN solicitud AS b ON a.id_solicitud = b.id_solicitud
+                LEFT JOIN empresas AS c ON a.datos->>'logo' = c.id_empresa::TEXT
                 WHERE a.id_solicitud = :id_solicitud
                 AND datos->>'invoice_number' = :invoiceNumber
             )
@@ -37,6 +38,8 @@ class ReportModel {
                 jd.ruta_pago,
                 jd.tipo_consignacion,
                 jd.nota_pago,
+                jd.nombre_empresa,
+				jd.ruta_logo,
                 COALESCE(
                     -- Buscar en personas_sociedad si es UUID válido
                     (SELECT nombre_sociedad 

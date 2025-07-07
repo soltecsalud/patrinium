@@ -1240,7 +1240,7 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                             <div class="col-md-3 mb-3">
                                                 <input type="text" placeholder="Qty" name="cantidad<?php echo $valor['value']; ?>" class="form-control">
                                             </div>
-                                            <div class="col-md-3 mb-3">btnInsertarFactura
+                                            <div class="col-md-3 mb-3">
                                                 <input type="text" placeholder="Unit Price" name="valor<?php echo $valor['value']; ?>" class="form-control">
                                             </div>
                                         </div>
@@ -2530,8 +2530,6 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                     $('#activarSociedadTexto').text('Desactivada');
                 }
             });
-
-
 
             $('#declararSociedad').prop('checked', $(this).data('declararsociedad') == 'on' ? true : false);
             // Si el check declararSociedad es true, agregar texto a la etiqueta p
