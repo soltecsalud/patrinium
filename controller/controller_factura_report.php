@@ -53,7 +53,10 @@ class MyPDF extends FPDF
             }
 
             $nombreEmpresa = $getLogo[0]->nombre_empresa;
-            $rutaImagen    = $getLogo[0]->ruta_logo;
+            // Si existe la ruta del logo, se usa; de lo contrario, se asigna una ruta por defecto
+            $logoBase   = $getLogo[0]->ruta_logo ?? '';
+            $rutaImagen = file_exists($logoBase) ? $logoBase : 'imgs/logo_empresa.png'; // Ruta por defecto si no se proporciona una imagen
+            // $rutaImagen = $getLogo[0]->ruta_logo;
 
             // if ($logo == "JairoVargas") {
             //     $rutaImagen = "imgs/logo1.png";
@@ -79,6 +82,9 @@ class MyPDF extends FPDF
             $direccionComun = "Address:\n6355 NW 36 St\nSuite 507\nVirginia Gardens, FL 33166\nEmail: jairo@patrimonium.co\nPh. 305.428.2020";
 
             // Configurar el encabezado
+            // if($rutaImagen == null || $rutaImagen == '') { 
+            //     $rutaImagen = "imgs/logo_empresa.png"; // Ruta por defecto si no se proporciona una imagen
+            // }
             $this->Image($rutaImagen, 10, 10, 50, 0, 'PNG');
 
 

@@ -86,9 +86,11 @@ class ReportModel {
             f.nota_pago,
             f.created_at,
             -- CONCAT(s.nombre, ' ', s.apellido) AS nombre_cliente,
-            f.datos->>'clientefactura' AS nombre_cliente
+            f.datos->>'clientefactura' AS nombre_cliente,
+            c.nombre_empresa,c.ruta_logo
             FROM factura_rapida AS f
             -- INNER JOIN sociedad AS s ON NULLIF(f.datos->>'clientefactura', '')::int = s.id_sociedad
+            LEFT JOIN empresas AS c ON f.datos->>'logo' = c.id_empresa::TEXT
             WHERE f.factura_rapida_id = :id_solicitud
             AND (datos->>'invoice_number')=:invoiceNumber";
             $listaJsonFactura = Conexion::conectar()->prepare($sqlListarJson);
