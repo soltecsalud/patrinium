@@ -1,55 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="path/to/AdminLTE-3.2.0/plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="path/to/AdminLTE-3.2.0/plugins/bootstrap/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="path/to/AdminLTE-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="path/to/AdminLTE-3.2.0/plugins/select2/js/select2.full.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+    <meta charset="UTF-8">
+    <title>Login AYSA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Otros scripts y estilos -->
+    <!-- Bootstrap moderno -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap">
+
+    <style>
+        body {
+            background-color: #f4f6f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 100%;
+        }
+
+      .logo {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    max-width: 250px;
+}
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
+
+        .btn-primary {
+            border-radius: 8px;
+            background-color: #0a0a23;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e1e3a;
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: #999;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .footer-text a {
+            color: #0a0a23;
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body class="hold-transition sidebar-collapse">
-    <!-- Contenido de la página -->
-    <section class="vh-75">
-        <div class="container-fluid">
-            <div class="row">
-            <div class="col-sm-6 px-0 d-none d-sm-block" style="background-color: #0a0a23; display: flex; align-items: center; justify-content: center;">
-    <h1 style="font-family: 'Cinzel', serif; color: #ffffff; font-size: 4rem; text-align: center;">
-        PATRIMONIUM
-    </h1>
+<body>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="text-center mb-3">
+    <img src="views/imgs/patrimonium.jpg" alt="AYSA Logo" style="max-width: 250px; height: auto;">
 </div>
-                <div class="col-sm-6 text-black" style="background:#f6f7fc;">
-                    <div class="px-5 ms-xl-4">
-                        <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #ffffff;"></i>
-                        <span class="h4 fw-bold mb-0" style="color:#020381;margin:-70px">Patrimonium APP</span>
-                    </div>
-                    <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                        <form style="width: 23rem;" action="" method="post">
-                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicia Sesi&oacute;n</h3>
-                            <div class="form-outline mb-4">
-                                <input type="text" id="usuarioLogin" name="usuarioLogin" class="form-control form-control-lg" />
-                                <label class="form-label" for="usuarioLogin">Usuario</label>
-                            </div>
-                            <div class="form-outline mb-4">
-                                <input type="password" id="contrasenaLogin" name="contrasenaLogin" class="form-control form-control-lg" />
-                                <label class="form-label" for="contrasenaLogin">Contrase&ntilde;a</label>
-                            </div>
-                            <div class="pt-1 mb-4">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-                            </div>
-                            <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Olvid&oacute; su contrase&ntilde;a?</a></p>
-                            <!-- <p>Don't have an account? <a href="#!" class="link-info">Register here</a></p> -->
-                        </form>
-                        <?php
+        <h3>Inicia Sesión</h3>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="usuarioLogin" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="usuarioLogin" name="usuarioLogin" required>
+            </div>
+            <div class="mb-3">
+                <label for="contrasenaLogin" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="contrasenaLogin" name="contrasenaLogin" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+            </div>
+           
+        </form>
+        <div class="footer-text mt-4">
+            Copyright © 2025 <a href="" target="_blank">Tachyon</a><br>
+            Versión 2.0
+        </div>
+    </div>
+</div>
+ <?php
                         include_once "controller/validar_login.php";
                         ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 </html>
