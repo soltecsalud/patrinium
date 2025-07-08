@@ -2004,7 +2004,7 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 </script>
 <script>
     $(document).ready(function() {
-
+ 
         $(document).on("click", ".btnVerActas", function() {
             $.ajax({
                 url: '../controller/obtenerActasController.php',
@@ -3626,6 +3626,16 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                 // $.each(data, function(index, item) {
                 //     select.append('<option value="' + item.uuid + '">' + item.nombre_sociedad + '</option>');
                 // });
+                if (tail && tail.select) {
+                    tail.select('.sociedad', {
+                        search: true,
+                        descriptions: false,
+                        hideSelected: true,
+                        hideDisabled: true,
+                        multiShowCount: false,
+                        multiContainer: true
+                    });
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching data: ', error);
@@ -3775,7 +3785,6 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 
 <script>
     $(document).ready(function() {
-
 
         $('#checklistModal').on('hidden.bs.modal', function() {
             let checklistAdded = document.getElementById("checklistAdded");
