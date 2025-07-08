@@ -50,7 +50,7 @@ include_once "../controller/solicitudController.php";
                 <div class="col-md-10 offset-md-1">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Billing</h3>
+                            <h3 class="card-title">Billing || Facturas </h3>
 
                             <div class="card-tools">
                                 <!-- This will cause the card to maximize when clicked -->
@@ -202,7 +202,7 @@ include_once "../controller/solicitudController.php";
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Formulario de Pago</h5>
+                <h5 class="modal-title" id="modalLabel">Formulario de Pago De Factura</h5>
             </div>
             <div class="modal-body">
                 <!-- Formulario -->
