@@ -40,7 +40,7 @@ include_once "../controller/usuarioController.php";
             <div class="card-header">
                 <h3 class="card-title">Administración de Usuarios</h3>
                 <div class="card-tools d-inline">
-                <a href="./crear_usuario.php" class="btn btn-outline-light btn_header">Registrar Usuario</a>
+                <a href="router.php?vista=crear_usuario.php" class="btn btn-outline-light btn_header">Registrar Usuario</a>
                 </div>
             </div>
             <div class="card-body table-responsive p-1 w-100">
