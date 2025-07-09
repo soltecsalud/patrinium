@@ -103,8 +103,8 @@ if (!isset($_SESSION['usuario'])) {
                     "columns": [
                         { "data": "nombrecliente" },
                         { "data": "pais_origen" },
-                        { "data": "nombre" },
-                        { "data": "estados" },
+                        { "data": "nombre_sociedad" },
+                        { "data": "estadopais" },
                         { "data": "activarsociedad" }
                     ],
                     "destroy": true,

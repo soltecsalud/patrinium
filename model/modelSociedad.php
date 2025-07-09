@@ -384,7 +384,7 @@ class modelSociedad{
             $sql = "SELECT 
                         ps.uuid,
                         ps.datos_sociedad->>'nombreSociedad' AS nombre,
-                        string_agg(e.estado, ', ') AS estado,
+                     	 string_agg(DISTINCT e.estado, ', ') AS estado,
                         ts.nombre_tipo_sociedad AS tipo,
                         ARRAY[
                             CASE 
@@ -457,18 +457,20 @@ class modelSociedad{
 
     public static function mdlObtenerSociedadesSinDeclararMarzo() {
         try {
-            $sql = "        SELECT 
+            $sql = "       SELECT 
     ps.uuid,
     ps.datos_sociedad->>'nombreSociedad' AS nombre,
     ts.nombre_tipo_sociedad AS tipo,
-    e.estado AS estado,
+    string_agg(DISTINCT e.estado, ', ' ORDER BY e.estado) AS estado,
     ARRAY[
         CASE 
-            WHEN ts.nombre_tipo_sociedad = 'LLC' THEN '1065'
-            WHEN ts.nombre_tipo_sociedad = 'Trust' THEN '1041'
-            WHEN ts.nombre_tipo_sociedad = 'Corp' THEN '1120'
-            WHEN ts.nombre_tipo_sociedad = 'INC' THEN '1120'
-            ELSE 'Extranjera (Colombia) - No aplica'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'llc 1065' THEN 'Cada Member obtiene una K-1 y Cada Member en una 1040'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  C  8832' THEN 'Como Corporacion C 1120 y paga 21%'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  S  2553' THEN '1120 - S NO paga Impuestos Cada Member Obtiene una K-1 Cada Member en una 1040'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120' THEN 'Paga 21% Si Distribuye Dividendos, pagan Personal del 0% - 20% Doble Tributacion En El 1040'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1065' THEN 'no Paga Taxes Cada Socio Recibe K-1 y Cada Socio 1040'
+            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120-S' THEN 'corporacion Evita Doble Tributacion 1120 - S no paga taxes, cada Socio Recibe K-1 y Cada Socio 1040'
+            ELSE 'No aplica  O solo member 1040'
         END
     ] ||
     CASE 
@@ -492,11 +494,13 @@ JOIN LATERAL
     jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
 JOIN 
     estados e ON e.id_estado = estado_codigo.codigo::int
-LEFT JOIN sociedades_march sm 
-  ON sm.fk_personas_sociedad_uuid = ps.uuid::uuid
+LEFT JOIN 
+    sociedades_march sm ON sm.fk_personas_sociedad_uuid = ps.uuid::uuid
 WHERE 
     ps.datos_sociedad->>'declararSociedad' = 'on'
-    AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)";
+    AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)
+GROUP BY 
+    ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo;";
             
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
