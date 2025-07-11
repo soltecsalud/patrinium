@@ -268,9 +268,8 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                 Nuevos Servicios A Facturar
                             </button>
 
-                        </div>
-                        <div class="card-tools">
-                            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                            <div class="card-tools">
+                            <button class="btn btn-success dropdown-toggle ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bars"></i> Opciones
                             </button>
 
@@ -292,8 +291,11 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                 <a class="dropdown-item text-white" href="#" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i> Maximizar
                                 </a>
+                                </div>
                             </div>
+
                         </div>
+                        
                     </div>
 
                     <div class="modal fade" id="modalCrearCliente" tabindex="-1" role="dialog" aria-labelledby="modalCrearClienteLabel" aria-hidden="true">
