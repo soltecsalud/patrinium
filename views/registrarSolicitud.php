@@ -46,7 +46,7 @@ if (!isset($_SESSION['usuario'])) {
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                         <h3>Servicios A Prestar</h3>
+                         <h3>Servicios Para Este Cliente</h3>
 
                     </div>
                 </div>
@@ -70,24 +70,25 @@ if (!isset($_SESSION['usuario'])) {
 
                         <!-- Grupo de Select -->
                         <div class="form-group">
+                        <label for="referidoDe">Seleccionar Cliente:</label>
                          <select name="selectPersona" class="form-control" id="selectPersona"></select>
                         </div>
 
                         <!-- Grupo de Nombre del Cliente -->
                         <div class="form-group">
-                            
+                        <label for="referidoDe"></label>
                             <input type="hidden" name="nombreCliente" class="form-control" id="nombreCliente" placeholder="Ingresa el nombre del cliente" value="no va ">
                         </div>
 
                         <!-- Grupo de Referido de -->
                           <div class="form-group">
-                            <label for="referidoDe">Referido:</label>
+                            <label for="referidoDe"></label>
                             <input type="hidden" name="referido_por" class="form-control" value="patrimonium" id="referidoDe" >
                         </div> 
 
                         <!-- Grupo de Necesidad -->
                         <div class="form-group">
-                            <label for="necesidad">Necesidad:</label>
+                            <label for="necesidad"></label>
                             <input type="hidden" name="necesidad" class="form-control" value="patrimonium" id="referidoDe" >
                             
                         </div>

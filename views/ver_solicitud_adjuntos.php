@@ -25,7 +25,7 @@ include_once "../controller/solicitudController.php";
     <div class="container-fluid h-100" >
         <div class="card card-dark  h-100">
             <div class="card-header">
-                <h3 class="card-title">Listado de Solicitudes </h3>
+                <h3 class="card-title">Administracion Clientes </h3>
                 <div class="card-tools">
                     <?php echo date('Y-m-d'); ?>
                     <button type="button" class="btn btn-tool" data-card-widget="maximize">

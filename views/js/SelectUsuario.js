@@ -27,7 +27,7 @@ function cargar_roles() {
     var cod = '';
     $.ajax({
         type: 'post',
-        url: baseUrl2+'/controller/selectRolesController.php',
+        url: baseUrl2+'/selectRolesController.php',
         data: cod,
         success: function(resp) {
             $('#rol').append(resp);

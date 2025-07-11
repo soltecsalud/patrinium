@@ -1053,8 +1053,8 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                         <input type="date" name="fechaein" class="form-control">
                     </div>
                     <div class="form-group" id="divfecharegistro" style="display: none;">
-                        <label for="fecharegistro">Fecha</label>
-                        <input type="datetime-local" name="fecharegistro" class="form-control">
+                        <label for="fecharegistro">Fecha y Hora</label>
+                        <input type="datetime-local" name="fecharegistro" class="form-control" style="max-width: 200px;">
                     </div>
                     <div class="form-group" id="divnumeroregistro" style="display: none;">
                         <label for="numeroregistro">N&uacute;mero de registro</label>
@@ -1676,7 +1676,7 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                     <!-- Reportes por cada Sociedad -->
                     <div id="reportesSociedad" class="form-group pt-2" style="display: none;">
                         <hr />
-                        <label for="reportesSociedad">Reportes de la Sociedad</label>
+                        <label for="reportesSociedad">Kit Entrega de Servicios A Clientes</label>
                         &nbsp;
                         <div class="row col-md-8">
                             <div class="col-md-4">
