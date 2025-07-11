@@ -402,13 +402,14 @@ include_once "../controller/solicitudController.php";
                     });
                     datosFacturas.push(factura);
                     // <td>${factura.id_solicitud}</td>
+                    let nombre_empresa = factura.nombre_empresa || datos.logo;
                     let row = `<tr>
                         <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment"  data-id-factura="${factura.id}" data-id-solicitud="${factura.id_solicitud}"/></td>
                         <td><input id="payment-${factura.id}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${factura.id}"  /></td>
                         <td><input id="payment-${factura.id}" class="btn btn-danger delete-btn" type="button" value="Eliminar" data-id-factura="${factura.id}"  /></td>
                         <td>${factura.nombre_obtenido}</td>
                         <td>${datos.invoice_number}</td>
-                        <td>${datos.logo}</td>
+                        <td>${nombre_empresa}</td>
                         <td>${factura.nombre_banco}</td>
                         <td>${factura.numero_cuenta}</td>
                         <td>${factura.created_at}</td>
@@ -417,7 +418,6 @@ include_once "../controller/solicitudController.php";
                     </tr>`;
                     tbody.append(row);
                 });
-               
         $("#facturaTable").DataTable({
             "responsive": true,
             "lengthChange": true,

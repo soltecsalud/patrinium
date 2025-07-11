@@ -191,21 +191,24 @@ if (!isset($_SESSION['usuario'])) {
                 data: { action: 'listarEmpresas' },
                 dataType: "json",
                 success: function(response) {
-                    if (response && response.length > 0) {
-                        dataEmpresas = response;
+                    if (response && response.status=="success") {
+                        dataEmpresas = response.data; 
                         var tbody = $('#empresas_tbody');
                         tbody.empty(); // Limpiar el tbody antes de agregar nuevos datos
-                        $.each(dataEmpresas, function(index, empresa) {
+
+                        // Recorrer el array de empresas y crear las filas de la tabla
+                        dataEmpresas.forEach(function(empresa) {
+                            var logo = empresa.ruta_logo ? `<img src="${empresa.ruta_logo}" alt="Logo" style="width: 50px; height: 50px;">` : 'No disponible';
                             var row = `<tr>
                                 <td>
-                                    <a style="margin-right: 10px;"  class="btn btn-success m-0" data-toggle="modal" data-target="#modalActualizarEmpresa" data-id="${empresa.id_empresa}">
-                                        Actualizar
-                                    </a>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarEmpresa" data-id="${empresa.id_empresa}">Editar</button>
                                 </td>
-                                <td><button style="margin-right: 10px;" class="btn btn-danger m-0"  onclick="eliminarEmpresa(${empresa.id_empresa})">Eliminar</button></td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="eliminarEmpresa(${empresa.id_empresa})">Eliminar</button>
+                                </td>
                                 <td>${empresa.nombre_empresa}</td>
                                 <td>${empresa.direccion_empresa}</td>
-                                <td><img src="${empresa.ruta_logo}" alt="Logo" style="width: 50px; height: 50px;"></td>
+                                <td>${logo}</td>
                                 <td>${empresa.correo}</td>
                             </tr>`;
                             tbody.append(row);

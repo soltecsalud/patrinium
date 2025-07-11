@@ -202,14 +202,15 @@ class ModelMenus
     static public function mdlEditarMenu($datos){
         try {
             $sql = "UPDATE menus 
-                    SET nombre = :nombre, icono = :icono, color = :color, orden = :orden 
+                    SET nombre = :nombre, icono = :icono, color = :color
+                    -- , orden = :orden 
                     WHERE id = :id_menu";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->bindParam(':id_menu', $datos['id_menu'], PDO::PARAM_STR);
             $consulta->bindParam(':nombre', $datos['nombre'], PDO::PARAM_STR);
             $consulta->bindParam(':icono', $datos['icono'], PDO::PARAM_STR);
             $consulta->bindParam(':color', $datos['color'], PDO::PARAM_STR);
-            $consulta->bindParam(':orden', $datos['orden'], PDO::PARAM_INT);
+            // $consulta->bindParam(':orden', $datos['orden'], PDO::PARAM_INT);
 
             return $consulta->execute();
         } catch (Exception $e) {

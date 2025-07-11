@@ -13,6 +13,7 @@ class ModelFacturacion {
 			$sql = "SELECT 
                 f.*, 
                 b.*, 
+                c.nombre_empresa,c.ruta_logo,
                 COALESCE(
                     (SELECT nombre_sociedad 
                     FROM personas_sociedad 
@@ -30,11 +31,10 @@ class ModelFacturacion {
                 ) AS nombre_obtenido
             FROM 
                 factura AS f
-            INNER JOIN 
-                bancos_consignaciones AS b 
-                ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+            INNER JOIN bancos_consignaciones AS b ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+            LEFT JOIN empresas AS c ON f.datos->>'logo' = c.id_empresa::TEXT
             WHERE 
-                estado = 2 OR estado IS NULL";
+                f.estado = 2 OR f.estado IS NULL";
             $consulta = Conexion::conectar()->prepare($sql);
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
