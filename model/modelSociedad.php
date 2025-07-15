@@ -1,11 +1,13 @@
 <?php
 require_once('conexion.php');
 
-class modelSociedad{
+class modelSociedad
+{
 
 
 
-    static public function mdlInsertarSociedad($datos) {
+    static public function mdlInsertarSociedad($datos)
+    {
         try {
             $sqlInsertarSociedad = "INSERT INTO sociedad(
                 nombre, apellido, estado_civil, pais_origen, 
@@ -57,13 +59,13 @@ class modelSociedad{
                 $error = $stmt->errorInfo();
                 return "error: " . $error[2];
             }
-
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public static function mdlActualizarCliente($datos){
+    public static function mdlActualizarCliente($datos)
+    {
         try {
             $tipo = $datos['tipo'];
 
@@ -115,7 +117,8 @@ class modelSociedad{
     }
 
 
-    static public function  mdlGetsociedad(){
+    static public function  mdlGetsociedad()
+    {
         try {
             // $sqlListarSociedades = "SELECT * FROM sociedad";
             $sqlListarSociedades = "SELECT id_sociedad, s.uuid, CONCAT(nombre, ' ',apellido) AS nombre, createdat FROM sociedad AS s
@@ -129,7 +132,8 @@ class modelSociedad{
         }
     }
 
-    static public function  mdlGetAllClientes(){
+    static public function  mdlGetAllClientes()
+    {
         try {
             $sqlListarSociedades = "SELECT uuid,id_sociedad, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
             pais_residencia_fiscal, pais_domicilio, numero_pasaporte, pais_pasaporte, 
@@ -154,9 +158,10 @@ class modelSociedad{
         }
     }
 
-    static public function mdlConsultarSocios(){
+    static public function mdlConsultarSocios()
+    {
         try {
-            $sqlListarSocios= "SELECT 
+            $sqlListarSocios = "SELECT 
                 id_persona_cliente, 
                 CONCAT(p.nombre, ' ',p.apellido) AS nombre, 
                 p.createdat, 
@@ -167,19 +172,20 @@ class modelSociedad{
 	                INNER JOIN sociedad AS sc ON (s.fk_cliente=sc.uuid)";
             $listaSocios = Conexion::conectar()->prepare($sqlListarSocios);
             $listaSocios->execute();
-            return $listaSocios->fetchAll(PDO::FETCH_ASSOC); 
+            return $listaSocios->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             die($e->getMessage());
         }
     }
 
-    static public function mdlActualizarTipoSocio($id, $tipo) {
+    static public function mdlActualizarTipoSocio($id, $tipo)
+    {
         try {
             $sqlActualizarTipoSocio = "UPDATE personas_cliente SET es_socio=:tipo WHERE id_persona_cliente=:id";
             $stmt = Conexion::conectar()->prepare($sqlActualizarTipoSocio);
             $stmt->bindParam(":tipo", $tipo, PDO::PARAM_BOOL);
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-            
+
             if ($stmt->execute()) {
                 return "ok";
             } else {
@@ -190,7 +196,8 @@ class modelSociedad{
         }
     }
 
-    static public function mdlGetPersonaSociedadySociedad($idSolicitud){
+    static public function mdlGetPersonaSociedadySociedad($idSolicitud)
+    {
         try {
             // $sqlListarSociedades = "SELECT DISTINCT(NULL) as uuid,id_sociedad,0 as idcliente,nombre||' ' ||apellido AS nombre,'miembro' as tipo FROM sociedad AS s
             //                         UNION
@@ -218,21 +225,22 @@ class modelSociedad{
     }
 
 
-    static public function mdlObtenerConsultoria() {
+    static public function mdlObtenerConsultoria()
+    {
         try {
             $sqlObtenerConsultoria = "SELECT  servicios, servicios_adicionales
 	        FROM public.solicitud  where id_solicitud='189';";
             $stmt = Conexion::conectar()->prepare($sqlObtenerConsultoria);
             $stmt->execute();
 
-                return $stmt->fetch(PDO::FETCH_ASSOC); // Devolver el resultado como un array asociativo
-            } 
-        catch (Exception $e) {
-                return false;
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Devolver el resultado como un array asociativo
+        } catch (Exception $e) {
+            return false;
         }
     }
 
-    static public function mdlObtenerDocumentosSociedad($solicitud, $sociedad){
+    static public function mdlObtenerDocumentosSociedad($solicitud, $sociedad)
+    {
         try {
             $sqlListarDocumentosSociedad = "SELECT 
             id_archivo_adjunto,nombre_archivo,a.create_at,id_solicitud,a.numero_registro,a.fecha_entrega,doc.nombre_documento_adjunto as tipo
@@ -242,7 +250,7 @@ class modelSociedad{
             $listaDocumentosSociedad = Conexion::conectar()->prepare($sqlListarDocumentosSociedad);
             $listaDocumentosSociedad->bindParam(":solicitud", $solicitud, PDO::PARAM_INT);
             $listaDocumentosSociedad->bindParam(":sociedad", $sociedad, PDO::PARAM_STR);
-            
+
             $listaDocumentosSociedad->execute();
             return $listaDocumentosSociedad->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -250,7 +258,8 @@ class modelSociedad{
         }
     }
 
-    static public function mdlObtenerTiposSociedad(){
+    static public function mdlObtenerTiposSociedad()
+    {
         try {
             $sqlListarTiposSociedad = "SELECT id_tipo_sociedad, nombre_tipo_sociedad FROM tipo_sociedad";
             $listaTiposSociedad = Conexion::conectar()->prepare($sqlListarTiposSociedad);
@@ -261,9 +270,10 @@ class modelSociedad{
         }
     }
 
-    static public function mdlObtenerCliente($campo){
+    static public function mdlObtenerCliente($campo)
+    {
         try {
-            $nombre ="%$campo%"; 
+            $nombre = "%$campo%";
             $sqlListarCliente = "SELECT id_sociedad FROM sociedad WHERE (nombre LIKE :campo) OR (numero_pasaporte=:pasaporte)";
             $listaCliente = Conexion::conectar()->prepare($sqlListarCliente);
             $listaCliente->bindParam(":campo", $nombre);
@@ -275,9 +285,10 @@ class modelSociedad{
         }
     }
 
-    static public function mdlObtenerNombreSociedad($campo){
+    static public function mdlObtenerNombreSociedad($campo)
+    {
         try {
-            $nombre ="%$campo%"; 
+            $nombre = "%$campo%";
             $sqlListarCliente = "SELECT id_personas_sociedad FROM personas_sociedad WHERE (datos_sociedad->>'nombreSociedad' LIKE :campo) OR (datos_sociedad->>'nombreSociedad'=:nombrecompleto)";
             $listaSociedad = Conexion::conectar()->prepare($sqlListarCliente);
             $listaSociedad->bindParam(":campo", $nombre);
@@ -289,22 +300,22 @@ class modelSociedad{
         }
     }
 
-    static public function mdlInsertarSociedadExtranjera($datos) {
+    static public function mdlInsertarSociedadExtranjera($datos)
+    {
         try {
-            
+
             $sqlInsertarSociedad = "INSERT INTO sociedad_extranjera(datos_sociedad,usuario) VALUES (:datosSociedad, :usuario)";
 
             $stmt = Conexion::conectar()->prepare($sqlInsertarSociedad);
             $stmt->bindParam(":datosSociedad", $datos["datos"], PDO::PARAM_STR);
             $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-            
-            if ($stmt->execute()){
+
+            if ($stmt->execute()) {
                 return "ok";
-            }else{ 
+            } else {
                 $error = $stmt->errorInfo();
                 return "error: " . $error[2];
             }
-
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -327,7 +338,8 @@ class modelSociedad{
                                         datos_sociedad->>'conjuntoclientes' AS conjuntoclientes,
                                         datos_sociedad->>'conjuntopersonas' AS conjuntopersonas,
 										(so.nombre || ' ' || so.apellido) AS nombrecliente,
-                                        s.id_solicitud
+                                        s.id_solicitud,
+                                        ps.is_required_mfa
                                     FROM personas_sociedad as ps
 									INNER JOIN solicitud AS s ON (ps.fk_solicitud=s.id_solicitud)
                     				INNER JOIN sociedad as so ON (s.fk_cliente=so.uuid)
@@ -343,7 +355,8 @@ class modelSociedad{
                                     jd.declararsociedad,
                                     jd.estadopais,
                                     jd.persona,
-                                    jd.porcentaje,
+                                    jd.porcentaje, 
+                                    jd.is_required_mfa,
                                         COALESCE(
                                             -- Buscamos en personas_sociedad si persona es un UUID válido
                                             (SELECT 
@@ -376,10 +389,10 @@ class modelSociedad{
         } catch (Exception $e) {
             die($e->getMessage());
         }
-
     }
 
-    public static function mdlObtenerExtensionSociedades(){
+    public static function mdlObtenerExtensionSociedades()
+    {
         try {
             $sql = "SELECT 
                         ps.uuid,
@@ -427,7 +440,7 @@ class modelSociedad{
                     GROUP BY 
                         ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo
             ";
-            
+
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -436,26 +449,28 @@ class modelSociedad{
         }
     }
 
-   public static function mdlActualizarDeclaracionMarzo($uuid, $estado) {
-            try {
-                $db = Conexion::conectar();
+    public static function mdlActualizarDeclaracionMarzo($uuid, $estado)
+    {
+        try {
+            $db = Conexion::conectar();
 
-                $sql = "INSERT INTO sociedades_march (fk_personas_sociedad_uuid, declararon_marzo, created_at)
+            $sql = "INSERT INTO sociedades_march (fk_personas_sociedad_uuid, declararon_marzo, created_at)
                         VALUES (:uuid, :estado, NOW())";
 
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
-                $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
-                $stmt->execute();
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
+            $stmt->execute();
 
-                return ["success" => true];
-            } catch (Exception $e) {
-                throw new Exception("Error al insertar declaración: " . $e->getMessage());
-            }
+            return ["success" => true];
+        } catch (Exception $e) {
+            throw new Exception("Error al insertar declaración: " . $e->getMessage());
         }
+    }
 
 
-    public static function mdlObtenerSociedadesSinDeclararMarzo() {
+    public static function mdlObtenerSociedadesSinDeclararMarzo()
+    {
         try {
             $sql = "       SELECT 
     ps.uuid,
@@ -501,7 +516,7 @@ WHERE
     AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)
 GROUP BY 
     ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo;";
-            
+
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -509,8 +524,34 @@ GROUP BY
             throw new Exception("Error: " . $e->getMessage());
         }
     }
-    
+
+    public static function mdlActualizarEstadoMFA($uuid, $estado)
+    {
+        try {
+
+            if($estado=='true') {
+                // Si se activa MFA, se genera un nuevo secreto
+                include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
+                $gAuth = new PHPGangsta_GoogleAuthenticator();
+                $totpsecret = $gAuth->createSecret();
+            } else { 
+                // Si se desactiva MFA, no es necesario generar un nuevo secreto
+                $totpsecret = null;
+            }
+
+            $sql = "UPDATE personas_sociedad SET totp_secret = :totpsecret, is_required_mfa = :estado WHERE uuid = :uuid";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':totpsecret', $totpsecret, PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL); 
+            $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return ["success" => true];
+        } catch (Exception $e) {
+            throw new Exception("Error al actualizar estado MFA: " . $e->getMessage());
+        }
+    }
+
+
 }
-
-
-?>

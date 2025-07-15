@@ -240,6 +240,20 @@ class SociedadController{
         }
     }
 
+    public function actualizarEstadoMFA($idSociedad, $isRequiredMFA) {
+        try {
+            $respuesta = modelSociedad::mdlActualizarEstadoMFA($idSociedad, $isRequiredMFA);
+            header('Content-Type: application/json');
+            if ($respuesta) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "No se pudo actualizar el estado de MFA"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["resultado" => 0, "mensaje" => $e->getMessage()]);
+        }
+    }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['accion']) && $_POST['accion'] == 'guardarSociedad') {
@@ -251,6 +265,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarCliente'){
         $controlador = new SociedadController();
         $controlador->actualizarCliente($_POST);
+    }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarEstadoMFA'){
+        $controlador = new SociedadController();
+        $controlador->actualizarEstadoMFA($_POST['idSociedad'], $_POST['isRequiredMFA']);
     }else {
         error_log("Acción no especificada o incorrecta.");
         echo json_encode(["resultado" => 0, "mensaje" => "Acción no especificada o incorrecta."]);

@@ -857,7 +857,10 @@ class ModelSolicitud
                     jsonb_array_elements_text(datos_sociedad->'personas') AS persona, -- Se extrae cada elemento de personas                                    
                     jsonb_array_elements_text(datos_sociedad->'porcentajes') AS porcentaje,
                     datos_sociedad->>'conjuntoclientes' AS conjuntoclientes,
-                    datos_sociedad->>'conjuntopersonas' AS conjuntopersonas
+                    datos_sociedad->>'conjuntopersonas' AS conjuntopersonas,
+                    ps.is_mfa_enabled,
+                    ps.totp_secret,
+                    ps.is_required_mfa
                 FROM personas_sociedad as ps
                 WHERE fk_solicitud = :id_solicitud 
             )
@@ -871,6 +874,9 @@ class ModelSolicitud
                 jd.estadopais,
                 jd.persona,
                 jd.porcentaje,
+                jd.is_mfa_enabled,
+                jd.totp_secret,
+                jd.is_required_mfa,
                     COALESCE(
                         -- Buscamos en personas_sociedad si persona es un UUID válido
                         (SELECT 

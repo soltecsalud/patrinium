@@ -5,6 +5,10 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 include_once "../controller/solicitudController.php";
+// include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
+include_once '../libs/phpqrcode-master/qrlib.php'; // Librería PHP QR Code
+
+// $gAuth  = new PHPGangsta_GoogleAuthenticator();
 
 $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 ?>
@@ -516,7 +520,6 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                             $sociedades[$nombre] = [];
                                         }
                                         $sociedades[$nombre][] = $item;
-                                        // print_r($item);
                                         // Decodificar JSONB que viene en datos_sociedad
                                         // $datos_sociedad = json_decode($item["datos_sociedad"], true);
 
@@ -549,8 +552,9 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                     }
                                     foreach ($sociedades as $nombre_sociedad => $detalles) { ?>
                                         <div class="col-md-4">
-                                            <div class="info-box">
-                                                <span class="info-box-icon bg-info"><i class="far fa-bookmark"></i></span>
+                                            <div class="info-box"> 
+                                                <!-- Si la sociedad esta activa el span tiene la clase bg-info y sino es bg-danger -->
+                                                <span class="info-box-icon <?php echo $detalles[0]['activarsociedad'] ? 'bg-info' : 'bg-danger'; ?>"><i class="fas fa-bookmark"></i></span>
                                                 <div class="info-box-content">
                                                     <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
                                                     <span class="info-box-text">
@@ -568,6 +572,9 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                                             $declararSociedad = $detalle['declararsociedad'];
                                                             $tipocorporacion  = $detalle['tipocorporacion'];
                                                             $estadopais       = $detalle['estadopais'];
+                                                            $is_mfa_enabled   = $detalle['is_mfa_enabled'];
+                                                            $totp_secret      = $detalle['totp_secret'];
+                                                            $is_required_mfa  = $detalle['is_required_mfa'];
                                                             //Se crea un array con la información de las personas asociadas a cada sociedad.
                                                             $infoSociedades[] = [
                                                                 'nombre'         => $detalle['nombre_obtenido'],
@@ -578,13 +585,29 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                                                 'idtiposociedad' => $detalle['selecttiposociedad'],
                                                                 'tiposociedad'   => $detalle['tiposociedad']
                                                             ];
+
+                                                            // Generar la URL OTP
+                                                            $issuer  = 'Patrinium'; 
+                                                            
+                                                            // $secret = $gAuth->createSecret();
+                                                            $totpUrl = 'otpauth://totp/' . urlencode($nombre_sociedad) . '?secret=' . $totp_secret . '&issuer=' . urlencode($issuer);
+
+                                                            $tempDir  = '../qr_temp/';
+                                                            $filename = $tempDir . 'qrcode_' . $idSociedad . '.png';
+                                                            QRcode::png($totpUrl, $filename, QR_ECLEVEL_L, 6); // Genera el archivo QR
                                                         }
                                                         echo implode(" <br> ", $personas);
                                                         ?>
                                                     </span>
                                                     <input type="hidden" id='inputIdSociedad_<?php echo $idSociedad; ?>' value='<?php echo $idSociedad; ?>'>
-                                                    <!-- Botón para abrir el modal -->
+                                                    <!-- Botón para abrir el modal de validacion MFA -->
                                                     <button
+                                                    style="display: <?php echo ($is_required_mfa && $totp_secret != null) ? 'inline-block' : 'none'; ?>;"
+                                                    class="btn btn-primary btn-sm mt-2 btn_validar_mfa" data-id="<?php echo $idSociedad; ?>" data-qr="<?php echo $filename; ?>" data-ismfaenabled="<?php echo $is_mfa_enabled; ?>" data-totpsecret="<?php echo $totp_secret; ?>">Ver Detalles</button>
+                                                    <!-- Botón para abrir el modal --> 
+                                                    <!-- Si is_required_mfa es true y si totpsecret es diferente de null el boton debe ser none -->
+                                                    <button 
+                                                        style="display: <?php echo ($is_required_mfa && $totp_secret != null) ? 'none' : 'inline-block'; ?>;"
                                                         data-id="<?php echo $idSociedad; ?>"
                                                         data-nombre="<?php echo $nombre_sociedad; ?>"
                                                         data-idtiposociedad="<?php echo $idtipoSociedad; ?>"
@@ -1883,6 +1906,36 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
     </div>
 </div>
 
+<!-- Modal MFA -->
+<div class="modal fade" id="mfaModal" tabindex="-1" aria-labelledby="mfaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mfaModalLabel">Autenticación de Dos Factores</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formMFA">
+                    <div class="form-group text-center" id="qrCodeContainer">
+                        <label for="">Escanea este c&oacute;digo QR con tu aplicaci&oacute;n de autenticaci&oacute;n</label>
+                        <img id="img_qr" class="img_qr" alt="Código QR">
+                    </div>
+                    <div class="form-group" id="mfaCodeContainer">
+                        <label for="mfaCode">C&oacute;digo de Autenticaci&oacute;n</label>
+                        <input type="text" class="form-control" id="mfaCode" name="mfa_code" maxlength="6" placeholder="Ingresa el código de autenticación" required>
+                    </div>
+                    <input type="hidden" id="totpsecret">
+                    <input type="hidden" id="idsociedadmfa">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btnSubmitMFA">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="js/solicitud.js"></script>
 <script src="js/factura.js"></script>
 
@@ -2487,6 +2540,68 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
             // 🔹 2️⃣ Eliminar elementos agregados dinámicamente
             checklistList.querySelectorAll(".dynamic-item").forEach(item => item.remove());
         });
+
+        $('.btn_validar_mfa').click(function() {
+            $('#img_qr').attr('src', $(this).data('qr'));
+            $('#totpsecret').val($(this).data('totpsecret'));
+            $('#idsociedadmfa').val($(this).data('id'));
+            if($(this).data('ismfaenabled')==true){
+                $('#qrCodeContainer').hide(); // Ocultar el contenedor del código QR si MFA está habilitado
+                $('#mfaCodeContainer').show(); // Mostrar el campo de código MFA
+            } else {
+                $('#qrCodeContainer').show(); // Mostrar el contenedor del código QR si MFA no está habilitado
+                $('#mfaCodeContainer').show(); // Mostrar el campo de código MFA
+            }
+            $('#mfaCode').val(''); // Limpiar el campo de código MFA
+            $('#mfaModal').modal('show'); 
+        });
+
+        $('#btnSubmitMFA').click(function() {
+            var mfaCode    = $('#mfaCode').val().trim();
+            var totpSecret = $('#totpsecret').val().trim();
+            var idSociedad = $('#idsociedadmfa').val().trim();
+            if (mfaCode === '') {
+                alert('Por favor, ingresa el código de autenticación.');
+                return;
+            }
+            $.ajax({ 
+                url: '../controller/mfaController.php',
+                method: 'POST',
+                data: { 
+                    action: 'validarMFA',
+                    mfa_code: mfaCode,
+                    totp_secret: totpSecret,
+                    id_sociedad: idSociedad
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert('Autenticación exitosa.');
+                        // Mostrar el boton de clase btnVerDetalles con el mismo id de la sociedad
+                        $('.btnVerDetalles').each(function() {
+                            if ($(this).data('id') === idSociedad) {
+                                $(this).show(); // Mostrar el botón si coincide el ID
+                            }
+                        }); 
+                        $('.btn_validar_mfa').each(function() { 
+                            if ($(this).data('id') === idSociedad) {
+                                $(this).hide(); // Ocultar el botón si coincide el ID
+                            }
+                        });
+                        $('#mfaModal').modal('hide'); 
+                        // Aquí puedes redirigir o realizar otra acción después de la autenticación exitosa
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                    alert('Error al validar el código MFA. Por favor, inténtalo de nuevo.');
+                }
+            });
+
+        });
+
         let idSolicituduuid;
         let tipocorporacion;
         $('.btnVerDetalles').click(function() {

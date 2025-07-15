@@ -42,6 +42,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <th>Sociedades</th>
                                             <th>Cliente de la sociedad</th>
                                             <th>Informaci&oacute;n de la sociedad</th>
+                                            <th>Habilitar MFA</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sociedades_patrimonium"></tbody>
@@ -254,7 +255,7 @@ if (!isset($_SESSION['usuario'])) {
                 tbody.empty();
                 $.each(response, function(index, sociedad) {
                     dataSociedad.push(sociedad);
-                    
+
                     //Verificar si la sociedad ya existe en el array
                     if (dataTablaSociedad.some(s => s.uuid === sociedad.uuid)) {
                         return; // Si ya existe, no la agregamos de nuevo
@@ -276,6 +277,16 @@ if (!isset($_SESSION['usuario'])) {
                                             Ver Informaci&oacute;n
                                             </a>`;
                             }
+                        },
+                        // checkbox para habilitar MFA, si el campo is_required_mfa es true, el checkbox debe estar marcado y mostrar un mensaje de "Habilitado"
+                        {
+                            "data": null,
+                            "render": function(data, type, row) {
+                                return `<label class="checkbox-container">
+                                            <input type="checkbox" class="mfa-checkbox" data-id="${row.uuid}" ${row.is_required_mfa === true ? 'checked' : ''}>
+                                            <span class="checkmark"></span>
+                                        </label>`;
+                            }
                         }
                     ],
                     "destroy": true,
@@ -288,6 +299,34 @@ if (!isset($_SESSION['usuario'])) {
                 console.error('Error al obtener los datos: ', xhr.responseText);
             }
         });
+
+        // Evento para el checkbox de habilitar MFA
+        $(document).on('change', '.mfa-checkbox', function() {
+            var idSociedad = $(this).data('id');
+            var isChecked  = $(this).is(':checked');
+            $.ajax({
+                url: '../controller/sociedadController.php',
+                type: 'POST',
+                data: {
+                    accion: 'actualizarEstadoMFA',
+                    idSociedad: idSociedad,
+                    isRequiredMFA: isChecked
+                },
+                dataType: 'json',
+                success: function(response) { 
+                    if (response.status === 'success') { 
+                        alert('Estado de MFA actualizado correctamente.');
+                    } else {
+                        alert('Error al actualizar el estado de MFA: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al actualizar el estado de MFA:', xhr.responseText);
+                }
+            });
+        });
+
+
         $('#modalverinformacion').on('show.bs.modal', function(event) {
             var button  = $(event.relatedTarget); 
             var id      = button.data('id');
