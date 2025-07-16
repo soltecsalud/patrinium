@@ -5,11 +5,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 include_once "../controller/solicitudController.php";
-// include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
 include_once '../libs/phpqrcode-master/qrlib.php'; // Librería PHP QR Code
-
-// $gAuth  = new PHPGangsta_GoogleAuthenticator();
-
 $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
 ?>
 <!DOCTYPE html>
@@ -590,7 +586,8 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                                             $issuer  = 'Patrinium'; 
                                                             
                                                             // $secret = $gAuth->createSecret();
-                                                            $totpUrl = 'otpauth://totp/' . urlencode($nombre_sociedad) . '?secret=' . $totp_secret . '&issuer=' . urlencode($issuer);
+                                                            // $totpUrl = 'otpauth://totp/'.urlencode($nombre_sociedad).'?secret='.$totp_secret.'&issuer='.urlencode($issuer);
+                                                            $totpUrl = "otpauth://totp/{$nombre_sociedad}?secret={$totp_secret}&issuer={$issuer}";
 
                                                             $tempDir  = '../qr_temp/';
                                                             $filename = $tempDir . 'qrcode_' . $idSociedad . '.png';
