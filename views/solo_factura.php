@@ -160,12 +160,14 @@ $controlador = new Solicitud_controller();
                                         <th>Fecha Creacion</th>
                                         <th>Descargar Factura</th>
                                         <th>Descargar Comprobante Pago</th>
+                                        <th>Nombre a quien Factura</th>
+                                        <th>N&uacute;mero de factura</th>
                                         <th>Tipo Consignacion</th>
                                         <th>Nota</th>
-                                        <th>ID</th>
-                                        <th>N&uacute;mero de factura</th>
+                                        <th>System Number</th>                                      
                                         <th>Valor</th>
                                         <th>Banco</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody id="tablefacturasrapidas"></tbody>
@@ -235,9 +237,7 @@ $controlador = new Solicitud_controller();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="billingModalLabel">Actualiza factura r&aacute;pida</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                      
                     </div>
                     <div class="modal-body">
                         <form id="billingFormActualizar">
@@ -527,10 +527,11 @@ $controlador = new Solicitud_controller();
             type: 'POST',
             data: datos, // Enviar los datos como un objeto
             success: function(response) {
+                console.log('Respuesta del controlador:', response);
                 // Parsear el JSON recibido
                 let facturas = JSON.parse(response);
                 datosFacturas.push(facturas);
-
+               
                 // Limpiar el contenido actual del tbody
                 $('#tablefacturasrapidas').empty();
 
@@ -542,6 +543,7 @@ $controlador = new Solicitud_controller();
                     let data = JSON.parse(jsonString);
 
                     // Extract the invoice_number
+                    let cliente_factura = data.clientefactura ? data.clientefactura : 'N/A';
                     let invoiceNumber = data.invoice_number;
                     
                     // Validar si los campos son null y asignar 'N/A' si es el caso
@@ -553,6 +555,8 @@ $controlador = new Solicitud_controller();
                     let idNumeroFacura   = factura.numerofactura ? factura.numerofactura : 'N/A';
                     
                     let nombreBanco      = factura.nombre_banco ? factura.nombre_banco : 'N/A';
+                    
+
 
                     let datosServicios = JSON.parse(factura.datos);
                     let total = 0; // Inicializa el total
@@ -568,12 +572,15 @@ $controlador = new Solicitud_controller();
                     <td>${createdAt}</td>
                     <td><a href='../views/factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
                     <td><a href='../documents/quick_invoices/${idFactura}/${rutaPago}' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td>
+                    <td>${cliente_factura}</td>
+                    <td>${idNumeroFacura}</td>                   
                     <td>${tipoConsignacion}</td>
                     <td>${notaPago}</td>
                     <td>${idFactura}</td>
-                    <td>${idNumeroFacura}</td>
+                
                     <td>${total}</td>
                     <td>${nombreBanco}</td>
+                    
                     </tr> `;
 
                     // Agregar la fila al tbody
@@ -723,11 +730,7 @@ $controlador = new Solicitud_controller();
 
             
             // Mover el modal cerca del mouse
-            const $modalDialog = $('#billingModal .modal-dialog');
-            $modalDialog.css({
-                top: mouseY + 5 + 'px',  // un poco más abajo del cursor
-                left: mouseX - 200 + 'px', // centrado horizontal aprox
-            });
+           
             $('#billingModal').modal('show');
         });
 

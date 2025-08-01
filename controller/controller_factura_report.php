@@ -23,6 +23,7 @@ class MyPDF extends FPDF
             if (isset($_GET['table']) && !empty($_GET['table'])) {
                 $getLogo = ReportModel::getJsonFacturaRapida($id_solicitud, $numeroInvoiceSendModelo);
                 $nombreCliente = $getLogo[0]->nombre_cliente;
+                $createAt =$getLogo[0]->created_at;
             } else {
                 $getLogo = ReportModel::getJsonFactura($id_solicitud, $numeroInvoiceSendModelo);
                 $getCliente = ReportModel::getCliente($id_solicitud, 'sociedad');
@@ -50,6 +51,7 @@ class MyPDF extends FPDF
                 $email = $datosJson['email'];
                 $numberTax = $datosJson['number_tax'];
                 $adress = $datosJson['adress'];
+               
             }
 
             $nombreEmpresa = $getLogo[0]->nombre_empresa;
@@ -86,6 +88,7 @@ class MyPDF extends FPDF
             //     $rutaImagen = "imgs/logo_empresa.png"; // Ruta por defecto si no se proporciona una imagen
             // }
             $this->Image($rutaImagen, 10, 10, 50, 0, 'PNG');
+           
 
 
             // Configurar la fuente para el título
@@ -95,7 +98,7 @@ class MyPDF extends FPDF
             // Fecha actual
             $dateOfIssue = date('m/d/Y'); // Formato: 05/09/2024
             // Imprime la fecha de emisión
-            $this->Cell(0, 10, 'Date of issue: ' . $dateOfIssue, 0, 1, 'C');
+            $this->Cell(0, 10, 'Date of issue: ' . $createAt, 0, 1, 'C');
             $this->SetX(100);
             $this->Cell(0, 10, 'Invoice No. ' . $numeroInvoice, 0, 1, 'C');
             $this->ln(20);

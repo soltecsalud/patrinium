@@ -84,7 +84,7 @@ class ReportModel {
             f.ruta,
             f.tipo_consignacion,
             f.nota_pago,
-            f.created_at,
+            to_char(f.created_at,'MM/DD/YYYY') as created_at,
             -- CONCAT(s.nombre, ' ', s.apellido) AS nombre_cliente,
             f.datos->>'clientefactura' AS nombre_cliente,
             c.nombre_empresa,c.ruta_logo
