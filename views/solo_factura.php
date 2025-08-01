@@ -289,7 +289,7 @@ $controlador = new Solicitud_controller();
                                 <div class="col-md-3">
                                     <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
                                         Creation Date: 
-                                    </label>
+                                    </label> 
                                     <input type="date" name="fecha_actualizacion" id="fecha_actualizacion" class="form-control">
                                 </div>
                             </div>
