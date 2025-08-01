@@ -339,7 +339,8 @@ class modelSociedad
                                         datos_sociedad->>'conjuntopersonas' AS conjuntopersonas,
 										(so.nombre || ' ' || so.apellido) AS nombrecliente,
                                         s.id_solicitud,
-                                        ps.is_required_mfa
+                                        ps.is_required_mfa,
+                                        ps.is_carga_eeuu
                                     FROM personas_sociedad as ps
 									INNER JOIN solicitud AS s ON (ps.fk_solicitud=s.id_solicitud)
                     				INNER JOIN sociedad as so ON (s.fk_cliente=so.uuid)
@@ -357,6 +358,7 @@ class modelSociedad
                                     jd.persona,
                                     jd.porcentaje, 
                                     jd.is_required_mfa,
+                                    jd.is_carga_eeuu,
                                         COALESCE(
                                             -- Buscamos en personas_sociedad si persona es un UUID válido
                                             (SELECT 
@@ -553,5 +555,37 @@ GROUP BY
         }
     }
 
+    public static function mdlActualizarEstadoCarga($uuid, $estado)
+    {
+        try {
+            $sql = "UPDATE personas_sociedad SET is_carga_eeuu = :estado WHERE uuid = :uuid";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
+            $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return ["success" => true];
+        } catch (Exception $e) {
+            throw new Exception("Error al actualizar estado de carga EEUU: " . $e->getMessage());
+        }
+    }
+
+    //Obteber las sociedades que tienen el campo is_carga_eeuu en true
+    public static function mdlObtenerSociedadesCarga()
+    {
+        try {
+            $sql = "SELECT 
+            id_personas_sociedad AS id,
+            datos_sociedad->>'nombreSociedad' AS nombre,
+            is_carga_eeuu
+            FROM personas_sociedad WHERE is_carga_eeuu = true";
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            throw new Exception("Error al obtener sociedades con carga EEUU: " . $e->getMessage());
+        }
+    }
 
 }

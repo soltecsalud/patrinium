@@ -338,8 +338,8 @@ class Solicitud_controller{
             }
         }
 
-        if(isset($_POST['id_factura_rapida']) && !empty($_POST['id_factura_rapida'])) {
-            $respuesta = ModelSolicitud::actualizarFacturaRapida($datos, $estado, $_POST['id_factura_rapida']);
+        if(isset($_POST['id_factura_rapida']) && !empty($_POST['id_factura_rapida'])) { 
+            $respuesta = ModelSolicitud::actualizarFacturaRapida($datos, $estado, $_POST['fecha_actualizacion'], $_POST['id_factura_rapida']);
         } else {
             $respuesta = ModelSolicitud::insertarFacturaRapida($datos, $estado);
         }

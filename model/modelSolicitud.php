@@ -475,12 +475,13 @@ class ModelSolicitud
         }
     }
 
-    public static function actualizarFacturaRapida($datos, $estado, $id_factura_rapida){
+    public static function actualizarFacturaRapida($datos, $estado, $fecha, $id_factura_rapida){
         try {
             $json_datos = json_encode($datos);
-            $sql = "UPDATE factura_rapida SET datos = :datos WHERE factura_rapida_id = :id_factura_rapida";
+            $sql = "UPDATE factura_rapida SET datos = :datos, created_at = :fecha WHERE factura_rapida_id = :id_factura_rapida";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':datos', $json_datos);
+            $stmt->bindParam(':fecha', $fecha);
             $stmt->bindParam(':id_factura_rapida', $id_factura_rapida, PDO::PARAM_INT);
             
             if($stmt->execute()) {
@@ -788,7 +789,7 @@ class ModelSolicitud
                     factura_rapida_id, 
                     datos,
                     datos->>'invoice_number' as numerofactura, 
-                    created_at, 
+                    to_char(created_at, 'YYYY-MM-DD') as created_at, 
                     ruta, 
                     tipo_consignacion, 
                     nota_pago,

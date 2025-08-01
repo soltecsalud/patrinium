@@ -284,10 +284,13 @@ $controlador = new Solicitud_controller();
                                         Invoice Number:
                                     </label>
                                     <input type="text" class="form-control" id="invoiceNumberInputActualizar" name="invoice_number" placeholder="Enter invoice number">
+                                    <input type="hidden" value="" class="form-control" id="taxActualizar" name="tax" placeholder="Enter TAX">
                                 </div>
                                 <div class="col-md-3">
-                                    
-                                    <input type="hidden"   value=" "   class="form-control" id="taxActualizar" name="tax" placeholder="Enter TAX">
+                                    <label class="text-center mb-2" style="font-size: smaller;" for="invoiceNumberInput">
+                                        Creation Date: 
+                                    </label>
+                                    <input type="date" name="fecha_actualizacion" id="fecha_actualizacion" class="form-control">
                                 </div>
                             </div>
                             <div class="row mt-4">
@@ -531,10 +534,8 @@ $controlador = new Solicitud_controller();
                 // Parsear el JSON recibido
                 let facturas = JSON.parse(response);
                 datosFacturas.push(facturas);
-               
                 // Limpiar el contenido actual del tbody
                 $('#tablefacturasrapidas').empty();
-
                 // Iterar sobre las facturas recibidas y agregar las filas al tbody
                 facturas.forEach(function(factura) {
                     let jsonString = factura.datos;
@@ -556,8 +557,6 @@ $controlador = new Solicitud_controller();
                     
                     let nombreBanco      = factura.nombre_banco ? factura.nombre_banco : 'N/A';
                     
-
-
                     let datosServicios = JSON.parse(factura.datos);
                     let total = 0; // Inicializa el total
                     $.each(datosServicios.servicios, function(nombreServicio, detalleServicio) {
@@ -665,6 +664,7 @@ $controlador = new Solicitud_controller();
             // $('#companySelectActualizar').val(datos.logo);
             $('#bankAccountSelectActualizar').val(factura.id_banco);
             $('#invoiceNumberInputActualizar').val(datos.invoice_number);
+            $('#fecha_actualizacion').val(factura.created_at); // Asignar la fecha de creación
             $('#taxActualizar').val(datos.tax);
             $('#emailActualizar').val(datos.email);
             $('#adressActualizar').val(datos.adress);

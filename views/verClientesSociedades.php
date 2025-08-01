@@ -43,6 +43,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <th>Cliente de la sociedad</th>
                                             <th>Informaci&oacute;n de la sociedad</th>
                                             <th>Habilitar MFA</th>
+                                            <th>Habilitar Carga</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sociedades_patrimonium"></tbody>
@@ -288,6 +289,17 @@ if (!isset($_SESSION['usuario'])) {
                                         </label>`;
                             }
                         }
+                        //checkbox para habilitar carga, si el campo is_carga_eeuu es true, el checkbox debe estar marcado y mostrar un mensaje de "Habilitado"
+                        ,
+                        {
+                            "data": null,
+                            "render": function(data, type, row) {
+                                return `<label class="checkbox-container">
+                                            <input type="checkbox" class="carga-checkbox" data-id="${row.uuid}" ${row.is_carga_eeuu === true ? 'checked' : ''}>
+                                            <span class="checkmark"></span>
+                                        </label>`;
+                            }
+                        }
                     ],
                     "destroy": true,
                     "responsive": true,
@@ -326,6 +338,31 @@ if (!isset($_SESSION['usuario'])) {
             });
         });
 
+        // Evento para el checkbox de habilitar carga
+        $(document).on('change', '.carga-checkbox', function() {
+            var idSociedad = $(this).data('id');
+            var isChecked  = $(this).is(':checked');
+            $.ajax({
+                url: '../controller/sociedadController.php',
+                type: 'POST',
+                data: {
+                    accion: 'actualizarEstadoCarga',
+                    idSociedad: idSociedad,
+                    isCargaEEUU: isChecked 
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert('Estado de carga actualizado correctamente.');
+                    } else {
+                        alert('Error al actualizar el estado de carga: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al actualizar el estado de carga:', xhr.responseText);
+                }
+            });
+        });
 
         $('#modalverinformacion').on('show.bs.modal', function(event) {
             var button  = $(event.relatedTarget); 
