@@ -51,7 +51,7 @@ if (!isset($_SESSION['usuario'])) {
                                         </div>
                                         <div class="form-group">
                                             <label for="logo_empresa">Logo</label>
-                                            <input type="file" class="form-control" id="logo_empresa" name="logo_empresa" required>
+                                            <input type="file" class="form-control" id="logo_empresa" name="logo_empresa" accept="image/png" required>
                                         </div>
                                     </div>
                                 </div>
@@ -151,6 +151,20 @@ if (!isset($_SESSION['usuario'])) {
         $(document).ready(function(){
             $('#btn_insertar_empresa').click(function(e){        
                 e.preventDefault();
+                // Obtener el archivo seleccionado
+                var archivo = $('#logo_empresa')[0].files[0];
+
+                // Validar que haya archivo seleccionado
+                if (!archivo) {
+                    alert("Por favor, selecciona un archivo.");
+                    return;
+                }
+
+                // Validar que sea PNG
+                if (archivo.type !== "image/png") {
+                    alert("Solo se permiten LOGOS archivos PNG.");
+                    return;
+                }
                 // Validar que se haya seleccionado un archivo para el logo
                 var formData = new FormData($('#form_empresa')[0]);
                 formData.append('action', 'gestionarEmpresa');
