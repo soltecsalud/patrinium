@@ -268,6 +268,20 @@ class SociedadController{
         }
     }
 
+    public function actualizarUsuarioCarga($id_sociedad, $id_usuario) {  
+        try {
+            $respuesta = modelSociedad::mdlActualizarUsuarioCarga($id_sociedad, $id_usuario);
+            header('Content-Type: application/json');
+            if ($respuesta) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "No se pudo actualizar el usuario de carga"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["resultado" => 0, "mensaje" => $e->getMessage()]);
+        }
+    }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['accion']) && $_POST['accion'] == 'guardarSociedad') {
@@ -285,6 +299,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarEstadoCarga'){
         $controlador = new SociedadController();
         $controlador->actualizarEstadoCarga($_POST['idSociedad'], $_POST['isCargaEEUU']);
+    }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarUsuarioCarga'){ // Actualizar usuario de carga
+        $controlador = new SociedadController();
+        $controlador->actualizarUsuarioCarga($_POST['id_sociedad'], $_POST['id_usuario']);
     }else {
         error_log("Acción no especificada o incorrecta.");
         echo json_encode(["resultado" => 0, "mensaje" => "Acción no especificada o incorrecta."]);

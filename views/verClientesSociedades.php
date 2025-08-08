@@ -44,6 +44,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <th>Informaci&oacute;n de la sociedad</th>
                                             <th>Habilitar MFA</th>
                                             <th>Habilitar Carga</th>
+                                            <th>Usuario Carga</th>
                                         </tr>
                                     </thead>
                                     <tbody id="sociedades_patrimonium"></tbody>
@@ -299,6 +300,17 @@ if (!isset($_SESSION['usuario'])) {
                                             <span class="checkmark"></span>
                                         </label>`;
                             }
+                        },
+                        {
+                            // Mostrar select con los usuarios que cargan datos a la sociedad
+                            "data": null,
+                            "render": function(data, type, row) {
+                                return `
+                                    <select class="form-control selectUsuarioCarga" name="usuario_carga" id="usuario_carga_${row.uuid}" data-id="${row.uuid}" data-id_usuario_carga_euu="${row.id_usuario_carga_euu}">
+                                        <option value="">Seleccionar usuario</option>
+                                    </select>`;
+                            }
+                            //${row.usuarios_carga.map(usuario => `<option value="${usuario.id_usuario}" ${usuario.is_selected ? 'selected' : ''}>${usuario.nombre_usuario}</option>`).join('')}
                         }
                     ],
                     "destroy": true,
@@ -306,6 +318,7 @@ if (!isset($_SESSION['usuario'])) {
                     "lengthChange": true,
                     "autoWidth": false,
                 });
+                cargarUsuarios(); // Cargar los usuarios en los selects después de inicializar la tabla
             },
             error: function(xhr, status, error) {
                 console.error('Error al obtener los datos: ', xhr.responseText);
@@ -511,6 +524,71 @@ if (!isset($_SESSION['usuario'])) {
 
         }); 
     });
+
+    // Peticion ajax para cargar los usuarios que cargan datos a la sociedad
+    function cargarUsuarios(){
+        let url = 'http://178.16.142.82/cargar_eeuu/controller/usuario_controller.php';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',  
+            success: function(response) { 
+                // console.log('Usuarios cargados:', response.usuarios);
+                // Recorrer cada select individualmente
+                $('.selectUsuarioCarga').each(function() {
+                    let idUsuarioCargaEuu = $(this).data('id_usuario_carga_euu');
+                    // console.log('Select encontrado:', $(this).data('id') , ' | ',$(this).data('id_usuario_carga_euu'));
+                    let select = $(this);
+                    select.empty(); // Limpiar opciones anteriores
+                    select.append('<option value="">Seleccionar usuario</option>');
+                    // Agregar las opciones
+                    $.each(response.usuarios, function(index, usuario) {
+                        select.append($('<option>', {
+                            value: usuario.id,
+                            text: usuario.usuario,
+                            selected: usuario.id === idUsuarioCargaEuu // Marcar como seleccionado si coincide
+                        }));
+                    });
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error cargar los usuarios:', xhr.responseText);
+            }
+        });
+    }
+
+    $(document).on('change', '.selectUsuarioCarga', function () {
+        let idSociedad = $(this).data('id');
+        let idUsuario  = $(this).val();
+        // console.log("Usuario seleccionado:", idUsuario, "para sociedad:", idSociedad);
+        if (idUsuario === "") {  // Verificar si se ha seleccionado un usuario
+            alert("Debe seleccionar un usuario válido.");
+            return;
+        }
+
+        $.ajax({ 
+            url: '../controller/sociedadController.php',
+            type: 'POST',
+            data: {
+                accion: 'actualizarUsuarioCarga',
+                id_sociedad: idSociedad, 
+                id_usuario: idUsuario 
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') { 
+                    alert('Usuario asignado correctamente.');
+                } else {
+                    alert('Error al asignar el usuario: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al asignar el usuario:', xhr.responseText);
+            }
+        });
+
+    });
+
 </script>
 
 

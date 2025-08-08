@@ -340,7 +340,8 @@ class modelSociedad
 										(so.nombre || ' ' || so.apellido) AS nombrecliente,
                                         s.id_solicitud,
                                         ps.is_required_mfa,
-                                        ps.is_carga_eeuu
+                                        ps.is_carga_eeuu,
+                                        ps.id_usuario_carga_euu
                                     FROM personas_sociedad as ps
 									INNER JOIN solicitud AS s ON (ps.fk_solicitud=s.id_solicitud)
                     				INNER JOIN sociedad as so ON (s.fk_cliente=so.uuid)
@@ -359,6 +360,7 @@ class modelSociedad
                                     jd.porcentaje, 
                                     jd.is_required_mfa,
                                     jd.is_carga_eeuu,
+                                    jd.id_usuario_carga_euu,
                                         COALESCE(
                                             -- Buscamos en personas_sociedad si persona es un UUID válido
                                             (SELECT 
@@ -571,16 +573,35 @@ GROUP BY
         }
     }
 
+    public static function mdlActualizarUsuarioCarga($uuid, $usuario)
+    { 
+        try {
+            $sql = "UPDATE personas_sociedad SET id_usuario_carga_euu = :usuario WHERE uuid = :uuid";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
+            $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return ["success" => true];
+        } catch (Exception $e) {
+            throw new Exception("Error al actualizar usuario de carga: " . $e->getMessage());
+        }
+    }
+
     //Obteber las sociedades que tienen el campo is_carga_eeuu en true
-    public static function mdlObtenerSociedadesCarga()
+    public static function mdlObtenerSociedadesCarga($usuario)
     {
         try {
             $sql = "SELECT 
             id_personas_sociedad AS id,
             datos_sociedad->>'nombreSociedad' AS nombre,
             is_carga_eeuu
-            FROM personas_sociedad WHERE is_carga_eeuu = true";
+            FROM personas_sociedad 
+            WHERE id_usuario_carga_euu = :usuario AND
+            is_carga_eeuu = true";
             $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {

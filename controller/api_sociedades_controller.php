@@ -3,13 +3,13 @@ include_once "../model/modelSociedad.php";
 
 class apiSociedadesController{ 
     //Obtener las sociedades con el is_carga_eeuu en true
-    public function getSociedadesCarga(){
+    public function getSociedadesCarga($usuario){
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: application/json");
 
         try {
             // Llamar al modelo para obtener las sociedades con carga
-            $sociedades = modelSociedad::mdlObtenerSociedadesCarga();
+            $sociedades = modelSociedad::mdlObtenerSociedadesCarga($usuario);
             if (empty($sociedades)) {
                 echo json_encode([
                     "status" => "success",
@@ -35,9 +35,17 @@ class apiSociedadesController{
 $apiSociedadesController = new apiSociedadesController();
 // Llamada al método para obtener las sociedades con carga
 if ($_SERVER['REQUEST_METHOD'] === 'GET') { 
-    $apiSociedadesController->getSociedadesCarga();
-}
-else {
+    $usuario = $_GET['usuario'] ?? null;
+    if ($usuario) { 
+        $apiSociedadesController->getSociedadesCarga($usuario);
+    }else {
+        http_response_code(400);
+        echo json_encode([
+            "status" => "error",
+            "message" => "Usuario no proporcionado."
+        ]);
+    }
+} else {
     http_response_code(405);
     echo json_encode([
         "status" => "error",
