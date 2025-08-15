@@ -409,6 +409,8 @@ class InvoiceController
             $pdf->Cell(0, 5, 'ABA (Routing): ' . $item['aba'], 0, 1);
             // Añadir celda para SWIFT
             $pdf->Cell(0, 5, 'SWIFT: ' . $item['swift'], 0, 1);
+            // Añadir celda para Routing ACH
+            $pdf->Cell(0, 5, 'Routing ACH: ' . $item['routing_ach'], 0, 1);
             // Añadir celda para dirección
             $pdf->Cell(0, 5, 'Dirección: ' . $item['sucursal'], 0, 1);
             // Añadir celda para teléfono
