@@ -551,7 +551,8 @@ $uuid_extensiones = '0d51f6e1-08ad-4716-b5a6-865e99aa9725';
                                             <div class="info-box"> 
                                                 <!-- Si la sociedad esta activa el span tiene la clase bg-info y sino es bg-danger -->
                                                 <span class="info-box-icon <?php echo $detalles[0]['activarsociedad'] ? 'bg-info' : 'bg-danger'; ?>">
-                                                    <?php echo  $detalles[0]['is_mfa_enabled'] ? '<i class="fas fa-bookmark"></i>' : '<i class="fas fa-lock"></i>'; ?>
+                                                    <!-- Si MFA esta habilitado se muestra un lock, sino un bookmark -->
+                                                    <?php  echo $detalles[0]['is_mfa_enabled'] == true ? '<i class="fas fa-lock"></i>' : '<i class="fas fa-bookmark"></i>'; ?>
                                                 </span> 
                                                 <div class="info-box-content">
                                                     <span class="info-box-number"><?php echo $nombre_sociedad; ?></span>
