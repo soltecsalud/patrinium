@@ -338,6 +338,9 @@ class Solicitud_controller{
             }
         }
 
+        // Al final, reindexa los servicios a un arreglo numérico
+        $datos['servicios'] = array_values($datos['servicios']); 
+
         if(isset($_POST['id_factura_rapida']) && !empty($_POST['id_factura_rapida'])) { 
             $respuesta = ModelSolicitud::actualizarFacturaRapida($datos, $estado, $_POST['fecha_actualizacion'], $_POST['id_factura_rapida']);
         } else {
