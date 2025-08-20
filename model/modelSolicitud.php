@@ -279,7 +279,7 @@ class ModelSolicitud
             $sqlListarSolicitud = "SELECT a.create_at, a.nombre_archivo, a.descripcion, a.numero_registro, a.fecha_entrega, b.nombre_sociedad, doc.nombre_documento_adjunto
                 FROM archivo_adjunto a
                 LEFT JOIN (
-                    SELECT DISTINCT uuid, nombre_sociedad
+                    SELECT DISTINCT uuid, datos_sociedad->>'nombreSociedad' AS nombre_sociedad
                     FROM personas_sociedad
                 ) b ON a.sociedad_UUID = b.uuid
                 INNER JOIN documentos_adjuntos AS doc ON (a.descripcion::int=doc.id_tipo_documento_adjunto)
