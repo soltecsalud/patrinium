@@ -42,7 +42,7 @@ if (!isset($_SESSION['usuario'])) {
                                             <th>Sociedades</th>
                                             <th>Cliente de la sociedad</th>
                                             <th>Informaci&oacute;n de la sociedad</th>
-                                            <th>Habilitar MFA</th>
+                                            <th>SEGURIDAD (MFA)</th>
                                             <th>Habilitar Carga</th>
                                             <th>Usuario Carga</th>
                                         </tr>
