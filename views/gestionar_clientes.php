@@ -41,7 +41,8 @@ if (!isset($_SESSION['usuario'])) {
 											<th>Apellido cliente</th>
                                             <th>Pais de Nacimiento</th>
                                             <th>Fecha creaci&oacute;n</th>
-                                            <th colspan="2">Acciones</th>
+                                            <th>Acciones</th>
+                                            <th>SEGURIDAD (MFA)</th>
                                         </tr>
                                     </thead>
                                     <tbody id="clientes_patrimonium"></tbody>
@@ -238,6 +239,8 @@ if (!isset($_SESSION['usuario'])) {
                     let tbody = $('#clientes_patrimonium');
                     tbody.empty();
                     $.each(response, function(index, cliente) {
+                        console.log(cliente);
+                        
                         dataCliente.push(cliente);
                         // let row = `<tr>
                         //     <td>${cliente.id_sociedad}</td>
@@ -263,6 +266,23 @@ if (!isset($_SESSION['usuario'])) {
                                 "data": null,
                                 "render": function(data, type, row) {
                                     return `<a style="margin-right: 10px;" class="btn btn-success m-0" data-toggle="modal" data-target="#modalActualizarServicio" data-id="${row.uuid}" data-nombre="${row.nombre}" data-created="${row.createdat}">Actualizar</a>`;
+                                }
+                            },
+                             // checkbox para habilitar MFA, si el campo is_required_mfa es true, el checkbox debe estar marcado y mostrar un mensaje de "Habilitado"
+                            {
+                                "data": null,
+                                "render": function(data, type, row) {
+                                    if(row.id_solicitud != null) {
+                                        // Si MFA está habilitado, mostrar el checkbox marcado y un mensaje
+                                        return `<label class="checkbox-container">
+                                                <input type="checkbox" class="mfa-checkbox" data-id="${row.id_solicitud}" ${row.is_required_mfa === true ? 'checked' : ''}>
+                                                <span class="checkmark"></span>
+                                            </label>`;
+                                    }else{
+                                        return ``;
+                                    }
+                                    // return row.id_solicitud;
+                                    // return '';
                                 }
                             }
                         ],
@@ -341,6 +361,32 @@ if (!isset($_SESSION['usuario'])) {
                     }
                 });
             });
+
+             // Evento para el checkbox de habilitar MFA
+        $(document).on('change', '.mfa-checkbox', function() {
+            var idSolicitud = $(this).data('id');
+            var isChecked  = $(this).is(':checked');
+            $.ajax({
+                url: '../controller/sociedadController.php',
+                type: 'POST',
+                data: {
+                    accion: 'actualizarEstadoMFA_Solicitud',
+                    idSolicitud: idSolicitud,
+                    isRequiredMFA: isChecked 
+                },
+                dataType: 'json',
+                success: function(response) { 
+                    if (response.status === 'success') { 
+                        alert('Estado de MFA actualizado correctamente.');
+                    } else {
+                        alert('Error al actualizar el estado de MFA: ' + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al actualizar el estado de MFA:', xhr.responseText);
+                }
+            });
+        });
 
 
         });

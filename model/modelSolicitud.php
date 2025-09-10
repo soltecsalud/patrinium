@@ -334,13 +334,14 @@ class ModelSolicitud
     public static function obtenerSolicitudesConAdjuntos() {
         try {
             $sqlListarSolicitud ="SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,
-            b.created_at, b.id_solicitud, CONCAT(c.nombre, ' ',c.apellido) AS nombre
+            b.created_at, b.id_solicitud, CONCAT(c.nombre, ' ',c.apellido) AS nombre,b.is_required_mfa,b.totp_secret,b.is_mfa_enabled
             FROM personas_sociedad a
             INNER JOIN solicitud b ON a.fk_solicitud = b.id_solicitud
 			INNER JOIN sociedad c ON (c.uuid = b.fk_cliente) 
             GROUP BY b.referido_por,b.created_at,b.id_solicitud,c.nombre,c.apellido
             UNION
-            SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,b.created_at, b.id_solicitud, CONCAT(c.nombre, ' ',c.apellido) AS nombre
+            SELECT b.referido_por, STRING_AGG(DISTINCT a.nombre_sociedad, ', ') AS nombre_sociedades,b.created_at, b.id_solicitud, CONCAT(c.nombre, ' ',c.apellido) AS nombre,
+            b.is_required_mfa,b.totp_secret,b.is_mfa_enabled
             FROM personas_sociedad a
             INNER JOIN solicitud b ON a.fk_solicitud = b.id_solicitud
             INNER JOIN personas_cliente c ON (c.uuid = b.fk_cliente)

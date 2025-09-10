@@ -254,6 +254,22 @@ class SociedadController{
         }
     }
 
+    public function actualizarEstadoMFA_Solicitud($idSolicitud, $isRequiredMFA) {
+        try {
+            $respuesta = modelSociedad::mdlActualizarEstadoMFA_Solicitud($idSolicitud, $isRequiredMFA);
+            header('Content-Type: application/json');
+            if ($respuesta) {
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "No se pudo actualizar el estado de MFA en la solicitud"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["resultado" => 0, "mensaje" => $e->getMessage()]);
+        }
+    }
+
+    
+
     public function actualizarEstadoCarga($idSociedad, $isCargaEEUU) {
         try {
             $respuesta = modelSociedad::mdlActualizarEstadoCarga($idSociedad, $isCargaEEUU);
@@ -296,6 +312,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarEstadoMFA'){
         $controlador = new SociedadController();
         $controlador->actualizarEstadoMFA($_POST['idSociedad'], $_POST['isRequiredMFA']);
+
+    }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarEstadoMFA_Solicitud'){
+        $controlador = new SociedadController();
+        $controlador->actualizarEstadoMFA_Solicitud($_POST['idSolicitud'], $_POST['isRequiredMFA']);
+
     }else if(isset($_POST['accion']) && $_POST['accion'] == 'actualizarEstadoCarga'){
         $controlador = new SociedadController();
         $controlador->actualizarEstadoCarga($_POST['idSociedad'], $_POST['isCargaEEUU']);

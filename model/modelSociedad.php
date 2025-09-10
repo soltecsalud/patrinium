@@ -135,21 +135,30 @@ class modelSociedad
     static public function  mdlGetAllClientes()
     {
         try {
-            $sqlListarSociedades = "SELECT uuid,id_sociedad, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
+            $sqlListarSociedades = "(SELECT DISTINCT ON (s.uuid)
+            id_sociedad, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
             pais_residencia_fiscal, pais_domicilio, numero_pasaporte, pais_pasaporte, 
             tipo_visa, direccion_local, telefonos, emails, industria,
             nombre_negocio_local, ubicacion_negocio_principal, 
             tamano_negocio, contacto_ejecutivo_local, numero_empleados, 
-            numero_hijos, razon_consultoria, requiere_registro_corporacion,observaciones,fk_solicitud, createdat, ciudad,'cliente' as tipo
+            numero_hijos, razon_consultoria, requiere_registro_corporacion,observaciones,fk_solicitud, createdat, ciudad,'cliente' as tipo,ss.id_solicitud,ss.is_required_mfa
 	        FROM sociedad AS s
+            LEFT JOIN solicitud AS ss ON (s.uuid=ss.fk_cliente)
+            ORDER BY s.uuid, ss.created_at DESC)
+
             UNION
-            SELECT uuid,id_persona_cliente, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
+
+            (SELECT DISTINCT ON (s.uuid)
+            id_persona_cliente, nombre, apellido, fecha_nacimiento, estado_civil, pais_origen,
             pais_residencia_fiscal, pais_domicilio, numero_pasaporte, pais_pasaporte, 
             tipo_visa, direccion_local, telefonos, emails, industria,
             nombre_negocio_local, ubicacion_negocio_principal, 
             tamano_negocio, contacto_ejecutivo_local, numero_empleados, 
-            numero_hijos, razon_consultoria, requiere_registro_corporacion,observaciones,fk_solicitud, createdat, ciudad, 'sociocliente' as tipo
-	        FROM personas_cliente AS s";
+            numero_hijos, razon_consultoria, requiere_registro_corporacion,observaciones,fk_solicitud, createdat, ciudad, 'sociocliente' as tipo,ss.id_solicitud,ss.is_required_mfa
+	        FROM personas_cliente AS s
+            LEFT JOIN solicitud AS ss ON (s.uuid=ss.fk_cliente)
+            ORDER BY s.uuid, ss.created_at DESC)
+            ";
             $listaSociedades = Conexion::conectar()->prepare($sqlListarSociedades);
             $listaSociedades->execute();
             return $listaSociedades->fetchAll(PDO::FETCH_ASSOC);
@@ -554,6 +563,34 @@ GROUP BY
             return ["success" => true];
         } catch (Exception $e) {
             throw new Exception("Error al actualizar estado MFA: " . $e->getMessage());
+        }
+    }
+
+    public static function mdlActualizarEstadoMFA_Solicitud($idSolicitud, $estado)
+    {
+        try {
+
+            if($estado=='true') {
+                // Si se activa MFA, se genera un nuevo secreto
+                include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
+                $gAuth = new PHPGangsta_GoogleAuthenticator();
+                $totpsecret = $gAuth->createSecret();
+            } else { 
+                // Si se desactiva MFA, no es necesario generar un nuevo secreto
+                $totpsecret = null;
+            }
+
+            $sql = "UPDATE solicitud SET totp_secret = :totpsecret, is_required_mfa = :estado WHERE id_solicitud = :idSolicitud";
+
+            $stmt = Conexion::conectar()->prepare($sql);
+            $stmt->bindParam(':totpsecret', $totpsecret, PDO::PARAM_STR);
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
+            $stmt->bindParam(':idSolicitud', $idSolicitud, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return ["success" => true];
+        } catch (Exception $e) {
+            throw new Exception("Error al actualizar estado MFA en solicitud: " . $e->getMessage());
         }
     }
 

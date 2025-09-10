@@ -15,6 +15,19 @@ class modelMFA {
             return false;
         }
     }
+
+    public static function mdlActualizarEstadoMFASolicitud($estado, $id_solicitud) {
+        $stmt = Conexion::conectar()->prepare("UPDATE solicitud SET is_mfa_enabled = :estado WHERE id_solicitud = :id_solicitud");
+        $stmt->bindParam(":estado", $estado, PDO::PARAM_BOOL);
+        $stmt->bindParam(":id_solicitud", $id_solicitud, PDO::PARAM_STR);
+        
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 
