@@ -75,14 +75,16 @@ include_once '../libs/phpqrcode-master/qrlib.php'; // Librería PHP QR Code
                             <td><?php echo  htmlspecialchars($solicitud->nombre);?></td>
                             <td>
                                 <button
-                                style="display: <?php echo ($is_required_mfa && $totp_secret != null) ? 'inline-block' : 'none'; ?>;"
-                                class="btn btn-primary btn-sm mt-2 btn_validar_mfa" data-id="<?php echo $solicitud->id_solicitud; ?>" data-qr="<?php echo $filename; ?>" data-ismfaenabled="<?php echo $is_mfa_enabled; ?>" data-totpsecret="<?php echo $totp_secret; ?>">
-                                <i class="fa fa-eye"></i></button>
+                                style="color:white; background-color: red; display: <?php echo ($is_required_mfa && $totp_secret != null) ? 'inline-block' : 'none'; ?>;"
+                                class="btn btn-sm mt-2 btn_validar_mfa" data-id="<?php echo $solicitud->id_solicitud; ?>" data-qr="<?php echo $filename; ?>" data-ismfaenabled="<?php echo $is_mfa_enabled; ?>" data-totpsecret="<?php echo $totp_secret; ?>">
+                                <i class="fas fa-lock"></i></button>
                                                                 
                                 <a 
                                     style="display: <?php echo ($is_required_mfa && $totp_secret != null) ? 'none' : 'inline-block'; ?>;"
                                     class="btn btn-primary btn-sm mt-2 btnVerDetalles" data-id="<?php echo $solicitud->id_solicitud; ?>" 
-                                    href="../views/verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    href="../views/verSolicitud.php?numero_solicitud=<?php echo $solicitud->id_solicitud;?>" class="btn btn-primary">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         <?php } ?>
