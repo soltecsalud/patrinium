@@ -93,7 +93,9 @@ $(document).ready(function () {
                     data: 'declararon_marzo',
                     render: function (data, type, row) {
                         const checked = data ? 'checked' : '';
-                        return `
+                        const declaro = data ? 'Si' : 'No'; 
+                        // return row.declararon_marzo;
+                        return declaro + ` 
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input marzo-switch"
                                     id="switch_${row.uuid}" 
@@ -166,20 +168,21 @@ $(document).ready(function () {
                     timer: 1500
                 });
 
+                tablaSinMarzo.ajax.reload(); // Recargar siempre la tabla inferior para reflejar cambios
                 // Buscar y ocultar fila de la tabla inferior si fue marcada como true
-                if (estado) {
-                    const fila = tablaSinMarzo.rows().nodes().to$().filter(function () {
-                        return $(this).find('td:first').text().trim() === id.toString();
-                    });
+                // if (estado) {
+                //     const fila = tablaSinMarzo.rows().nodes().to$().filter(function () {
+                //         return $(this).find('td:first').text().trim() === id.toString();
+                //     });
 
-                    if (fila.length > 0) {
-                        fila.fadeOut(500, function () {
-                            tablaSinMarzo.row(fila).remove().draw(false);
-                        });
-                    }
-                } else {
-                    tablaSinMarzo.ajax.reload(); // si se desmarca, simplemente recargar
-                }
+                //     if (fila.length > 0) {
+                //         fila.fadeOut(500, function () {
+                //             tablaSinMarzo.row(fila).remove().draw(false);
+                //         });
+                //     }
+                // } else {
+                //     tablaSinMarzo.ajax.reload(); // si se desmarca, simplemente recargar
+                // }
             },
             error: function () {
                 Swal.fire({

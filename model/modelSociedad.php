@@ -410,7 +410,7 @@ class modelSociedad
             $sql = "SELECT 
                         ps.uuid,
                         ps.datos_sociedad->>'nombreSociedad' AS nombre,
-                     	 string_agg(DISTINCT e.estado, ', ') AS estado,
+                        string_agg(DISTINCT e.estado, ', ') AS estado,
                         ts.nombre_tipo_sociedad AS tipo,
                         ARRAY[
                             CASE 
@@ -435,7 +435,8 @@ class modelSociedad
                                 )
                             ) THEN ARRAY['8804']
                             ELSE ARRAY[]::text[]
-                        END AS formularios_fiscales
+                        END AS formularios_fiscales,
+                    COALESCE(sm.declararon_marzo, FALSE) AS declararon_marzo
                     FROM 
                         personas_sociedad ps
                     JOIN 
@@ -449,7 +450,7 @@ class modelSociedad
                     WHERE 
                         ps.datos_sociedad->>'declararSociedad' = 'on'
                         AND ps.datos_sociedad->>'activarSociedad' = 'on'
-                        AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)
+                        -- AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo = TRUE) -- Se cambia el IS NULL por = TRUE
                     GROUP BY 
                         ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo
             ";
@@ -467,8 +468,22 @@ class modelSociedad
         try {
             $db = Conexion::conectar();
 
-            $sql = "INSERT INTO sociedades_march (fk_personas_sociedad_uuid, declararon_marzo, created_at)
+            //Consultar si existe registro
+            $consulta = "SELECT COUNT(*) FROM sociedades_march WHERE fk_personas_sociedad_uuid = :uuid";
+            $stmtConsulta = $db->prepare($consulta);
+            $stmtConsulta->bindParam(':uuid', $uuid, PDO::PARAM_STR); 
+            $stmtConsulta->execute();
+            $existe = $stmtConsulta->fetchColumn();
+
+            //Si existe, actualizar, si no, insertar
+            if ($existe) {
+                $sql = "UPDATE sociedades_march 
+                        SET declararon_marzo = :estado
+                        WHERE fk_personas_sociedad_uuid = :uuid";
+            } else {
+                $sql = "INSERT INTO sociedades_march (fk_personas_sociedad_uuid, declararon_marzo, created_at)
                         VALUES (:uuid, :estado, NOW())";
+            }
 
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
@@ -482,72 +497,72 @@ class modelSociedad
     }
 
 
-    public static function mdlObtenerSociedadesSinDeclararMarzo()
-    {
+    public static function mdlObtenerSociedadesSinDeclararMarzo(){
         try {
             $sql = "       SELECT 
-    ps.uuid,
-    ps.datos_sociedad->>'nombreSociedad' AS nombre,
-    ts.nombre_tipo_sociedad AS tipo,
-    string_agg(DISTINCT e.estado, ', ' ORDER BY e.estado) AS estado,
-    ARRAY[
-        CASE 
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'llc 1065' THEN 'Cada Member obtiene una K-1 y Cada Member en una 1040'
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  C  8832' THEN 'Como Corporacion C 1120 y paga 21%'
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  S  2553' THEN '1120 - S NO paga Impuestos Cada Member Obtiene una K-1 Cada Member en una 1040'
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120' THEN 'Paga 21% Si Distribuye Dividendos, pagan Personal del 0% - 20% Doble Tributacion En El 1040'
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1065' THEN 'no Paga Taxes Cada Socio Recibe K-1 y Cada Socio 1040'
-            WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120-S' THEN 'corporacion Evita Doble Tributacion 1120 - S no paga taxes, cada Socio Recibe K-1 y Cada Socio 1040'
-            ELSE 'No aplica  O solo member 1040'
-        END
-    ] ||
-    CASE 
-        WHEN EXISTS (
-            SELECT 1
-            FROM sociedad s
-            WHERE s.pais_pasaporte != 'USA'
-              AND s.id_sociedad IN (
-                  SELECT elem::int
-                  FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
-                  WHERE elem ~ '^\d+$'
-              )
-        ) THEN ARRAY['8804']
-        ELSE ARRAY[]::text[]
-    END AS formularios_fiscales
-FROM 
-    personas_sociedad ps
-JOIN 
-    tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
-JOIN LATERAL 
-    jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
-JOIN 
-    estados e ON e.id_estado = estado_codigo.codigo::int
-LEFT JOIN 
-    sociedades_march sm ON sm.fk_personas_sociedad_uuid = ps.uuid::uuid
-WHERE 
-    ps.datos_sociedad->>'declararSociedad' = 'on'
-    AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)
-GROUP BY 
-    ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo;";
+                ps.uuid,
+                ps.datos_sociedad->>'nombreSociedad' AS nombre,
+                ts.nombre_tipo_sociedad AS tipo,
+                string_agg(DISTINCT e.estado, ', ' ORDER BY e.estado) AS estado,
+                ARRAY[
+                    CASE 
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'llc 1065' THEN 'Cada Member obtiene una K-1 y Cada Member en una 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  C  8832' THEN 'Como Corporacion C 1120 y paga 21%'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = 'Corporacion  S  2553' THEN '1120 - S NO paga Impuestos Cada Member Obtiene una K-1 Cada Member en una 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120' THEN 'Paga 21% Si Distribuye Dividendos, pagan Personal del 0% - 20% Doble Tributacion En El 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1065' THEN 'no Paga Taxes Cada Socio Recibe K-1 y Cada Socio 1040'
+                        WHEN ps.datos_sociedad->>'tipoCorporacion' = '1120-S' THEN 'corporacion Evita Doble Tributacion 1120 - S no paga taxes, cada Socio Recibe K-1 y Cada Socio 1040'
+                        ELSE 'No aplica  O solo member 1040'
+                    END
+                ] ||
+                    CASE 
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM sociedad s
+                            WHERE s.pais_pasaporte != 'USA'
+                            AND s.id_sociedad IN (
+                                SELECT elem::int
+                                FROM jsonb_array_elements_text(ps.datos_sociedad->'personas') AS arr(elem)
+                                WHERE elem ~ '^\d+$'
+                            )
+                        ) THEN ARRAY['8804']
+                        ELSE ARRAY[]::text[]
+                    END AS formularios_fiscales
+                FROM 
+                    personas_sociedad ps
+                JOIN 
+                    tipo_sociedad ts ON ts.id_tipo_sociedad::text = ps.datos_sociedad->>'selectTipoSociedad'
+                JOIN LATERAL 
+                    jsonb_array_elements_text(ps.datos_sociedad->'estadopais') AS estado_codigo(codigo) ON TRUE
+                JOIN 
+                    estados e ON e.id_estado = estado_codigo.codigo::int
+                LEFT JOIN 
+                    sociedades_march sm ON sm.fk_personas_sociedad_uuid = ps.uuid::uuid
+                WHERE 
+                    ps.datos_sociedad->>'declararSociedad' = 'on' AND ps.datos_sociedad->>'activarSociedad' = 'on'
+                    -- AND (sm.declararon_marzo = FALSE OR sm.declararon_marzo IS NULL)
+                    AND (sm.declararon_marzo = TRUE)
+                GROUP BY 
+                    ps.uuid, ps.datos_sociedad, ts.nombre_tipo_sociedad, sm.declararon_marzo;";
 
-            $stmt = Conexion::conectar()->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            throw new Exception("Error: " . $e->getMessage());
+                $stmt = Conexion::conectar()->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (Exception $e) {
+                throw new Exception("Error: " . $e->getMessage());
+            }
         }
-    }
 
     public static function mdlActualizarEstadoMFA($uuid, $estado)
     {
         try {
 
-            if($estado=='true') {
+            if ($estado == 'true') {
                 // Si se activa MFA, se genera un nuevo secreto
                 include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
                 $gAuth = new PHPGangsta_GoogleAuthenticator();
                 $totpsecret = $gAuth->createSecret();
-            } else { 
+            } else {
                 // Si se desactiva MFA, no es necesario generar un nuevo secreto
                 $totpsecret = null;
             }
@@ -556,7 +571,7 @@ GROUP BY
 
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->bindParam(':totpsecret', $totpsecret, PDO::PARAM_STR);
-            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL); 
+            $stmt->bindParam(':estado', $estado, PDO::PARAM_BOOL);
             $stmt->bindParam(':uuid', $uuid, PDO::PARAM_STR);
             $stmt->execute();
 
@@ -570,12 +585,12 @@ GROUP BY
     {
         try {
 
-            if($estado=='true') {
+            if ($estado == 'true') {
                 // Si se activa MFA, se genera un nuevo secreto
                 include_once '../libs/GoogleAuthenticator-master/PHPGangsta/GoogleAuthenticator.php';
                 $gAuth = new PHPGangsta_GoogleAuthenticator();
                 $totpsecret = $gAuth->createSecret();
-            } else { 
+            } else {
                 // Si se desactiva MFA, no es necesario generar un nuevo secreto
                 $totpsecret = null;
             }
@@ -611,7 +626,7 @@ GROUP BY
     }
 
     public static function mdlActualizarUsuarioCarga($uuid, $usuario)
-    { 
+    {
         try {
             $sql = "UPDATE personas_sociedad SET id_usuario_carga_euu = :usuario WHERE uuid = :uuid";
 
@@ -645,5 +660,4 @@ GROUP BY
             throw new Exception("Error al obtener sociedades con carga EEUU: " . $e->getMessage());
         }
     }
-
 }
