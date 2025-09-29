@@ -1130,5 +1130,23 @@ class ModelSolicitud
             exit;
         }
     }
+    
+    public static function duplicarFacturaRapida($id_factura_rapida){
+        try {
+            $sqlDuplicar = "INSERT INTO factura_rapida (datos, estado, id_factura_original)
+                            SELECT datos, estado, factura_rapida_id
+                            FROM factura_rapida 
+                            WHERE factura_rapida_id = :id_factura_rapida";
+            $stmt = Conexion::conectar()->prepare($sqlDuplicar);
+            $stmt->bindParam(':id_factura_rapida', $id_factura_rapida, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                return "ok";
+            } else {
+                return "error";
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }
 ?>

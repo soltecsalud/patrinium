@@ -157,6 +157,7 @@ $controlador = new Solicitud_controller();
                                     <tr>
                                         <th>Acci&oacute;n</th>
                                         <th>Pagar</th>
+                                        <th>Duplicar</th>
                                         <th>Fecha Creacion</th>
                                         <th>Descargar Factura</th>
                                         <th>Descargar Comprobante Pago</th>
@@ -565,9 +566,13 @@ $controlador = new Solicitud_controller();
                     });
 
                     // Construir la fila 
+                    // 1 boton para actualizar la factura
+                    // 2 boton para pagar la factura
+                    // 3 boton para duplicar la factura
                     let filas = `<tr>
                     <td><input id="payment-${idFactura}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${idFactura}"  /></td>
                     <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-idfactura="${idFactura}"/></td>
+                    <td><input id="payment-${factura.id_solicitud}" class="btn btn-warning duplicate-btn" type="button" value="Duplicar" data-idfactura="${idFactura}"/></td>
                     <td>${createdAt}</td>
                     <td><a href='../views/factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
                     <td><a href='../documents/quick_invoices/${idFactura}/${rutaPago}' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td>
@@ -786,7 +791,58 @@ $controlador = new Solicitud_controller();
             });
         });
 
+        // Función para duplicar la factura
+        $(document).on('click', '.duplicate-btn', function() {
+            var idFactura = $(this).data('idfactura');
+            //Preguntar si está seguro de duplicar la factura
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción duplicará la factura rápida.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, duplicar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    duplicarFactura(idFactura);
+                }
+            });
+            
+        });
+
     });
+
+    function duplicarFactura(idFactura){
+        var datos = {
+            accion: "duplicarFacturaRapida",
+            idFactura: idFactura
+        };
+        $.ajax({
+            url: '../controller/solicitudController.php', // Ruta del controlador
+            type: 'POST',
+            data: datos, // Enviar los datos como un objeto
+            success: function(response) { 
+                // console.log('Respuesta del controlador:', response);
+                let res = JSON.parse(response);
+                if(res.status == '0'){
+                    Swal.fire("Éxito", "Factura duplicada con éxito.", "success")
+                    .then(() => {
+                        location.reload(); // Recargar la página para mostrar los cambios
+                    });
+                }else{
+                    Swal.fire("Error", "Fallo al duplicar la factura.", "error");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                Swal.fire("Error", "Error en la comunicación con el servidor.", "error");
+            }
+        });
+    }
+
+    
 
     $(document).ready(function() {
         $('#paymentType').change(function() {

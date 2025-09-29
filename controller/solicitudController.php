@@ -720,6 +720,16 @@ class Solicitud_controller{
         }
     }
 
+    public function duplicarFacturaRapida(){
+        $id_factura_rapida = $_POST['idFactura'];
+        $respuesta = ModelSolicitud::duplicarFacturaRapida($id_factura_rapida);
+        if ($respuesta == "ok") {
+            echo json_encode(["status" => 0]); // Éxito
+        } else {
+            echo json_encode(["status" => 1]); // Error
+        }
+    }
+
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -735,6 +745,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $controlador->insertarFactura();
         } elseif ($_POST['accion'] === 'insertarFacturaRapida') {
             $controlador->insertarFacturaRapida();
+        }else if($_POST['accion'] === 'duplicarFacturaRapida'){
+            $controlador->duplicarFacturaRapida();
         } elseif ($_POST['accion'] === 'insertarServiciosAdicionales') {
             $controlador->insertarServiciosAdicionales();
         } elseif ($_POST['accion'] === 'guardarCliente') {
