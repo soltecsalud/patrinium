@@ -798,7 +798,8 @@ class ModelSolicitud
                     b.nombre_banco
                     FROM factura_rapida AS f
                     INNER JOIN bancos_consignaciones AS b 
-                    ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco";
+                    ON NULLIF(f.datos->>'cuenta_bancaria', '')::int = b.id_banco
+                    ORDER BY datos->>'invoice_number',factura_rapida_id DESC";
             $stmt = Conexion::conectar()->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ); // Devolver los resultados como objetos

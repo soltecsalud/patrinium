@@ -537,6 +537,7 @@ $controlador = new Solicitud_controller();
                 datosFacturas.push(facturas);
                 // Limpiar el contenido actual del tbody
                 $('#tablefacturasrapidas').empty();
+                let numero_factura = '';
                 // Iterar sobre las facturas recibidas y agregar las filas al tbody
                 facturas.forEach(function(factura) {
                     let jsonString = factura.datos;
@@ -569,10 +570,14 @@ $controlador = new Solicitud_controller();
                     // 1 boton para actualizar la factura
                     // 2 boton para pagar la factura
                     // 3 boton para duplicar la factura
+
+                    $boton_duplicar = numero_factura === idNumeroFacura ? "style='display:none'" : "style='display:block'";
+
+
                     let filas = `<tr>
                     <td><input id="payment-${idFactura}" class="btn btn-success update-btn" type="button" value="Actualizar" data-id-factura="${idFactura}"  /></td>
                     <td><input id="payment-${factura.id_solicitud}" class="btn btn-primary payment-btn" type="button" value="Payment" data-idfactura="${idFactura}"/></td>
-                    <td><input id="payment-${factura.id_solicitud}" class="btn btn-warning duplicate-btn" type="button" value="Duplicar" data-idfactura="${idFactura}"/></td>
+                    <td><input id="payment-${factura.id_solicitud}" ${$boton_duplicar} class="btn btn-warning duplicate-btn" type="button" value="Duplicar" data-idfactura="${idFactura}"/></td>
                     <td>${createdAt}</td>
                     <td><a href='../views/factura_report.php?table=facturarapida&numero_solicitud=${idFactura}&invoiceNumber=${invoiceNumber}' target='_blank' rel='noopener noreferrer'>Descargar </a></td>
                     <td><a href='../documents/quick_invoices/${idFactura}/${rutaPago}' target='_blank' rel='noopener noreferrer'>Descargar Comprobante</a></td>
@@ -586,6 +591,8 @@ $controlador = new Solicitud_controller();
                     <td>${nombreBanco}</td>
                     
                     </tr> `;
+
+                    numero_factura = idNumeroFacura;
 
                     // Agregar la fila al tbody
                     $('#tablefacturasrapidas').append(filas);
